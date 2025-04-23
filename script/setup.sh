@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+
+
 #install the tools
 # git
 # bash
