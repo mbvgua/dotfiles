@@ -1,3 +1,15 @@
-.  [8 entries exceeds filelimit, not opening dir]
+.
+├── bash
+│   └── .bashrc -> /home/daagi/.bashrc
+├── .git  [10 entries exceeds filelimit, not opening dir]
+├── git
+│   └── .gitconfig -> /home/daagi/.gitconfig
+├── README.md
+├── setup.sh
+├── tmux
+│   └── .tmux.conf -> /home/daagi/.tmux.conf
+├── tree.txt
+└── vim
+    └── .vimrc -> /home/daagi/.vimrc
 
-1 directory, 0 files
+6 directories, 7 files
