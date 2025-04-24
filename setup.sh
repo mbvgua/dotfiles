@@ -17,6 +17,8 @@
 # create the subdirectories
 ```
     $ mkdir bash vim git tmux
+    $ cd vim/
+    $ mkdir autoload plugged colors backup
 ```
 
 #install programs that do not come automatically -> tmux
