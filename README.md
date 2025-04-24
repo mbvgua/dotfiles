@@ -1,7 +1,7 @@
 # dotfiles
 
 > If you only knew the power of the dark side. 
-> ~Darth Vader.
+> ~ Darth Vader.
 
 This repo houses dotfiles for my main developer environment:
     1.vim -> text-editor
@@ -17,28 +17,32 @@ Not alot of customization was done to git, bash or tmux in terms of general appe
 
 ## Links to useful resources
 
-Some useful articles that could help you build and understand better are listed below. Feel free to customize my config files to fit your workflow.
+Some useful articles that could help you build and understand better are listed below. 
 
 ### tmux:
 
-    - [hamvocke-guide](https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/)
-    - [hostinger-tutorials](https://www.hostinger.com/tutorials/tmux-config)
-    - [builtin-articles](https://builtin.com/articles/tmux-config)
+- [hamvocke-guide](https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/)
+- [hostinger-tutorials](https://www.hostinger.com/tutorials/tmux-config)
+- [builtin-articles](https://builtin.com/articles/tmux-config)
 
 ### vim:
 
-    - [freecodecamp-vimrc-configuration-guide](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
-    - [boost-your-coding-fu-with-vscode-and-vim](https://www.barbarianmeetscoding.com/blog/boost-your-coding-fu-with-vscode-and-vim#move-to-a-specific-character)
-    - [freecodecamp-vim-tips](https://www.freecodecamp.org/news/7-vim-tips-that-changed-my-life/)
-    - [freecodecamp-how-not-to-be-afraid-of-vim](https://www.freecodecamp.org/news/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae/)
-    - [freecodecamp-how-i-learned-to-love-vim](https://www.freecodecamp.org/news/how-i-learned-to-love-vim-ce3e058d57fb/)
-    - [netrw-not-nerdtree](https://blog.stevenocchipinti.com/posts/2016-12-28-using-netrw-instead-of-nerdtree-for-vim/)
-    - [vim-theming](https://winterdom.com/2011/02/13/github-repo-for-molokai)
-    - [vim-statusline](https://tomdaly.dev/post/vanilla-vim-statusline)
-    -[dotfiles](https://dotfiles.github.io/)
+- [freecodecamp-vimrc-configuration-guide](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
+- [boost-your-coding-fu-with-vscode-and-vim](https://www.barbarianmeetscoding.com/blog/boost-your-coding-fu-with-vscode-and-vim#move-to-a-specific-character)
+- [freecodecamp-vim-tips](https://www.freecodecamp.org/news/7-vim-tips-that-changed-my-life/)
+- [freecodecamp-how-not-to-be-afraid-of-vim](https://www.freecodecamp.org/news/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae/)
+- [freecodecamp-how-i-learned-to-love-vim](https://www.freecodecamp.org/news/how-i-learned-to-love-vim-ce3e058d57fb/)
+- [netrw-not-nerdtree](https://blog.stevenocchipinti.com/posts/2016-12-28-using-netrw-instead-of-nerdtree-for-vim/)
+- [vim-theming](https://winterdom.com/2011/02/13/github-repo-for-molokai)
+- [vim-statusline](https://tomdaly.dev/post/vanilla-vim-statusline)
+- [dotfiles](https://dotfiles.github.io/)
 
 ### git & bash:
 
 > Lol, its not that serious mahn!
 > ~ Unknown.
+
+## Conclusion
+
+Feel free to customize my config files to fit your workflow.
 
