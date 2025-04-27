@@ -97,27 +97,12 @@ set autoread
 " Disable showmode - i.e. Don't show mode texts like --INSERT-- in current statusline.
 " set noshowmode -> turned off. vital on smaller screens
 
-" show tabline alongside status line .from airline
-let g:airline#extensions#tabline#enabled = 1
+" set auto code folding
+set foldmethod=indent
+set foldmethod=syntax
 
-" show relative path in tabline
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-let g:airline_filetype_overrides = {
-    \ 'coc-explorer':  [ 'CoC Explorer', '' ],
-    \ 'defx':  ['defx', '%{b:defx.paths[0]}'],
-    \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
-    \ 'floggraph':  [ 'Flog', '%{get(b:, "flog_status_summary", "")}' ],
-    \ 'gundo': [ 'Gundo', '' ],
-    \ 'help':  [ 'Help', '%f' ],
-    \ 'minibufexpl': [ 'MiniBufExplorer', '' ],
-    \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERDTree'), '' ],
-    \ 'startify': [ 'startify', '' ],
-    \ 'vim-plug': [ 'Plugins', '' ],
-    \ 'vimfiler': [ 'vimfiler', '%{vimfiler#get_status_string()}' ],
-    \ 'vimshell': ['vimshell','%{vimshell#get_status_string()}'],
-    \ 'vaffle' : [ 'Vaffle', '%{b:vaffle.dir}' ],
-    \ }
+" ignore the node_modules dir always
+let g:NERDTreeIgnore = ['^node_modules$']
 
 "}}}
 
@@ -172,13 +157,12 @@ call plug#begin()
   Plug 'sheerun/vim-polyglot'
 
   " nerdtree as a better sidebar navigation tool
-  Plug 'preservim/nerdtree'
-
-  " manage tabs and buffers elegantly at the top
-  " Plug 'bagrat/vim-buffet' -> APPARENTLY NOT THE VIM WAY
+  Plug 'preservim/nerdtree'|
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " have a stylish tabline/statusline
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " lol. installed only so vim airline could work!
   Plug 'tpope/vim-fugitive'
@@ -196,17 +180,48 @@ colorscheme molokai
 " looks like sublime -> jackpot!
 let g:molokai_original = 1
 
-" looks like VsCode -> L
-" let g:rehash256 = 1    
-
 "}}}
 
 
 " 5.Status Bar -------------------------------------------------------------- {{{
 
-" customize airline sections to match my custom ones
-" let g:airline_section_c = airline#section#create(['%f'])
+" customize airline sections
+" show tabline alongside status line .from airline
+let g:airline#extensions#tabline#enabled = 1
+
+" show relative path in tabline
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:airline_filetype_overrides = {
+    \ 'coc-explorer':  [ 'CoC Explorer', '' ],
+    \ 'defx':  ['defx', '%{b:defx.paths[0]}'],
+    \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
+    \ 'floggraph':  [ 'Flog', '%{get(b:, "flog_status_summary", "")}' ],
+    \ 'gundo': [ 'Gundo', '' ],
+    \ 'help':  [ 'Help', '%f' ],
+    \ 'minibufexpl': [ 'MiniBufExplorer', '' ],
+    \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERDTree'), '' ],
+    \ 'startify': [ 'startify', '' ],
+    \ 'vim-plug': [ 'Plugins', '' ],
+    \ 'vimfiler': [ 'vimfiler', '%{vimfiler#get_status_string()}' ],
+    \ 'vimshell': ['vimshell','%{vimshell#get_status_string()}'],
+    \ 'vaffle' : [ 'Vaffle', '%{b:vaffle.dir}' ],
+    \ }
+
+" set the list of fav airline themes
+" wombat,distinguished, minimalist
+let g:airline_theme='wombat'
+
+" disable autofilling of sections to allow customization
+let g:airline_skip_empty_sections = 1
+
+" customize sections of airline statusline
+" %t -> show time and modified status on section c
+" %m -> make the last warning section blank. Finally! 
+let g:airline_section_c = '%t%m'
 let g:airline_section_z = airline#section#create(['LOC:%l/%L percentage: %p%%'])
+let g:airline_section_warning = ''
+"let g:airline_section_warning = 'jikaze bana'
 
 "}}}
 
@@ -294,16 +309,32 @@ let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = '☰ '
 let g:airline_symbols.dirty='⚡'
 
-" add window number on statusline
-function! WindowNumber(...)
-  let builder = a:1
-  let context = a:2
-  call builder.add_section('airline_b', '%{tabpagewinnr(tabpagenr())}')
-  return 0
-endfunction
+" SEEMS UNECESSARY IN RETROSPECT
+" " add window number on statusline
+" function! WindowNumber(...)
+"   let builder = a:1
+"   let context = a:2
+"   call builder.add_section('airline_b', '%{tabpagewinnr(tabpagenr())}')
+"   return 0
+" endfunction
 
-call airline#add_statusline_func('WindowNumber')
-call airline#add_inactive_statusline_func('WindowNumber')
+" call airline#add_statusline_func('WindowNumber')
+" call airline#add_inactive_statusline_func('WindowNumber')
 
+" set auto tab spacing for python files
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" set tab spacing for other langs
+au BufNewFile,BufRead *.ts, *.js, *.html, *.css,
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
 
 " }}}
