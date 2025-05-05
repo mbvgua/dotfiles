@@ -43,8 +43,11 @@ set splitbelow
 " vertical split to the right always
 set splitright
 
-" do not wrap long lines. allow them to extend
-set nowrap
+" wrap long lines
+set wrap
+set linebreak
+" set textwidth=80 -> hard wrapping. not good with VCS, and other editors
+set wrapmargin=0
 
 " use highlighting when doing a search.
 set hlsearch
@@ -103,6 +106,21 @@ set foldmethod=syntax
 
 " ignore the node_modules dir always
 let g:NERDTreeIgnore = ['^node_modules$']
+
+" insert automatic closing and opening brackets,parens,quotation marks
+" to escape them use ctrl+v before typing mapped command
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap < <><left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+" Read an empty HTML template and move cursor to title
+" Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+nnoremap <leader>! :-1read $HOME/.vim/.base.html<CR>6jwf>a
 
 "}}}
 
