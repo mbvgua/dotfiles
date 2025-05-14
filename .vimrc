@@ -11,7 +11,7 @@
 " 1.General --------------------------------------------------------- {{{
 
 "be iMproved always! could cause unexpected issues if compatible to vi
-  set nocompatible
+set nocompatible
 
 " enable type file detection. it detects the type of file in use
 filetype on
@@ -122,6 +122,53 @@ inoremap {;<CR> {<CR>};<ESC>O
 " Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
 nnoremap <leader>! :-1read $HOME/.vim/.base.html<CR>6jwf>a
 
+" Conquer of Code(CoC) settings
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <leader>, coc#refresh()
+
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
 "}}}
 
 
@@ -185,12 +232,28 @@ call plug#begin()
   " lol. installed only so vim airline could work!
   Plug 'tpope/vim-fugitive'
 
+  " auto completion. mostly for frontend gymnastics
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 "}}}
 
 
 " 4.Themes/Colors -------------------------------------------------------------- {{{
+
+" set term gui colors
+set termguicolors
+
+" CoC Colur scheme
+" Use a consistent background color for Coc floating windows
+hi CocFloating ctermbg=DarkGrey
+
+" Use a consistent foreground color for Coc error messages
+hi CocErrorFloat ctermfg=LightRed
+
+" Link the Coc floating window to your theme's default background
+autocmd VimEnter,colorscheme * hi link CocFloating Normal
 
 " use the molokai color scheme
 colorscheme molokai
@@ -234,12 +297,14 @@ let g:airline_theme='wombat'
 let g:airline_skip_empty_sections = 1
 
 " customize sections of airline statusline
-" %t -> show time and modified status on section c
-" %m -> make the last warning section blank. Finally! 
-let g:airline_section_c = '%t%m'
+" %m -> show modified status
+" %r -> show read only section
+" %w -> show preview window flag
+" get these values by :help 'statusline'
+" make the last warning section blank. Finally! 
+let g:airline_section_c = '%m%r%w'
 let g:airline_section_z = airline#section#create(['LOC:%l/%L percentage: %p%%'])
 let g:airline_section_warning = ''
-"let g:airline_section_warning = 'jikaze bana'
 
 "}}}
 
@@ -297,47 +362,17 @@ let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
-let g:airline_symbols.colnr = ' ㏇:'
-let g:airline_symbols.colnr = ' ℅:'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.linenr = ' ␊:'
-let g:airline_symbols.linenr = ' ␤:'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.maxlinenr = '㏑'
 let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = 'Ɇ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.notexists = ' ∄'
 
-" powerline symbols
+" " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
-let g:airline_symbols.colnr = ' ℅:'
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ' :'
-let g:airline_symbols.maxlinenr = '☰ '
-let g:airline_symbols.dirty='⚡'
-
-" SEEMS UNECESSARY IN RETROSPECT
-" " add window number on statusline
-" function! WindowNumber(...)
-"   let builder = a:1
-"   let context = a:2
-"   call builder.add_section('airline_b', '%{tabpagewinnr(tabpagenr())}')
-"   return 0
-" endfunction
-
-" call airline#add_statusline_func('WindowNumber')
-" call airline#add_inactive_statusline_func('WindowNumber')
+let g:airline_symbols.dirty='📝'
 
 " set auto tab spacing for python files
 au BufNewFile,BufRead *.py
