@@ -1,5 +1,10 @@
 # ignore backups and swaps within vim
 .vim/tmp/**
 
+# ignore the nested repos
+# TODO: find a way to install vim-plug in the setup.sh automatically
+# .vim/autoload/**
+.vim/plugged/**
+
 # ignore backups and swap within nvim
 .config/nvim/tmp/**
