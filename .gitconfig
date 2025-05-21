@@ -1,0 +1,29 @@
+[user]
+	name = mbvgua
+	email = 105845499+mbvgua@users.noreply.github.com
+[color]
+	ui = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[alias]
+	lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
+	contributors = shortlog --summary --numbered
+	ao = remote add origin
+[core]
+	editor = vim
+	symlink = true
+[merge]
+	tool = smerge
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = false
