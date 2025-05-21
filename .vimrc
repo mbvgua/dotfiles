@@ -169,6 +169,9 @@ call plug#begin()
   " syntax highlighting for various languages
   Plug 'sheerun/vim-polyglot'
 
+  " yeah! I finally caved and installed gruvbox
+  Plug 'morhetz/gruvbox'
+
 call plug#end()
 
 "}}}
@@ -180,8 +183,10 @@ call plug#end()
 " set term gui colors
 set termguicolors
 
-" use monokai
-colorscheme monokai
+" use gruvbox dark theme. alternative is light theme
+set background=dark
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 
 "}}}
 
