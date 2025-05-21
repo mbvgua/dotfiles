@@ -85,9 +85,9 @@ set hidden
 " put swap,backup and undo files in a special location
 " instead of the current working directory
 " thanks https://stackoverflow.com/a/15317146/30236232
-set backupdir=~/.vim/backup
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
+set backupdir=~/.vim/tmp/backups
+set directory=~/.vim/tmp/swaps
+set undodir=~/.vim/tmp/undo
 
 " Automatically re-read the file if it has changed and not ask me every single time!!!
 set autoread
@@ -177,15 +177,11 @@ call plug#end()
 " 4.Themes/Colors -------------------------------------------------------------- {{{
 
 
-" use the molokai color scheme
-colorscheme molokai
-
-" looks like sublime -> jackpot!
-let g:molokai_original = 1
-
 " set term gui colors
 set termguicolors
 
+" use monokai
+colorscheme monokai
 
 "}}}
 

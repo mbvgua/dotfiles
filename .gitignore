@@ -1,6 +1,5 @@
 # ignore backups and swaps within vim
-.vim/swaps/**
-.vim/backup/**
+.vim/tmp/**
 
 # ignore backups and swap within nvim
 .config/nvim/tmp/**

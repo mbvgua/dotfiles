@@ -1,3 +1,46 @@
+
+commit 93cfd2ff1f5cdcc52a5bd7ab6e617c3a6569c110
+Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
+Date:   Wed May 21 06:21:21 2025 +0300
+
+    Add my vim and Neovim config
+    
+    This was done gradually in another repo, so hhere I did it as a bulk
+    commit. Might add the changelog for posterity's sake.
+
+commit 04c19170ef92eba37f0460a96f3b53206e0be360
+Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
+Date:   Mon Apr 21 06:56:01 2025 +0300
+
+    Finally decided to create dotfiles!!
+    
+    - Recently began being a vim power(ish) user and decided to create
+      dotfiles to help me along the journey.
+    - After doing some reading on the issue, realized i could also create
+      dotfiles for other commonly used tools, git and bash, and so I did
+      that
+    - Looking forward to seeing this grow gradually
+
+commit 0e21a565e8a45882f4a6da68909872a3837f444e
+Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
+Date:   Wed May 21 05:59:22 2025 +0300
+
+    Using a bare repo to manage my dotfiles
+    
+    Using the home directory as the base of my dotfiles repo proved quick
+    challenfing in the long run because:
+    - directories on the sidebar of my code editors were dimmed, say while
+      working on a project with some node_modules that are ignored in my
+      .gitignore files, it was difficult to differenciate.
+    - when Discovering a new tool and deciding to track its customizzations
+      within my dotfiles, One has to manually clear previous git cache then
+      add then new files
+    - it becomes challenging for fnested files or those not within my home
+      directory
+    
+    This method seems pretty handy as it only took me a couple of minutes to
+    understand.
+
 commit 7dc08ac01fb398e18c2ca1f58ab3274959ae82e6
 Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
 Date:   Tue May 20 19:00:30 2025 +0300
@@ -256,3 +299,31 @@ Date:   Mon Apr 21 06:56:01 2025 +0300
       dotfiles for other commonly used tools, git and bash, and so I did
       that
     - Looking forward to seeing this grow gradually
+commit 93cfd2ff1f5cdcc52a5bd7ab6e617c3a6569c110
+Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
+Date:   Wed May 21 06:21:21 2025 +0300
+
+    Add my vim and Neovim config
+    
+    This was done gradually in another repo, so hhere I did it as a bulk
+    commit. Might add the changelog for posterity's sake.
+
+commit 0e21a565e8a45882f4a6da68909872a3837f444e
+Author: mbvgua <105845499+mbvgua@users.noreply.github.com>
+Date:   Wed May 21 05:59:22 2025 +0300
+
+    Using a bare repo to manage my dotfiles
+    
+    Using the home directory as the base of my dotfiles repo proved quick
+    challenfing in the long run because:
+    - directories on the sidebar of my code editors were dimmed, say while
+      working on a project with some node_modules that are ignored in my
+      .gitignore files, it was difficult to differenciate.
+    - when Discovering a new tool and deciding to track its customizzations
+      within my dotfiles, One has to manually clear previous git cache then
+      add then new files
+    - it becomes challenging for fnested files or those not within my home
+      directory
+    
+    This method seems pretty handy as it only took me a couple of minutes to
+    understand.
