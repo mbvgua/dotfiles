@@ -61,9 +61,9 @@ vim.opt.wildignore = {
 -- instead of the current working directory
 -- thanks https://stackoverflow.com/a/15317146/30236232
 -- and https://toddknutson.bio/posts/how-to-enable-neovim-undo-backup-and-swap-files-when-switching-linux-groups/
-SWAPDIR = 'tmp/swap//'
-BACKUPDIR = 'tmp/backup//'
-UNDODIR = 'tmp/undo//'
+SWAPDIR = '/tmp/swap//'
+BACKUPDIR = '/tmp/backup//'
+UNDODIR = '/tmp/undo//'
 
 -- if directories do not exist, make them
 if vim.fn.isdirectory(SWAPDIR) == 0 then
