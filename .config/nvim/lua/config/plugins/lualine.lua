@@ -49,5 +49,15 @@ return {
         { 'progress', separator = { left = '', right = '' } }
       }
     },
+    tabline ={
+      -- show open buffers
+      lualine_a = {'buffers'},
+      lualine_b = {''},       
+      lualine_c = {''},     
+      lualine_x = {},
+      lualine_y = {},
+      -- show open tabs
+      lualine_z = {'tabs'}
+    },
   }
 }
