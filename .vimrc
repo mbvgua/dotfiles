@@ -2,10 +2,10 @@
 "Filename: .vimrc                                               "
 "Sections:                                                      "   
 "    1.General...................general vim behaviour          "
-"    2.Plugins...................installed plugins              "
-"    3.Key bindings..............custom aliases                 "
-"    4.Themes/Colors.............colors,fonts,icons e.t.c       "
-"    5.Layout....................tab,side panel, task bar e.t.c "
+"    2.Key bindings..............custom aliases                 "
+"    3.Themes/Colors.............colors,fonts,icons e.t.c       "
+"    4.Status Bar................design lok of status bar       "
+"    5.Vimscript.................code supporting functions above"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 1.General --------------------------------------------------------- {{{
@@ -56,10 +56,6 @@ set ignorecase
 " this will allow you to search specifically for capital letters.
 set smartcase
 
-" check my word spellings. Didnt know this existed!?
-" thanks to this blog:https://danielmiessler.com/blog/vim
-"set spell spelllang=en_us
-
 " show partial command you type in the last line of the screen.
 set showcmd
 
@@ -82,22 +78,11 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 " navigate between buffers without saving changes
 set hidden
 
-" put swap,backup and undo files in a special location
-" instead of the current working directory
-" thanks https://stackoverflow.com/a/15317146/30236232
-set backupdir=~/.vim/tmp/backups
-set directory=~/.vim/tmp/swaps
-set undodir=~/.vim/tmp/undo
-
 " Automatically re-read the file if it has changed and not ask me every single time!!!
 set autoread
 
 " Disable showmode - i.e. Don't show mode texts like --INSERT-- in current statusline.
-" set noshowmode -> turned off. vital on smaller screens
-
-" set auto code folding
-set foldmethod=indent
-set foldmethod=syntax
+set noshowmode 
 
 " Conquer of Code(CoC) settings
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -159,76 +144,62 @@ map <silent> <leader>e :call ToggleVexplorer()<CR>
 " }}}
 
 
-" 3.Plugins -------------------------------------------------------------- {{{
-
-call plug#begin()
-
-  " track time spent coding
-  Plug 'wakatime/vim-wakatime'
-
-  " syntax highlighting for various languages
-  Plug 'sheerun/vim-polyglot'
-
-call plug#end()
-
-"}}}
-
-
 " 4.Themes/Colors -------------------------------------------------------------- {{{
 
 
 " set term gui colors
 set termguicolors
 
-" use gruvbox dark theme. alternative is light theme
+" use desert colorscheme thats inbuilt to vim 
 set background=dark
+
+if exists("syntax_on")
+    syntax reset
+endif
+let g:colors_name="desert"
+
 
 "}}}
 
 
 " 5.Status Bar -------------------------------------------------------------- {{{
 
-  " Clear status line when vimrc is reloaded.
-  " Status line left side.
-  set statusline=
+" Clear status line when vimrc is reloaded.
+" Status line left side.
+set statusline=
+
+" custom colours for different sections of status line
+hi User1 ctermbg=black ctermfg=grey guibg=black guifg=grey
+hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
+hi User3 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
+
+" which mode that you are currently in
+" the extra " "s are for spacing
+set statusline+=%*\ " "
+set statusline+=%*\%{StatuslineMode()}
+set statusline+=%*\ " "
   
-  " custom colours for different sections of status line
-  hi User1 ctermbg=black ctermfg=grey guibg=black guifg=grey
-  hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
-  hi User3 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
-  
-  " which mode that you are currently in
-  " the extra " "s are for spacing
-  set statusline+=%*\ " "
-  set statusline+=%*\%{StatuslineMode()}
-  set statusline+=%*\ " "
-  
-  " show git branch
-  set statusline+=%3*\ " "
-  set statusline+=%3*\<<\%{StatuslineGit()}>>
-  set statusline+=%3*\ " "
-  
-  " t -> the filename
-  " m -> modified flag text, either [+] or [-]
-  set statusline+=%*\%3*\ %t\ %m
-  
-  " Use a divider to separate the left side from the right side.
-  set statusline+=%=
-  
-  " y -> type of file
-  " ff -> file encoding
-  " r -> if file is read only 
-  set statusline+=%1*\ " "
-  set statusline+=%1*\ %y\ %r\ LOC:\ %l/%L\ %p%%\ %*
-  set statusline+=%1*\ " "
-  
-  " Status line right side
-  set statusline+=%*\ " "
-  set statusline+=%*\ buffer:[%n]\ %*
-  set statusline+=%*\ " "
-  
-  " Show the status on the second to last line.
-  set laststatus=2
+" t -> the filename
+" m -> modified flag text, either [+] or [-]
+set statusline+=%*\%3*\ %t\ %m
+
+" Use a divider to separate the left side from the right side.
+set statusline+=%=
+
+" y -> type of file
+" ff -> file encoding
+" r -> if file is read only 
+set statusline+=%1*\ " "
+set statusline+=%1*\ %r\ LOC:\ %l/%L\ %p%%\ %*
+set statusline+=%1*\ " "
+
+" Status line right side
+set statusline+=%*\ " "
+set statusline+=%*\ buffer:[%n]\ %*
+set statusline+=%*\ " "
+
+" Show the status on the second to last line.
+set laststatus=2
 
 "}}}
 
@@ -306,30 +277,20 @@ function! ToggleVexplorer()
 endfunction
 
 " custom statusline functions
-  " statusline functions
-  " get the Vim Mode you are in
-  function! StatuslineMode()
-    let l:mode=mode()
-    if l:mode==#"n"
-        return "NORMAL"
-    elseif l:mode==?"v"
-        return "VISUAL"
-    elseif l:mode==#"i"
-        return "INSERT"
-    rlseif l:mode==#"R"
-        return "REPLACE"
-    endif
-  endfunction
-
-  " get the git branch you are in
-  function! GitBranch()
-    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-  endfunction
-
-  function! StatuslineGit()
-    let l:branchname = GitBranch()
-    return strlen(l:branchname) > 0?' '.l:branchname.' ':''
-  endfunction
+" statusline functions
+" get the Vim Mode you are in
+function! StatuslineMode()
+  let l:mode=mode()
+  if l:mode==#"n"
+      return "NORMAL"
+  elseif l:mode==?"v"
+      return "VISUAL"
+  elseif l:mode==#"i"
+      return "INSERT"
+  elseif l:mode==#"R"
+      return "REPLACE"
+  endif
+endfunction
 
 
 " This will enable code folding.
@@ -340,33 +301,6 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" If the current file type is HTML, set indentation to 2 spaces.
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
-
-" If Vim version is equal to or greater than 7.3 enable undofile.
-" This allows you to undo changes to a file even after saving it.
-" TODO: look for the equivalent of this in NeoVim.
-if version >= 703
-  set undodir=~/.vim/backup
-  set undofile
-  set undoreload=10000
-endif
-
-" set auto tab spacing for python files
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-
-" set tab spacing for other langs
-au BufNewFile,BufRead *.ts, *.js, *.html, *.css,
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
 
 " }}}
 
