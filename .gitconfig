@@ -16,7 +16,7 @@
 	br = branch
 	st = status
 	com = commit
-	che = checkout
+	ch = checkout
 	last = log -1 HEAD
 	visual = !smerge .
 [core]
