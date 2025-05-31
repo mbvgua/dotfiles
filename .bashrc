@@ -45,6 +45,11 @@ alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisite
 # managing dotfiles repo
 alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/daagi'
 
+# substitute ls with eza. Modern with inbuilt icons
+alias ls='eza --icons --sort=extension'
+
+# call lite-xl with just lite
+alias lite='lite-xl'
 
 ############################################
 # 3.Packages                               #                     
@@ -55,4 +60,5 @@ alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/
 source <(ng completion script)
 
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
+# eval "$(fzf --bash)"
+
