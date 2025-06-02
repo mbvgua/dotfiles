@@ -122,9 +122,7 @@ vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv")
 vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
--- Terminal --
--- Better terminal navigation
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
+-- instantly create terminal window in neovim.
+-- pretty useless since Im already in the terminal and wezterm allows split screens
+-- but the icons are pretty nice
+--vim.keymap.set("n","<A-t>",":split<CR> :resize 10<CR> :term<CR>")
