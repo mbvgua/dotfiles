@@ -106,7 +106,7 @@ wezterm.on("update-right-status", function(window, _)
     local prefix = ""
 
     if window:leader_is_active() then
-        prefix = " " .. utf8.char(0x1f30a) -- ocean wave
+        prefix = " " .. utf8.char(0x1F3A9) -- utf8 unicode for the mad hatter!! 
         SOLID_LEFT_ARROW = utf8.char(0xe0b2)
     end
 
@@ -134,13 +134,13 @@ config.tab_and_split_indices_are_zero_based = true
 config.font_size = 16
 
 -- the OG colour scheme
-config.color_scheme = 'Monokai (base16)'
+config.color_scheme = 'Kibble'
 
 -- remove uneccessary padding on window.
 -- no scrollbar, since its set 0 to the left and right. More RealEstate!
 config.window_padding = {
-  left =0,
-  right = 0,
+  left =4,
+  right = 4,
   top = 0,
   bottom = 0,
 }
