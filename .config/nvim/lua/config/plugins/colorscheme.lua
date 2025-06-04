@@ -5,7 +5,7 @@ return{
     config = function()
         require('monokai-pro').setup({
             -- classic | octagon | pro | machine | ristretto | spectrum
-            filter="classic",
+            filter="spectrum",
             terminal_colors = true,
             -- highlight the icons of `nvim-web-devicons`
             devicons = true,
@@ -23,7 +23,7 @@ return{
             },
             -- Enable this will disable filter option
             day_night = {
-              enable = false, -- turn off by default
+              enable = true, -- turn off by default
               day_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
               night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
             },
@@ -32,7 +32,7 @@ return{
               -- "float_win",
               "toggleterm",
               "telescope",
-              -- "which-key",
+              "which-key",
               "renamer",
               "notify",
               -- "nvim-tree",

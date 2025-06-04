@@ -2,6 +2,7 @@
 
 return {
   'wakatime/vim-wakatime',
-  lazy=false
-  
+  lazy=false,
+  -- enable = false,
+  opts = {}  
 }

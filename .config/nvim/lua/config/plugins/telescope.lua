@@ -75,30 +75,32 @@ return {
         "n","<leader>fc",
         function()
           require('telescope.builtin').find_files {
-            cwd = vim.fn.stdpath("config")
+            cwd = vim.fn.stdpath("config"),{desc="[f]inf [c]onfig files"}
           }
         end
       )
       
       -- open the find files on one click
-      vim.keymap.set("n","<leader>ff",require('telescope.builtin').find_files)
+      vim.keymap.set("n","<leader>ff",require('telescope.builtin').find_files,{desc="[f]ind [f]iles"})
 
       -- for live-grep (find by words)
-      vim.keymap.set("n","<leader>fg",require('telescope.builtin').live_grep)
+      vim.keymap.set("n","<leader>fg",require('telescope.builtin').live_grep,{desc="[f]ind word by live [g]rep"})
 
       -- find all word occurrences when hovered
-      vim.keymap.set("n","<leader>fw",require('telescope.builtin').grep_string)
+      vim.keymap.set("n","<leader>fw",require('telescope.builtin').grep_string,{desc="[f]ind hovered [w]ord"})
 
       -- move around buffers easily. Blew my mind dude!!
-      vim.keymap.set("n","<leader>fb",require('telescope.builtin').buffers)
+      vim.keymap.set("n","<leader>fb",require('telescope.builtin').buffers,{desc="[f]ind [b]uffers"})
 
       -- easily move around :help docs. This cemented telescope as the greatest plugin! 
-      vim.keymap.set("n","<leader>fh",require('telescope.builtin').help_tags)
+      vim.keymap.set("n","<leader>fh",require('telescope.builtin').help_tags,{desc="[f]ind [h]elp"})
 
       -- search through old opened files
-      vim.keymap.set("n","<leader>fo",require('telescope.builtin').oldfiles)
+      vim.keymap.set("n","<leader>fo",require('telescope.builtin').oldfiles,{desc="[f]ind [o]ld files"})
 
       -- find lsp symbols. Does not work now, I have no lsp client. 
-      vim.keymap.set("n","<leader>fs",require('telescope.builtin').lsp_document_symbols)
+      vim.keymap.set("n","<leader>fs",require('telescope.builtin').lsp_document_symbols,{desc="[f]ind [l]sp symbols"})
+      -- find your preset keymaps
+      vim.keymap.set("n","<leader>fk",require('telescope.builtin').keymaps,{desc="[f]ind [k]eymaps"})
     end
 }

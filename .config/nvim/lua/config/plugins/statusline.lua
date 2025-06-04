@@ -27,7 +27,9 @@ return {
           newfile_status = true,
           symbols = {
             modified = '', readonly = '', unnamed = '', newfile = ''
-          }
+          },
+          -- values: 0,1,2,3,4
+          path = 1,
         },
       },
       -- TODO: add the LSP ICON here instead of search count

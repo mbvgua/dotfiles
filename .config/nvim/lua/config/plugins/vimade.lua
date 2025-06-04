@@ -8,6 +8,7 @@ return {
       recipe = { 'minimalist', { animate = false } },
       -- ncmode = 'windows' will fade inactive windows.
       ncmode = 'windows',
+      fadelevel = 0.7,
   }
   }
 }
