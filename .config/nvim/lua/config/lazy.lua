@@ -30,5 +30,6 @@ require("lazy").setup({
     { import = "config.plugins" },
   },
   -- automatically check for plugin updates
+  install = { colorscheme = {"monokai-pro"} },
   -- checker = { enabled = true },
 })
