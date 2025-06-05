@@ -102,5 +102,8 @@ return {
       vim.keymap.set("n","<leader>fs",require('telescope.builtin').lsp_document_symbols,{desc="[f]ind [l]sp symbols"})
       -- find your preset keymaps
       vim.keymap.set("n","<leader>fk",require('telescope.builtin').keymaps,{desc="[f]ind [k]eymaps"})
+
+      -- resume previous search
+      vim.keymap.set('n', '<leader>fr',require('telescope.builtin').resume, { desc = '[f]ind and [r]esume search' })
     end
 }
