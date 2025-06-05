@@ -15,7 +15,7 @@ vim.keymap.set( {'n','x'},'<S-p>','"+p',{desc='paste clipboard text'} )
 vim.keymap.set( 'n','<leader>w','<cmd>write<cr>',{desc = 'Save file'} )
 
 -- close current window quickly
-vim.keymap.set( 'n','<leader>c','<C-w>c',{desc='Close current window'} )
+vim.keymap.set( 'n','<leader>x','<C-w>c',{desc='Close current window'} )
 
 -- close all file and exit vim
 vim.keymap.set( 'n','<leader>q','<cmd>quitall<cr>',{desc = 'Exit vim'} )

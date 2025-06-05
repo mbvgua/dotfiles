@@ -29,11 +29,26 @@ return {
             modified = '', readonly = '', unnamed = '', newfile = ''
           },
           -- values: 0,1,2,3,4
-          path = 1,
+          path = 4,
         },
       },
       -- TODO: add the LSP ICON here instead of search count
-      lualine_x = { ' ' },
+      lualine_x = {
+         {
+            'lsp_status',
+            icon = '', -- f013
+            symbols = {
+                -- Standard unicode symbols to cycle through for LSP progress:
+                spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                -- Standard unicode symbol for when LSP is done:
+                done = '✓',
+                -- Delimiter inserted between LSP names:
+                separator = ' ',
+            },
+            -- List of LSP names to ignore (e.g., `null-ls`):
+            ignore_lsp = {},
+         }
+      },
       lualine_y = {
         { 'filetype', icon = { align = 'right' } },
         'fileformat',
