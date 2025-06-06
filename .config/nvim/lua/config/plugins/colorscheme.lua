@@ -5,7 +5,7 @@ return{
     config = function()
         require('monokai-pro').setup({
             -- classic | octagon | pro | machine | ristretto | spectrum
-            filter="pro",
+            filter="spectrum",
             terminal_colors = true,
             -- highlight the icons of `nvim-web-devicons`
             devicons = true,
