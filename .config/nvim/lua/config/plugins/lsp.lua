@@ -4,6 +4,7 @@
 return {
 	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
+	tag = "v2.0.0",
 	dependencies = {
 		-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
 		-- NOTE: had to tag the versions since Neovim 0.11 has built in lsp support and

@@ -94,6 +94,12 @@ else
   set signcolumn=yes
 endif
 
+" remove automatic backing up of files. In VCS anyways
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+
 
 "}}}
 
@@ -130,11 +136,8 @@ noremap <leader>l <c-w>l
 " close a window easily
 noremap <leader>c <c-w>c
 
-" moving an entire line up/down ->I use this alot!!
-" ddkP -> move line up
-noremap <leader><up> ddkP
-" ddp -> move line down
-noremap <leader><down> ddp
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>cs :setlocal spell!<cr>
 
 " open netrw quickly
 " from this discussion: https://stackoverflow.com/a/51199145/30236232
