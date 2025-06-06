@@ -6,5 +6,3 @@ require("config.options")
 
 -- setup my key bindings
 require("config.keymaps")
-
-
