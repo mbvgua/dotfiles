@@ -19,6 +19,8 @@
 	ch = checkout
 	last = log -1 HEAD
 	visual = !smerge .
+    ; pull all remote branches into local working directory
+	pa = "!git branch -r | grep -v \"\\->\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && git fetch --all && git pull --all"
 [core]
 	editor = vim
 	symlink = true

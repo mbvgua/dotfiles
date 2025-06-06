@@ -51,6 +51,8 @@ alias ls='eza --icons --sort=extension'
 # call lite-xl with just lite
 alias lite='lite-xl'
 
+# open files easily
+alias files='xdg-open .'
 ############################################
 # 3.Packages                               #                     
 ############################################
