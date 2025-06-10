@@ -54,22 +54,22 @@ config.keys = {
 	},
 	-- change pane sizes{Up,Down,Right,Left}
 	{
-		mods = "ALT",
+		mods = "CTRL",
 		key = "LeftArrow",
 		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
 	},
 	{
-		mods = "ALT",
+		mods = "CTRL",
 		key = "RightArrow",
 		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
 	},
 	{
-		mods = "ALT",
+		mods = "CTRL",
 		key = "DownArrow",
 		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
 	},
 	{
-		mods = "ALT",
+		mods = "CTRL",
 		key = "UpArrow",
 		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
 	},
@@ -78,6 +78,12 @@ config.keys = {
 		key = "t",
 		mods = "LEADER",
 		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+	},
+	-- close pane
+	{
+		key = "x",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 	-- close tab
 	{
@@ -130,6 +136,8 @@ config.tab_and_split_indices_are_zero_based = true
 
 -- increase font size. My eyes!!!
 config.font_size = 16
+-- change default font
+-- config.font = wezterm.font("Source Code Pro")
 
 -- the OG colour scheme
 config.color_scheme = "Kibble (Gogh)"
@@ -142,6 +150,9 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
+
+-- make terminal transparent!!
+config.window_background_opacity = 0.85
 
 -- return the configuration to wezterm for changes to work on save
 -- if not, use Ctrl+Shift+R to force reload
