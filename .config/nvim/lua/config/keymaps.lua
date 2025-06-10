@@ -31,11 +31,11 @@ vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Navigate to window above" }
 vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Navigate to window below" })
 
 -- resize windows with arrow keys easily
--- resize upwards,downwards,left,right
-vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
-vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
+-- resize with Alt+Arrow Keys (upwards,downwards,left,right)
+vim.keymap.set("n", "<A-Up>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
+vim.keymap.set("n", "<A-Down>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
+vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
+vim.keymap.set("n", "<A-Right>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
 
 -- navigate buffers easily with leader key
 -- (N)ext and (P)revious
@@ -59,11 +59,6 @@ vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
 -- check spelling within file
 vim.keymap.set("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
-
--- instantly create terminal window in neovim.
--- pretty useless since Im already in the terminal and wezterm allows split screens
--- but the icons are pretty nice
---vim.keymap.set("n","<A-t>",":split<CR> :resize 10<CR> :term<CR>")
 
 -- from kickstart!
 -- TIP: Disable arrow keys in normal mode

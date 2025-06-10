@@ -81,12 +81,7 @@ return {
 		vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[f]ind [f]iles" })
 
 		-- for live-grep (find by words)
-		vim.keymap.set(
-			"n",
-			"<leader>fg",
-			require("telescope.builtin").live_grep,
-			{ desc = "[f]ind word by live [g]rep" }
-		)
+		vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "[f]ind word by live [g]rep" })
 
 		-- find all word occurrences when hovered
 		vim.keymap.set("n", "<leader>fw", require("telescope.builtin").grep_string, { desc = "[f]ind hovered [w]ord" })
@@ -101,16 +96,12 @@ return {
 		vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles, { desc = "[f]ind [o]ld files" })
 
 		-- find lsp symbols. Does not work now, I have no lsp client.
-		vim.keymap.set(
-			"n",
-			"<leader>fs",
-			require("telescope.builtin").lsp_document_symbols,
-			{ desc = "[f]ind [l]sp symbols" }
-		)
+		vim.keymap.set("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols, { desc = "[f]ind [l]sp symbols" })
+
 		-- find your preset keymaps
 		vim.keymap.set("n", "<leader>fk", require("telescope.builtin").keymaps, { desc = "[f]ind [k]eymaps" })
 
 		-- resume previous search
-		vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "[f]ind and [r]esume search" })
+		vim.keymap.set("n", "<leader>fp", require("telescope.builtin").resume, { desc = "[f]ind [p]revious search" })
 	end,
 }
