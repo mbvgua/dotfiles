@@ -58,11 +58,11 @@ return {
 
 				-- Rename the variable under your cursor.
 				--  Most Language Servers support renaming across files, etc.
-				map("cn", vim.lsp.buf.rename, "[c]hange [n]ame")
+				map("<leader>cn", vim.lsp.buf.rename, "[c]hange [n]ame")
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("ca", vim.lsp.buf.code_action, "[c]ode [a]ction", { "n", "x" })
+				map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction", { "n", "x" })
 
 				-- Find references for the word under your cursor.
 				map("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
@@ -82,6 +82,7 @@ return {
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
+				-- TODO: similar mapping in telescope, see which to keep
 				map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 
 				-- Fuzzy find all the symbols in your current workspace.
@@ -247,5 +248,10 @@ return {
 				end,
 			},
 		})
+
+		-- see what error message is about with lsp
+		vim.keymap.set("n", "ge", function()
+			vim.diagnostic.open_float()
+		end, { desc = "LSP: [g]oto [e]rror diagnostics" })
 	end,
 }

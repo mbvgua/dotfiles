@@ -38,7 +38,6 @@ return {
 			},
 			sync_install = false,
 			highlight = { enable = true },
-			-- indent with =
 			indent = { enable = true },
 
 			-- easier navigation of textObjects
@@ -54,5 +53,8 @@ return {
 				},
 			},
 		})
+
+		-- inspect tree sitter syntax easily
+		vim.keymap.set("n", "<leader>ti", "<cmd>:InspectTree<CR>", { desc = "[i]nspect [t]ree-sitter syntax nodes" })
 	end,
 }

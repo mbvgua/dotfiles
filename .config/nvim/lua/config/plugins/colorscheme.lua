@@ -1,4 +1,5 @@
 -- monokai pro colorscheme. matches Sublime superbly!
+
 return {
 	"loctvl842/monokai-pro.nvim",
 	version = "v1.26.0",
@@ -6,11 +7,11 @@ return {
 	config = function()
 		require("monokai-pro").setup({
 			-- classic | octagon | pro | machine | ristretto | spectrum
-			filter = "spectrum",
+			filter = "classic",
 			terminal_colors = true,
-			-- highlight the icons of `nvim-web-devicons`
 			devicons = true,
 
+			-- make transparent or not.
 			transparent_background = false,
 			styles = {
 				comment = { italic = true },
