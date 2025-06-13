@@ -4,12 +4,13 @@ return {
 	"stevearc/conform.nvim",
 	version = "9.0.0",
 	opts = {
-		-- format on save automatically
-		format_on_save = {
-			-- These options will be passed to conform.format()
-			timeout_ms = 500,
-			lsp_format = "fallback",
-		},
+		-- disabled temporarily. Dont like forced formats
+		-- -- format on save automatically
+		-- format_on_save = {
+		-- 	-- These options will be passed to conform.format()
+		-- 	timeout_ms = 500,
+		-- 	lsp_format = "fallback",
+		-- },
 		-- installed formatters
 		formatters_by_ft = {
 			-- frontend
