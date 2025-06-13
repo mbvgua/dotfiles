@@ -3,7 +3,9 @@
 return {
 	"mistweaverco/kulala.nvim",
 	keys = {
-		{ "<leader>Rs", desc = "Send request" },
+		-- { "<leader>Rs", desc = "Send request" },
+        -- remapped to <CR> to move faster. Only works in .http files, amazing!!
+		{ "<CR>", desc = "Send request" },
 		{ "<leader>Ra", desc = "Send all requests" },
 		{ "<leader>Rb", desc = "Open scratchpad" },
 	},
@@ -12,6 +14,7 @@ return {
 		global_keymaps = true,
 		global_keymaps_prefix = "<leader>R",
 		kulala_keymaps_prefix = "",
+        ui = {formatter=true}
 	},
 	-- recognize files with .http extension as http files
 	vim.filetype.add({

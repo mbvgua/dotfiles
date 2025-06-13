@@ -18,6 +18,9 @@ vim.opt.cursorline = true
 -- elegantly display 1 column after crossing 'my textwidth=90'
 vim.opt.colorcolumn = "91"
 
+-- keep identation from previous line
+vim.opt.autoindent = true
+
 -- number of spaces that a tab will count for
 vim.o.tabstop = 4
 
@@ -31,9 +34,6 @@ vim.o.shiftwidth = 4
 
 -- how many spaces are applied when pressing tab
 vim.opt.softtabstop = 4
-
--- keep identation from previous line
-vim.opt.autoindent = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -58,8 +58,6 @@ vim.o.smartcase = true
 -- set auto cold folding
 vim.o.foldmethod = "indent"
 vim.o.foldmethod = "syntax"
-vim.o.foldlevel = 3
-vim.o.foldlevelstart = 3
 
 -- automatically re-read changes done on file.
 -- no need to ask me everytime!!
@@ -151,4 +149,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local extension = "~" .. vim.fn.strftime("%Y-%m-%d-%H%M%S")
 		vim.o.backupext = extension
 	end,
+})
+
+-- python specific files
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.py",
+  callback = function()
+    vim.bo.tabstop = 4 -- TAB will be equal to 4 spaces
+    vim.bo.softtabstop = 4 --insert/delete 4 spaces when hitting TAB/BACKSPACE
+    vim.bo.shiftwidth = 4 -- operation >> & << will indent/unindent 4 columns
+    vim.bo.textwidth = 79 -- lines longer than 79 chars are broken
+    vim.bo.colorcolumn = "80"  -- where right horizontal line margin will be showed
+    vim.bo.expandtab = true -- inser spaces when hitting TAB
+    vim.bo.autoindent = true -- align new line indentation with previous line
+    vim.bo.fileformat = "unix" -- format all files to have unix base EOF
+  end,
 })
