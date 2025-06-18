@@ -10,21 +10,22 @@ return {
 	opts = {
 		-- your configuration comes here
 		indent = { enabled = true },
-		input = { enabled = true, prompt_pos = "left" },
+		input = { enabled = true },
 		picker = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
 		words = { enabled = true },
 		animate = { enabled = true },
-		bigfile = { enabled = true },
+		bigfile = { enabled = true }, -- loads extremely large files with ease
+		quickfile = { enabled = true }, -- render a new file as quick as possible before icons
 		notifier = {
 			enabled = true,
-			style = "fancy",
+			-- compact | minimal | fancy
+			style = "compact",
 			timeout = 4000,
-			wo = { wrap = true },
+			wo = { wrap = false },
 		},
 		-- not in use...
-		quickfile = { enabled = false }, -- not sure what this does. but no
 		dashboard = { enabled = false }, -- too much. totally uneccessary
 		explorer = { enabled = false }, -- have netrw!
 		terminal = { enabled = false }, -- float term is harzardous at best

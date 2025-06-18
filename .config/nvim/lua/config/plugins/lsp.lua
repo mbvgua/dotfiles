@@ -147,14 +147,14 @@ return {
 				-- code, if the language server you are using supports them
 				--
 				-- This may be unwanted, since they displace some of your code
-				if
-					client
-					and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
-				then
-					map("<leader>th", function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-					end, "[T]oggle Inlay [H]ints")
-				end
+				-- if
+				-- 	client
+				-- 	and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
+				-- then
+				-- 	map("<leader>th", function()
+				-- 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+				-- 	end, "[T]oggle Inlay [H]ints")
+				-- end
 			end,
 		})
 
@@ -231,6 +231,7 @@ return {
 			"prettier", -- format js and ts code
 			"prettierd", -- format js and ts code, but running on a dedicated daemon
 			"black", -- format python code
+            "sql-formatter" -- format sql
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
