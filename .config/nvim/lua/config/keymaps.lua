@@ -16,12 +16,12 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 -- close current window quickly
 vim.keymap.set("n", "<leader>x", "<C-w>c", { desc = "Close current window" })
 
--- close all file and exit vim
-vim.keymap.set("n", "<leader>q", "<cmd>quitall<cr>", { desc = "Exit vim" })
-
 -- stop highlighting after search
 -- (H)ighlight (O)ff
 vim.keymap.set("n", "<leader>ho", ":nohlsearch<CR>", { desc = "Removing highlighted text after a search" })
+
+-- check spelling within file
+vim.keymap.set("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
 
 -- easy window navigation with leader key
 -- navigate to left, right, up, down (h,l,k,j)
@@ -32,10 +32,10 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Navigate to window below" }
 
 -- resize windows with arrow keys easily
 -- resize with Alt+Arrow Keys (upwards,downwards,left,right)
-vim.keymap.set("n", "<A-Up>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
-vim.keymap.set("n", "<A-Down>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
-vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
-vim.keymap.set("n", "<A-Right>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
+vim.keymap.set("n", "<A-k>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
+vim.keymap.set("n", "<A-j>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
+vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
+vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
 
 -- navigate buffers easily with leader key
 -- (N)ext and (P)revious
@@ -56,9 +56,6 @@ vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv")
 vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
-
--- check spelling within file
-vim.keymap.set("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
 
 -- from kickstart!
 -- TIP: Disable arrow keys in normal mode

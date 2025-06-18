@@ -64,7 +64,8 @@ vim.o.foldmethod = "syntax"
 vim.opt.autoread = true
 
 -- save changes on file when closed abruptly.
-vim.opt.autowrite = true
+-- :q! will still save changes made to file?! Not ideal
+-- vim.opt.autowrite = true
 
 -- allow backspace to delete over identations, EOL, e.t.c
 vim.opt.backspace = "2"
@@ -154,15 +155,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- python specific files
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.py",
-  callback = function()
-    vim.bo.tabstop = 4 -- TAB will be equal to 4 spaces
-    vim.bo.softtabstop = 4 --insert/delete 4 spaces when hitting TAB/BACKSPACE
-    vim.bo.shiftwidth = 4 -- operation >> & << will indent/unindent 4 columns
-    vim.bo.textwidth = 79 -- lines longer than 79 chars are broken
-    vim.bo.colorcolumn = "80"  -- where right horizontal line margin will be showed
-    vim.bo.expandtab = true -- inser spaces when hitting TAB
-    vim.bo.autoindent = true -- align new line indentation with previous line
-    vim.bo.fileformat = "unix" -- format all files to have unix base EOF
-  end,
+	pattern = "*.py",
+	callback = function()
+		vim.bo.tabstop = 4 -- TAB will be equal to 4 spaces
+		vim.bo.softtabstop = 4 --insert/delete 4 spaces when hitting TAB/BACKSPACE
+		vim.bo.shiftwidth = 4 -- operation >> & << will indent/unindent 4 columns
+		vim.bo.textwidth = 79 -- lines longer than 79 chars are broken
+		vim.bo.colorcolumn = "80" -- where right horizontal line margin will be showed
+		vim.bo.expandtab = true -- inser spaces when hitting TAB
+		vim.bo.autoindent = true -- align new line indentation with previous line
+		vim.bo.fileformat = "unix" -- format all files to have unix base EOF
+	end,
 })

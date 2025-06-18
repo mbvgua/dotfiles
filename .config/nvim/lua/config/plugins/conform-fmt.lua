@@ -24,11 +24,12 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
-			sql = { "sqlfmt" },
+			sql = { "sql-formatter" },
 		},
 	},
 	-- format using key bindings
 	vim.keymap.set("n", "<leader>cf", function()
-		require("conform").format({ lsp_format = "fallback" })
+		require("conform").format({ lsp_format = "fallback", async = true })
+		print("File formatted")
 	end, { desc = "[c]ode [f]ormat" }),
 }

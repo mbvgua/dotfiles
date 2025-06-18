@@ -13,7 +13,7 @@ return {
 			always_divide_middle = true,
 			always_show_tabline = true,
 			-- only 1 statusline for all windows/buffers
-			globalstatus = true,
+			-- globalstatus = true,
 		},
 		sections = {
 			lualine_a = { { "mode", separator = { left = "", right = "" } } },

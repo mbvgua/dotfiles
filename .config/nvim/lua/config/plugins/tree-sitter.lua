@@ -55,6 +55,6 @@ return {
 		})
 
 		-- inspect tree sitter syntax easily
-		vim.keymap.set("n", "<leader>ti", "<cmd>:InspectTree<CR>", { desc = "[i]nspect [t]ree-sitter syntax nodes" })
+		vim.keymap.set("n", "<leader>ci", "<cmd>:InspectTree<CR>", { desc = "[c]ode [i]nspect tree-sitter" })
 	end,
 }
