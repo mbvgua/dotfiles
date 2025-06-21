@@ -21,12 +21,12 @@ vim.opt.colorcolumn = "91"
 -- keep identation from previous line
 vim.opt.autoindent = true
 
--- number of spaces that a tab will count for
-vim.o.tabstop = 4
-
 -- convert tabs to spaces
 vim.opt.expandtab = true
 vim.opt.shiftround = true
+
+-- number of spaces that a tab will count for
+vim.o.tabstop = 4
 
 -- number of spaces to use with auto-indent(<< & >>)
 -- if not set, tabstop value is used
