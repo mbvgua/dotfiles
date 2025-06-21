@@ -1,29 +1,17 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Filename: .vimrc                                               "
-"Sections:                                                      "   
+"Sections:                                                      "
 "    1.General...................general vim behaviour          "
-"    2.Key bindings..............custom aliases                 "
-"    3.Themes/Colors.............colors,fonts,icons e.t.c       "
-"    4.Status Bar................design lok of status bar       "
-"    5.Vimscript.................code supporting functions above"
+"    2.Key bindings..............custom key mappings            "
+"    3.Status Bar................design look of status bar      "
+"    4.Vimscript.................code supporting functions above"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " 1.General --------------------------------------------------------- {{{
 
 "be iMproved always! could cause unexpected issues if compatible to vi
 set nocompatible
-
-" enable type file detection. it detects the type of file in use
-filetype on
-
-" enable plugins and load plugin for the detected file type.
-filetype plugin on
-  
-" load an indent file for the detected file type.
-filetype indent on
-
-" turn on syntax highlighting
-syntax on
 
 " show line numbers
 set number
@@ -36,6 +24,9 @@ set scrolloff=7
 
 " minimal number of lines to keep on left/right of cursor
 set sidescrolloff=8 
+
+" no colors!!! no higlighting at all. plain black and white
+syntax off
 
 " split go below always
 set splitbelow
@@ -84,7 +75,6 @@ set autoread
 " Disable showmode - i.e. Don't show mode texts like --INSERT-- in current statusline.
 set noshowmode 
 
-" Conquer of Code(CoC) settings
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -92,14 +82,18 @@ if has("patch-8.1.1564")
   set signcolumn=number
 else
   set signcolumn=yes
-endif
+endif 
 
-" remove automatic backing up of files. In VCS anyways
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
+" remove automatic backing up of files.Conflict when I SSH.Plus already in In VCS anyways
 set nobackup
 set nowb
 set noswapfile
 
+" Show the status on the second to last line.
+set laststatus=2
+
+" Clear status line when vimrc is reloaded.
+set statusline=
 
 "}}}
 
@@ -133,58 +127,27 @@ noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
 noremap <leader>l <c-w>l
 
-" close a window easily
-noremap <leader>c <c-w>c
-
-" Pressing ,ss will toggle and untoggle spell checking
+" Pressing <leader>ss will toggle and untoggle spell checking
 map <leader>cs :setlocal spell!<cr>
 
 " open netrw quickly
 " from this discussion: https://stackoverflow.com/a/51199145/30236232
 map <silent> <leader>e :call ToggleVexplorer()<CR>
 
-
 " }}}
 
 
-" 4.Themes/Colors -------------------------------------------------------------- {{{
-
-
-" set term gui colors
-set termguicolors
-
-" use desert colorscheme thats inbuilt to vim 
-set background=dark
-
-if exists("syntax_on")
-    syntax reset
-endif
-let g:colors_name="desert"
-
-
-"}}}
-
-
-" 5.Status Bar -------------------------------------------------------------- {{{
-
-" Clear status line when vimrc is reloaded.
-" Status line left side.
-set statusline=
+" 3.Status Bar -------------------------------------------------------------- {{{
 
 " custom colours for different sections of status line
 hi User1 ctermbg=black ctermfg=grey guibg=black guifg=grey
 hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
 hi User3 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
 
-" which mode that you are currently in
-" the extra " "s are for spacing
-set statusline+=%*\ " "
-set statusline+=%*\%{StatuslineMode()}
-set statusline+=%*\ " "
-  
+" StatuslineMode: which mode that you are currently in
 " t -> the filename
 " m -> modified flag text, either [+] or [-]
-set statusline+=%*\%3*\ %t\ %m
+set statusline+=%*\ %{StatuslineMode()}\ %3*\ %t\ %m
 
 " Use a divider to separate the left side from the right side.
 set statusline+=%=
@@ -192,25 +155,14 @@ set statusline+=%=
 " y -> type of file
 " ff -> file encoding
 " r -> if file is read only 
-set statusline+=%1*\ " "
-set statusline+=%1*\ %r\ LOC:\ %l/%L\ %p%%\ %*
-set statusline+=%1*\ " "
-
-" Status line right side
-set statusline+=%*\ " "
-set statusline+=%*\ buffer:[%n]\ %*
-set statusline+=%*\ " "
-
-" Show the status on the second to last line.
-set laststatus=2
+set statusline+=%3*\ %r\ LOC:\%l/%L\ %p%%\ %*
 
 "}}}
 
 
-" 5.Vimscript -------------------------------------------------------------- {{{ 
+" 4.Vimscript -------------------------------------------------------------- {{{ 
 
 " MODIFY NETWR
-"modify netrw
 " From this stackoverflow dicussion: https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
 " remove list characters
 autocmd FileType netrw set nolist
@@ -257,7 +209,7 @@ autocmd WinEnter * if winnr('$') == 1
   \ && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"
   \ || &buftype == 'quickfix' | q | endif
 
-" Toggle Vexplore with Ctrl-O
+" Toggle Vexplore with Ctrl-e
 function! ToggleVexplorer()
   if exists("t:expl_buf_num")
       let expl_win_num = bufwinnr(t:expl_buf_num)
@@ -279,9 +231,7 @@ function! ToggleVexplorer()
   endif
 endfunction
 
-" custom statusline functions
-" statusline functions
-" get the Vim Mode you are in
+" custom statusline functions to get the Vim Mode you are in
 function! StatuslineMode()
   let l:mode=mode()
   if l:mode==#"n"
@@ -295,7 +245,6 @@ function! StatuslineMode()
   endif
 endfunction
 
-
 " This will enable code folding.
 " Use the marker method of folding.
 " only in this specific .vimrc file
@@ -303,7 +252,6 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
-
 
 " }}}
 

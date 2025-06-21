@@ -54,22 +54,22 @@ config.keys = {
 	},
 	-- change pane sizes{Up,Down,Right,Left}
 	{
-		mods = "CTRL",
+		mods = "ALT",
 		key = "LeftArrow",
 		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
 	},
 	{
-		mods = "CTRL",
+		mods = "ALT",
 		key = "RightArrow",
 		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
 	},
 	{
-		mods = "CTRL",
+		mods = "ALT",
 		key = "DownArrow",
 		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
 	},
 	{
-		mods = "CTRL",
+		mods = "ALT",
 		key = "UpArrow",
 		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
 	},
