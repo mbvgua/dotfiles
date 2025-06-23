@@ -26,7 +26,9 @@ set scrolloff=7
 set sidescrolloff=8 
 
 " no colors!!! no higlighting at all. plain black and white
-syntax off
+syntax on
+set termguicolors
+colorscheme desert
 
 " split go below always
 set splitbelow
@@ -107,7 +109,7 @@ let mapleader = " "
 
 " Read an empty HTML template and move cursor to title
 " Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
-nnoremap <leader>! :-1read $HOME/.vim/.base.html<CR>6jwf>a
+nnoremap <leader>! :-1read $HOME/.vim/.base.html<CR>9jwf>a
 
 " insert automatic closing and opening brackets,parens,quotation marks
 " to escape them use ctrl+v before typing mapped command
