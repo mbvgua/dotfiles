@@ -71,7 +71,28 @@ vim.keymap.set("n", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j
 -- Disable arrow keys in insert mode with a styled message
 -- vim.keymap.set("i", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
 -- vim.keymap.set("i", "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-vim.keymap.set("i", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-vim.keymap.set("i", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+-- vim.keymap.set("i", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+-- vim.keymap.set("i", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
 -- vim.api.nvim_set_keymap("i", "<Del>", "<C-o>" .. msg, { noremap = true, silent = false })
 -- vim.api.nvim_set_keymap("i", "<BS>", "<C-o>" .. msg, { noremap = true, silent = false })
+
+-- some quick terminal movements
+local Terminal = require("toggleterm.terminal").Terminal
+
+-- open the python REPL quickly
+local python = Terminal:new({ cmd = "python", hidden = true })
+
+function PYTHON_TOGGLE()
+	python:toggle()
+end
+vim.keymap.set("n", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
+vim.keymap.set("i", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
+
+-- open htop
+local htop = Terminal:new({ cmd = "htop", hidden = true })
+
+function HTOP_TOGGLE()
+	htop:toggle()
+end
+vim.keymap.set("n", "<C-h>", "<cmd> :lua HTOP_TOGGLE()<CR> <cmd>")
+vim.keymap.set("i", "<C-h>", "<cmd> :lua HTOP_TOGGLE()<CR> <cmd>")
