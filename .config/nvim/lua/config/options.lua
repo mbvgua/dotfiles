@@ -55,9 +55,14 @@ vim.o.ignorecase = true
 -- allowing you to search specifically for caps
 vim.o.smartcase = true
 
--- set auto cold folding
-vim.o.foldmethod = "indent"
-vim.o.foldmethod = "syntax"
+-- allow code folding with tree sitter
+-- gotten from: https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for code folding
+vim.opt.foldtext = "" -- you can see what is inside the fold
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 2 --top level is not folded. only nested folds
+vim.opt.foldnestmax = 5
 
 -- automatically re-read changes done on file.
 -- no need to ask me everytime!!
