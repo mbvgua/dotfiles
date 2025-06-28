@@ -48,11 +48,10 @@ alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/
 # substitute ls with eza. Modern with inbuilt icons
 alias ls='eza --icons --sort=extension'
 
-# call lite-xl with just lite
-alias lite='lite-xl'
-
 # open files easily
 alias files='xdg-open .'
+
+
 ############################################
 # 3.Packages                               #                     
 ############################################
@@ -62,5 +61,6 @@ alias files='xdg-open .'
 source <(ng completion script)
 
 # Set up fzf key bindings and fuzzy completion
-# eval "$(fzf --bash)"
+#eval "$(fzf --bash)"
 
+. "$HOME/.cargo/env"
