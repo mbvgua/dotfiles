@@ -7,10 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = typer.Typer()
+
 main_session = os.environ.get("MAIN_SESSION")
 lab_session = os.environ.get("LAB_SESSION")
 careers_session = os.environ.get("CAREERS_SESSION")
-user_email = os.environ.get("USER_EMAIL")
+command = "teams-for-linux"
+closeArg = "--closeAppOnCross"
+urlArg = "--url"
 
 session_catalogue = {
     "[1] Morning rollcall": "Basic standup and checkin session (9:00am - 9:20am)",
@@ -34,37 +37,19 @@ def choose_session():
     if (user_choice == 1) or (user_choice == 2) or (user_choice == 4):
         print("You choose either the [cyan]Morning[/cyan] rollcall/session or [cyan]Evening[/cyan] session.")
         subprocess.run(
-            [
-                "teams-for-linux",
-                "--closeAppOnCross",
-                "--followSystemTheme",
-                "--url ",
-                main_session,
-            ],
+            [command,closeArg,urlArg,main_session],
             capture_output=True,
         )
     elif (user_choice == 3) or (user_choice == 5):
         print("You choose either the [cyan]Morning[/cyan] or [cyan]Evening[/cyan] lab session.")
         subprocess.run(
-            [
-                "teams-for-linux",
-                "--closeAppOnCross",
-                "--followSystemTheme",
-                "--url ",
-                lab_session,
-            ],
+            [command,closeArg,urlArg,lab_session],
             capture_output=True,
         )
     elif user_choice == 6:
         print("You choose the [cyan]careers[/cyan] session.")
         subprocess.run(
-            [
-                "teams-for-linux",
-                "--closeAppOnCross",
-                "--followSystemTheme",
-                "--url ",
-                careers_session,
-            ],
+            [command,closeArg,urlArg,lab_session],
             capture_output=True,
         )
     else:
