@@ -6,8 +6,6 @@ return {
 	-- enabled=false,
 	config = function()
 		require("monokai-pro").setup({
-			-- classic | octagon | pro | machine | ristretto | spectrum
-			filter = "classic",
 			terminal_colors = true,
 			devicons = true,
 
@@ -23,11 +21,13 @@ return {
 				annotation = { italic = true },
 				tag_attribute = { italic = true }, -- attribute of tag in reactjs
 			},
+			-- classic | octagon | pro | machine | ristretto | spectrum
+			filter = "classic",
 			-- Enable this will disable filter option
 			day_night = {
 				enable = false, -- turn off by default
-				day_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
-				night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
+				day_filter = "light", -- classic | octagon | pro | machine | ristretto | spectrum
+				night_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
 			},
 			inc_search = "background", -- underline | background
 			background_clear = {
