@@ -5,14 +5,15 @@
 To install this onto your system, run:
 
 ```bash
-git clone https://github.com/mbvgua/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-bash setup
+    $ git clone https://github.com/mbvgua/dotfiles.git ~/.dotfiles
+    $ cd ~/.dotfiles
+    $ chmod +x setup
+    $ ./setup
 ```
 
 <h2> Customization </h2>
 
 A good place to customize would be the `.gitconfig` file, change existing variable names to yours
 
-[!WARNING]
+> [!IMPORTANT]
 > It might be a good idea to back up existing files of the same name as they will be replaced
