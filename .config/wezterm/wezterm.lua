@@ -1,5 +1,7 @@
 -- pull the wezterm API
 local wezterm = require("wezterm")
+local appearance = require("appearance")
+
 local config = wezterm.config_builder()
 
 -- ############################### --
@@ -136,11 +138,16 @@ config.tab_and_split_indices_are_zero_based = true
 
 -- increase font size. My eyes!!!
 config.font_size = 16
--- change default font
--- config.font = wezterm.font("Source Code Pro")
 
--- the OG colour scheme
-config.color_scheme = "Kibble (Gogh)"
+if appearance.is_dark() then
+	config.color_scheme = "Kibble (Gogh)"
+	config.window_background_opacity = 0.85
+else
+	config.color_scheme = "GruvboxLight"
+	-- make terminal transparent!!
+	config.window_background_opacity = 1
+end
+
 -- remove uneccessary padding on window.
 -- no scrollbar, since its set 0 to the left and right. More RealEstate!
 -- also real hackers don't use scrollbars for navigation!
@@ -150,9 +157,6 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
-
--- make terminal transparent!!
-config.window_background_opacity = 0.85
 
 -- return the configuration to wezterm for changes to work on save
 -- if not, use Ctrl+Shift+R to force reload
