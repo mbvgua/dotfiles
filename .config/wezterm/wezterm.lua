@@ -143,8 +143,7 @@ if appearance.is_dark() then
 	config.color_scheme = "Kibble (Gogh)"
 	config.window_background_opacity = 0.85
 else
-	config.color_scheme = "GruvboxLight"
-	-- make terminal transparent!!
+	config.color_scheme = "lovelace"
 	config.window_background_opacity = 1
 end
 
