@@ -1,6 +1,4 @@
-<h1> dotfiles </h1>
-
-<h2> Installation </h2>
+<h1> Installation </h1>
 
 To install this onto your system, run:
 
@@ -11,9 +9,6 @@ To install this onto your system, run:
     $ ./setup
 ```
 
-<h2> Customization </h2>
-
-A good place to customize would be the `.gitconfig` file, change existing variable names to yours
-
 > [!IMPORTANT]
-> It might be a good idea to back up existing files of the same name as they will be replaced
+> It might be a good idea to back up existing files of the same name as they will be replaced.
+> A good place to customize would be the `.gitconfig` file, change existing variable names to yours
