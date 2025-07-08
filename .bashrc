@@ -51,6 +51,8 @@ alias ls='eza --icons --sort=extension'
 # open files easily
 alias files='xdg-open .'
 
+#easy tree navigation
+alias tree-fs='tree --filelimit 15'
 
 ############################################
 # 3.Packages                               #                     
@@ -63,4 +65,13 @@ source <(ng completion script)
 # Set up fzf key bindings and fuzzy completion
 #eval "$(fzf --bash)"
 
+#cargo
 . "$HOME/.cargo/env"
+
+# pnpm
+export PNPM_HOME="/home/daagi/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
