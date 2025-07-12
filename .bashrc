@@ -52,7 +52,7 @@ alias ls='eza --icons --sort=extension'
 alias files='xdg-open .'
 
 #easy tree navigation
-alias tree-fs='tree --filelimit 15'
+alias treee='tree --filelimit 15'
 
 ############################################
 # 3.Packages                               #                     
