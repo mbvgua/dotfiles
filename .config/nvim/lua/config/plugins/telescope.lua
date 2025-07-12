@@ -103,5 +103,9 @@ return {
 
 		-- resume previous search
 		vim.keymap.set("n", "<leader>fp", require("telescope.builtin").resume, { desc = "[f]ind [p]revious search" })
+
+		-- find todo comments easily
+		vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope<cr>", { desc = "[f]ind [t]odos" })
+
 	end,
 }
