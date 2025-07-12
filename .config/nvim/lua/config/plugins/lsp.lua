@@ -217,6 +217,7 @@ return {
 			graphql = {},
 			volar = {},
 			zls = {},
+			sqls = {},
 		}
 
 		-- To check the current status of installed tools and/or manually install
@@ -231,7 +232,6 @@ return {
 			"prettier", -- format js and ts code
 			"prettierd", -- format js and ts code, but running on a dedicated daemon
 			"black", -- format python code
-            "sql-formatter" -- format sql
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
