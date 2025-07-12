@@ -61,7 +61,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for code folding
 vim.opt.foldtext = "" -- you can see what is inside the fold
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 2 --top level is not folded. only nested folds
+vim.opt.foldlevelstart = 4 --top level is not folded. only nested folds
 vim.opt.foldnestmax = 5
 
 -- automatically re-read changes done on file.

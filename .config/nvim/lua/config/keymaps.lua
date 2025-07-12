@@ -88,7 +88,6 @@ end
 vim.keymap.set("n", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
 vim.keymap.set("i", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
 
-
 -- open mysql
 local mysql = Terminal:new({ cmd = "mysql -u root -p", hidden = true })
 
@@ -98,11 +97,11 @@ end
 vim.keymap.set("n", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
 vim.keymap.set("i", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
 
--- open htop
--- local htop = Terminal:new({ cmd = "htop", hidden = true })
---
--- function HTOP_TOGGLE()
--- 	htop:toggle()
--- end
--- vim.keymap.set("n", "<C-h>", "<cmd> :lua HTOP_TOGGLE()<CR> <cmd>")
--- vim.keymap.set("i", "<C-h>", "<cmd> :lua HTOP_TOGGLE()<CR> <cmd>")
+-- toggle todo comments easily
+vim.keymap.set("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "[n]ext [t]odo comment" })
+
+vim.keymap.set("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "[p]revious [t]odo comment" })
