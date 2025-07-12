@@ -2,8 +2,8 @@
 
 return {
 	"wakatime/vim-wakatime",
-    version="v11.3.0",
+	version = "v11.3.0",
 	lazy = false,
 	-- enable = false,
-	opts = {},
+	config = function() end,
 }

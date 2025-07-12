@@ -23,7 +23,6 @@ return {
 			-- compact | minimal | fancy
 			style = "compact",
 			timeout = 4000,
-			wo = { wrap = false },
 		},
 		-- not in use...
 		dashboard = { enabled = false }, -- too much. totally uneccessary

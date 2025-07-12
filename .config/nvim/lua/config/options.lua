@@ -158,7 +158,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- python specific files
-
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = "*.py",
 	callback = function()
@@ -172,3 +171,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 		vim.bo.fileformat = "unix" -- format all files to have unix base EOF
 	end,
 })
+
+-- nice border on snacks picker
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })

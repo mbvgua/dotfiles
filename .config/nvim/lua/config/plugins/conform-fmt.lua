@@ -24,7 +24,7 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
-			sql = { "sql-formatter" },
+			sql = { "sqls" },
 		},
 	},
 	-- format using key bindings
