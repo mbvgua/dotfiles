@@ -26,7 +26,6 @@ return {
 		keymap = {
 			preset = "default",
 			-- use tabs to auto-complete alongside default settings
-            -- decided to use defaults
 			-- ["<Tab>"] = { "accept", "fallback" },
 			-- ["<C-k>"] = { "select_prev", "fallback" },
 			-- ["<C-j>"] = { "select_next", "fallback" },

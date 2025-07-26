@@ -4,7 +4,7 @@
 return {
 	"nvim-tree/nvim-web-devicons",
 	version = "0.100",
-	-- enabled=false,
+	-- enabled = false,
 	config = function()
 		require("nvim-web-devicons").setup({
 

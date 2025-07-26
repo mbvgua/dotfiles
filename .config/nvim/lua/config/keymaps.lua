@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>x", "<C-w>c", { desc = "Close current window" })
 
 -- stop highlighting after search
--- (H)ighlight (O)ff
+-- (f)ind (o)ff
 vim.keymap.set("n", "<leader>ho", ":nohlsearch<CR>", { desc = "Removing highlighted text after a search" })
 
 -- check spelling within file
@@ -89,19 +89,11 @@ vim.keymap.set("n", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
 vim.keymap.set("i", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
 
 -- open mysql
-local mysql = Terminal:new({ cmd = "mysql -u root -p", hidden = true })
+-- local mysql = Terminal:new({ cmd = "mysql -u root -p", hidden = true })
 
-function MYSQL_TOGGLE()
-	mysql:toggle()
-end
-vim.keymap.set("n", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
-vim.keymap.set("i", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
+-- function MYSQL_TOGGLE()
+-- 	mysql:toggle()
+-- end
+-- vim.keymap.set("n", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
+-- vim.keymap.set("i", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
 
--- toggle todo comments easily
-vim.keymap.set("n", "]t", function()
-	require("todo-comments").jump_next()
-end, { desc = "[n]ext [t]odo comment" })
-
-vim.keymap.set("n", "[t", function()
-	require("todo-comments").jump_prev()
-end, { desc = "[p]revious [t]odo comment" })

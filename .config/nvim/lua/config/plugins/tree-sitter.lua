@@ -1,8 +1,10 @@
 -- install tree-sitter. for better syntax highlighting
+-- and code navigation
 
 return {
 	"nvim-treesitter/nvim-treesitter",
 	version = "v0.10.0",
+	enabled = false,
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
@@ -11,8 +13,6 @@ return {
 			ensure_installed = {
 				"c",
 				"cpp",
-				"zig",
-				"rust",
 				"cmake",
 				"make",
 				"dockerfile",
@@ -28,10 +28,10 @@ return {
 				"typescript",
 				"python",
 				"perl",
+				"php",
 				"lua",
 				"vue",
 				"angular",
-				"graphql",
 				"sql",
 			},
 			sync_install = false,
