@@ -3,9 +3,8 @@
 return {
 	"mistweaverco/kulala.nvim",
 	tag = "v5.2.1",
+	-- enabled = false,
 	keys = {
-		-- { "<leader>Rs", desc = "Send request" },
-		-- remapped to <CR> to move faster. Only works in .http files, amazing!!
 		{ "<CR>", desc = "Send request" },
 		-- dont need these keys. Currently
 		-- { "<leader>Ra", desc = "Send all requests" },
@@ -14,7 +13,7 @@ return {
 	ft = { "http", "rest" },
 	opts = {
 		global_keymaps = true,
-		global_keymaps_prefix = "<leader>R",
+		-- global_keymaps_prefix = "<leader>R",
 		kulala_keymaps_prefix = "",
 		ui = { formatter = true },
 	},

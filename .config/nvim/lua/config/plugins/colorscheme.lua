@@ -31,15 +31,14 @@ return {
 			},
 			inc_search = "background", -- underline | background
 			background_clear = {
-				-- "float_win",
+				"float_win",
 				"toggleterm",
 				"telescope",
 				"which-key",
-				"renamer",
 				"notify",
-				-- "nvim-tree",
-				-- "neo-tree",
-				-- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+				"nvim-tree",
+				"bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+				-- "renamer",
 			}, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
 			plugins = {
 				bufferline = {

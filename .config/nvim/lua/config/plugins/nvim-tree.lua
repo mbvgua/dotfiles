@@ -3,7 +3,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-	-- enabled=false,
+	-- enabled = false,
 	lazy = false,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
@@ -22,6 +22,19 @@ return {
 					item = "│",
 					bottom = "─",
 					none = " ",
+				},
+			},
+			icons = {
+				glyphs = {
+					git = {
+						unstaged = "",
+						staged = "S",
+						unmerged = "",
+						renamed = "➜",
+						untracked = "U",
+						deleted = "✗",
+						ignored = "◌",
+					},
 				},
 			},
 		},
@@ -66,6 +79,6 @@ return {
 		-- my custom mappings
 		-- toggle easily with <Leader>e
 		vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<CR>", { desc = "toggle [e]xplorer" }),
-		vim.keymap.set("n", "<leader>E", "<cmd>:NvimTreeFocus<CR>", { desc = "[e]xplorer focus" }),
+		vim.keymap.set("n", "<leader>E", "<cmd>:NvimTreeFocus<CR>", { desc = "focus [e]xplorer" }),
 	},
 }
