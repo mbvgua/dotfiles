@@ -17,6 +17,7 @@
 	st = status
 	co = commit
 	ch = checkout
+    cl = clone
 	last = log -1 HEAD
 	visual = !smerge .
     ; pull all remote branches into local working directory
@@ -35,3 +36,5 @@
 	required = true
 [pull]
 	rebase = false
+[commit]
+	template = /home/daagi/.gitmessage
