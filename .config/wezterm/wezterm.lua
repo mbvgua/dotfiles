@@ -1,109 +1,17 @@
 -- pull the wezterm API
 local wezterm = require("wezterm")
 local appearance = require("appearance")
+local projects = require("projects")
 
 local config = wezterm.config_builder()
+local act = wezterm.action
 
 -- ############################### --
--- keybindings --
+-- general
 -- ############################### --
 
--- set the leader key to match my tmux config
+-- set the leader key
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 3000 }
-
--- common functionalities ill need:
-config.keys = {
-	-- create pane horizontally with \, wanted to use the | without shift
-	-- but dont know how to set it up here :(
-	{
-		key = "\\",
-		mods = "LEADER",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	-- create pane vertically
-	{
-		key = "-",
-		mods = "LEADER",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	-- rotate through panes
-	{
-		key = "r",
-		mods = "ALT",
-		-- only set clockwise. same difference to anti-*
-		action = wezterm.action.RotatePanes("Clockwise"),
-	},
-	-- move through panes like vim{h,j,k,l}
-	{
-		mods = "LEADER",
-		key = "h",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		mods = "LEADER",
-		key = "j",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		mods = "LEADER",
-		key = "k",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		mods = "LEADER",
-		key = "l",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	-- change pane sizes{Up,Down,Right,Left}
-	{
-		mods = "ALT",
-		key = "LeftArrow",
-		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
-	},
-	{
-		mods = "ALT",
-		key = "RightArrow",
-		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
-	},
-	{
-		mods = "ALT",
-		key = "DownArrow",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-	},
-	{
-		mods = "ALT",
-		key = "UpArrow",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-	},
-	-- create tab in same domain as current window
-	{
-		key = "t",
-		mods = "LEADER",
-		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
-	},
-	-- close pane
-	{
-		key = "x",
-		mods = "LEADER",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
-	},
-	-- close tab
-	{
-		key = "c",
-		mods = "LEADER",
-		action = wezterm.action.CloseCurrentTab({ confirm = true }),
-	},
-}
-
--- cycle through tabs
-for i = 0, 9 do
-	-- leader + number to activate that tab
-	table.insert(config.keys, {
-		key = tostring(i),
-		mods = "LEADER",
-		action = wezterm.action.ActivateTab(i),
-	})
-end
 
 -- show when leader key is active
 wezterm.on("update-right-status", function(window, _)
@@ -116,7 +24,7 @@ wezterm.on("update-right-status", function(window, _)
 		SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 	end
 
-	if window:active_tab():tab_id() ~= 0 then
+	if window:active_tab():tab_id() ~= 1 then
 		ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
 	end -- arrow color based on if tab is first pane
 
@@ -128,23 +36,79 @@ wezterm.on("update-right-status", function(window, _)
 	}))
 end)
 
+-- moving between panes
+local function move_pane(key, direction)
+	return {
+		key = key,
+		mods = "LEADER",
+		action = act.ActivatePaneDirection(direction),
+	}
+end
+
+-- resizing panes
+local function resize_pane(key, direction, size)
+	return {
+		key = key,
+		mods = "ALT",
+		action = act.AdjustPaneSize({ direction, size }),
+	}
+end
+
+config.keys = {
+	-- create pane horizontally with \, wanted to use the | without shift
+	{ key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- create pane vertically
+	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	-- rotate through panes
+	{ key = "r", mods = "ALT", action = act.RotatePanes("Clockwise") },
+	-- move through panes like vim{h,j,k,l}
+	move_pane("k", "Up"),
+	move_pane("j", "Down"),
+	move_pane("l", "Right"),
+	move_pane("h", "Left"),
+	-- change pane sizes{Up,Down,Right,Left}
+	resize_pane("UpArrow", "Up", 5),
+	resize_pane("DownArrow", "Down", 5),
+	resize_pane("RightArrow", "Right", 5),
+	resize_pane("LeftArrow", "Left", 5),
+	-- close pane
+	{ key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
+	-- create new tab
+	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	-- cycle tabs
+	{ key = "l", mods = "ALT", action = act.ActivateTabRelative(1) },
+	{ key = "h", mods = "ALT", action = act.ActivateTabRelative(-1) },
+	-- close tab
+	{ key = "w", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+	-- cycling through projects
+	{ key = "p", mods = "LEADER", action = projects.choose_project() },
+	-- Present a list of existing workspaces
+	{ key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+}
+
+-- cycle through tabs
+for i = 1, 9 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = act.ActivateTab(i - 1),
+	})
+end
+
 -- ############################### --
--- fonts,themes,layout and colours
+-- themes & layout
 -- ############################### --
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.tab_and_split_indices_are_zero_based = true
+config.font_size = 16 -- increase font size. My eyes!!!
+config.window_background_opacity = 0.85
 
--- increase font size. My eyes!!!
-config.font_size = 16
-
+-- set appearance
 if appearance.is_dark() then
 	config.color_scheme = "Kibble (Gogh)"
-	config.window_background_opacity = 0.85
 else
 	config.color_scheme = "lovelace"
-	config.window_background_opacity = 1
 end
 
 -- remove uneccessary padding on window.
