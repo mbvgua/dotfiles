@@ -5,6 +5,7 @@ return {
 	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
 	tag = "v2.0.0",
+	-- enabled = false,
 	dependencies = {
 		-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
 		-- NOTE: had to tag the versions since Neovim 0.11 has built in lsp support and
@@ -208,16 +209,17 @@ return {
 			lua_ls = {},
 			clangd = {},
 			html = {},
+			cssls = {},
 			angularls = {},
 			jsonls = {},
-			pylsp = {},
+			-- pylsp = {},
 			pyright = {},
 			ts_ls = {},
 			dockerls = {},
-			graphql = {},
 			volar = {},
-			zls = {},
 			sqls = {},
+			intelephense = {},
+			-- phpactor = {}, --cant format simple code. Not worth it
 		}
 
 		-- To check the current status of installed tools and/or manually install
@@ -232,6 +234,7 @@ return {
 			"prettier", -- format js and ts code
 			"prettierd", -- format js and ts code, but running on a dedicated daemon
 			"black", -- format python code
+			"php-cs-fixer", -- format php code
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

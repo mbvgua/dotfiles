@@ -2,7 +2,7 @@
 
 return {
 	"nvim-lualine/lualine.nvim",
-	-- enabled=true,
+	-- enabled=false,
 	event = "VeryLazy",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = {
@@ -27,7 +27,7 @@ return {
 			lualine_c = {
 				{ "diagnostics" },
 				{
-					"filename",
+					-- "filename", -- present in filetree/telescope & buffername
 					newfile_status = true,
 					symbols = {
 						modified = "",

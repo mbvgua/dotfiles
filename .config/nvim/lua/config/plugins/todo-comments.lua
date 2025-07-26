@@ -3,6 +3,7 @@
 return {
 	"folke/todo-comments.nvim",
 	version = "v1.4.0",
+	-- enabled = false,
 	dependencies = { "nvim-lua/plenary.nvim" },
 	opts = {
 		-- keywords recognized as todo comments
@@ -22,8 +23,15 @@ return {
 			info = { "DiagnosticInfo", "#2563EB" },
 			hint = { "DiagnosticHint", "#10B981" },
 			default = { "Identifier", "#7C3AED" },
-			test = { "#38fa07" },
-			-- test = { "Identifier", "#38fa07" },
+			test = { "#38fa07" }, -- Removed "Identifier" to make it green, not white
 		},
 	},
+	-- move across toggle todo comments easily
+	vim.keymap.set("n", "]t", function()
+		require("todo-comments").jump_next()
+	end, { desc = "[n]ext [t]odo comment" }),
+
+	vim.keymap.set("n", "[t", function()
+		require("todo-comments").jump_prev()
+	end, { desc = "[p]revious [t]odo comment" }),
 }

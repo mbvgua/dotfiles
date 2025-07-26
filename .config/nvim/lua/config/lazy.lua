@@ -1,6 +1,7 @@
 -- Bootstrap lazy.nvim
 -- automatically install lazy.nvim if not there
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -30,6 +31,6 @@ require("lazy").setup({
     { import = "config.plugins" },
   },
   -- automatically check for plugin updates
-  install = { colorscheme = {"monokai-pro"} },
   -- checker = { enabled = true },
+  -- install = { colorscheme = {"monokai-pro"} },
 })

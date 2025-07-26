@@ -3,6 +3,7 @@
 return {
 	"stevearc/conform.nvim",
 	version = "9.0.0",
+	-- enabled = false,
 	opts = {
 		-- disabled temporarily. Dont like forced formats
 		-- -- format on save automatically
@@ -24,7 +25,8 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
-			sql = { "sqls" },
+			php = { "php-cs-fixer" },
+			-- sql = { "sqls" }, --really teribble formatter. pretty good LSP
 		},
 	},
 	-- format using key bindings

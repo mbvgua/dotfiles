@@ -6,3 +6,6 @@ require("config.options")
 
 -- setup my key bindings
 require("config.keymaps")
+
+-- setup my auto commands
+require("config.autocmds")

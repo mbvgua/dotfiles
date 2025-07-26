@@ -1,13 +1,13 @@
 -- autopairs for {,[,(,",',`
 
 return {
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true,
-    opts = {
-      disable_filetype = { "TelescopePrompt" , "vim" },
-    }
-  }
+	{
+		"windwp/nvim-autopairs",
+		-- enabled = false,
+		event = "InsertEnter",
+		config = true,
+		opts = {
+			disable_filetype = { "TelescopePrompt", "vim" },
+		},
+	},
 }
-
