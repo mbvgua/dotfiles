@@ -76,6 +76,16 @@ vim.keymap.set("n", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j
 -- vim.api.nvim_set_keymap("i", "<Del>", "<C-o>" .. msg, { noremap = true, silent = false })
 -- vim.api.nvim_set_keymap("i", "<BS>", "<C-o>" .. msg, { noremap = true, silent = false })
 
+
+vim.keymap.set("n", "<leader>bd", function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end, { desc = "[d]elete all [b]uffers except current" })
+
 -- some quick terminal movements
 local Terminal = require("toggleterm.terminal").Terminal
 
