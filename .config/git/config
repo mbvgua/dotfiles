@@ -38,4 +38,4 @@
 [pull]
 	rebase = false
 [commit]
-	template = /home/daagi/.gitmessage
+	template = ~/.config/git/message
