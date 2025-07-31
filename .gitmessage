@@ -1,12 +1,12 @@
-# <type>(optional scope): <subject>
+# type(optional scope): subject                   ^TOO LONG(50 chars max)
 #   |       |               |
 #   |       |               +-> short descriptive summary(e.g update README.md)
 #   |       |
 #   |       +-> what part of codebase changed(e.g controllers,models,auth)
 #   |
-#   +-> (feat|fix|refactor|perf|test|docs|style|build|ci|chore)
+#   +-> fix, feat, docs, style, refactor, perf, test, build, ci, chore, revert,
 #------------------------------------------------> <BLANK LINE>
-# [OPTIONAL BODY]
+# [OPTIONAL BODY]                                                      ^WRAP HERE(72 chars)
 # - Why was this change necessary?
 # - How does it address the problem?
 # - What has been changed in codebase?
