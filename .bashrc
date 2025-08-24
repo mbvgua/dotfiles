@@ -25,7 +25,7 @@ export PATH
 
 
 ############################################
-# 2.Aliases                                #                     
+# 2.Aliases                                #
 ############################################
 
 
@@ -74,4 +74,7 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
+
+# default for opening files with ranger
+export EDITOR="nvim"
+export VISUAL="nvim"
