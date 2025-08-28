@@ -4,7 +4,6 @@ local vim = vim or {}
 local o = vim.o
 local opt = vim.opt
 local fn = vim.fn
-local bo = vim.bo
 local wo = vim.wo
 
 -- Enable mouse mode, can be useful for resizing splits for example!
