@@ -1,16 +1,16 @@
 #################################################################
-#Filename: .bashrc                                              #
-#Sections:                                                      #   
+# We programmers are lazy,                                      #
+# so let’s bring laziness to a whole new level,                 #
+# shall we?                                                     #
+# Sections:                                                     #
 #    1.General...................general bash behaviour         #
 #    2.Aliases....................general aliases               #
 #    3.Packages .................installed packages             #
 #################################################################
 
-
 ############################################
-# 1.General                                #                     
+# 1.General                                #
 ############################################
-
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -23,27 +23,26 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
+# default for opening files with ranger
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# open man pages in neovim
+# thanks mental outlaw
+export MANPAGER="nvim +Man!"
+
+# ignore duplicates in history
+HISTCONTROL=ignoredups
 
 ############################################
 # 2.Aliases                                #
 ############################################
 
-
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-export PATH="$PATH:/opt/mssql-tools/bin"
+# managing dotfiles repo
+alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/daagi'
 
 # downloading entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
-
-# managing dotfiles repo
-alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/daagi'
 
 # substitute ls with eza. Modern with inbuilt icons
 alias ls='eza --icons --sort=extension'
@@ -54,18 +53,28 @@ alias files='xdg-open .'
 #easy tree navigation
 alias treee='tree --filelimit 15'
 
+#exit terminal easily. like vim
+alias :q="exit"
+
 ############################################
-# 3.Packages                               #                     
+# 3.Packages                               #
 ############################################
 
+# mssql-server
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+export PATH="$PATH:/opt/mssql-tools/bin"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
-# Set up fzf key bindings and fuzzy completion
-#eval "$(fzf --bash)"
-
-#cargo
+# cargo for rust
 . "$HOME/.cargo/env"
 
 # pnpm
@@ -75,6 +84,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# default for opening files with ranger
-export EDITOR="nvim"
-export VISUAL="nvim"
