@@ -1,0 +1,207 @@
+#!/usr/bin/python
+import subprocess
+import platform
+import os
+
+langs = {
+    # "c",
+    "gcc",
+    "clang",
+    "make",
+    "cpp",
+    # "rust",
+    "cargo",
+    "zig",
+    "perl",
+    "python",
+    "pip",
+    "lisp",
+    "lua",
+    "luajit",
+    # "html",
+    # "css"
+    # "javascript",
+    "tsc",  # typescript
+}
+dev_tools = {
+    "node",
+    "npm",
+    "pnpm",
+    "ng",  # "@angular/cli"
+    "sqlite",
+    "mysql",
+    "sqlcmd",  # "mssql server"
+    "subl",  # "sublime text"
+    "smerge",  # "sublime merge",
+    "teams-for-linux",
+    "firefox",
+    "brave-browser",
+    "vlc",
+}
+cli_tools = {
+    "wezterm",
+    "ranger",
+    "tmux",
+    "git",
+    "git-lfs",
+    "nvim",  # "neovim",
+    "vim",
+    "bash",
+    "fzf",
+    "eza",
+    "yt-dlp",
+    "docker",
+    "keyd",
+    "wget",
+    "curl",
+    "htop",
+}
+not_installed = []
+
+
+def get_environ():
+    """
+    use platform to get underlying system, hence the
+    package manager to use.
+    platform.system() will either return:
+        - linux = 'Linux'
+        - mac = 'Darwin'
+        - window = 'Windows'
+    """
+
+    user_system = platform.system()
+    if user_system == "Linux":
+        distro = platform.freedesktop_os_release()
+        print(f"Running on {distro["ID"].capitalize()}")
+    elif user_system == "Darwin":
+        print("Running on a Mac system")
+    elif user_system == "Windows":
+        print("Massive L dude! This script will not run")
+        print("Try something else... like changing your OS!")
+    else:
+        print("Unable to get the host OS. Try again later?!")
+
+
+def check_installed():
+    """
+    check what the user already had installed in their system,
+    eliminating it from installed list
+    """
+    print(f"Check if needed langs are installed: ")
+    for lang in langs:
+        # shell=True allow concatenating a command
+        is_installed = subprocess.run(
+            [f"which {lang}"], shell=True, capture_output=True
+        )
+        if is_installed.returncode == 0:
+            print(f"✓ {lang.capitalize()} is installed")
+        else:
+            not_installed.append(lang)
+            print(f"✗ {lang.capitalize()} is not installed")
+
+    print(f"Check if needed dev_tools are installed: ")
+    for tool in dev_tools:
+        # shell=True allow concatenating a command
+        is_installed = subprocess.run(
+            [f"which {tool}"], shell=True, capture_output=True
+        )
+        if is_installed.returncode == 0:
+            print(f"✓ {tool.capitalize()} is installed")
+        else:
+            not_installed.append(tool)
+            print(f"✗ {tool.capitalize()} is not installed")
+
+    print(f"Check if needed dev_tools are installed: ")
+    for tool in cli_tools:
+        # shell=True allow concatenating a command
+        is_installed = subprocess.run(
+            [f"which {tool}"], shell=True, capture_output=True
+        )
+        if is_installed.returncode == 0:
+            print(f"✓ {tool.capitalize()} is installed")
+        else:
+            not_installed.append(tool)
+            print(f"✗ {tool.capitalize()} is not installed")
+
+
+def install_tools(install_this):
+    """
+    install the tools not currently on the system
+    """
+    print(install_this)
+
+
+def install_edge_cases(install_this):
+    """
+    install the packages not in the official fedora repo
+    like wezterm
+    """
+    pass
+
+
+# def install_tools():
+# install underlying langs and tools
+# C/C++
+# GNU Make 4.4.1
+# gcc (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
+# clang version 19.1.7 (Fedora 19.1.7-3.fc41)
+
+# LUA
+# Lua 5.1.5
+# LuaJIT 2.1.1720049189
+
+# PYTHON
+# Python 3.13.3
+# pip 25.1.1
+
+# TYPESCRIPT/JAVASCRIPT
+# node -> v22.15.0
+# typescript@5.4.5
+# pnpm@10.10.0
+# @angular/cli@18.0.2
+
+# RUST(for wezterm)
+# cargo 1.87.0
+
+
+# def install_software():
+# install all needed software that i use commonly
+# Neovim -> NVIM v0.10.4
+# Sublime Merge ->
+# Wezterm ->
+# MySql/MariaDb ->
+# MySqlLite ->
+# Azure Data Studio ->
+# VLC ->
+# Firefox ->
+# Brave Browser ->
+# Teams-For-Linux ->
+
+
+# install the tools
+# git
+# bash
+# fzf
+# eza
+
+
+def main():
+    print(
+        """
+          888          888     .d888 d8b 888
+          888          888    d88P"  Y8P 888
+          888          888    888        888
+      .d88888  .d88b.  888888 888888 888 888  .d88b.  .d8888b
+     d88" 888 d88""88b 888    888    888 888 d8P  Y8b 88K
+     888  888 888  888 888    888    888 888 88888888 "Y8888b.
+     Y88b 888 Y88..88P Y88b.  888    888 888 Y8b.          X88
+      "Y88888  "Y88P"   "Y888 888    888 888  "Y8888   88888P'
+    """
+    )
+    get_environ()
+    check_installed()
+    install_tools(not_installed)
+
+
+if __name__ == "__main__":
+    main()
