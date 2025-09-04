@@ -58,6 +58,14 @@ alias :q="exit"
 alias :wq="exit"
 alias :wqa="exit"
 
+# working with docker
+alias dils="docker image ls"
+alias dcls="docker container ls"
+alias dclsa="docker container ls -a"
+
+# get window class name for qtile
+alias wn="xprop WM_CLASS"
+
 ############################################
 # 3.Packages                               #
 ############################################
