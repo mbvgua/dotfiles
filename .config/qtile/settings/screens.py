@@ -196,8 +196,7 @@ screens = [
                     # discharge_char=" 󱐋",
                     # empty_char="",
                     # not_charging_char="",
-                    not_charging_char="",
-                    format="{char}{percent:2.0%} {hour:d}:{min:02d}hrs",
+                    format="{percent:2.0%} {hour:d}:{min:02d}hrs",
                     low_percentage=20,
                     notify_below=10,  # send notification below this %
                 ),
@@ -213,7 +212,7 @@ screens = [
                 ),
                 widget.Spacer(length=8),
             ],
-            size=40,
+            size=45,
             background=backgroundColor,
             margin=[0, 0, 0, 0],  # Remove margins for full-width bar
         ),
