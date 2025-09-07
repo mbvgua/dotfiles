@@ -3,10 +3,13 @@
 To install this onto your system, run:
 
 ```bash
-    $ git clone https://github.com/mbvgua/dotfiles.git ~/.dotfiles
-    $ cd ~/.dotfiles
-    $ chmod +x setup
-    $ ./setup
+    git clone https://github.com/mbvgua/dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles
+    chmod +x setup
+    ./setup
+
+    # create symlinks to necessary files
+    stow .
 ```
 
 > [!IMPORTANT]
