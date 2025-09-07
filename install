@@ -49,6 +49,7 @@ cli_tools = {
     "bash",
     "fzf",
     "eza",
+    "stow",
     "yt-dlp",
     "docker",
     "keyd",
