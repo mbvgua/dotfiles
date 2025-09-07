@@ -10,12 +10,14 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [alias]
-	lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
+    ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
+	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Cresetby %an' --all --abbrev-commit
 	contributors = shortlog --summary --numbered
 	ao = remote add origin
 	br = branch
 	st = status
 	co = commit
+    coa = commit --amend --no-edit
 	ch = checkout
     cl = clone
 	last = log -1 HEAD

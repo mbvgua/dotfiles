@@ -39,7 +39,8 @@ HISTCONTROL=ignoredups
 ############################################
 
 # managing dotfiles repo
-alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/daagi'
+# moved to Gnu Stow!
+# alias dotfiles='/usr/bin/git --git-dir=/home/daagi/.dotfiles/ --work-tree=/home/daagi'
 
 # downloading entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
