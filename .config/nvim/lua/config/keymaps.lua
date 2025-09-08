@@ -36,6 +36,10 @@ map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Resize vertically to be b
 map("n", "<leader>n", ":bnext<CR>", { desc = "Navigate to next buffer" })
 map("n", "<leader>p", ":bprevious<CR>", { desc = "Navigate to previous buffer" })
 
+-- easily split windows with - & | like tmux
+map("n", "<leader>-",":split<CR>",{desc = "[-]Split window horizontally "})
+map("n", "<leader>\\",":vsplit<CR>",{desc = "[|] Split window vertically "})
+
 -- Hardmode ON!! from kickstart nvim
 -- Disable arrow keys in normal mode
 map("n", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
