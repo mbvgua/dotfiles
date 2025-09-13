@@ -26,8 +26,7 @@ dev_tools = {
     "node",
     "npm",
     "pnpm",
-    "ng",  # "@angular/cli"
-    "sqlite",
+    "sqlite3",
     "mysql",
     "sqlcmd",  # "mssql server"
     "subl",  # "sublime text"
@@ -57,6 +56,7 @@ cli_tools = {
     "htop",
 }
 not_installed = []
+package_manager = ""
 
 
 def get_environ():
@@ -72,6 +72,7 @@ def get_environ():
     user_system = platform.system()
     if user_system == "Linux":
         distro = platform.freedesktop_os_release()
+        print("Aha! A man of culture... ")
         print(f"Running on {distro["ID"].capitalize()}")
     elif user_system == "Darwin":
         print("Running on a Mac system")
@@ -94,10 +95,10 @@ def check_installed():
             [f"which {lang}"], shell=True, capture_output=True
         )
         if is_installed.returncode == 0:
-            print(f"✓ {lang.capitalize()} is installed")
+            print(f" ✓ {lang.capitalize()} is installed")
         else:
             not_installed.append(lang)
-            print(f"✗ {lang.capitalize()} is not installed")
+            print(f" ✗ {lang.capitalize()} is not installed")
 
     print(f"Check if needed dev_tools are installed: ")
     for tool in dev_tools:
@@ -106,10 +107,10 @@ def check_installed():
             [f"which {tool}"], shell=True, capture_output=True
         )
         if is_installed.returncode == 0:
-            print(f"✓ {tool.capitalize()} is installed")
+            print(f" ✓ {tool.capitalize()} is installed")
         else:
             not_installed.append(tool)
-            print(f"✗ {tool.capitalize()} is not installed")
+            print(f" ✗ {tool.capitalize()} is not installed")
 
     print(f"Check if needed dev_tools are installed: ")
     for tool in cli_tools:
@@ -118,29 +119,41 @@ def check_installed():
             [f"which {tool}"], shell=True, capture_output=True
         )
         if is_installed.returncode == 0:
-            print(f"✓ {tool.capitalize()} is installed")
+            print(f" ✓ {tool.capitalize()} is installed")
         else:
             not_installed.append(tool)
-            print(f"✗ {tool.capitalize()} is not installed")
+            print(f" ✗ {tool.capitalize()} is not installed")
 
 
-def install_tools(install_this):
+def install_tools():
     """
-    install the tools not currently on the system
+    install the tools not currently on the system but in fedora repos
+    for those not in the repos, e.g teams-for-linux, wezterms, sublime etc
+    they be listed as not installed, and you can download them manually
+            - teams-for-linux   - keyd
+            - wezterm           - sqlcmd
+            - lisp              - brave-browser
+            - sublime-text      - sublime-merge
     """
-    for app in not_installed:
-        subprocess.run(
-            [f"sudo dnf install {app}"],
-            shell=True,
-        )
+    distro = platform.freedesktop_os_release()
 
-
-def install_edge_cases(install_this):
-    """
-    install the packages not in the official fedora repo
-    like wezterm
-    """
-    pass
+    if distro["ID"] == "fedora":
+        package_manager = "sudo dnf install -y --skip-unavailable"
+        for app in not_installed:
+            subprocess.run(
+                [f"{package_manager} {app}"],
+                shell=True,
+            )
+    elif distro["ID"] == "void":
+        # become root first
+        # subprocess.run(["su -"], shell=True)
+        package_manager = "xbps-install -Sy"
+        for app in not_installed:
+            subprocess.run(
+                [f"{package_manager} {app}"],
+                shell=True,
+            )
+    check_installed()
 
 
 def main():
@@ -157,8 +170,10 @@ def main():
     """
     )
     get_environ()
+    print("")
     check_installed()
-    install_tools(not_installed)
+    print("")
+    install_tools()
 
 
 if __name__ == "__main__":
