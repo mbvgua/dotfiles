@@ -17,14 +17,17 @@
 	br = branch
 	st = status
 	co = commit
-    coa = commit --amend --no-edit
+    coan = commit --amend --no-edit
 	ch = checkout
     cl = clone
 	last = log -1 HEAD
 	visual = !smerge .
+	standup = log --since='yesterday' --author='mbvgua'
+    ; for cloning repos with submodules
+    clrs = clone --recurse-submodules
+    sur = submodule update --remote
     ; pull all remote branches into local working directory
 	pa = "!git branch -r | grep -v \"\\->\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && git fetch --all && git pull --all"
-	standup = log --since='yesterday' --author='mbvgua'
 [core]
 	editor = vim
 	symlink = true
@@ -41,3 +44,5 @@
 	rebase = false
 [commit]
 	template = ~/.config/git/message
+[status]
+	submodulesummary = 1
