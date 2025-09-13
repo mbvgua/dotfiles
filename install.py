@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import subprocess
 import platform
 import os
@@ -129,7 +128,11 @@ def install_tools(install_this):
     """
     install the tools not currently on the system
     """
-    print(install_this)
+    for app in not_installed:
+        subprocess.run(
+            [f"sudo dnf install {app}"],
+            shell=True,
+        )
 
 
 def install_edge_cases(install_this):
@@ -138,52 +141,6 @@ def install_edge_cases(install_this):
     like wezterm
     """
     pass
-
-
-# def install_tools():
-# install underlying langs and tools
-# C/C++
-# GNU Make 4.4.1
-# gcc (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
-# clang version 19.1.7 (Fedora 19.1.7-3.fc41)
-
-# LUA
-# Lua 5.1.5
-# LuaJIT 2.1.1720049189
-
-# PYTHON
-# Python 3.13.3
-# pip 25.1.1
-
-# TYPESCRIPT/JAVASCRIPT
-# node -> v22.15.0
-# typescript@5.4.5
-# pnpm@10.10.0
-# @angular/cli@18.0.2
-
-# RUST(for wezterm)
-# cargo 1.87.0
-
-
-# def install_software():
-# install all needed software that i use commonly
-# Neovim -> NVIM v0.10.4
-# Sublime Merge ->
-# Wezterm ->
-# MySql/MariaDb ->
-# MySqlLite ->
-# Azure Data Studio ->
-# VLC ->
-# Firefox ->
-# Brave Browser ->
-# Teams-For-Linux ->
-
-
-# install the tools
-# git
-# bash
-# fzf
-# eza
 
 
 def main():

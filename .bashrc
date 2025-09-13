@@ -55,7 +55,7 @@ alias files='xdg-open .'
 alias treee='tree --filelimit 15'
 
 #exit terminal easily. like vim
-alias :q="exit"
+alias :wq="exit"
 
 ############################################
 # 3.Packages                               #
