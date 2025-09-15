@@ -23,6 +23,7 @@ _darcs
 ^/COPYING
 
 # my files
-\.default.conf
 \.scripts
-^/install
+^/install.py
+^/default.conf
+# \.default.*
