@@ -6,7 +6,7 @@ return {
 
 	-- optional: provides snippets for the snippet source
 	dependencies = { "rafamadriz/friendly-snippets" },
-	version = "1.*",
+	version = "1.6.0",
 
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
