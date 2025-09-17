@@ -5,6 +5,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local hl = vim.api.nvim_set_hl
 local bo = vim.bo
+local wo = vim.wo
 local o = vim.o
 
 -- Highlight text for some time after yanking
@@ -33,7 +34,7 @@ autocmd({ "BufNewFile", "BufRead" }, {
 		bo.softtabstop = 4 --insert/delete 4 spaces when hitting TAB/BACKSPACE
 		bo.shiftwidth = 4 -- operation >> & << will indent/unindent 4 columns
 		bo.textwidth = 79 -- lines longer than 79 chars are broken
-		bo.colorcolumn = 80 -- where right horizontal line margin will be showed
+		wo.colorcolumn = "80" -- where right horizontal line margin will be showed
 		bo.expandtab = true -- inser spaces when hitting TAB
 		bo.autoindent = true -- align new line indentation with previous line
 		bo.fileformat = "unix" -- format all files to have unix base EOF

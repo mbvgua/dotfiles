@@ -25,7 +25,6 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
-			php = { "php-cs-fixer" },
 			-- sql = { "sqls" }, --really teribble formatter. pretty good LSP
 		},
 	},
