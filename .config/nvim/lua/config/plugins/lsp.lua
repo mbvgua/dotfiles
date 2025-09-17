@@ -213,13 +213,13 @@ return {
 			angularls = {},
 			jsonls = {},
 			-- pylsp = {},
-			pyright = {},
+			-- pyright = {},
+            basedpyright = {},
 			ts_ls = {},
 			dockerls = {},
 			volar = {},
 			sqls = {},
-			intelephense = {},
-			-- phpactor = {}, --cant format simple code. Not worth it
+			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
 		}
 
 		-- To check the current status of installed tools and/or manually install
@@ -234,7 +234,6 @@ return {
 			"prettier", -- format js and ts code
 			"prettierd", -- format js and ts code, but running on a dedicated daemon
 			"black", -- format python code
-			"php-cs-fixer", -- format php code
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
