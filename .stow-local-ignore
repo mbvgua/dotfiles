@@ -7,23 +7,27 @@ CVS
 \.\#.+       # CVS conflict files / emacs lock files
 \.cvsignore
 
+# Other VCS
 \.svn
 _darcs
 \.hg
-
 \.git
 \.gitignore
 \.gitmodules
 
+# Python cache
+\.pyc$
+
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-^/README.*
-^/LICENSE.*
-^/COPYING
+# Standard docs
+^README(\..*)?$
+^LICENSE(\..*)?$
+^COPYING$
 
-# my files
-\.scripts
-^/install.py
-^/default.conf
+# My files
+# \.scripts
+^install\.py$
+^default\.conf$
 # \.default.*
