@@ -1,4 +1,7 @@
-from libqtile import bar, layout, qtile, widget
+import os
+import subprocess
+
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import (
     Click,
     Drag,
@@ -19,7 +22,7 @@ mod2 = "mod1"  # the ALT key
 shift = "shift"  # the left/right shift keys
 space = "space"  # the space key
 control = "control"
-colors = colors.GruvboxDark
+colors = colors.DoomOne
 
 # my tools of choice
 terminal = "wezterm"
@@ -38,9 +41,9 @@ keys = [
     # =================
     # Qtile specific
     # =================
-    Key([mod, "control"], "r", lazy.reload_config(), desc="[r]eload the config"),
-    # Key([mod, "control"], "r", lazy.restart(), desc="[r]estart qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
+    # Key([mod, control], "r", lazy.restart(), desc="[r]estart qtile"),
+    Key([mod, control], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # =================
     # Groups(workspaces) specific
     # =================
@@ -159,10 +162,18 @@ for vt in range(1, 8):
 # group_labels are how they appear in the bar. changes this freely
 ##################
 
-groups = [Group(i) for i in "123456789"]
-# group_names = "123456789"
-# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-#  group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX", "MISC"]
+groups = []
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
+
+for i in range(len(group_names)):
+    groups.append(
+        Group(
+            name=group_names[i],
+            label=group_labels[i],
+        )
+    )
 
 for i in groups:
     keys.extend(
@@ -223,9 +234,117 @@ layouts = [
     # layout.Zoomy(**layout_theme),
 ]
 
+
 ##################
 # SCREEN
 ##################
+def init_widgets_list():
+    widgets_list = [
+        widget.Spacer(length=8),
+        widget.Image(
+            filename="~/.config/qtile/icons/dt-icon.png",
+            scale="False",
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("qtilekeys-yad")},
+        ),
+        widget.Prompt(font="Ubuntu Mono", fontsize=14, foreground=colors[1]),
+        widget.GroupBox(
+            fontsize=11,
+            margin_y=5,
+            margin_x=14,
+            padding_y=0,
+            padding_x=2,
+            borderwidth=3,
+            active=colors[8],
+            inactive=colors[9],
+            rounded=False,
+            highlight_color=colors[0],
+            highlight_method="line",
+            this_current_screen_border=colors[7],
+            this_screen_border=colors[4],
+            other_current_screen_border=colors[7],
+            other_screen_border=colors[4],
+        ),
+        widget.TextBox(
+            text="|", font="Ubuntu Mono", foreground=colors[9], padding=2, fontsize=14
+        ),
+        widget.LaunchBar(
+            progs=[
+                ("🦁", "brave", "Brave web browser"),
+                ("🚀", "alacritty", "Alacritty terminal"),
+                ("📁", "pcmanfm", "PCManFM file manager"),
+                ("🎸", "vlc", "VLC media player"),
+            ],
+            fontsize=12,
+            padding=6,
+            foreground=colors[3],
+        ),
+        widget.TextBox(
+            text="|", font="Ubuntu Mono", foreground=colors[9], padding=2, fontsize=14
+        ),
+        widget.CurrentLayout(foreground=colors[1], padding=5),
+        widget.TextBox(
+            text="|", font="Ubuntu Mono", foreground=colors[9], padding=2, fontsize=14
+        ),
+        widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
+        widget.GenPollText(
+            update_interval=300,
+            func=lambda: subprocess.check_output(
+                "printf $(uname -r)", shell=True, text=True
+            ),
+            foreground=colors[3],
+            padding=8,
+            fmt="❤  {}",
+        ),
+        widget.CPU(
+            foreground=colors[4],
+            padding=8,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(myTerm + " -e htop")},
+            format="  Cpu: {load_percent}%",
+        ),
+        widget.Memory(
+            foreground=colors[8],
+            padding=8,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(myTerm + " -e htop")},
+            format="{MemUsed: .0f}{mm}",
+            fmt="🖥  Mem: {}",
+        ),
+        widget.DF(
+            update_interval=60,
+            foreground=colors[5],
+            padding=8,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("notify-disk")},
+            partition="/",
+            # format = '[{p}] {uf}{m} ({r:.0f}%)',
+            format="{uf}{m} free",
+            fmt="🖴  Disk: {}",
+            visible_on_warn=False,
+        ),
+        widget.Volume(
+            foreground=colors[7],
+            padding=8,
+            fmt="🕫  Vol: {}",
+        ),
+        widget.Clock(
+            foreground=colors[8],
+            padding=8,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("notify-date")},
+            ## Uncomment for date and time
+            # format = "⧗  %a, %b %d - %H:%M",
+            ## Uncomment for time only
+            format="⧗  %I:%M %p",
+        ),
+        widget.Systray(padding=6),
+        widget.Spacer(length=8),
+        widget.Battery()
+    ]
+    return widgets_list
+
+
+def init_widgets_screen():
+    widgets_screen = init_widgets_list()
+    return widgets_screen
+
+
 widget_defaults = dict(font="sans", fontsize=12, padding=3, background=colors[2])
 
 extension_defaults = widget_defaults.copy()
@@ -233,29 +352,9 @@ extension_defaults = widget_defaults.copy()
 screens = [
     Screen(
         top=bar.Bar(
-            [
-                widget.CurrentLayout(mode="both", icon_first=False),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-                widget.CPUGraph(),
-                widget.Battery(),
-                widget.BatteryIcon(),
-            ],
-            34,
+            widgets=init_widgets_screen(),
+            margin=[8, 12, 0, 12],
+            size=34,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
@@ -301,6 +400,14 @@ floating_layout = layout.Floating(
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
+
+
+# # a bash script to autostart programs on startup
+# @hook.subscribe.startup_once
+# def start_once():
+#     home = os.path.expanduser("~")
+#     subprocess.call([home + "/.config/qtile/autostart.sh"])
+
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
