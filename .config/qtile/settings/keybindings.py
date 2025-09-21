@@ -147,7 +147,6 @@ def notify_layout():
         subprocess.run(
             [f"notify-send Layout {display_name} -t 1500 -u low"],
             shell=True,
-            # ["notify-send", "Layout", display_name, "-t", "1500", "-u", "low"]
         )
 
     return _notify_layout
@@ -160,7 +159,6 @@ def notify_restart():
         subprocess.run(
             ["notify-send Qtile Restarting... -t 2000 -u normal"],
             shell=True,
-            # ["notify-send", "Qtile", "Restarting...", "-t", "2000", "-u", "normal"]
         )
 
     return _notify_restart
