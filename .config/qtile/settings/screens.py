@@ -136,6 +136,7 @@ screens = [
                 # widget.CapsNumLockIndicator(),
                 widget.Systray(
                     padding=4,
+                    icon_size=21,
                 ),
                 create_separator(),
                 widget.TextBox(
@@ -166,13 +167,21 @@ screens = [
                     format="{load_percent:2.0f}%", foreground=foregroundColor, padding=4
                 ),
                 create_separator(),
-                widget.TextBox(text="󰋊", foreground=colors[6][0], padding=4),
-                widget.DF(
-                    visible_on_warn=False,
-                    format="{r:.0f}%",
-                    partition="/",
+                widget.BatteryIcon(
                     foreground=foregroundColor,
-                    padding=2,
+                    padding=4,
+                    scale=1.5,
+                ),
+                widget.Battery(
+                    foreground=foregroundColor,
+                    padding=5,
+                    charge_char=" ",
+                    discharge_char=" 󱐋",
+                    empty_char="",
+                    not_charging_char="",
+                    format='{char} {percent:2.0%} {hour:d}hrs:{min:02d}mins',
+                    low_percentage=20,
+                    notify_below=10, # send notification below this %
                 ),
                 widget.Spacer(length=8),
             ],
