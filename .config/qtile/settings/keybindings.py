@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 from libqtile.config import Key, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
@@ -118,6 +119,54 @@ def focus_right():
 
 
 # =====================
+# Useful notification functions
+# =====================
+def notify_layout():
+    """Show current layout in notification"""
+
+    def _notify_layout(qtile):
+        layout_name = qtile.current_group.layout.name
+        layout_map = {
+            "tile": "Tile",
+            "max": "Maximized",
+            "matrix": "Matrix",
+            "monadtall": "Monad Tall",
+            "columns": "Columns",
+            "bsp": "BSP",
+            "treetab": "Tree Tab",
+            "plasma": "Plasma",
+            "floating": "Floating",
+            "spiral": "Spiral",
+            "ratiotile": "Ratio Tile",
+            "monadwide": "Monad Wide",
+            "verticaltile": "Vertical Tile",
+            "stack": "Stack",
+            "zoomy": "Zoomy",
+        }
+        display_name = layout_map.get(layout_name, layout_name.title())
+        subprocess.run(
+            [f"notify-send Layout {display_name} -t 1500 -u low"],
+            shell=True,
+            # ["notify-send", "Layout", display_name, "-t", "1500", "-u", "low"]
+        )
+
+    return _notify_layout
+
+
+def notify_restart():
+    """Show restart notification"""
+
+    def _notify_restart(qtile):
+        subprocess.run(
+            ["notify-send Qtile Restarting... -t 2000 -u normal"],
+            shell=True,
+            # ["notify-send", "Qtile", "Restarting...", "-t", "2000", "-u", "normal"]
+        )
+
+    return _notify_restart
+
+
+# =====================
 # Keybindings
 # =====================
 
@@ -127,13 +176,14 @@ keys = [
     # =================
     # Qtile specific
     # =================
-    Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
-    # Key(
-    #     [mod, control],
-    #     "r",
-    #     lazy.function(notify_restart, lazy.restart()),
-    #     desc="[r]estart qtile",
-    # ),
+    # Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
+    Key(
+        [mod, control],
+        "r",
+        lazy.function(notify_restart()),
+        lazy.restart(),
+        desc="[r]estart qtile",
+    ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
     # =================
     # Groups(workspaces) specific
@@ -252,7 +302,7 @@ keys = [
                 [],
                 "r",
                 lazy.spawn(
-                    "rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/qtile/rofi/config.rasi"
+                    "rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/rofi/config.rasi"
                 ),
                 desc="launch [r]ofi",
             ),
@@ -319,19 +369,25 @@ keys = [
     Key(
         [mod],
         "Print",
-        lazy.spawn("flameshot gui --path " + os.path.expanduser("~/Screenshots/")),
+        lazy.spawn(
+            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        ),
         desc="Screenshot (region select)",
     ),
     Key(
         [],
         "Print",
-        lazy.spawn("flameshot full --path " + os.path.expanduser("~/Screenshots/")),
+        lazy.spawn(
+            "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        ),
         desc="Screenshot (full screen)",
     ),
     Key(
         [mod, shift],
         "s",
-        lazy.spawn("flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")),
+        lazy.spawn(
+            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        ),
         desc="Screenshot (region select alt)",
     ),
 ]
