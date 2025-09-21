@@ -4,10 +4,20 @@
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # background
-feh --bg-fill ~/.config/qtile/wallpaper/wallhaven-rq7jw1_3440x1440.png &
+# fixed in config.py
+# feh --bg-fill  ~/.config/qtile/wallpapers/ &
 
 # compositor
-picom --config ~/.config/qtile/picom/picom.conf --animations -b &
+picom --config ~/.config/picom/picom.conf --animations -b &
 
 # Notifications
-dunst -config ~/.config/qtile/dunst/dunstrc &
+dunst -config ~/.config/dunst/dunstrc &
+
+# network manager
+nm-applet &
+
+# bluetooth manager
+blueman-applet &
+
+# night light.ish features
+redshift-gtk &
