@@ -101,7 +101,7 @@ end
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.font_size = 16 -- increase font size. My eyes!!!
+config.font_size = 15.5 -- increase font size. My eyes!!!
 config.window_background_opacity = 0.85
 
 -- set appearance

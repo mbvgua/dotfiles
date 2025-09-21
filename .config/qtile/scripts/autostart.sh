@@ -8,7 +8,7 @@
 # feh --bg-fill  ~/.config/qtile/wallpapers/ &
 
 # compositor
-picom --config ~/.config/picom/picom.conf --animations -b &
+picom --config ~/.config/picom/picom.conf -b &
 
 # Notifications
 dunst -config ~/.config/dunst/dunstrc &
