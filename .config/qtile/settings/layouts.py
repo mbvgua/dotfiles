@@ -13,7 +13,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme = {
-    "margin": 5,
+    "margin": 4,
     "border_width": 3,
     "border_focus": colors[3],
     "border_normal": colors[1],
