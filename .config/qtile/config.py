@@ -1,5 +1,6 @@
 import os
 import subprocess
+import random
 from typing import List
 
 from libqtile import bar, layout, qtile, widget, hook
@@ -23,6 +24,7 @@ mod2 = "mod1"  # the ALT key
 shift = "shift"  # the left/right shift keys
 space = "space"  # the space key
 control = "control"
+WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
@@ -172,7 +174,23 @@ def focus_right():
 
     return _focus_right
 
+def set_random_wallpaper():
+    wallpapers = []
+    for root, dirs, files in os.walk(WALLPAPER_DIR):
+        for f in files:
+            if f.lower().endswith((".jpg", ".jpeg", ".png")):
+                wallpapers.append(os.path.join(root, f))
+    if wallpapers:
+        chosen = random.choice(wallpapers)
+        subprocess.run(["feh", "--bg-fill", chosen])
 
+@hook.subscribe.startup_once
+def startup_wallpaper():
+    set_random_wallpaper()
+
+@hook.subscribe.setgroup
+def change_wallpaper():
+    set_random_wallpaper()
 # =====================
 # Keybindings
 # =====================
@@ -183,7 +201,12 @@ keys = [
     # Qtile specific
     # =================
     Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
-    # Key([mod, control], "r", lazy.function(notify_restart, lazy.restart()), desc="[r]estart qtile"),
+    # Key(
+    #     [mod, control],
+    #     "r",
+    #     lazy.function(notify_restart, lazy.restart()),
+    #     desc="[r]estart qtile",
+    # ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
     # =================
     # Groups(workspaces) specific
@@ -498,7 +521,7 @@ for i in groups:
 # some default layouts themes for each theme
 layout_theme = {
     "margin": 5,
-    "border_width": 2,
+    "border_width": 3,
     "border_focus": colors[3],
     "border_normal": colors[1],
 }
@@ -531,7 +554,7 @@ layouts = [
 
 widget_defaults = dict(
     font="Roboto Mono Nerd Font",  # Match Polybar font
-    fontsize=14,
+    fontsize=21,
     padding=3,
     background=backgroundColor,
     foreground=foregroundColor,
@@ -563,6 +586,8 @@ screens = [
                     foreground=colors[6][0],
                     scale=0.6,
                     padding=4,
+                    mode="both",
+                    icon_first=True,
                 ),
                 create_separator(),
                 widget.GroupBox(
@@ -613,8 +638,10 @@ screens = [
                     ),
                     update_interval=0.5,
                     padding=4,
-                    foreground=colors[9][0],
+                    foreground=foregroundColor,
+                    # foreground=colors[9][0],
                 ),
+                # widget.CapsNumLockIndicator(),
                 widget.Systray(
                     padding=4,
                 ),
@@ -657,7 +684,7 @@ screens = [
                 ),
                 widget.Spacer(length=8),
             ],
-            size=34,
+            size=37,
             background=backgroundColor,
             margin=[0, 0, 0, 0],  # Remove margins for full-width bar
             # border_width=[0, 0, 0, 0],  # No borders to match Polybar
