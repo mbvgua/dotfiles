@@ -1,3 +1,5 @@
+
+
 # DoomOne
 def doomone():
     colors = [
