@@ -71,6 +71,7 @@ screens = [
             [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=8),
+                widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
                 widget.CurrentLayoutIcon(
                     custom_icon_paths=[
                         os.path.expanduser("~/.config/qtile/icons/layouts")
@@ -78,8 +79,7 @@ screens = [
                     foreground=colors[6][0],
                     scale=0.6,
                     padding=4,
-                    mode="both",
-                    icon_first=True,
+                    # icon_first=True,
                 ),
                 create_separator(),
                 widget.GroupBox(
@@ -157,11 +157,6 @@ screens = [
                     padding=4,
                 ),
                 create_separator(),
-                widget.TextBox(text="󰍛", foreground=colors[6][0], padding=2),
-                widget.Memory(
-                    format="{MemPercent:2.0f}%", foreground=foregroundColor, padding=4
-                ),
-                create_separator(),
                 widget.TextBox(text="󰻠", foreground=colors[6][0], padding=4),
                 widget.CPU(
                     format="{load_percent:2.0f}%", foreground=foregroundColor, padding=4
@@ -179,9 +174,9 @@ screens = [
                     discharge_char=" 󱐋",
                     empty_char="",
                     not_charging_char="",
-                    format='{char} {percent:2.0%} {hour:d}hrs:{min:02d}mins',
+                    format="{char} {percent:2.0%} {hour:d}hrs:{min:02d}mins",
                     low_percentage=20,
-                    notify_below=10, # send notification below this %
+                    notify_below=10,  # send notification below this %
                 ),
                 widget.Spacer(length=8),
             ],
