@@ -1,5 +1,5 @@
 from libqtile import layout
-from libqtile.config import Screen, Match, Click
+from libqtile.config import Match
 
 from .colours import *
 
@@ -13,10 +13,10 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme = {
-    "margin": 4,
+    "margin": 5,
     "border_width": 3,
-    "border_focus": colors[3],
-    "border_normal": colors[1],
+    "border_focus": workspaceColor,
+    "border_normal": foregroundColorTwo,
 }
 
 layouts = [
@@ -27,14 +27,14 @@ layouts = [
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Floating(**layout_theme),
-    # layout.Columns(**layout_theme),
-    # layout.MonadWide(**layout_theme),
+    # layout.Floating(**layout_theme), # dont know how to use this
+    # layout.Columns(**layout_theme), # same as monadtall
+    # layout.MonadWide(**layout_theme), # not very useful
     # layout.RatioTile(),
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(**layout_theme),
-    # layout.TreeTab(**layout_theme),
+    # layout.Stack(num_stacks=2), # dont know how to use this. confusing
+    # layout.Bsp(**layout_theme), # wtf layout. only for clout
+    # layout.TreeTab(**layout_theme), # refer to above
     # layout.VerticalTile(**layout_theme),
     # layout.Zoomy(**layout_theme),
 ]

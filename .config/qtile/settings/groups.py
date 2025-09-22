@@ -1,7 +1,7 @@
-from libqtile.config import Group, Key
+from libqtile.config import DropDown, Group, Key, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys,mod
+from .keybindings import keys, mod
 
 
 # =====================
@@ -13,9 +13,21 @@ from .keybindings import keys,mod
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_layouts = [
+    "tile",
+    "max",
+    "matrix",
+    "tile",
+    "tile",
+    "tile",
+    "tile",
+    "tile",
+    "tile",
+]
 # group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
 
 # # Define scratchpads
+# # Qtil crashes when uncommented. LOL
 # groups.append(
 #     ScratchPad(
 #         "scratchpad",
@@ -46,6 +58,7 @@ for i in range(len(group_names)):
     groups.append(
         Group(
             name=group_names[i],
+            layout=group_layouts[i].lower(),
             label=group_labels[i],
         )
     )
