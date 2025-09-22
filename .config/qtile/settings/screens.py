@@ -2,7 +2,8 @@ import os
 import subprocess
 import random
 
-from libqtile import hook, widget, bar
+from libqtile import hook, widget, bar, qtile
+from libqtile.command.base import expose_command
 from libqtile.lazy import lazy
 from libqtile.config import Screen
 
@@ -19,25 +20,41 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
 
 
-def set_random_wallpaper():
-    wallpapers = []
-    for root, dirs, files in os.walk(WALLPAPER_DIR):
-        for f in files:
-            if f.lower().endswith((".jpg", ".jpeg", ".png")):
-                wallpapers.append(os.path.join(root, f))
-    if wallpapers:
+# Store assigned wallpapers per workspace
+wallpapers_by_group = {}
+
+
+def set_wallpaper_for_group(group_name):
+    global wallpapers_by_group
+    if group_name in wallpapers_by_group:
+        # Already has one → reuse
+        chosen = wallpapers_by_group[group_name]
+    else:
+        # Assign a new one
+        wallpapers = []
+        for root, dirs, files in os.walk(WALLPAPER_DIR):
+            for f in files:
+                if f.lower().endswith((".jpg", ".jpeg", ".png")):
+                    wallpapers.append(os.path.join(root, f))
+        if not wallpapers:
+            return
         chosen = random.choice(wallpapers)
-        subprocess.run(["feh", "--bg-fill", chosen])
+        wallpapers_by_group[group_name] = chosen
+    # Actually set it
+    subprocess.run(["feh", "--bg-fill", chosen])
 
 
 @hook.subscribe.startup_once
 def startup_wallpaper():
-    set_random_wallpaper()
+    # Set wallpaper for the initial group
+
+    set_wallpaper_for_group(qtile.current_group.name)
 
 
 @hook.subscribe.setgroup
 def change_wallpaper():
-    set_random_wallpaper()
+
+    set_wallpaper_for_group(qtile.current_group.name)
 
 
 # =====================
@@ -45,7 +62,7 @@ def change_wallpaper():
 # =====================
 
 widget_defaults = dict(
-    font="Roboto Mono Nerd Font",
+    font="JetBrains Mono Nerd Font 11",
     fontsize=21,
     padding=3,
     background=backgroundColor,
@@ -113,7 +130,7 @@ screens = [
                 widget.Spacer(),
                 # Center - Date & Time
                 widget.Clock(
-                    format="%a, %b %-d", foreground=foregroundColorTwo, padding=4
+                    format="%a, %b %-d", foreground=foregroundColor, padding=4
                 ),
                 create_separator(),
                 widget.Clock(format="%-l:%M %p", foreground=foregroundColor, padding=4),
@@ -138,6 +155,13 @@ screens = [
                     padding=4,
                     icon_size=21,
                 ),
+                # create_separator(),
+                # widget.CheckUpdates(
+                #     distro="Fedora",
+                #     no_update_string="",
+                #     foreground=foregroundColor,
+                #     fmt='{  }',
+                # ),
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
@@ -159,7 +183,10 @@ screens = [
                 create_separator(),
                 widget.TextBox(text="󰻠", foreground=colors[6][0], padding=4),
                 widget.CPU(
-                    format="{load_percent:2.0f}%", foreground=foregroundColor, padding=4
+                    format="{load_percent:2.0f}%",
+                    foreground=foregroundColor,
+                    padding=4,
+                    mouse_callbacks={"Button1": lazy.spawn("htop")},
                 ),
                 create_separator(),
                 widget.BatteryIcon(
@@ -174,7 +201,7 @@ screens = [
                     discharge_char=" 󱐋",
                     empty_char="",
                     not_charging_char="",
-                    format="{char} {percent:2.0%} {hour:d}hrs:{min:02d}mins",
+                    format="{char} {percent:2.0%} {hour:d}:{min:02d}hrs",
                     low_percentage=20,
                     notify_below=10,  # send notification below this %
                 ),
