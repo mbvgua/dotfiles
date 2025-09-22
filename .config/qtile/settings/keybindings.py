@@ -175,7 +175,13 @@ keys = [
     # Qtile specific
     # =================
     # Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
-    Key( [mod, control], "r", lazy.function(notify_restart()), lazy.restart(), desc="[r]estart qtile",),
+    Key(
+        [mod, control],
+        "r",
+        lazy.function(notify_restart()),
+        lazy.restart(),
+        desc="[r]estart qtile",
+    ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
     # =================
     # Groups(workspaces) specific
@@ -183,21 +189,65 @@ keys = [
     Key([mod], "n", lazy.screen.next_group(), desc="move to group on the right"),
     Key([mod], "p", lazy.screen.prev_group(), desc="move to group on the left"),
     # imitate normal gnome de
-    Key( [mod, mod2], "right", lazy.screen.next_group(), desc="move to group on the right",),
-    Key( [mod, mod2], "left", lazy.screen.prev_group(), desc="move to group on the left"),
+    Key(
+        [mod, mod2],
+        "right",
+        lazy.screen.next_group(),
+        desc="move to group on the right",
+    ),
+    Key(
+        [mod, mod2], "left", lazy.screen.prev_group(), desc="move to group on the left"
+    ),
     Key([mod2], "Tab", lazy.screen.toggle_group(), desc="move to last visited group"),
     # =================
     # Window actions
     # =================
-    Key( [mod, shift], "h", lazy.layout.shuffle_up(), lazy.layout.shuffle_left(), desc="Move window up/left",),
-    Key( [mod, shift], "l", lazy.layout.shuffle_down(), lazy.layout.shuffle_right(), desc="Move window down/right",),
+    Key(
+        [mod, shift],
+        "h",
+        lazy.layout.shuffle_up(),
+        lazy.layout.shuffle_left(),
+        desc="Move window up/left",
+    ),
+    Key(
+        [mod, shift],
+        "l",
+        lazy.layout.shuffle_down(),
+        lazy.layout.shuffle_right(),
+        desc="Move window down/right",
+    ),
     # Resize windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key( [control], "left", lazy.layout.grow_left(), lazy.function(resize_left()), desc="Grow window to the left",),
-    Key( [control], "right", lazy.function(resize_right()), desc="Grow window to the right",),
-    Key( [control], "down", lazy.layout.grow_down(), lazy.layout.shrink(), lazy.layout.increase_nmaster(), desc="Grow window down",),
-    Key( [control], "up", lazy.layout.grow_up(), lazy.layout.grow(), lazy.layout.decrease_nmaster(), desc="Grow window up",),
-    Key([control], "s", lazy.layout.normalize(), desc="Reset all window [s]izes"),
+    Key(
+        [shift],
+        "left",
+        lazy.layout.grow_left(),
+        lazy.function(resize_left()),
+        desc="Grow window to the left",
+    ),
+    Key(
+        [shift],
+        "right",
+        lazy.function(resize_right()),
+        desc="Grow window to the right",
+    ),
+    Key(
+        [shift],
+        "down",
+        lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        lazy.layout.increase_nmaster(),
+        desc="Grow window down",
+    ),
+    Key(
+        [shift],
+        "up",
+        lazy.layout.grow_up(),
+        lazy.layout.grow(),
+        lazy.layout.decrease_nmaster(),
+        desc="Grow window up",
+    ),
+    Key([shift], "s", lazy.layout.normalize(), desc="Reset all window [s]izes"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # # Toggle between split and unsplit sides of stack.
     # # Split = all windows displayed
@@ -208,7 +258,12 @@ keys = [
     # Layout Control
     # =================
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key( [mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window",),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     # =================
     # Focus Control
     # =================
@@ -217,7 +272,12 @@ keys = [
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    Key( [mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
+    Key(
+        [mod],
+        "f",
+        lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen on the focused window",
+    ),
     # =================
     # Open My Tools
     # =================
@@ -231,19 +291,12 @@ keys = [
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
             Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "s", lazy.spawn(teams), desc="Open [t]eams"),
-            Key(
-                [],
-                "r",
-                lazy.spawn(
-                    "rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/rofi/config.rasi"
-                ),
-                desc="launch [r]ofi",
-            ),
+            Key( [], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi",),
             Key(
                 [],
                 "h",
                 lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-                desc="[h]elp with keybindings mappink",
+                desc="[h]elp with keybindings mapping",
             ),
         ],
     ),
