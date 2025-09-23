@@ -55,6 +55,25 @@ cli_tools = {
     "curl",
     "htop",
 }
+wm_tools = {
+    "qtile",
+    "rofi",
+    "dunst",
+    "feh",
+    "lxappearance",
+    "network-manager-applet",
+    "pavucontrol",
+    "pulsemixer",
+    "pamixer",
+    "pipewire-pulse",
+    "flameshot",
+    "picom",
+    "polkit",
+    "dmenu",
+    "brightnessctl",
+    "redshift",
+    "unzip",
+}
 not_installed = []
 package_manager = ""
 
