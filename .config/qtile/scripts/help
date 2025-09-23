@@ -1,5 +1,11 @@
 #!/bin/bash
 
+## Rofi   : Help Menu
+#
+## Available Styles
+#
+## style-1   style-2   style-3   style-4   style-5
+
 # Extract keybindings from config.py with descriptions
 # This looks for Key() definitions with desc= parameters
 
@@ -42,6 +48,4 @@ keybindings=$(grep -E 'Key\(' ~/.config/qtile/settings/* | grep 'desc=' | sed 's
 done | sort -k2)
 
 # Show in rofi
-echo "$keybindings" | rofi -dmenu -i -p "Keybindings" \
-    -line-padding 4 -hide-scrollbar \
-f   -theme ~/.config/rofi/keybinds.rasi
+echo "$keybindings" | rofi -dmenu -i -p "Keybindings" -hide-scrollbar
