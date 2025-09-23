@@ -8,6 +8,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
+from .keybindings import terminal
 
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
@@ -78,7 +79,7 @@ def create_separator():
         text="|",
         foreground=foregroundColorTwo,  # disabled color
         padding=8,
-        fontsize=14,
+        fontsize=19,
     )
 
 
@@ -121,12 +122,6 @@ screens = [
                     # hide_unused=True,
                 ),
                 create_separator(),
-                # widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
-                # create_separator(),
-                widget.Prompt(
-                    font="Ubuntu Mono", fontsize=17, foreground=colors[1], padding=8
-                ),
-                create_separator(),
                 widget.Spacer(),
                 # Center - Date & Time
                 widget.Clock(
@@ -153,7 +148,7 @@ screens = [
                 # widget.CapsNumLockIndicator(),
                 widget.Systray(
                     padding=4,
-                    icon_size=21,
+                    icon_size=22,
                 ),
                 # create_separator(),
                 # widget.CheckUpdates(
@@ -186,7 +181,9 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     padding=4,
-                    mouse_callbacks={"Button1": lazy.spawn("htop")},
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e htop")
+                    },
                 ),
                 create_separator(),
                 widget.BatteryIcon(
@@ -205,13 +202,22 @@ screens = [
                     low_percentage=20,
                     notify_below=10,  # send notification below this %
                 ),
+                create_separator(),
+                widget.TextBox(
+                    foreground=colors[6][0],
+                    padding=4,
+                    fmt=" {}",
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(
+                            os.path.expanduser("~/.config/qtile/scripts/power"),
+                        )
+                    },
+                ),
                 widget.Spacer(length=8),
             ],
-            size=37,
+            size=40,
             background=backgroundColor,
             margin=[0, 0, 0, 0],  # Remove margins for full-width bar
-            # border_width=[0, 0, 0, 0],  # No borders to match Polybar
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling

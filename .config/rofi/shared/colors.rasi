@@ -1,1 +1,16 @@
-@import "gruvbox.rasi"
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Colors
+ *
+ * Available Colors Schemes
+ *
+ * catppuccin   everforest  gruvbox     nord    lovelace    onedark
+ *
+ **/
+
+/* Import color-scheme from `colors` directory */
+
+@import "../colors/gruvbox.rasi"
