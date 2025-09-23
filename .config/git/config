@@ -18,6 +18,7 @@
 	st = status
 	co = commit
     coan = commit --amend --no-edit
+    coa = commit --amend
 	ch = checkout
     cl = clone
 	last = log -1 HEAD
