@@ -65,7 +65,7 @@ def change_wallpaper():
 widget_defaults = dict(
     font="JetBrains Mono Nerd Font 11",
     fontsize=21,
-    padding=3,
+    padding=4,
     background=backgroundColor,
     foreground=foregroundColor,
 )
@@ -78,7 +78,7 @@ def create_separator():
     return widget.TextBox(
         text="|",
         foreground=foregroundColorTwo,  # disabled color
-        padding=8,
+        padding=5,
         fontsize=19,
     )
 
@@ -94,9 +94,8 @@ screens = [
                     custom_icon_paths=[
                         os.path.expanduser("~/.config/qtile/icons/layouts")
                     ],
-                    foreground=colors[6][0],
+                    foreground=colors[8][0],
                     scale=0.6,
-                    padding=4,
                     # icon_first=True,
                 ),
                 create_separator(),
@@ -107,28 +106,34 @@ screens = [
                     inactive=foregroundColorTwo,
                     highlight_method="line",
                     highlight_color=[backgroundColor, backgroundColor],
-                    this_current_screen_border=colors[6][0],
+                    this_current_screen_border=colors[8][0],
                     this_screen_border=colors[1][0],
                     other_current_screen_border=colors[1][0],
                     other_screen_border=backgroundColor,
                     urgent_alert_method="text",
                     urgent_text=colors[9][0],
                     rounded=False,
-                    margin_x=0,
-                    margin_y=2,
-                    padding_x=8,
-                    padding_y=4,
                     borderwidth=3,
-                    # hide_unused=True,
+                    # hides unused workspaces
+                    hide_unused=True,
+                ),
+                create_separator(),
+                widget.WindowName(
+                    # max_chars=10,
+                    # scroll=True,
+                    width=300,
+                    format='{name}',
+                    foreground=colors[8][0],
                 ),
                 create_separator(),
                 widget.Spacer(),
                 # Center - Date & Time
                 widget.Clock(
-                    format="%a, %b %-d", foreground=foregroundColor, padding=4
+                    format="%a,%b %-d",
+                    foreground=foregroundColor,
                 ),
                 create_separator(),
-                widget.Clock(format="%-l:%M %p", foreground=foregroundColor, padding=4),
+                widget.Clock(format="%-l:%M %p", foreground=foregroundColor),
                 widget.Spacer(),
                 # Right modules - System Info
                 widget.GenPollText(
@@ -141,13 +146,11 @@ screens = [
                         else ""
                     ),
                     update_interval=0.5,
-                    padding=4,
-                    foreground=foregroundColor,
-                    # foreground=colors[9][0],
+                    # foreground=foregroundColor,
+                    foreground=colors[9][0],
                 ),
                 # widget.CapsNumLockIndicator(),
                 widget.Systray(
-                    padding=4,
                     icon_size=22,
                 ),
                 # create_separator(),
@@ -160,12 +163,10 @@ screens = [
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
-                    foreground=colors[6][0],
-                    padding=4,
+                    foreground=colors[8][0],
                     mouse_callbacks={"Button1": lazy.spawn("pavucontrol")},
                 ),
                 widget.Volume(
-                    fmt="{}",
                     mute_command="pamixer -t",
                     volume_up_command="pamixer -i 2",
                     volume_down_command="pamixer -d 2",
@@ -176,11 +177,10 @@ screens = [
                     padding=4,
                 ),
                 create_separator(),
-                widget.TextBox(text="󰻠", foreground=colors[6][0], padding=4),
+                widget.TextBox(text="󰻠", foreground=colors[8][0], padding=4),
                 widget.CPU(
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
-                    padding=4,
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(terminal + " -e htop")
                     },
@@ -188,25 +188,23 @@ screens = [
                 create_separator(),
                 widget.BatteryIcon(
                     foreground=foregroundColor,
-                    padding=4,
                     scale=1.5,
                 ),
                 widget.Battery(
                     foreground=foregroundColor,
-                    padding=5,
-                    charge_char=" ",
-                    discharge_char=" 󱐋",
-                    empty_char="",
-                    not_charging_char="",
-                    format="{char} {percent:2.0%} {hour:d}:{min:02d}hrs",
+                    # charge_char=" ",
+                    # discharge_char=" 󱐋",
+                    # empty_char="",
+                    # not_charging_char="",
+                    not_charging_char="",
+                    format="{char}{percent:2.0%} {hour:d}:{min:02d}hrs",
                     low_percentage=20,
                     notify_below=10,  # send notification below this %
                 ),
                 create_separator(),
                 widget.TextBox(
-                    foreground=colors[6][0],
-                    padding=4,
-                    fmt=" {}",
+                    foreground=colors[8][0],
+                    fmt=" ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(
                             os.path.expanduser("~/.config/qtile/scripts/power"),

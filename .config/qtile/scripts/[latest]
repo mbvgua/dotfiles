@@ -1,0 +1,6 @@
+Usage: ./betterlockscreen <install-mode> [<version>] [<systemd-service>]
+  <install-mode>: (string) 'user' installs to '~/.local/bin/', 'system' installs to '/usr/local/bin'
+  <version>: (string) defaults to 'latest' which will determinate the latest tag from git or specified branch/tag
+  <systemd-service>: (boolean) defaults to 'false' - Whether to copy and enable system-service
+
+Please note: The order of the parameters *is* relevant, if you want to set '<system-service>' you need to specify '<version>' as well!
