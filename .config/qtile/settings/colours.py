@@ -79,7 +79,7 @@ def monokai_pro():
     ]
     backgroundColor = "#2D2A2E"
     foregroundColor = "#FCFCFA"
-    workspaceColor = "#FF6188"
+    workspaceColor = "#78DCE8"
     foregroundColorTwo = "#7d7d7d"
     return colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo
 

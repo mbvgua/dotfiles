@@ -58,7 +58,7 @@ for i in range(len(group_names)):
     groups.append(
         Group(
             name=group_names[i],
-            layout=group_layouts[i].lower(),
+            layout=group_layouts[i],
             label=group_labels[i],
         )
     )

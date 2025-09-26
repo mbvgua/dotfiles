@@ -23,77 +23,6 @@ teams = "teams-for-linux"
 # =====================
 
 
-def toggle_float_center():
-    """Toggle floating and center at 75% size"""
-
-    def _toggle_float_center(qtile):
-        window = qtile.current_window
-        if window:
-            was_floating = window.floating
-            window.toggle_floating()
-            if not was_floating and window.floating:
-                # Only resize/center when going from tiled to floating
-                screen = qtile.current_screen
-                width = int(screen.width * 0.70)
-                height = int(screen.height * 0.60)
-                window.set_size_floating(width, height)
-                window.center()
-
-    return _toggle_float_center
-
-
-def resize_left():
-    """Resize window left - intuitive based on focus"""
-
-    def _resize_left(qtile):
-        layout = qtile.current_layout.name
-        group = qtile.current_group
-
-        # For BSP/Columns layouts with directional resize
-        if layout in ["bsp", "columns"]:
-            qtile.current_layout.cmd_grow_left()
-        # For MonadTall/Tile - check if we're in main or stack area
-        elif layout in ["monadtall", "monadwide", "tile", "ratiotile"]:
-            # Get current window index
-            current_idx = group.windows.index(qtile.current_window)
-            # First window is usually main, so reverse the behavior
-            if current_idx == 0:
-                qtile.current_layout.cmd_shrink()
-            else:
-                qtile.current_layout.cmd_grow()
-        else:
-            # Default behavior for other layouts
-            qtile.current_layout.cmd_shrink()
-
-    return _resize_left
-
-
-def resize_right():
-    """Resize window right - intuitive based on focus"""
-
-    def _resize_right(qtile):
-        layout = qtile.current_layout.name
-        group = qtile.current_group
-
-        # For BSP/Columns layouts with directional resize
-        if layout in ["bsp", "columns"]:
-            qtile.current_layout.cmd_grow_right()
-        # For MonadTall/Tile - check if we're in main or stack area
-        elif layout in ["monadtall", "monadwide", "tile", "ratiotile"]:
-            # Get current window index
-            current_idx = group.windows.index(qtile.current_window)
-            # First window is usually main, so reverse the behavior
-            if current_idx == 0:
-                qtile.current_layout.cmd_grow()
-            else:
-                qtile.current_layout.cmd_shrink()
-        else:
-            # Default behavior for other layouts
-            qtile.current_layout.cmd_grow()
-
-    return _resize_right
-
-
 def focus_left():
     """Focus window to the left, or cycle if floating"""
 
@@ -183,12 +112,20 @@ keys = [
         desc="[r]estart qtile",
     ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
+    # Key([mod2],"l",lazy.spawn(), desc="activate [l]ockscreen"),
+    Key(
+        [mod],
+        "delete",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/power")),
+        desc="activate poweroff menu",
+    ),
     # =================
     # Groups(workspaces) specific
     # =================
     Key([mod], "n", lazy.screen.next_group(), desc="move to group on the right"),
     Key([mod], "p", lazy.screen.prev_group(), desc="move to group on the left"),
     # imitate normal gnome de
+    # Key([mod2], "Tab", lazy.screen.toggle_group(), desc="move to last visited group"),
     Key(
         [mod, mod2],
         "right",
@@ -198,7 +135,6 @@ keys = [
     Key(
         [mod, mod2], "left", lazy.screen.prev_group(), desc="move to group on the left"
     ),
-    Key([mod2], "Tab", lazy.screen.toggle_group(), desc="move to last visited group"),
     # =================
     # Window actions
     # =================
@@ -207,6 +143,7 @@ keys = [
         "h",
         lazy.layout.shuffle_up(),
         lazy.layout.shuffle_left(),
+        # lazy.layout.swap_left(),
         desc="Move window up/left",
     ),
     Key(
@@ -214,25 +151,31 @@ keys = [
         "l",
         lazy.layout.shuffle_down(),
         lazy.layout.shuffle_right(),
+        # lazy.layout.swap_right(),
         desc="Move window down/right",
     ),
     # Resize windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key(
-        [shift],
+        [mod, shift],
         "left",
         lazy.layout.grow_left(),
-        lazy.function(resize_left()),
-        desc="Grow window to the left",
+        lazy.layout.shrink(),
+        lazy.layout.decrease_ratio(),
+        lazy.layout.add(),
+        desc="Decrease active window size",
     ),
     Key(
-        [shift],
+        [mod, shift],
         "right",
-        lazy.function(resize_right()),
-        desc="Grow window to the right",
+        lazy.layout.grow_right(),
+        lazy.layout.grow(),
+        lazy.layout.increase_ratio(),
+        lazy.layout.delete(),
+        desc="Increase active window size",
     ),
     Key(
-        [shift],
+        [mod, shift],
         "down",
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
@@ -240,14 +183,14 @@ keys = [
         desc="Grow window down",
     ),
     Key(
-        [shift],
+        [mod, shift],
         "up",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
         desc="Grow window up",
     ),
-    Key([shift], "s", lazy.layout.normalize(), desc="Reset all window [s]izes"),
+    Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # # Toggle between split and unsplit sides of stack.
     # # Split = all windows displayed
@@ -291,7 +234,12 @@ keys = [
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
             Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "s", lazy.spawn(teams), desc="Open [t]eams"),
-            Key( [], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi",),
+            Key(
+                [],
+                "r",
+                lazy.spawn("rofi -show drun"),
+                desc="launch [r]ofi",
+            ),
             Key(
                 [],
                 "h",
@@ -348,6 +296,14 @@ keys = [
         ),
         desc="Screenshot (region select)",
     ),
+    Key(
+        [mod2],
+        "space",
+        lazy.spawn(
+            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        ),
+        desc="Screenshot (region select alt)",
+    ),
     # current device doesnt ahve this key
     # Key(
     #     [],
@@ -357,14 +313,6 @@ keys = [
     #     ),
     #     desc="Screenshot (full screen)",
     # ),
-    Key(
-        [mod, shift],
-        "s",
-        lazy.spawn(
-            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        ),
-        desc="Screenshot (region select alt)",
-    ),
 ]
 
 # # Scratchpad keybindings
