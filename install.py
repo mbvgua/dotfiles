@@ -40,6 +40,13 @@ apps = {
         "brave-browser",
         "vlc",
         "zathura",
+        "zathura-pdf-poppler",
+        "zathura-pdf-mupdf",
+        "zathura-ps",
+        "zathura-ps",
+        "zathura-cb",
+        "zathura-djvu",
+        "nemo",
     ],
     "cli_tools": [
         "wezterm",
