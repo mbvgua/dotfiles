@@ -15,7 +15,7 @@ map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 map("n", "<leader>x", "<C-w>c", { desc = "Close current window" })
 
 -- stop highlighting after search
-map("n", "<leader>ho", ":nohlsearch<CR>", { desc = "Removing highlighted text after a search" })
+map("n", "<leader>so", ":nohlsearch<CR>", { desc = "Removing highlighted text after a search" })
 
 -- check spelling within file
 map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
