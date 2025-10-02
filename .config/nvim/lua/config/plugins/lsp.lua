@@ -216,7 +216,8 @@ return {
 			-- pyright = {},
             basedpyright = {},
 			ts_ls = {},
-			dockerls = {},
+            -- NOTE: install manually
+            -- docker_language_server={},
 			volar = {},
 			sqls = {},
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
