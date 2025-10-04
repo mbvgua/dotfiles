@@ -12,7 +12,7 @@
 [alias]
     ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Cresetby %an' --all --abbrev-commit
-	contributors = shortlog --summary --numbered
+    contributors = shortlog -nse
 	ao = remote add origin
 	br = branch
 	st = status
