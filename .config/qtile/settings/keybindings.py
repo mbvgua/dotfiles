@@ -192,11 +192,6 @@ keys = [
     ),
     Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    # # Toggle between split and unsplit sides of stack.
-    # # Split = all windows displayed
-    # # Unsplit = 1 window displayed, like Max layout, but still with
-    # # multiple stack panes
-    # Key( [mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack",),
     # =================
     # Layout Control
     # =================
@@ -224,7 +219,6 @@ keys = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     KeyChord(
         [mod],
@@ -277,12 +271,18 @@ keys = [
     ),
     # =================
     # LED Brightness controls
+    # get devices with "brightnessctl --list"
     # =================
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight +10"), desc="Brightness up"),
+    Key(
+        [],
+        "XF86MonBrightnessUp",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changebrightness up")),
+        desc="Brightness up",
+    ),
     Key(
         [],
         "XF86MonBrightnessDown",
-        lazy.spawn("xbacklight -10"),
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changebrightness down")),
         desc="Brightness down",
     ),
     # =================
@@ -304,15 +304,6 @@ keys = [
         ),
         desc="Screenshot (region select alt)",
     ),
-    # current device doesnt ahve this key
-    # Key(
-    #     [],
-    #     "Print",
-    #     lazy.spawn(
-    #         "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
-    #     ),
-    #     desc="Screenshot (full screen)",
-    # ),
 ]
 
 # # Scratchpad keybindings
