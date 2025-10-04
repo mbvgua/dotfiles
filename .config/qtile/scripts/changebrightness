@@ -1,0 +1,22 @@
+#!/bin/bash
+
+dir="$HOME/.config/dunst/icons/"
+
+function send_notification() {
+    brightness=$(brightnessctl get)
+    max_brightness=$(brightnessctl max)
+    # Calculate brightness percentage
+    percent=$(( 100 * brightness / max_brightness ))
+    dunstify -a "changebrightness" -u low -r "9994" -h int:value:"$percent" -i ${dir}/brightness.svg "Brightness: ${percent}%" -t 2000
+}
+
+case $1 in
+up)
+    brightnessctl set +5%
+    send_notification
+    ;;
+down)
+    brightnessctl set 5%-
+    send_notification
+    ;;
+esac
