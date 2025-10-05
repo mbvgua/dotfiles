@@ -4,8 +4,9 @@
 # shall we?                                                     #
 # Sections:                                                     #
 #    1.General...................general bash behaviour         #
-#    2.Aliases....................general aliases               #
-#    3.Packages .................installed packages             #
+#    2.Packages .................installed packages             #
+#    3.Aliases....................general aliases               #
+#    3.Functions..................useful functions              #
 #################################################################
 
 ############################################
@@ -22,49 +23,6 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
-
-# default for opening files with ranger
-export EDITOR="nvim"
-export VISUAL="nvim"
-
-# open man pages in neovim
-# thanks mental outlaw
-export MANPAGER="nvim +Man!"
-
-# ignore duplicates in history
-HISTCONTROL=ignoredups
-
-############################################
-# 2.Aliases                                #
-############################################
-
-# managing dotfiles repo
-alias dots='cd ~/.dotfiles/.config/'
-
-# downloading entire websites with wget
-alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
-
-# substitute ls with eza. Modern with inbuilt icons
-alias ls='eza --icons --sort=extension'
-
-# open files easily
-alias files='xdg-open .'
-
-#easy tree navigation
-alias treee='tree --filelimit 15'
-
-#exit terminal easily. like vim
-alias :q="exit"
-alias :wq="exit"
-alias :wqa="exit"
-
-# working with docker
-alias dils="docker image ls"
-alias dcls="docker container ls"
-alias dclsa="docker container ls -a"
-
-# get window class name for qtile
-alias wn="xprop WM_CLASS"
 
 ############################################
 # 3.Packages                               #
@@ -93,4 +51,76 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+############################################
+# 2.Aliases                                #
+############################################
+
+# default for opening files in ranger
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# open man pages in neovim
+# thanks @mental_outlaw - Yt
+export MANPAGER="nvim +Man!"
+
+# ignore duplicates in history
+HISTCONTROL=ignoredups
+
+# downloads
+# entire websites with wget
+alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
+alias ytv="yt-dlp -f 'bestvideo+bestaudio/best' mp4"   # Best video + audio merged as mp4
+alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
+
+# substitutions
+alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
+alias ls='eza --icons --sort=extension'         # ls for eza. modern with icons
+alias fdir='find . -type d -name'               # find directories
+alias ff='find . -type f -name'                 # find files
+alias hist='history'                            # show history
+alias hgrep='history | grep'                    # search for command in history
+alias lgrep='ls -l | grep'                      # search for file/directory in .
+alias files='xdg-open .'                        # open files easily
+
+# typos
+alias :q="exit"
+alias :wq="exit"
+alias :Wq="exit"
+alias :wqa="exit"
+alias :Wqa="exit"
+alias quit="exit"
+
+# navigation
+alias treee='tree --filelimit 15'
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# Bookmarks
+alias dots='cd ~/.dotfiles && ls -1a'
+alias dt='cd ~/Desktop && ls -1a'
+alias docs='cd ~/Documents && ls -1a'
+alias dl='cd ~/Downloads'
+alias vids='cd ~/Videos && ls -1a'
+alias music='cd ~/Music && ls -1a'
+alias pics='cd ~/Pictures'
+
+# working with docker
+alias dils="docker image ls"
+alias dcls="docker container ls"
+alias dclsa="docker container ls -a"
+
+# get window class name for qtile
+alias wn="xprop WM_CLASS"
+
+############################################
+# 4.Functions                              #
+############################################
+# Create a new directory and enter it
+mkd() {
+    mkdir -p "$@" && cd "$@"
+}
 

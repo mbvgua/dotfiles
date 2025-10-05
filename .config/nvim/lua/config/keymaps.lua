@@ -27,10 +27,11 @@ map("n", "<leader>k", "<C-w>k", { desc = "Navigate to window above" })
 map("n", "<leader>j", "<C-w>j", { desc = "Navigate to window below" })
 
 -- resize windows with Alt+Arrow Keys (upwards,downwards,left,right)
-map("n", "<A-k>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
-map("n", "<A-j>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
-map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
-map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
+-- ALT was taken by wez for tab mvmt. switched to Ctrl
+map("n", "<C-k>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
+map("n", "<C-j>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
+map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
+map("n", "<C-l>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
 
 -- navigate buffers easily with leader-(N)ext and (P)revious
 map("n", "<leader>n", ":bnext<CR>", { desc = "Navigate to next buffer" })
@@ -68,6 +69,9 @@ map("x", "J", ":move '>+1<CR>gv-gv")
 map("x", "K", ":move '<-2<CR>gv-gv")
 map("x", "<A-j>", ":move '>+1<CR>gv-gv")
 map("x", "<A-k>", ":move '<-2<CR>gv-gv")
+
+-- delete current buffer
+map("n","<leader>bb",":bd<CR>",{desc="[d]elete current [b]uffer"})
 
 -- delete all buffers in background
 map("n", "<leader>bd", function()
