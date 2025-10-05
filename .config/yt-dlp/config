@@ -1,0 +1,24 @@
+# Download the best file format available.
+# -t mp4
+
+# Do not use the Last-modified header to set the file modification time.
+--no-mtime
+
+# Download English subtitle.
+--embed-subs
+--sub-langs en,en-US,enUS
+--convert-subs srt
+
+# Embed metadata & subs to the video file. Also adds chapters to file
+# "--write-thumbnail" + "embed-thumbnail" when both ON , it will keep the picture and embed/merge into the file
+# metadata are needed for example chapter names and other stuff
+#--write-thumbnail
+--embed-thumbnail
+--add-metadata
+--embed-metadata
+--embed-chapters
+--embed-metadata
+
+# Save to ~/Video directory.
+--paths "$HOME/Videos/Youtube/"
+--output "%(title)s.%(ext)s"

@@ -3,7 +3,9 @@ from libqtile.lazy import lazy
 
 from .keybindings import mod
 
-
+# removed mod key operation in floating windows
+# now you simple press the buttons
+# then my clicks were hijacked by the WM, reverted them back to default
 mouse = [
     Drag(
         [mod],
