@@ -1,4 +1,4 @@
-from libqtile.config import DropDown, Group, Key, ScratchPad
+from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
 from .keybindings import keys, mod
@@ -10,6 +10,7 @@ from .keybindings import keys, mod
 # group_names should remain 0-9 to match MOD+0-9 keybindings
 # group_labels are how they appear in the bar. changes this freely
 
+# matches=[Match(wm_class="Firefox")]
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -62,6 +63,19 @@ for i in range(len(group_names)):
             label=group_labels[i],
         )
     )
+
+# open these apps in grp 2, where layout is always max
+groups.append(
+    Group(
+        name=group_names[1],
+        matches=[
+            Match(wm_class="org.mozilla.firefox"),
+            Match(wm_class="org.pwmt.zathura"),
+            Match(wm_class="brave-browser"),
+            Match(wm_class="teams-for-linux"),
+        ],
+    )
+)
 
 for i in groups:
     # if i.name != "scratchpad":  # Skip scratchpad groups
