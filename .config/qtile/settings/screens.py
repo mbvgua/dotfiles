@@ -48,13 +48,11 @@ def set_wallpaper_for_group(group_name):
 @hook.subscribe.startup_once
 def startup_wallpaper():
     # Set wallpaper for the initial group
-
     set_wallpaper_for_group(qtile.current_group.name)
 
 
 @hook.subscribe.setgroup
 def change_wallpaper():
-
     set_wallpaper_for_group(qtile.current_group.name)
 
 
@@ -122,7 +120,7 @@ screens = [
                     # max_chars=10,
                     # scroll=True,
                     width=300,
-                    format='{name}',
+                    format="{name}",
                     foreground=colors[8][0],
                 ),
                 create_separator(),
