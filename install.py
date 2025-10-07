@@ -38,7 +38,8 @@ apps = {
         "teams-for-linux",
         "firefox",
         "brave-browser",
-        "vlc",
+        # "vlc",    # Sorry, but only played audio on my device, no video
+        "mpv",
         "zathura",
         "zathura-pdf-poppler",
         "zathura-pdf-mupdf",
