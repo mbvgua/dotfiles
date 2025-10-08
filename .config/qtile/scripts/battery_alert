@@ -1,0 +1,3 @@
+#!/bin/sh
+
+paplay ~/.config/qtile/sounds/battery.mp3
