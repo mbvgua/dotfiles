@@ -212,14 +212,17 @@ return {
 			cssls = {},
 			angularls = {},
 			jsonls = {},
+            yamlls={},
 			-- pylsp = {},
 			-- pyright = {},
             basedpyright = {},
 			ts_ls = {},
             -- NOTE: install manually
             -- docker_language_server={},
+            dockerls={},
+            docker_compose_language_service={},
 			volar = {},
-			sqls = {},
+			sqlls = {},
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
 		}
 
