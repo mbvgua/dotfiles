@@ -359,21 +359,21 @@
     override_pause_level = 30
     # Icon for notifications with normal urgency
     default_icon = dialog-information
-    script = "/home/daagi/.config/qtile/scripts/normal_alert"
+    script = "/home/daagi/.config/qtile/scripts/alert_normal"
 
 
 [urgency_critical]
     background = "#0d1117"
     foreground = "#d0d7de"
     frame_color = "#ff0000"
+    highlight = "#ff0000"
     # must click to remove. no timeout
     #timeout = 30
-    highlight = "#ff0000"
-    override_pause_level = 60
+    #override_pause_level = 60
     # Icon for notifications with critical urgency
     default_icon = dialog-warning
     # play sound for critical alerts
-    script = "/home/daagi/.config/qtile/scripts/battery_alert"
+    script = "/home/daagi/.config/qtile/scripts/alert_battery"
 
 
 #[play_sound]

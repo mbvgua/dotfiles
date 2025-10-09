@@ -288,9 +288,10 @@ keys = [
     # =================
     # Screenshots
     # =================
+    # tux+shift s. like Vlc, since im now on mpv
     Key(
-        [mod],
-        "Print",
+        [mod, shift],
+        "s",
         lazy.spawn(
             "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
         ),
@@ -300,9 +301,9 @@ keys = [
         [mod2],
         "space",
         lazy.spawn(
-            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
+            "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
         ),
-        desc="Screenshot (region select alt)",
+        desc="Screenshot (full screen)",
     ),
 ]
 
