@@ -1,6 +1,9 @@
 [user]
-	name = mbugua
-	email = mbugua@noreply.codeberg.org
+	name = mbvgua
+	email = 105845499+mbvgua@users.noreply.github.com
+    ; when I move to codeberg, hopefully
+	; name = mbugua
+	; email = mbugua@noreply.codeberg.org
 [color]
 	ui = true
 [credential "https://github.com"]
