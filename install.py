@@ -47,7 +47,7 @@ apps = {
         "zathura-ps",
         "zathura-cb",
         "zathura-djvu",
-        "nemo",
+        "nautilus",
     ],
     "cli_tools": [
         "wezterm",
