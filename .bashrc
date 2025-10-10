@@ -82,8 +82,9 @@ alias hist='history'                            # show history
 alias hgrep='history | grep'                    # search for command in history
 alias lgrep='ls -l | grep'                      # search for file/directory in .
 alias files='xdg-open .'                        # open files easily
-# view images with feh, set extension type
-alias feh='feh --fullscreen --draw-filename --slideshow-delay 5 -f "Jet Brains Mono"'
+# view images with feh {default image and slideahow}
+alias feh='feh --fullscreen --draw-filename --info %h%S -f "Jet Brains Mono"'
+alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5 -f "Jet Brains Mono"'
 
 # typos
 alias :q="exit"

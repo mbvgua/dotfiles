@@ -1,0 +1,40 @@
+#########################
+# custom feh keybindings
+#########################
+
+# all refused to work?!
+# # pause slideshow
+# space [toggle_pause]
+# 
+# # vim like image movements
+# j [next_img]
+# k [prev_img]
+# gg [jump_first]
+# G [jump_last]
+# dd [delete]
+# Ctrl++ [zoom_in]
+# Ctrl+- [zoom_out]
+
+#########################
+# useful default keys
+# from: https://man.finalrewind.org/1/feh/
+#########################
+
+# m -> show the menu
+# esc -> quit menu
+# d -> toggle file name
+# f -> toggle fullscreen
+# o -> toggle pointer visibility
+# i -> toogle file info
+# | -> mirror along y
+# - -> mirror along x
+# q -> quit feh
+# n -> next image
+# p -> previous image
+# delete -> remove from slideshow
+# C-delete -> delete permanetly from system
+# up/down -> zoom in/out
+# * -> return to zoom default
+# / -> zoom to fit window size
+# ! -> zoom to fill window size, like --bg-fill
+# C-up/down/left/right -> scroll up/down/left/right
