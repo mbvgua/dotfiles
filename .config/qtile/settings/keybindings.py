@@ -292,9 +292,11 @@ keys = [
     Key(
         [mod, shift],
         "s",
-        lazy.spawn(
-            "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        ),
+        # lazy.spawn(
+        #     "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        # ),
+        # temporarily, due to flameshots terrible image quality
+        lazy.spawn("deepin-screenshot"),
         desc="Screenshot (region select)",
     ),
     Key(

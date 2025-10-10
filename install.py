@@ -80,6 +80,8 @@ apps = {
         "pamixer",
         "pipewire-pulse",
         "flameshot",
+        # flameshot quality is teribble
+        "deepin-screenshot",
         "picom",
         "polkit",
         "dmenu",
