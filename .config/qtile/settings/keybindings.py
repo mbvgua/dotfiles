@@ -16,6 +16,7 @@ terminal = "wezterm"
 browser = "firefox"
 browser2 = "brave-browser"
 teams = "teams-for-linux"
+files = "nautilus"
 
 
 # =====================
@@ -228,6 +229,7 @@ keys = [
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
             Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "s", lazy.spawn(teams), desc="Open [t]eams"),
+            Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
             Key(
                 [],
                 "r",
