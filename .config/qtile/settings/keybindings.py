@@ -12,11 +12,12 @@ space = "space"  # the space key
 control = "control"
 
 # my tools of choice
-terminal = "wezterm"
 browser = "firefox"
 browser2 = "brave-browser"
-teams = "teams-for-linux"
 files = "nautilus"
+terminal = "wezterm"
+editor = "subl"
+teams = "teams-for-linux"
 
 
 # =====================
@@ -221,21 +222,16 @@ keys = [
     # Open My Tools
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],
         "o",
         [
-            Key([], "t", lazy.spawn(terminal), desc="Open [w]ezterm"),
-            Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
             Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
-            Key([], "s", lazy.spawn(teams), desc="Open [t]eams"),
+            Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
+            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
-            Key(
-                [],
-                "r",
-                lazy.spawn("rofi -show drun"),
-                desc="launch [r]ofi",
-            ),
             Key(
                 [],
                 "h",
@@ -309,26 +305,22 @@ keys = [
         ),
         desc="Screenshot (full screen)",
     ),
+    # =================
+    # Scratchpads
+    # =================
+    # cant use Keychords for some reason!!
+    # not very memorable, used homerow keys for comfort
+    Key(
+        [mod],
+        "s",
+        lazy.group["scratchpad"].dropdown_toggle("sp"),
+    ),
+    Key(
+        [mod],
+        "a",
+        lazy.group["scratchpad"].dropdown_toggle("notes"),
+    ),
 ]
-
-# # Scratchpad keybindings
-# # Unable to add the group in groups.py wont work
-# keys.extend(
-#     [
-#         Key(
-#             [mod, "shift"],
-#             "Return",
-#             lazy.group["scratchpad"].dropdown_toggle(terminal),
-#         ),
-#         Key(
-#             [mod],
-#             "v",
-#             lazy.group["scratchpad"].dropdown_toggle("volume"),
-#             desc="Toggle volume scratchpad",
-#         ),
-#     ]
-# )
-
 
 # Add key bindings to switch VTs in Wayland.
 # We can't check qtile.core.name in default config as it is loaded before qtile is started
