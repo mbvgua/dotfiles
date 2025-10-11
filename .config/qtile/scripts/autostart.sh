@@ -4,8 +4,7 @@
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # background
-# fixed in config.py
-# feh --bg-fill  ~/.config/qtile/wallpapers/ &
+feh --bg-fill  ~/.config/qtile/wallpapers/ &
 
 # compositor
 picom --config ~/.config/picom/picom.conf -b &
@@ -21,3 +20,6 @@ blueman-applet &
 
 # night light.ish features
 redshift-gtk &
+
+# battery power management
+xfce4-power-manager &

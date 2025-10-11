@@ -42,7 +42,9 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
     - [dunst](https://github.com/dunst-project/dunst) - A highly configurable and lightweight notification daemon.
     - [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
-    - [sublime Text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
+    - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.
+    - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
+    - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
     - [flameshot](https://github.com/flameshot-org/flameshot) - powerful yet simple to use screenshot software.
     - [mpv](https://github.com/mpv-player/mpv) - command line media player.
     - [redshift](https://github.com/jonls/redshift) - Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
@@ -82,11 +84,11 @@ To get this up and running, simply navigate to your `$HOME` directory and:
 <!--- So it begins young Padawan! --->
 
 <p align="center">
-If you only knew the power of the dark side. <br>
-    Darth Vader.
+<bold> If you only knew the power of the dark side. </bold><br>
+    <i> ~ Darth Vader.</i>
 </p>
 
-## May I?
-
-[If you insist...](./LICENSE)
-
+<!--## May I?-->
+<!---->
+<!--[If you insist...](./LICENSE)-->
+<!---->
