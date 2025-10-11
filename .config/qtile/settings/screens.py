@@ -15,54 +15,12 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 )
 
 # =====================
-# Wallpapers
-# =====================
-
-WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
-
-
-# Store assigned wallpapers per workspace
-wallpapers_by_group = {}
-
-
-def set_wallpaper_for_group(group_name):
-    global wallpapers_by_group
-    if group_name in wallpapers_by_group:
-        # Already has one → reuse
-        chosen = wallpapers_by_group[group_name]
-    else:
-        # Assign a new one
-        wallpapers = []
-        for root, dirs, files in os.walk(WALLPAPER_DIR):
-            for f in files:
-                if f.lower().endswith((".jpg", ".jpeg", ".png")):
-                    wallpapers.append(os.path.join(root, f))
-        if not wallpapers:
-            return
-        chosen = random.choice(wallpapers)
-        wallpapers_by_group[group_name] = chosen
-    # Actually set it
-    subprocess.run(["feh", "--bg-fill", chosen])
-
-
-@hook.subscribe.startup_once
-def startup_wallpaper():
-    # Set wallpaper for the initial group
-    set_wallpaper_for_group(qtile.current_group.name)
-
-
-@hook.subscribe.setgroup
-def change_wallpaper():
-    set_wallpaper_for_group(qtile.current_group.name)
-
-
-# =====================
 # Screens
 # =====================
 
 widget_defaults = dict(
-    font="JetBrains Mono Nerd Font 11",
-    fontsize=21,
+    font="JetBrains Mono Nerd Font Bold",
+    fontsize=22,
     padding=4,
     background=backgroundColor,
     foreground=foregroundColor,
@@ -86,7 +44,7 @@ screens = [
         top=bar.Bar(
             [
                 # Left modules - Layout & System Info
-                widget.Spacer(length=8),
+                widget.Spacer(length=10),
                 widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
                 widget.CurrentLayoutIcon(
                     custom_icon_paths=[
@@ -145,23 +103,15 @@ screens = [
                     ),
                     padding=4,
                     update_interval=0.5,
-                    # foreground=foregroundColor,
-                    foreground=backgroundColor,
+                    foreground=foregroundColorTwo,
                 ),
                 widget.Systray(
                     icon_size=22,
                 ),
-                # create_separator(),
-                # widget.CheckUpdates(
-                #     distro="Fedora",
-                #     no_update_string="",
-                #     foreground=foregroundColor,
-                #     fmt='{  }',
-                # ),
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
-                    foreground=foregroundColor,
+                    foreground=foregroundColorTwo,
                     mouse_callbacks={"Button1": lazy.spawn("pavucontrol")},
                 ),
                 widget.Volume(
@@ -174,7 +124,10 @@ screens = [
                     foreground=foregroundColor,
                 ),
                 create_separator(),
-                widget.TextBox(text="󰻠", foreground=foregroundColor, padding=4),
+                widget.TextBox(
+                    text="󰻠",
+                    foreground=foregroundColorTwo,
+                ),
                 widget.CPU(
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
@@ -184,31 +137,39 @@ screens = [
                 ),
                 create_separator(),
                 widget.BatteryIcon(
-                    foreground=foregroundColor,
                     scale=1.5,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(
+                            os.path.expanduser("~/.config/qtile/scripts/battery"),
+                        )
+                    },
                 ),
                 widget.Battery(
-                    foreground=foregroundColor,
-                    # charge_char=" ",
-                    # discharge_char=" 󱐋",
-                    # empty_char="",
-                    # not_charging_char="",
-                    format="{percent:2.0%} {hour:d}:{min:02d}hrs",
+                    foreground=workspaceColor,
+                    low_foreground=foregroundColor,
+                    # made irrelevant by xfce-power-manager
+                    # format="{percent:2.0%} {hour:d}:{min:02d}hrs",
+                    format="{percent:2.0%}",
                     low_percentage=20,
-                    notify_below=10,  # send notification below this %
-                    notification_timeout= 0,
+                    notify_below=20,  # send notification below this %
+                    notification_timeout=0,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(
+                            os.path.expanduser("~/.config/qtile/scripts/battery"),
+                        )
+                    },
                 ),
                 create_separator(),
                 widget.TextBox(
                     foreground=foregroundColor,
-                    fmt=" ",
+                    fmt='⏻',
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(
                             os.path.expanduser("~/.config/qtile/scripts/power"),
                         )
                     },
                 ),
-                widget.Spacer(length=8),
+                widget.Spacer(length=10),
             ],
             size=45,
             background=backgroundColor,
