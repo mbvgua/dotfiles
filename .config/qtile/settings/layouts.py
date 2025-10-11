@@ -46,6 +46,7 @@ layouts = [
 
 # Drag floating layouts.
 floating_layout = layout.Floating(
+    **layout_theme,  # use custom theming
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -55,7 +56,8 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),
         Match(title="pinentry"),  # GPG key password entry
-    ]
+        # Match(title="wezterm"),     # scratchpad
+    ],
 )
 
 
@@ -63,7 +65,7 @@ floating_layout = layout.Floating(
 # default retains them in floating
 # https://github.com/qtile/qtile/discussions/3722
 @hook.subscribe.layout_change
-def _(layout, group):
+def _(layout, group, groups):
     for window in group.windows:
         window.floating = False
 
@@ -79,7 +81,7 @@ def client_managed(client):
         "org.gnome.Nautilus",
     ]
     if client.get_wm_class()[0] in floating_windows_suite:
-        client.set_size_floating(900,750).set_position(300, 300)
+        client.set_size_floating(900, 750).set_position(300, 300)
 
 
 auto_fullscreen = True
