@@ -103,6 +103,8 @@ apps = {
         "pkgconf",
         "xcb-util-image-devel",
         "xcb-util-xrm-devel",
+        "xset",
+        "xfce4-power-manager",
     ],
 }
 
