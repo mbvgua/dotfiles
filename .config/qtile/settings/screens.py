@@ -121,7 +121,7 @@ screens = [
                     # scroll=True,
                     width=300,
                     format="{name}",
-                    foreground=colors[8][0],
+                    foreground=workspaceColor,
                 ),
                 create_separator(),
                 widget.Spacer(),
@@ -143,11 +143,11 @@ screens = [
                         ).stdout
                         else ""
                     ),
+                    padding=4,
                     update_interval=0.5,
                     # foreground=foregroundColor,
-                    foreground=colors[9][0],
+                    foreground=backgroundColor,
                 ),
-                # widget.CapsNumLockIndicator(),
                 widget.Systray(
                     icon_size=22,
                 ),
@@ -161,7 +161,7 @@ screens = [
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
-                    foreground=colors[8][0],
+                    foreground=foregroundColor,
                     mouse_callbacks={"Button1": lazy.spawn("pavucontrol")},
                 ),
                 widget.Volume(
@@ -172,10 +172,9 @@ screens = [
                     check_mute_command="pamixer --get-mute",
                     check_mute_string="true",
                     foreground=foregroundColor,
-                    padding=4,
                 ),
                 create_separator(),
-                widget.TextBox(text="󰻠", foreground=colors[8][0], padding=4),
+                widget.TextBox(text="󰻠", foreground=foregroundColor, padding=4),
                 widget.CPU(
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
@@ -197,10 +196,11 @@ screens = [
                     format="{percent:2.0%} {hour:d}:{min:02d}hrs",
                     low_percentage=20,
                     notify_below=10,  # send notification below this %
+                    notification_timeout= 0,
                 ),
                 create_separator(),
                 widget.TextBox(
-                    foreground=colors[8][0],
+                    foreground=foregroundColor,
                     fmt=" ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(
