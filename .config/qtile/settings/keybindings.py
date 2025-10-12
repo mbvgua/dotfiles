@@ -114,7 +114,7 @@ keys = [
         desc="[r]estart qtile",
     ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
-    # Key([mod2],"l",lazy.spawn(), desc="activate [l]ockscreen"),
+    Key([mod, mod2], "l", lazy.spawn("xfce4-screensaver-command -l"), desc="activate [l]ockscreen"),
     Key(
         [mod],
         "delete",
@@ -124,10 +124,6 @@ keys = [
     # =================
     # Groups(workspaces) specific
     # =================
-    Key([mod], "n", lazy.screen.next_group(), desc="move to group on the right"),
-    Key([mod], "p", lazy.screen.prev_group(), desc="move to group on the left"),
-    # imitate normal gnome de
-    # Key([mod2], "Tab", lazy.screen.toggle_group(), desc="move to last visited group"),
     Key(
         [mod, mod2],
         "right",
@@ -312,13 +308,21 @@ keys = [
     # not very memorable, used homerow keys for comfort
     Key(
         [mod],
-        "s",
-        lazy.group["scratchpad"].dropdown_toggle("sp"),
+        "b",
+        lazy.group["scratchpad"].dropdown_toggle("bt"),
+        desc="open [b]luetooth",
     ),
     Key(
         [mod],
-        "a",
+        "n",
         lazy.group["scratchpad"].dropdown_toggle("notes"),
+        desc="open [n]otes scratchpad",
+    ),
+    Key(
+        [mod],
+        "s",
+        lazy.group["scratchpad"].dropdown_toggle("sp"),
+        desc="open [v]im scratchpad",
     ),
 ]
 
