@@ -23,3 +23,6 @@ redshift-gtk &
 
 # battery power management
 xfce4-power-manager &
+
+# lockscreen functionality, turns out xfce is nice!
+xfce4-screensaver &
