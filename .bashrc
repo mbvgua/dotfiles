@@ -87,9 +87,14 @@ alias hgrep='history | grep'                    # search for command in history
 alias lgrep='ls -l | grep'                      # search for file/directory in .
 alias files='xdg-open .'                        # open files easily
 alias notes='wezterm -e nvim ~/notes.md'           # notes app? whats that
+
 # view images with feh {default image and slideahow}
 alias feh='feh --fullscreen --draw-filename --info %h%S -f Jet Brains Mono'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5 -f Jet Brains Mono'
+
+# toggle wifi
+alias wifi-on="nmcli radio wifi on"
+alias wifi-off="nmcli radio wifi off"
 
 # typos
 alias :q="exit"
@@ -101,7 +106,7 @@ alias quit="exit"
 
 # navigation
 alias treee='tree --filelimit 15'
-alias ..='cd ..'
+alias .1='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
