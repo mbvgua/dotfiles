@@ -13,7 +13,7 @@ picom --config ~/.config/picom/picom.conf -b &
 dunst -config ~/.config/dunst/dunstrc &
 
 # network manager
-nm-applet &
+nm-applet --indicator &
 
 # bluetooth manager
 blueman-applet &

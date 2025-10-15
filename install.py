@@ -67,6 +67,7 @@ apps = {
         "wget",
         "curl",
         "htop",
+        "nmcli",
     ],
     "wm_tools": [
         "qtile",
