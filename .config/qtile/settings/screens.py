@@ -145,12 +145,12 @@ screens = [
                     },
                 ),
                 widget.Battery(
-                    foreground=workspaceColor,
-                    low_foreground=foregroundColor,
+                    foreground=foregroundColor,
+                    charging_foreground=workspaceColor,
                     # made irrelevant by xfce-power-manager
                     # format="{percent:2.0%} {hour:d}:{min:02d}hrs",
                     format="{percent:2.0%}",
-                    low_percentage=20,
+                    low_percentage=0.2,     # fraction x%/100
                     notify_below=20,  # send notification below this %
                     notification_timeout=0,
                     mouse_callbacks={
