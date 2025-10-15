@@ -82,6 +82,9 @@ apps = {
         "flameshot",
         # flameshot quality is teribble
         "deepin-screenshot",
+        "xfce4-power-manager",
+        "xfce4-screensaver",
+        "xautolock",
         "picom",
         "polkit",
         "dmenu",
@@ -99,12 +102,13 @@ apps = {
         "libxkbcommon-devel",
         "libxkbcommon-x11-devel",
         "libXrandr",
+        "libXrandr-devel",
+        "imlib2-devel",
         "pam-devel",
         "pkgconf",
         "xcb-util-image-devel",
         "xcb-util-xrm-devel",
         "xset",
-        "xfce4-power-manager",
     ],
 }
 
