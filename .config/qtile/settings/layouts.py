@@ -57,7 +57,6 @@ floating_layout = layout.Floating(
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(title="pinentry"),  # GPG key password entry
-        # Match(title="wezterm"),     # scratchpad
     ],
 )
 
