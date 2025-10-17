@@ -62,20 +62,17 @@ screens = [
                     inactive=foregroundColorTwo,
                     highlight_method="line",
                     highlight_color=[backgroundColor, backgroundColor],
-                    this_current_screen_border=colors[8][0],
-                    this_screen_border=colors[1][0],
-                    other_current_screen_border=colors[1][0],
+                    this_current_screen_border=workspaceColor,
+                    this_screen_border=workspaceColor,
+                    other_current_screen_border=foregroundColor,
                     other_screen_border=backgroundColor,
                     urgent_alert_method="text",
-                    urgent_text=colors[9][0],
+                    urgent_text=workspaceColor,
                     rounded=False,
-                    borderwidth=3,
-                    # hides unused workspaces
-                    hide_unused=True,
+                    hide_unused=True,  # hides unused workspaces
                 ),
                 create_separator(),
                 widget.WindowName(
-                    # max_chars=10,
                     # scroll=True,
                     width=300,
                     format="{name}",
@@ -108,6 +105,13 @@ screens = [
                 widget.Systray(
                     icon_size=22,
                 ),
+                # create_separator(),
+                # widget.CheckUpdates(
+                #     distro="Fedora",
+                #     colour_have_updates = workspaceColor,
+                #     colour_no_updates = foregroundColorTwo,
+                #     display_format='{updates}'
+                # ),
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
@@ -132,7 +136,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e htop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e bpytop")
                     },
                 ),
                 create_separator(),
@@ -150,7 +154,7 @@ screens = [
                     # made irrelevant by xfce-power-manager
                     # format="{percent:2.0%} {hour:d}:{min:02d}hrs",
                     format="{percent:2.0%}",
-                    low_percentage=0.2,     # fraction x%/100
+                    low_percentage=0.2,  # fraction x%/100
                     notify_below=20,  # send notification below this %
                     notification_timeout=0,
                     mouse_callbacks={
@@ -162,7 +166,7 @@ screens = [
                 create_separator(),
                 widget.TextBox(
                     foreground=foregroundColor,
-                    fmt='⏻',
+                    fmt="⏻",
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(
                             os.path.expanduser("~/.config/qtile/scripts/power"),
