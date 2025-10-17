@@ -23,7 +23,7 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
     - [git](https://github.com/git/git) - A free and open source distributed version control system.
         - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Make your diffs human readable instead of machine readable.
-    - [htop](https://github.com/htop-dev/htop) - An interactive process viewer.
+    - [bpytop](https://github.com/aristocratos/bpytop) - Linux/OSX/FreeBSD resource monitor.
     - [fzf](https://github.com/junegunn/fzf) - A command-line fuzzy finder.
     - [ripgrep](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool that recursively searches directories for a regex pattern.
     - [wget](https://cgit.git.savannah.gnu.org/cgit/wget.git) - A free software package for retrieving files using HTTP, HTTPS, FTP, and FTPS.
@@ -43,6 +43,7 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [dunst](https://github.com/dunst-project/dunst) - A highly configurable and lightweight notification daemon.
     - [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
     - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.
+    - [xfce4-screensaver](https://gitlab.xfce.org/apps/xfce4-screensaver) - a simple screen saver and locker well integrated with Xfce.
     - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
     - [flameshot](https://github.com/flameshot-org/flameshot) - powerful yet simple to use screenshot software.
