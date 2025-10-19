@@ -205,24 +205,25 @@ return {
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-			bashls = {},
-			lua_ls = {},
-			clangd = {},
-			html = {},
-			cssls = {},
-			angularls = {},
-			jsonls = {},
-            yamlls={},
+			bashls = {}, -- bash
+			lua_ls = {}, -- lua
+			clangd = {}, -- c/c++
+			html = {}, -- html
+			cssls = {}, -- css
+			angularls = {}, -- angular
+			jsonls = {}, -- json
+			yamlls = {}, -- yaml
 			-- pylsp = {},
 			-- pyright = {},
-            basedpyright = {},
-			ts_ls = {},
-            -- NOTE: install manually
-            -- docker_language_server={},
-            dockerls={},
-            docker_compose_language_service={},
-			volar = {},
-			sqlls = {},
+			basedpyright = {}, -- python
+			ts_ls = {}, -- javascript, typescript
+			-- NOTE: install manually
+			-- docker_language_server={},
+			dockerls = {},
+			docker_compose_language_service = {},
+			volar = {}, -- vue
+			sqlls = {}, -- sql
+			taplo = {}, -- tomml
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
 		}
 

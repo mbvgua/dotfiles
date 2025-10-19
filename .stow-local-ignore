@@ -27,6 +27,7 @@ _darcs
 ^COPYING$
 
 # My files
+\.images$
 # \.scripts
 ^install\.py$
 ^default\.conf$
