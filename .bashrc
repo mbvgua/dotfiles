@@ -143,6 +143,13 @@ gitdir() {
 # activate virtual environements
 sauce() {
     source "$@"/bin/activate
+    # make it work like this eventually
+    # if exit 0; then
+    #     source "$@"/bin/activate
+    # else
+    #     python -m venv "$@" --prompt page-tracker
+    #     python -m venv "$@" && source "$@"/bin/activate
+    # fi
 }
 
 # extract files cleanly
@@ -212,3 +219,6 @@ calc() {
 	fi
 	printf "\\n"
 }
+
+# starship
+eval "$(starship init bash)"

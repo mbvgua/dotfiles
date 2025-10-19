@@ -1,0 +1,55 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Prompt format
+format = '''
+$username@ $directory$git_branch
+$python$character
+'''
+
+[username]
+format = "[$user]($style)"
+style_user = "bold green"
+show_always = true
+
+[directory]
+truncation_length = 7
+truncate_to_repo = false
+style = 'bold green'
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold green)" # already have seen what it was from stout
+
+# (Optional) Customize the command duration display
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+
+[git_branch]
+disabled = false
+symbol = " "
+style = 'white'
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[git_status]
+disabled = true
+
+[python]
+format = '[(\($virtualenv\))]($style)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
