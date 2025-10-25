@@ -26,7 +26,7 @@ layouts = [
     ),
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
-    layout.MonadTall(**layout_theme),
+    # layout.MonadTall(**layout_theme),
     # layout.Floating(**layout_theme), # dont know how to use this
     # layout.Columns(**layout_theme), # same as monadtall
     # layout.MonadWide(**layout_theme), # not very useful
@@ -64,10 +64,12 @@ floating_layout = layout.Floating(
 # change layout even for floating windows
 # default retains them in floating
 # https://github.com/qtile/qtile/discussions/3722
-@hook.subscribe.layout_change
-def _(layout, group, groups):
-    for window in group.windows:
-        window.floating = False
+# @hook.subscribe.layout_change
+# def _(layout, group):
+#     for window in group.windows:
+#         window.floating = False
+# BUG: change layout of scratchpads to normal layout when I 
+# switch the group. Very annoying!
 
 
 # floating windows in fixed screen position
