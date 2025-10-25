@@ -125,6 +125,8 @@ alias pics='cd ~/Pictures'
 alias dils="docker image ls"
 alias dcls="docker container ls"
 alias dclsa="docker container ls -a"
+alias dvls="docker volumes ls"
+alias dpls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
 
 # get window class name for qtile
 alias wn="xprop WM_CLASS"

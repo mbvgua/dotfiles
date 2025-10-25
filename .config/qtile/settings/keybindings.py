@@ -14,6 +14,7 @@ control = "control"
 # my tools of choice
 browser = "firefox"
 browser2 = "brave-browser"
+# browser3 = "qutebrowser"
 files = "nautilus"
 terminal = "wezterm"
 editor = "subl"
@@ -225,6 +226,7 @@ keys = [
         [
             Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
+            # Key([], "q", lazy.spawn(browser3), desc="Open [q]utebrowser"),
             Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),

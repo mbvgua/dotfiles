@@ -1,4 +1,4 @@
-<h1 align="center">dotfiles</h1>
+<h1 align="center">dotfiles ~/.</h1>
 
 ![mbugua's dotfiles](./images/desktop.png)
 
@@ -7,12 +7,6 @@
     <a href="https://github.com/mbvgua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/mbvgua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
 </p>
-
-## Why?
-
-Every time I got a new machine, I’d dive straight into tweaking(changing themes, adding icons, adjusting settings, downloading my preferred apps) all just to make it feel right. But it was always messy and inconsistent. That all changed when I discovered Vim, and how easy it was to configure with just a `.vimrc` file. It opened my eyes to the idea that my environment could be scripted, repeatable, and fully mine.
-
-That led me down the rabbit hole to a deeper realization; in Linux, everything is a file. Dotfiles became my way of capturing those preferences in a clean, version-controlled setup I could carry anywhere. ~~NixOs~~ Dots are reproducible to the core. No more starting from scratch! Just clone, symlink, and go.
 
 ## What?
 
@@ -52,6 +46,8 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [zathura](https://pwmt.org/projects/zathura) - a highly customizable and functional document viewer. It provides a minimalistic and space saving interface as well as an easy usage that mainly focuses on keyboard interaction.
     - [nautilus](https://gitlab.gnome.org/GNOME/nautilus) - this is the project of the Files app, a file browser for GNOME, internally known by its historical name `nautilus`.
     - [marktext](https://github.com/marktext/marktext) - a simple and elegant markdown editor.
+    - [firefox](https://github.com/mozilla-firefox/firefox) - the browser that helps you get sh*t done.
+    - [brave browser](https://brave.com/) - The browser that puts you first.
 
 ## How?
 
@@ -67,8 +63,7 @@ To get this up and running, simply navigate to your `$HOME` directory and:
     stow .
 ```
 > [!IMPORTANT]
-> It might be a good idea to back up existing files of the same name as they will be replaced. A good place to customize would be the `.gitconfig` file, change existing variable names to yours
-> 
+>
 > A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchoad. Simply navigate to the `/usr/share/X11/xorg.conf.d/40-libinput.conf` file and add the "Option" "Tapping" "true" in the below class:
 > 
 > ```bash
