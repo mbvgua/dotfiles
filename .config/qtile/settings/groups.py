@@ -48,6 +48,7 @@ groups.append(
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="brave-browser"),
             Match(wm_class="teams-for-linux"),
+            # Match(wm_class="qutebrowser"),
         ],
     ),
 )
