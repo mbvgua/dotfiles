@@ -66,8 +66,9 @@ apps = {
         "keyd",
         "wget",
         "curl",
-        "htop",
+        "bpytop",
         "nmcli",
+        "diff-so-fancy",
     ],
     "wm_tools": [
         "qtile",
