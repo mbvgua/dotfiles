@@ -89,8 +89,8 @@ alias files='xdg-open .'                        # open files easily
 alias notes='wezterm -e nvim ~/notes.md'           # notes app? whats that
 
 # view images with feh {default image and slideahow}
-alias feh='feh --fullscreen --draw-filename --info %h%S -f Jet Brains Mono'
-alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5 -f Jet Brains Mono'
+alias feh='feh --fullscreen --draw-filename --info %h%S'
+alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
 
 # toggle wifi
 alias wifi-on="nmcli radio wifi on"
@@ -125,9 +125,14 @@ alias pics='cd ~/Pictures'
 alias dils="docker image ls"
 alias dcls="docker container ls"
 alias dclsa="docker container ls -a"
+alias dvls="docker volumes ls"
+alias dpls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
 
 # get window class name for qtile
 alias wn="xprop WM_CLASS"
+
+# open qtile logs
+alias qlogs="nvim ~/.local/share/qtile/qtile.log"
 
 ############################################
 # 4.Functions                              #
@@ -135,6 +140,18 @@ alias wn="xprop WM_CLASS"
 # Create a new git directory and enter it
 gitdir() {
     mkdir -p "$@" && cd "$@" && git init
+}
+
+# activate virtual environements
+sauce() {
+    source "$@"/bin/activate
+    # make it work like this eventually
+    # if exit 0; then
+    #     source "$@"/bin/activate
+    # else
+    #     python -m venv "$@" --prompt page-tracker
+    #     python -m venv "$@" && source "$@"/bin/activate
+    # fi
 }
 
 # extract files cleanly
@@ -204,3 +221,6 @@ calc() {
 	fi
 	printf "\\n"
 }
+
+# starship
+eval "$(starship init bash)"

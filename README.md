@@ -1,4 +1,4 @@
-<h1 align="center">dotfiles</h1>
+<h1 align="center">dotfiles ~/.</h1>
 
 ![mbugua's dotfiles](./images/desktop.png)
 
@@ -7,12 +7,6 @@
     <a href="https://github.com/mbvgua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/mbvgua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
 </p>
-
-## Why?
-
-Every time I got a new machine, I’d dive straight into tweaking(changing themes, adding icons, adjusting settings, downloading my preferred apps) all just to make it feel right. But it was always messy and inconsistent. That all changed when I discovered Vim, and how easy it was to configure with just a `.vimrc` file. It opened my eyes to the idea that my environment could be scripted, repeatable, and fully mine.
-
-That led me down the rabbit hole to a deeper realization; in Linux, everything is a file. Dotfiles became my way of capturing those preferences in a clean, version-controlled setup I could carry anywhere. ~~NixOs~~ Dots are reproducible to the core. No more starting from scratch! Just clone, symlink, and go.
 
 ## What?
 
@@ -23,7 +17,7 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
     - [git](https://github.com/git/git) - A free and open source distributed version control system.
         - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Make your diffs human readable instead of machine readable.
-    - [htop](https://github.com/htop-dev/htop) - An interactive process viewer.
+    - [bpytop](https://github.com/aristocratos/bpytop) - Linux/OSX/FreeBSD resource monitor.
     - [fzf](https://github.com/junegunn/fzf) - A command-line fuzzy finder.
     - [ripgrep](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool that recursively searches directories for a regex pattern.
     - [wget](https://cgit.git.savannah.gnu.org/cgit/wget.git) - A free software package for retrieving files using HTTP, HTTPS, FTP, and FTPS.
@@ -43,6 +37,7 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [dunst](https://github.com/dunst-project/dunst) - A highly configurable and lightweight notification daemon.
     - [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
     - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.
+    - [xfce4-screensaver](https://gitlab.xfce.org/apps/xfce4-screensaver) - a simple screen saver and locker well integrated with Xfce.
     - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
     - [flameshot](https://github.com/flameshot-org/flameshot) - powerful yet simple to use screenshot software.
@@ -51,6 +46,8 @@ That led me down the rabbit hole to a deeper realization; in Linux, everything i
     - [zathura](https://pwmt.org/projects/zathura) - a highly customizable and functional document viewer. It provides a minimalistic and space saving interface as well as an easy usage that mainly focuses on keyboard interaction.
     - [nautilus](https://gitlab.gnome.org/GNOME/nautilus) - this is the project of the Files app, a file browser for GNOME, internally known by its historical name `nautilus`.
     - [marktext](https://github.com/marktext/marktext) - a simple and elegant markdown editor.
+    - [firefox](https://github.com/mozilla-firefox/firefox) - the browser that helps you get sh*t done.
+    - [brave browser](https://brave.com/) - The browser that puts you first.
 
 ## How?
 
@@ -66,8 +63,7 @@ To get this up and running, simply navigate to your `$HOME` directory and:
     stow .
 ```
 > [!IMPORTANT]
-> It might be a good idea to back up existing files of the same name as they will be replaced. A good place to customize would be the `.gitconfig` file, change existing variable names to yours
-> 
+>
 > A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchoad. Simply navigate to the `/usr/share/X11/xorg.conf.d/40-libinput.conf` file and add the "Option" "Tapping" "true" in the below class:
 > 
 > ```bash
