@@ -2,7 +2,7 @@
 	name = mbvgua
     ; when I move to codeberg, hopefully
 	; name = mbugua
-	email = mbuguadougas17@gmail.com
+	email = mbuguadouglas17@gmail.com
 [color]
 	ui = true
 [credential "https://github.com"]
