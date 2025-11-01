@@ -12,19 +12,19 @@ apps = {
         "clang",
         "make",
         "cpp",
-        # "rust",
         "cargo",
         "zig",
         "perl",
         "python",
         "pip",
-        "lisp",
+        "clisp",
         "lua",
         "luajit",
-        # "html",
-        # "css"
-        # "javascript",
-        "tsc",  # typescript
+        # # "html",
+        # # "css"
+        # # "javascript",
+        # "tsc",  # typescript
+        # rust -> wezterm
     ],
     "dev_tools": [
         "node",
@@ -37,8 +37,7 @@ apps = {
         "smerge",  # "sublime merge",
         "teams-for-linux",
         "firefox",
-        "brave-browser",
-        # "vlc",    # Sorry, but only played audio on my device, no video
+        # "brave-browser",
         "mpv",
         "zathura",
         "zathura-pdf-poppler",
@@ -50,7 +49,7 @@ apps = {
         "nautilus",
     ],
     "cli_tools": [
-        "wezterm",
+        # "wezterm",
         "ranger",
         "tmux",
         "git",
@@ -67,7 +66,7 @@ apps = {
         "wget",
         "curl",
         "bpytop",
-        "nmcli",
+        # "nmcli", -> use inbuilt rfkill instead!!
         "diff-so-fancy",
     ],
     "wm_tools": [
@@ -86,7 +85,6 @@ apps = {
         "deepin-screenshot",
         "xfce4-power-manager",
         "xfce4-screensaver",
-        "xautolock",
         "picom",
         "polkit",
         "dmenu",
