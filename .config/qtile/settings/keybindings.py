@@ -312,19 +312,19 @@ keys = [
         [mod],
         "b",
         lazy.group["scratchpad"].dropdown_toggle("bt"),
-        desc="open [b]luetooth",
+        desc="open [b]luetooth scratchpad",
     ),
     Key(
         [mod],
-        "n",
-        lazy.group["scratchpad"].dropdown_toggle("notes"),
-        desc="open [n]otes scratchpad",
+        "d",
+        lazy.group["scratchpad"].dropdown_toggle("diary"),
+        desc="open [d]iary scratchpad",
     ),
     Key(
         [mod],
         "s",
         lazy.group["scratchpad"].dropdown_toggle("sp"),
-        desc="open [v]im scratchpad",
+        desc="open terminal [s]cratchpad",
     ),
 ]
 
