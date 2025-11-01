@@ -72,7 +72,7 @@ groups.append(
             ),
             # simple notes scratchpad
             DropDown(
-                "notes",
+                "diary",
                 f"{terminal} -e nvim notes.md",
                 match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
