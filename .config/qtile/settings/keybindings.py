@@ -115,7 +115,12 @@ keys = [
         desc="[r]estart qtile",
     ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
-    Key([mod, mod2], "l", lazy.spawn("xfce4-screensaver-command -l"), desc="activate [l]ockscreen"),
+    Key(
+        [mod, mod2],
+        "l",
+        lazy.spawn("xfce4-screensaver-command -l"),
+        desc="activate [l]ockscreen",
+    ),
     Key(
         [mod],
         "delete",
@@ -307,7 +312,6 @@ keys = [
     # Scratchpads
     # =================
     # cant use Keychords for some reason!!
-    # not very memorable, used homerow keys for comfort
     Key(
         [mod],
         "b",
