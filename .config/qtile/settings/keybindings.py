@@ -17,6 +17,7 @@ browser2 = "brave-browser"
 # browser3 = "qutebrowser"
 files = "nautilus"
 terminal = "wezterm"
+terminal2= "alacritty"
 editor = "subl"
 teams = "teams-for-linux"
 
@@ -314,6 +315,12 @@ keys = [
     # cant use Keychords for some reason!!
     Key(
         [mod],
+        "a",
+        lazy.group["scratchpad"].dropdown_toggle("tmux"),
+        desc="open [a]lacritty with tmux scratchpad",
+    ),
+    Key(
+        [mod],
         "b",
         lazy.group["scratchpad"].dropdown_toggle("bt"),
         desc="open [b]luetooth scratchpad",
@@ -328,7 +335,7 @@ keys = [
         [mod],
         "s",
         lazy.group["scratchpad"].dropdown_toggle("sp"),
-        desc="open terminal [s]cratchpad",
+        desc="open wezterm terminal [s]cratchpad",
     ),
 ]
 
