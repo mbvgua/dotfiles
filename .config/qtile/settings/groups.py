@@ -1,7 +1,7 @@
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys, mod, terminal
+from .keybindings import keys, mod, terminal, terminal2
 
 
 # =====================
@@ -63,6 +63,18 @@ groups.append(
                 "sp",
                 terminal,
                 match=Match(wm_class="org.wezfurlong.wezterm"),
+                on_focus_lost_hide=False,
+                width=0.6,
+                height=0.6,
+                x=0.2,
+                y=0.02,
+                opacity=0.95,
+            ),
+            # alacritty terminla with tmux
+            DropDown(
+                "tmux",
+                f"{terminal2} -e tmux",
+                match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.6,
