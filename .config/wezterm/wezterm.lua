@@ -116,7 +116,7 @@ end
 -- also real hackers don't use scrollbars for navigation!
 config.window_padding = {
 	left = 4,
-	right = 4,
+	right = 2,
 	top = 0,
 	bottom = 0,
 }
