@@ -135,7 +135,7 @@ for i in groups:
                     [mod, "shift"],
                     i.name,
                     lazy.window.togroup(i.name),
-                    desc="move focused window to group {}".format(i.name),
+                    desc=f"move focused window to group {i.name}",
                 ),
             ]
         )
