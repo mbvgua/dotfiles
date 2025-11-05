@@ -54,37 +54,6 @@ def focus_right():
 # =====================
 # Useful notification functions
 # =====================
-def notify_layout():
-    """Show current layout in notification"""
-
-    def _notify_layout(qtile):
-        layout_name = qtile.current_group.layout.name
-        layout_map = {
-            "tile": "Tile",
-            "max": "Maximized",
-            "matrix": "Matrix",
-            "monadtall": "Monad Tall",
-            "columns": "Columns",
-            "bsp": "BSP",
-            "treetab": "Tree Tab",
-            "plasma": "Plasma",
-            "floating": "Floating",
-            "spiral": "Spiral",
-            "ratiotile": "Ratio Tile",
-            "monadwide": "Monad Wide",
-            "verticaltile": "Vertical Tile",
-            "stack": "Stack",
-            "zoomy": "Zoomy",
-        }
-        display_name = layout_map.get(layout_name, layout_name.title())
-        subprocess.run(
-            [f"notify-send Layout {display_name} -t 1500 -u low"],
-            shell=True,
-        )
-
-    return _notify_layout
-
-
 def notify_restart():
     """Show restart notification"""
 
