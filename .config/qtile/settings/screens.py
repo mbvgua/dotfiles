@@ -9,6 +9,7 @@ from libqtile.config import Screen
 
 from .colours import *
 from .keybindings import terminal
+from .calender import toggle_calendar_popup
 
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
@@ -46,7 +47,7 @@ screens = [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
                 widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
-                widget.CurrentLayoutIcon(
+                widget.TextBox(
                     custom_icon_paths=[
                         os.path.expanduser("~/.config/qtile/icons/layouts")
                     ],
@@ -84,9 +85,14 @@ screens = [
                 widget.Clock(
                     format="%a,%b %-d",
                     foreground=foregroundColor,
+                    mouse_callbacks={"Button1": lazy.function(toggle_calendar_popup)},
                 ),
                 create_separator(),
-                widget.Clock(format="%-l:%M %p", foreground=foregroundColor),
+                widget.Clock(
+                    format="%-l:%M %p",
+                    foreground=foregroundColor,
+                    mouse_callbacks={"Button1": lazy.function(toggle_calendar_popup)},
+                ),
                 widget.Spacer(),
                 # Right modules - System Info
                 widget.GenPollText(
