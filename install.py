@@ -70,7 +70,8 @@ apps = {
         "diff-so-fancy",
     ],
     "wm_tools": [
-        "qtile",
+        # "qtile", -> install with pip
+        # "qtile-extras", -> install with pip
         "rofi",
         "dunst",
         "feh",
@@ -88,6 +89,7 @@ apps = {
         "picom",
         "polkit",
         "dmenu",
+        "mpd",
         "brightnessctl",
         "redshift",
         "unzip",
