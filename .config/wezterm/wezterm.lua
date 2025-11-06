@@ -1,6 +1,5 @@
 -- pull the wezterm API
 local wezterm = require("wezterm")
-local appearance = require("appearance")
 local projects = require("projects")
 
 local config = wezterm.config_builder()
@@ -104,18 +103,18 @@ config.use_fancy_tab_bar = false
 config.font_size = 13.3 -- increase font size. My eyes!!!
 config.window_background_opacity = 0.85
 
+-- [[
 -- set appearance
-if appearance.is_dark() then
-	config.color_scheme = "Kibble (Gogh)"
-else
-	config.color_scheme = "lovelace"
-end
+-- the Gogh is the only family that allows cursor to be white! use that
+-- ]]
+-- config.color_scheme = "Kibble (Gogh)"
+config.color_scheme = "Monokai Dark (Gogh)"
 
 -- remove uneccessary padding on window.
 -- no scrollbar, since its set 0 to the left and right. More RealEstate!
 -- also real hackers don't use scrollbars for navigation!
 config.window_padding = {
-	left = 4,
+	left = 2,
 	right = 2,
 	top = 0,
 	bottom = 0,
