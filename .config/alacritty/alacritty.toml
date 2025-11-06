@@ -1,0 +1,29 @@
+[general]
+import = ["~/.config/alacritty/themes/monokai.toml"]
+
+[env]
+# merges well with tmux
+TERM = "xterm-256color"
+
+[window]
+# not very useful in a window manager
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 0.85
+
+[window.padding]
+x = 2
+y = 2
+
+[font]
+# same as wezterm
+size = 13.0
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
