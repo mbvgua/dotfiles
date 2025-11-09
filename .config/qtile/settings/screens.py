@@ -91,7 +91,6 @@ screens = [
                 widget.Clock(
                     format="%-l:%M %p",
                     foreground=foregroundColor,
-                    mouse_callbacks={"Button1": lazy.function(toggle_calendar_popup)},
                 ),
                 widget.Spacer(),
                 # Right modules - System Info

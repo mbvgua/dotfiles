@@ -111,6 +111,7 @@ apps = {
         "xcb-util-image-devel",
         "xcb-util-xrm-devel",
         "xset",
+        "Xephyr",
     ],
 }
 
