@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from libqtile.config import Key, KeyChord, ScratchPad, DropDown
+from libqtile.config import EzKey, Key, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import qtile
 
@@ -17,7 +17,7 @@ browser2 = "brave-browser"
 # browser3 = "qutebrowser"
 files = "nautilus"
 terminal = "wezterm"
-terminal2= "alacritty"
+terminal2 = "alacritty"
 editor = "subl"
 teams = "teams-for-linux"
 
@@ -199,12 +199,23 @@ keys = [
         [mod],
         "o",
         [
-            Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
-            # Key([], "q", lazy.spawn(browser3), desc="Open [q]utebrowser"),
-            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
-            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
+            Key([], "r", lazy.spawn(browser2), desc="Open b[r]ave Browser"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
+            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
+            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            Key(
+                [],
+                "b",
+                lazy.group["scratchpad"].dropdown_toggle("bt"),
+                desc="open [b]luetooth scratchpad",
+            ),
+            Key(
+                [],
+                "d",
+                lazy.group["scratchpad"].dropdown_toggle("diary"),
+                desc="open [d]iary scratchpad",
+            ),
             Key(
                 [],
                 "h",
@@ -268,7 +279,7 @@ keys = [
         # ),
         # temporarily, due to flameshots terrible image quality
         lazy.spawn("deepin-screenshot"),
-        desc="Screenshot (region select)",
+        desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
@@ -276,12 +287,11 @@ keys = [
         lazy.spawn(
             "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
         ),
-        desc="Screenshot (full screen)",
+        desc="full screen screenshot",
     ),
     # =================
     # Scratchpads
     # =================
-    # cant use Keychords for some reason!!
     Key(
         [mod],
         "a",
@@ -290,21 +300,21 @@ keys = [
     ),
     Key(
         [mod],
-        "b",
-        lazy.group["scratchpad"].dropdown_toggle("bt"),
-        desc="open [b]luetooth scratchpad",
-    ),
-    Key(
-        [mod],
-        "d",
-        lazy.group["scratchpad"].dropdown_toggle("diary"),
-        desc="open [d]iary scratchpad",
-    ),
-    Key(
-        [mod],
         "s",
         lazy.group["scratchpad"].dropdown_toggle("sp"),
         desc="open wezterm terminal [s]cratchpad",
+    ),
+    # lock all input, allow interacting with nested Xephyr instace
+    # activated by using mod+x + mod+x
+    # deactivate using mod+x+x OR esc key
+    KeyChord(
+        [mod],
+        "x",
+        [
+            Key([], "x", lazy.ungrab_all_chords(), desc="grab all input to xephyr"),
+        ],
+        mode=True,
+        name="[x]ephyr instance",
     ),
 ]
 

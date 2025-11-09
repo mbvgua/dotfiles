@@ -73,7 +73,8 @@ groups.append(
             # alacritty terminla with tmux
             DropDown(
                 "tmux",
-                f"{terminal2} -e tmux",
+                # f"{terminal2} -e tmux",
+                terminal2,
                 match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
