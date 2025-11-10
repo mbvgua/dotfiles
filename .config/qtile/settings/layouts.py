@@ -56,6 +56,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
         Match(wm_class="blueman-manager"),  # bluetooth settings
+        Match(wm_class="gnome-calendar"),  # calender
         Match(title="pinentry"),  # GPG key password entry
     ],
 )
@@ -73,7 +74,7 @@ floating_layout = layout.Floating(
 
 
 # floating windows in fixed screen position
-# sweet spot!! in top right position
+# sweet spot!! in centred position
 @hook.subscribe.client_managed
 def client_managed(client):
     floating_windows_suite = [
