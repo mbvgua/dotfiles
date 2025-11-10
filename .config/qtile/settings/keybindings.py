@@ -212,6 +212,12 @@ keys = [
             ),
             Key(
                 [],
+                "c",
+                lazy.group["scratchpad"].dropdown_toggle("cal"),
+                desc="open [c]alender scratchpad",
+            ),
+            Key(
+                [],
                 "d",
                 lazy.group["scratchpad"].dropdown_toggle("diary"),
                 desc="open [d]iary scratchpad",
@@ -284,9 +290,10 @@ keys = [
     Key(
         [mod2],
         "space",
-        lazy.spawn(
-            "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        ),
+        # lazy.spawn(
+        #     "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        # ),
+        lazy.spawn("deepin-screenshot -f"),
         desc="full screen screenshot",
     ),
     # =================
@@ -295,13 +302,13 @@ keys = [
     Key(
         [mod],
         "a",
-        lazy.group["scratchpad"].dropdown_toggle("tmux"),
+        lazy.group["scratchpad"].dropdown_toggle("alacritty"),
         desc="open [a]lacritty with tmux scratchpad",
     ),
     Key(
         [mod],
         "s",
-        lazy.group["scratchpad"].dropdown_toggle("sp"),
+        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
         desc="open wezterm terminal [s]cratchpad",
     ),
     # lock all input, allow interacting with nested Xephyr instace

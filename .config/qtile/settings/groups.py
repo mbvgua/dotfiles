@@ -60,7 +60,7 @@ groups.append(
         [
             # normal terminal scratchpad
             DropDown(
-                "sp",
+                "wezterm",
                 terminal,
                 match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
@@ -70,11 +70,11 @@ groups.append(
                 y=0.02,
                 opacity=0.95,
             ),
-            # alacritty terminla with tmux
+            # alacritty terminal with tmux
             DropDown(
-                "tmux",
-                # f"{terminal2} -e tmux",
-                terminal2,
+                "alacritty",
+                f"{terminal2} -e tmux",
+                # terminal2,
                 match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
@@ -93,13 +93,25 @@ groups.append(
                 height=0.7,
                 x=0.2,
                 y=0.02,
-                opacity=0.95,
+                opacity=1,
             ),
             # bluetooth UI
             DropDown(
                 "bt",
                 "blueman-manager",
                 match=Match(wm_class="blueman-manager"),
+                on_focus_lost_hide=True,
+                width=0.6,
+                height=0.7,
+                x=0.2,
+                y=0.02,
+                opacity=1,
+            ),
+            # calender
+            DropDown(
+                "cal",
+                "gnome-calendar",
+                match=Match(wm_class="gnome-calendar"),
                 on_focus_lost_hide=True,
                 width=0.6,
                 height=0.7,

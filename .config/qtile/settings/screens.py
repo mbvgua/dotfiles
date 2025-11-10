@@ -9,7 +9,6 @@ from libqtile.config import Screen
 
 from .colours import *
 from .keybindings import terminal
-from .calender import toggle_calendar_popup
 
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
@@ -85,7 +84,7 @@ screens = [
                 widget.Clock(
                     format="%a,%b %-d",
                     foreground=foregroundColor,
-                    mouse_callbacks={"Button1": lazy.function(toggle_calendar_popup)},
+                    # mouse_callbacks={"Button1": lazy.spawn("gnome-calendar")},
                 ),
                 create_separator(),
                 widget.Clock(
