@@ -1,6 +1,5 @@
 -- pull the wezterm API
 local wezterm = require("wezterm")
-local projects = require("projects")
 
 local config = wezterm.config_builder()
 local act = wezterm.action
@@ -79,8 +78,6 @@ config.keys = {
 	{ key = "h", mods = "ALT", action = act.ActivateTabRelative(-1) },
 	-- close tab
 	{ key = "w", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-	-- cycling through projects
-	{ key = "p", mods = "LEADER", action = projects.choose_project() },
 	-- Present a list of existing workspaces
 	{ key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 }
@@ -101,7 +98,7 @@ end
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.font_size = 13.3 -- increase font size. My eyes!!!
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.9
 
 -- [[
 -- set appearance

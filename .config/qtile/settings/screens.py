@@ -8,7 +8,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
-from .keybindings import terminal
+from .keybindings import terminal2
 
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
@@ -140,7 +140,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e bpytop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e bpytop")
                     },
                 ),
                 create_separator(),

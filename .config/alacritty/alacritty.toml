@@ -9,8 +9,7 @@ TERM = "xterm-256color"
 # not very useful in a window manager
 decorations = "buttonless"
 dynamic_padding = false
-# opacity = 0.85 -> just like wezterm?
-opacity = 1
+opacity = 0.9 # just like wezterm?
 
 [window.padding]
 x = 2
