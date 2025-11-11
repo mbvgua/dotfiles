@@ -13,10 +13,16 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme = {
-    "margin": 5,
+    "margin": 3,
     "border_width": 3,
     "border_focus": workspaceColor,
     "border_normal": foregroundColorTwo,
+}
+
+# no border on my scratchpads
+floating_layout_theme = {
+    "margin": 3,
+    "border_width": 0,
 }
 
 layouts = [
@@ -46,7 +52,7 @@ layouts = [
 
 # Drag floating layouts.
 floating_layout = layout.Floating(
-    **layout_theme,  # use custom theming
+    **floating_layout_theme,  # use custom theming
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -79,7 +85,6 @@ floating_layout = layout.Floating(
 def client_managed(client):
     floating_windows_suite = [
         "feh",
-        "blueman-manager",
         "pavucontrol",
         "org.gnome.Nautilus",
     ]
