@@ -17,25 +17,19 @@ apps = {
         "perl",
         "python",
         "pip",
-        "clisp",
         "lua",
         "luajit",
-        # # "html",
-        # # "css"
-        # # "javascript",
-        # "tsc",  # typescript
-        # rust -> wezterm
     ],
     "dev_tools": [
         "node",
         "npm",
+        "cargo",
         "pnpm",
         "sqlite3",
         "mysql",
-        "sqlcmd",  # "mssql server"
-        "subl",  # "sublime text"
-        "smerge",  # "sublime merge",
-        "teams-for-linux",
+        # "subl",  # "sublime text"
+        # "smerge",  # "sublime merge",
+        # "teams-for-linux",
         "firefox",
         # "brave-browser",
         "mpv",
@@ -50,6 +44,7 @@ apps = {
     ],
     "cli_tools": [
         # "wezterm",
+        # "alacritty",
         "ranger",
         "tmux",
         "git",
@@ -57,11 +52,19 @@ apps = {
         "nvim",  # "neovim",
         "vim",
         "bash",
-        "fzf",
         "eza",
         "stow",
         "yt-dlp",
         "docker",
+        "docker-client",
+        "docker-client-latest",
+        "docker-common",
+        "docker-common-latest",
+        "docker-logrotate",
+        "docker-latest-logrotate",
+        "docker-selinux",
+        "docker-engine",
+        "docker-engine-selinux",
         "keyd",
         "wget",
         "curl",
@@ -81,8 +84,6 @@ apps = {
         "pulsemixer",
         "pamixer",
         "pipewire-pulse",
-        "flameshot",
-        # flameshot quality is teribble
         "deepin-screenshot",
         "xfce4-power-manager",
         "xfce4-screensaver",
