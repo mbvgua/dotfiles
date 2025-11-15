@@ -19,12 +19,6 @@ layout_theme = {
     "border_normal": foregroundColorTwo,
 }
 
-# no border on my scratchpads
-floating_layout_theme = {
-    "margin": 3,
-    "border_width": 0,
-}
-
 layouts = [
     layout.Tile(
         **layout_theme,
@@ -52,7 +46,7 @@ layouts = [
 
 # Drag floating layouts.
 floating_layout = layout.Floating(
-    **floating_layout_theme,  # use custom theming
+    **layout_theme,  # use custom theming
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -75,7 +69,7 @@ floating_layout = layout.Floating(
 # def _(layout, group):
 #     for window in group.windows:
 #         window.floating = False
-# BUG: change layout of scratchpads to normal layout when I 
+# BUG: change layout of scratchpads to normal layout when I
 # switch the group. Very annoying!
 
 
