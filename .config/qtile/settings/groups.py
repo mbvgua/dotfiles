@@ -86,8 +86,8 @@ groups.append(
             # simple notes scratchpad
             DropDown(
                 "diary",
-                f"{terminal} -e nvim notes.md",
-                match=Match(wm_class="org.wezfurlong.wezterm"),
+                f"{terminal2} -e nvim notes.md",
+                match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.7,

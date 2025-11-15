@@ -78,8 +78,6 @@ config.keys = {
 	{ key = "h", mods = "ALT", action = act.ActivateTabRelative(-1) },
 	-- close tab
 	{ key = "w", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-	-- Present a list of existing workspaces
-	{ key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 }
 
 -- cycle through tabs
