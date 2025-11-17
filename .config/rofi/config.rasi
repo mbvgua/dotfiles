@@ -1,12 +1,11 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser,window,ssh";
+	modi:                       "drun,window,filebrowser,run";
     show-icons:                 true;
     display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
     display-window:             " Windows";
-    display-ssh:                " ssh" ;
+    display-filebrowser:        " Files";
+    display-run:                " Run";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }

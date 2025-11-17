@@ -13,7 +13,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme = {
-    "margin": 5,
+    "margin": 3,
     "border_width": 3,
     "border_focus": workspaceColor,
     "border_normal": foregroundColorTwo,
@@ -56,6 +56,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
         Match(wm_class="blueman-manager"),  # bluetooth settings
+        Match(wm_class="gnome-calendar"),  # calender
         Match(title="pinentry"),  # GPG key password entry
     ],
 )
@@ -68,17 +69,16 @@ floating_layout = layout.Floating(
 # def _(layout, group):
 #     for window in group.windows:
 #         window.floating = False
-# BUG: change layout of scratchpads to normal layout when I 
+# BUG: change layout of scratchpads to normal layout when I
 # switch the group. Very annoying!
 
 
 # floating windows in fixed screen position
-# sweet spot!! in top right position
+# sweet spot!! in centred position
 @hook.subscribe.client_managed
 def client_managed(client):
     floating_windows_suite = [
         "feh",
-        "blueman-manager",
         "pavucontrol",
         "org.gnome.Nautilus",
     ]

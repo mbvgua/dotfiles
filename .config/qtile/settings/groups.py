@@ -1,7 +1,7 @@
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys, mod, terminal
+from .keybindings import keys, mod, terminal, terminal2
 
 
 # =====================
@@ -60,7 +60,7 @@ groups.append(
         [
             # normal terminal scratchpad
             DropDown(
-                "sp",
+                "wezterm",
                 terminal,
                 match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
@@ -70,23 +70,48 @@ groups.append(
                 y=0.02,
                 opacity=0.95,
             ),
+            # alacritty terminal with tmux
+            DropDown(
+                "alacritty",
+                f"{terminal2} -e tmux",
+                # terminal2,
+                match=Match(wm_class="Alacritty"),
+                on_focus_lost_hide=False,
+                width=0.6,
+                height=0.6,
+                x=0.2,
+                y=0.02,
+                opacity=0.95,
+            ),
             # simple notes scratchpad
             DropDown(
-                "notes",
-                f"{terminal} -e nvim notes.md",
-                match=Match(wm_class="org.wezfurlong.wezterm"),
+                "diary",
+                f"{terminal2} -e nvim notes.md",
+                match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.7,
                 x=0.2,
                 y=0.02,
-                opacity=0.95,
+                opacity=1,
             ),
             # bluetooth UI
             DropDown(
                 "bt",
                 "blueman-manager",
                 match=Match(wm_class="blueman-manager"),
+                on_focus_lost_hide=True,
+                width=0.6,
+                height=0.7,
+                x=0.2,
+                y=0.02,
+                opacity=1,
+            ),
+            # calender
+            DropDown(
+                "cal",
+                "gnome-calendar",
+                match=Match(wm_class="gnome-calendar"),
                 on_focus_lost_hide=True,
                 width=0.6,
                 height=0.7,
@@ -123,7 +148,7 @@ for i in groups:
                     [mod, "shift"],
                     i.name,
                     lazy.window.togroup(i.name),
-                    desc="move focused window to group {}".format(i.name),
+                    desc=f"move focused window to group {i.name}",
                 ),
             ]
         )

@@ -7,10 +7,10 @@
  *
  * Available Colors Schemes
  *
- * catppuccin   everforest  gruvbox     nord    lovelace    onedark
+ *  gruvbox    monokai
  *
  **/
 
 /* Import color-scheme from `colors` directory */
 
-@import "../colors/gruvbox.rasi"
+@import "../colors/monokai.rasi"

@@ -222,5 +222,12 @@ calc() {
 	printf "\\n"
 }
 
+# clean unused packages
+clean(){
+    sudo dnf autoremove
+    sudo dnf clean packages
+    sudo dnf clean all
+}
+
 # starship
 eval "$(starship init bash)"

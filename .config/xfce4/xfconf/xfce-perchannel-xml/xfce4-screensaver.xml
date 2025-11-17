@@ -21,9 +21,9 @@
       <property name="delay" type="int" value="300"/>
     </property>
     <property name="embedded-keyboard" type="empty">
-      <property name="enabled" type="bool" value="false"/>
-      <property name="command" type="string" value=""/>
-      <property name="displayed" type="bool" value="false"/>
+      <property name="enabled" type="bool" value="true"/>
+      <property name="command" type="string" value="Alt+k"/>
+      <property name="displayed" type="bool" value="true"/>
     </property>
   </property>
 </channel>
