@@ -1,0 +1,16 @@
+/**
+ *
+ * Theme : Monokai
+ * Author: Douglas Mbugua
+ * Inspired by Monokai Pro & classic Sublime Text palette
+ *
+ **/
+
+* {
+    background:     #272822FF; /* Dark gray background */
+    background-alt: #383830FF; /* Slightly lighter gray for contrast */
+    foreground:     #F8F8F2FF; /* Soft white text */
+    selected:       #66D9E8FF; /* Cyan highlight */
+    active:         #A6E22EFF; /* Vibrant green for active elements */
+    urgent:         #F92672FF; /* Pinkish red for urgent actions */
+}
