@@ -18,6 +18,14 @@ return {
 					-- default 10.
 					sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
 				},
+				mappings = {
+					-- apat from moving with `x, this makes mvmnt much easier
+					next = "]m", -- move to next mark
+					prev = "[m", -- move to previous mark
+					-- mx -> set mark x
+					-- dmx -> delete mark x
+					-- dm<space> -> delete all marks in current buffer
+				},
 			})
 		end,
 	},

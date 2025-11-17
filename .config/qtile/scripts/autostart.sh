@@ -27,5 +27,5 @@ xfce4-power-manager &
 # lockscreen functionality, turns out xfce is nice!
 xfce4-screensaver &
 
-# autolock after inactivity
-# xautolock -time 10 -locker slock &
+# start mpd daemon
+mpd ~/.config/mpd/mpd.conf &

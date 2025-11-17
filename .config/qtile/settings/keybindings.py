@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from libqtile.config import Key, KeyChord, ScratchPad, DropDown
+from libqtile.config import EzKey, Key, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import qtile
 
@@ -17,6 +17,7 @@ browser2 = "brave-browser"
 # browser3 = "qutebrowser"
 files = "nautilus"
 terminal = "wezterm"
+terminal2 = "alacritty"
 editor = "subl"
 teams = "teams-for-linux"
 
@@ -53,37 +54,6 @@ def focus_right():
 # =====================
 # Useful notification functions
 # =====================
-def notify_layout():
-    """Show current layout in notification"""
-
-    def _notify_layout(qtile):
-        layout_name = qtile.current_group.layout.name
-        layout_map = {
-            "tile": "Tile",
-            "max": "Maximized",
-            "matrix": "Matrix",
-            "monadtall": "Monad Tall",
-            "columns": "Columns",
-            "bsp": "BSP",
-            "treetab": "Tree Tab",
-            "plasma": "Plasma",
-            "floating": "Floating",
-            "spiral": "Spiral",
-            "ratiotile": "Ratio Tile",
-            "monadwide": "Monad Wide",
-            "verticaltile": "Vertical Tile",
-            "stack": "Stack",
-            "zoomy": "Zoomy",
-        }
-        display_name = layout_map.get(layout_name, layout_name.title())
-        subprocess.run(
-            [f"notify-send Layout {display_name} -t 1500 -u low"],
-            shell=True,
-        )
-
-    return _notify_layout
-
-
 def notify_restart():
     """Show restart notification"""
 
@@ -115,7 +85,12 @@ keys = [
         desc="[r]estart qtile",
     ),
     Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
-    Key([mod, mod2], "l", lazy.spawn("xfce4-screensaver-command -l"), desc="activate [l]ockscreen"),
+    Key(
+        [mod, mod2],
+        "l",
+        lazy.spawn("xfce4-screensaver-command -l"),
+        desc="activate [l]ockscreen",
+    ),
     Key(
         [mod],
         "delete",
@@ -224,12 +199,29 @@ keys = [
         [mod],
         "o",
         [
-            Key([], "b", lazy.spawn(browser2), desc="Open [b]rave Browser"),
             Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
-            # Key([], "q", lazy.spawn(browser3), desc="Open [q]utebrowser"),
-            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
-            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
+            Key([], "r", lazy.spawn(browser2), desc="Open b[r]ave Browser"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
+            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
+            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            Key(
+                [],
+                "b",
+                lazy.group["scratchpad"].dropdown_toggle("bt"),
+                desc="open [b]luetooth scratchpad",
+            ),
+            Key(
+                [],
+                "c",
+                lazy.group["scratchpad"].dropdown_toggle("cal"),
+                desc="open [c]alender scratchpad",
+            ),
+            Key(
+                [],
+                "d",
+                lazy.group["scratchpad"].dropdown_toggle("diary"),
+                desc="open [d]iary scratchpad",
+            ),
             Key(
                 [],
                 "h",
@@ -293,38 +285,43 @@ keys = [
         # ),
         # temporarily, due to flameshots terrible image quality
         lazy.spawn("deepin-screenshot"),
-        desc="Screenshot (region select)",
+        desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
-        lazy.spawn(
-            "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        ),
-        desc="Screenshot (full screen)",
+        # lazy.spawn(
+        #     "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
+        # ),
+        lazy.spawn("deepin-screenshot -f"),
+        desc="full screen screenshot",
     ),
     # =================
     # Scratchpads
     # =================
-    # cant use Keychords for some reason!!
-    # not very memorable, used homerow keys for comfort
     Key(
         [mod],
-        "b",
-        lazy.group["scratchpad"].dropdown_toggle("bt"),
-        desc="open [b]luetooth",
-    ),
-    Key(
-        [mod],
-        "n",
-        lazy.group["scratchpad"].dropdown_toggle("notes"),
-        desc="open [n]otes scratchpad",
+        "a",
+        lazy.group["scratchpad"].dropdown_toggle("alacritty"),
+        desc="open [a]lacritty with tmux scratchpad",
     ),
     Key(
         [mod],
         "s",
-        lazy.group["scratchpad"].dropdown_toggle("sp"),
-        desc="open [v]im scratchpad",
+        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
+        desc="open wezterm terminal [s]cratchpad",
+    ),
+    # lock all input, allow interacting with nested Xephyr instace
+    # activated by using mod+x + mod+x
+    # deactivate using mod+x+x OR esc key
+    KeyChord(
+        [mod],
+        "x",
+        [
+            Key([], "x", lazy.ungrab_all_chords(), desc="grab all input to xephyr"),
+        ],
+        mode=True,
+        name="[x]ephyr instance",
     ),
 ]
 

@@ -8,7 +8,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
-from .keybindings import terminal
+from .keybindings import terminal2
 
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
@@ -46,7 +46,7 @@ screens = [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
                 widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
-                widget.CurrentLayoutIcon(
+                widget.TextBox(
                     custom_icon_paths=[
                         os.path.expanduser("~/.config/qtile/icons/layouts")
                     ],
@@ -84,9 +84,13 @@ screens = [
                 widget.Clock(
                     format="%a,%b %-d",
                     foreground=foregroundColor,
+                    # mouse_callbacks={"Button1": lazy.spawn("gnome-calendar")},
                 ),
                 create_separator(),
-                widget.Clock(format="%-l:%M %p", foreground=foregroundColor),
+                widget.Clock(
+                    format="%-l:%M %p",
+                    foreground=foregroundColor,
+                ),
                 widget.Spacer(),
                 # Right modules - System Info
                 widget.GenPollText(
@@ -136,7 +140,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e bpytop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e bpytop")
                     },
                 ),
                 create_separator(),
@@ -179,6 +183,10 @@ screens = [
             background=backgroundColor,
             margin=[0, 0, 0, 0],  # Remove margins for full-width bar
         ),
+        # # set wallpaper with qtile
+        # wallpaper= os.path.expanduser("~/.config/qtile/wallpapers/hay.jpg"),
+        # # mode -> fill, stretch, center
+        # wallpaper_mode="fill",
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
