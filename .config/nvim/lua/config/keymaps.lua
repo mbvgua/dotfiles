@@ -98,19 +98,3 @@ end, { desc = "[d]elete all [b]uffers except current" })
 -- easily navigate modes in terminal
 map("t", "<Esc>", "<C-\\><C-n>")
 
--- -- open work environemnts in toggleterm terminal
--- local Terminal = require("toggleterm.terminal").Terminal
--- local python = Terminal:new({ cmd = "python", hidden = true }) -- open python REPL
--- local mysql = Terminal:new({ cmd = "mysql -u root -p", hidden = true }) -- open MySql
---
--- function PYTHON_TOGGLE()
--- 	python:toggle()
--- end
--- map("n", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
--- map("i", "<C-p>", "<cmd> :lua PYTHON_TOGGLE()<CR> <cmd>")
---
--- function MYSQL_TOGGLE()
--- 	mysql:toggle()
--- end
--- map("n", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
--- map("i", "<C-m>", "<cmd> :lua MYSQL_TOGGLE()<CR> <cmd>")
