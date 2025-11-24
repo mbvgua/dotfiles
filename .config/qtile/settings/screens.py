@@ -1,6 +1,5 @@
 import os
 import subprocess
-import random
 
 from libqtile import hook, widget, bar, qtile
 from libqtile.command.base import expose_command
@@ -10,6 +9,7 @@ from libqtile.config import Screen
 from .colours import *
 from .keybindings import terminal2
 
+# gruvbox_dark monokai_pro
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
@@ -109,13 +109,6 @@ screens = [
                 widget.Systray(
                     icon_size=22,
                 ),
-                # create_separator(),
-                # widget.CheckUpdates(
-                #     distro="Fedora",
-                #     colour_have_updates = workspaceColor,
-                #     colour_no_updates = foregroundColorTwo,
-                #     display_format='{updates}'
-                # ),
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",
