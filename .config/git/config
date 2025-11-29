@@ -1,6 +1,7 @@
 [user]
 	name = mbvgua
 	email = 105845499+mbvgua@users.noreply.github.com
+	signingKey = /home/daagi/.ssh/id_ed25519_codeberg.pub
 [color]
 	ui = true
 [credential "https://github.com"]
@@ -46,7 +47,10 @@
 	rebase = false
 [commit]
 	template = ~/.config/git/message
+	gpgSign = true
 [status]
 	submodulesummary = 1
 [interactive]
 	diffFilter = diff-so-fancy --patch
+[gpg]
+	format = ssh
