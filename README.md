@@ -5,7 +5,7 @@
 <p align="center">
     <b>Screenshots</b><br>
     <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/feh.png">Feh</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/mpv.png">Mpv</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/rofi.png">Rofi</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/scratchpad.png">Scratchpad</a>&nbsp;&nbsp;&nbsp;
