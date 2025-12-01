@@ -45,14 +45,14 @@ screens = [
             [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
-                widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
-                widget.TextBox(
+                widget.CurrentLayout(
                     custom_icon_paths=[
-                        os.path.expanduser("~/.config/qtile/icons/layouts")
+                        os.path.expanduser("~/.config/qtile/icons/layouts/")
                     ],
-                    foreground=colors[8][0],
+                    foreground=foregroundColorTwo,
                     scale=0.6,
-                    # icon_first=True,
+                    mode="both",
+                    icon_first=False,
                 ),
                 create_separator(),
                 widget.GroupBox(

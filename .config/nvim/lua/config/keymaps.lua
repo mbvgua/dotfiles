@@ -26,8 +26,7 @@ map("n", "<leader>l", "<C-w>l", { desc = "Navigate to right window" })
 map("n", "<leader>k", "<C-w>k", { desc = "Navigate to window above" })
 map("n", "<leader>j", "<C-w>j", { desc = "Navigate to window below" })
 
--- resize windows with Alt+Arrow Keys (upwards,downwards,left,right)
--- ALT was taken by wez for tab mvmt. switched to Ctrl
+-- resize windows with Ctrl+h\j\k\l Keys
 map("n", "<C-k>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
 map("n", "<C-j>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
 map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
