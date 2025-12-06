@@ -4,8 +4,11 @@
 
 <p align="center">
     <b>Screenshots</b><br>
-    <a href="https://github.com/mbvgua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/mbvgua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbugua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbugua/dotfiles/blob/main/images/mpv.png">Mpv</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbugua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbugua/dotfiles/blob/main/images/rofi.png">Rofi</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbugua/dotfiles/blob/main/images/scratchpad.png">Scratchpad</a>&nbsp;&nbsp;&nbsp;
 </p>
 
 ## What?
@@ -14,6 +17,7 @@
     - [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
     - [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.
     - [wezterm](https://github.com/wezterm/wezterm) - A GPU-accelerated cross-platform terminal emulator and multiplexer written and implemented in Rust .
+    - [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.
     - [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
     - [git](https://github.com/git/git) - A free and open source distributed version control system.
         - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Make your diffs human readable instead of machine readable.
@@ -46,8 +50,8 @@
     - [brave browser](https://brave.com/) - The browser that puts you first.
     - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
-    - [flameshot](https://github.com/flameshot-org/flameshot) - powerful yet simple to use screenshot software.
     - [marktext](https://github.com/marktext/marktext) - a simple and elegant markdown editor.
+    - [deepin-screenshot](https://github.com/martyr-deepin/deepin-screenshot) - 
 
 ## How?
 

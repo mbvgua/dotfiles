@@ -27,18 +27,17 @@ layouts = [
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
     # layout.MonadTall(**layout_theme),
-    # layout.Floating(**layout_theme), # dont know how to use this
     # layout.Columns(**layout_theme), # same as monadtall
+    # Try more layouts by unleashing below layouts.
+    # layout.Floating(**layout_theme), # dont know how to use this
     # layout.MonadWide(**layout_theme), # not very useful
     # layout.RatioTile(),
-    # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2), # dont know how to use this. confusing
     # layout.Bsp(**layout_theme), # wtf layout. only for clout
     # layout.TreeTab(**layout_theme), # refer to above
     # layout.VerticalTile(**layout_theme),
     # layout.Zoomy(**layout_theme),
 ]
-
 
 # =====================
 # Floating layouts
@@ -49,6 +48,7 @@ floating_layout = layout.Floating(
     **layout_theme,  # use custom theming
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
+        # or `wn` thanks to my bash script
         *layout.Floating.default_float_rules,
         Match(wm_class="feh"),  # image viewer
         Match(wm_class="lxappearance"),  # lxappearance

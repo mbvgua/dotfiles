@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from libqtile.config import EzKey, Key, KeyChord, ScratchPad, DropDown
+from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile import qtile
 
@@ -14,7 +14,6 @@ control = "control"
 # my tools of choice
 browser = "firefox"
 browser2 = "brave-browser"
-# browser3 = "qutebrowser"
 files = "nautilus"
 terminal = "wezterm"
 terminal2 = "alacritty"
@@ -54,6 +53,8 @@ def focus_right():
 # =====================
 # Useful notification functions
 # =====================
+
+
 def notify_restart():
     """Show restart notification"""
 
@@ -276,23 +277,15 @@ keys = [
     # =================
     # Screenshots
     # =================
-    # tux+shift s. like Vlc, since im now on mpv
     Key(
         [mod, shift],
         "s",
-        # lazy.spawn(
-        #     "flameshot gui --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        # ),
-        # temporarily, due to flameshots terrible image quality
         lazy.spawn("deepin-screenshot"),
         desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
-        # lazy.spawn(
-        #     "flameshot full --path " + os.path.expanduser("~/Pictures/Screenshots/")
-        # ),
         lazy.spawn("deepin-screenshot -f"),
         desc="full screen screenshot",
     ),
@@ -305,12 +298,13 @@ keys = [
         lazy.group["scratchpad"].dropdown_toggle("alacritty"),
         desc="open [a]lacritty with tmux scratchpad",
     ),
-    Key(
-        [mod],
-        "s",
-        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
-        desc="open wezterm terminal [s]cratchpad",
-    ),
+    # retired, working with alacritty now!
+    # Key(
+    #     [mod],
+    #     "s",
+    #     lazy.group["scratchpad"].dropdown_toggle("wezterm"),
+    #     desc="open wezterm terminal [s]cratchpad",
+    # ),
     # lock all input, allow interacting with nested Xephyr instace
     # activated by using mod+x + mod+x
     # deactivate using mod+x+x OR esc key

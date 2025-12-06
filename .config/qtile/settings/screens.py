@@ -1,6 +1,5 @@
 import os
 import subprocess
-import random
 
 from libqtile import hook, widget, bar, qtile
 from libqtile.command.base import expose_command
@@ -10,6 +9,7 @@ from libqtile.config import Screen
 from .colours import *
 from .keybindings import terminal2
 
+# gruvbox_dark monokai_pro
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
@@ -45,14 +45,14 @@ screens = [
             [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
-                widget.CurrentLayout(foreground=foregroundColorTwo, padding=4),
-                widget.TextBox(
+                widget.CurrentLayout(
                     custom_icon_paths=[
-                        os.path.expanduser("~/.config/qtile/icons/layouts")
+                        os.path.expanduser("~/.config/qtile/icons/layouts/")
                     ],
-                    foreground=colors[8][0],
+                    foreground=foregroundColorTwo,
                     scale=0.6,
-                    # icon_first=True,
+                    mode="both",
+                    icon_first=False,
                 ),
                 create_separator(),
                 widget.GroupBox(
@@ -109,13 +109,6 @@ screens = [
                 widget.Systray(
                     icon_size=22,
                 ),
-                # create_separator(),
-                # widget.CheckUpdates(
-                #     distro="Fedora",
-                #     colour_have_updates = workspaceColor,
-                #     colour_no_updates = foregroundColorTwo,
-                #     display_format='{updates}'
-                # ),
                 create_separator(),
                 widget.TextBox(
                     text="󰕾",

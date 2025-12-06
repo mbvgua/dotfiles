@@ -48,7 +48,6 @@ groups.append(
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="brave-browser"),
             Match(wm_class="teams-for-linux"),
-            # Match(wm_class="qutebrowser"),
         ],
     ),
 )
@@ -59,17 +58,17 @@ groups.append(
         "scratchpad",
         [
             # normal terminal scratchpad
-            DropDown(
-                "wezterm",
-                terminal,
-                match=Match(wm_class="org.wezfurlong.wezterm"),
-                on_focus_lost_hide=False,
-                width=0.6,
-                height=0.6,
-                x=0.2,
-                y=0.02,
-                opacity=0.95,
-            ),
+            # DropDown(
+            #     "wezterm",
+            #     terminal,
+            #     match=Match(wm_class="org.wezfurlong.wezterm"),
+            #     on_focus_lost_hide=False,
+            #     width=0.6,
+            #     height=0.6,
+            #     x=0.2,
+            #     y=0.02,
+            #     opacity=0.95,
+            # ),
             # alacritty terminal with tmux
             DropDown(
                 "alacritty",
