@@ -133,7 +133,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e bpytop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e btop")
                     },
                 ),
                 create_separator(),
