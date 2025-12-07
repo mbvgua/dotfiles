@@ -24,7 +24,7 @@
     cl = clone
 	last = log -1 HEAD
 	visual = !smerge .
-	standup = log --since='yesterday' --author='mbvgua'
+	standup = log --since='yesterday' --author='mbugua'
     ; for cloning repos with submodules
     clrs = clone --recurse-submodules
     sur = submodule update --remote

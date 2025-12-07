@@ -9,7 +9,8 @@ local act = wezterm.action
 -- ############################### --
 
 -- set the leader key
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 3000 }
+-- just like tmux. much easier on that pinky
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 3000 }
 
 -- show when leader key is active
 wezterm.on("update-right-status", function(window, _)
