@@ -46,7 +46,7 @@ groups.append(
         matches=[
             Match(wm_class="org.mozilla.firefox"),
             Match(wm_class="org.pwmt.zathura"),
-            Match(wm_class="brave-browser"),
+            Match(wm_class="helium"),
             Match(wm_class="teams-for-linux"),
         ],
     ),

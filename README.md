@@ -47,7 +47,7 @@
     - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.
     - [xfce4-screensaver](https://gitlab.xfce.org/apps/xfce4-screensaver) - a simple screen saver and locker well integrated with Xfce.
     - [firefox](https://github.com/mozilla-firefox/firefox) - the browser that helps you get sh*t done.
-    - [brave browser](https://brave.com/) - The browser that puts you first.
+    - [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
     - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
     - [marktext](https://github.com/marktext/marktext) - a simple and elegant markdown editor.
