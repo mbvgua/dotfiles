@@ -12,7 +12,6 @@ apps = {
         "clang",
         "make",
         "cpp",
-        "cargo",
         "zig",
         "perl",
         "python",
@@ -25,13 +24,11 @@ apps = {
         "npm",
         "cargo",
         "pnpm",
-        "sqlite3",
-        "mysql",
+        # "sqlite3",
+        # "mysql",
         # "subl",  # "sublime text"
         # "smerge",  # "sublime merge",
         # "teams-for-linux",
-        "firefox",
-        # "brave-browser",
         "mpv",
         "zathura",
         "zathura-pdf-poppler",
@@ -49,7 +46,7 @@ apps = {
         "tmux",
         "git",
         "git-lfs",
-        "nvim",  # "neovim",
+        "nvim",  # "neovim"@v0.10,
         "vim",
         "bash",
         "eza",
@@ -68,13 +65,10 @@ apps = {
         "keyd",
         "wget",
         "curl",
-        "bpytop",
-        # "nmcli", -> use inbuilt rfkill instead!!
+        "btop",  # faster then bpytop and less resource use
         "diff-so-fancy",
     ],
     "wm_tools": [
-        # "qtile", -> install with pip
-        # "qtile-extras", -> install with pip
         "rofi",
         "dunst",
         "feh",

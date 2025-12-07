@@ -9,6 +9,7 @@ local act = wezterm.action
 -- ############################### --
 
 -- set the leader key
+-- just like tmux. much easier on that pinky
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 3000 }
 
 -- show when leader key is active
