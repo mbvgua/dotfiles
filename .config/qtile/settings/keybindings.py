@@ -12,12 +12,12 @@ space = "space"  # the space key
 control = "control"
 
 # my tools of choice
-browser = "firefox"
-browser2 = "brave-browser"
+browser = "~/Downloads/helium-0.7.1.1-x86_64.AppImage"
+browser2 = "firefox"
 files = "nautilus"
 terminal = "wezterm"
 terminal2 = "alacritty"
-editor = "subl"
+gui_editor = "subl"
 teams = "teams-for-linux"
 
 
@@ -196,14 +196,20 @@ keys = [
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
+    Key(
+        [mod],
+        "h",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
+        desc="[h]elp with keybindings mapping",
+    ),
     KeyChord(
         [mod],
         "o",
         [
-            Key([], "f", lazy.spawn(browser), desc="Open [f]irefox"),
-            Key([], "r", lazy.spawn(browser2), desc="Open b[r]ave Browser"),
+            Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
+            Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
-            Key([], "s", lazy.spawn(editor), desc="Open [s]ublime text"),
+            Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
             Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
                 [],
@@ -222,12 +228,6 @@ keys = [
                 "d",
                 lazy.group["scratchpad"].dropdown_toggle("diary"),
                 desc="open [d]iary scratchpad",
-            ),
-            Key(
-                [],
-                "h",
-                lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-                desc="[h]elp with keybindings mapping",
             ),
         ],
     ),
@@ -298,13 +298,6 @@ keys = [
         lazy.group["scratchpad"].dropdown_toggle("alacritty"),
         desc="open [a]lacritty with tmux scratchpad",
     ),
-    # retired, working with alacritty now!
-    # Key(
-    #     [mod],
-    #     "s",
-    #     lazy.group["scratchpad"].dropdown_toggle("wezterm"),
-    #     desc="open wezterm terminal [s]cratchpad",
-    # ),
     # lock all input, allow interacting with nested Xephyr instace
     # activated by using mod+x + mod+x
     # deactivate using mod+x+x OR esc key

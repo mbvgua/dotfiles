@@ -1,14 +1,15 @@
 <h1 align="center">dotfiles ~/.</h1>
 
-![mbvgua's dotfiles](./images/desktop.png)
+![mbvgua's dotfiles](./images/fastfetch.png)
 
 <p align="center">
     <b>Screenshots</b><br>
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/mpv.png">Mpv</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/nvim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/rofi.png">Rofi</a>&nbsp;&nbsp;&nbsp;
-    <a href="https://codeberg.org/mbvgua/dotfiles/blob/main/images/scratchpad.png">Scratchpad</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/desktop.png">Desktop</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/mpv.png">Mpv</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/neovim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/rofi.png">Rofi</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/scratchpad.png">Scratchpad</a>&nbsp;&nbsp;&nbsp;
 </p>
 
 ## What?
@@ -47,7 +48,7 @@
     - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.
     - [xfce4-screensaver](https://gitlab.xfce.org/apps/xfce4-screensaver) - a simple screen saver and locker well integrated with Xfce.
     - [firefox](https://github.com/mozilla-firefox/firefox) - the browser that helps you get sh*t done.
-    - [brave browser](https://brave.com/) - The browser that puts you first.
+    - [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
     - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
     - [marktext](https://github.com/marktext/marktext) - a simple and elegant markdown editor.
