@@ -52,6 +52,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# odin
+export PATH="$HOME/.odin/:$PATH"
+
 ############################################
 # 2.Aliases                                #
 ############################################

@@ -25,6 +25,7 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
+			-- odin = { "odinfmt" }, -- Not yet! activate alongside lsp...
 			-- sql = { "sqls" }, --really teribble formatter. pretty good LSP
 		},
 	},
