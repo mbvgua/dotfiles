@@ -217,14 +217,13 @@ return {
 			-- pyright = {},
 			basedpyright = {}, -- python
 			ts_ls = {}, -- javascript, typescript
-			-- NOTE: install manually
-			-- docker_language_server={},
 			dockerls = {},
 			docker_compose_language_service = {},
 			volar = {}, -- vue
 			sqlls = {}, -- sql
 			taplo = {}, -- tomml
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
+			-- ols = {},-- Not yet, first master the lang!! ~ by Ginger Bill
 		}
 
 		-- To check the current status of installed tools and/or manually install

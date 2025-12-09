@@ -33,6 +33,7 @@ return {
 				"vue",
 				"angular",
 				"sql",
+                "odin",
 			},
 			sync_install = false,
 			highlight = { enable = true },
