@@ -27,16 +27,22 @@ return {
 			lualine_c = {
 				{ "diagnostics" },
 				{
-					-- "filename", -- present in filetree/telescope & buffername
+					"filename", -- present in filetree/telescope & buffername
+                    -- Values:   0: Just the filename
+					--           1: Relative path
+					--           2: Absolute path
+					--           3: Absolute path, with tilde as the home directory
+					--           4: Filename and parent dir, with tilde as the home directory
+					path = 4,
+					-- shorten path to leave 40 spaces in window
+					shorting_target = 40,
 					newfile_status = true,
 					symbols = {
 						modified = "",
 						readonly = "",
-						unnamed = "",
+						unnamed = "[No Name]",
 						newfile = "",
 					},
-					-- values: 0,1,2,3,4
-					path = 4,
 				},
 			},
 			-- TODO: add the LSP ICON here instead of search count

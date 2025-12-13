@@ -67,6 +67,7 @@ apps = {
         "curl",
         "btop",  # faster then bpytop and less resource use
         "diff-so-fancy",
+        "cmus",
     ],
     "wm_tools": [
         "rofi",
