@@ -210,7 +210,9 @@ keys = [
             Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
             Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
-            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            # not using this atm!?
+            # Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            Key([], "t", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
             Key(
                 [],
                 "b",
