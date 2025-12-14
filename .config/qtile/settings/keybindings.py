@@ -12,7 +12,7 @@ space = "space"  # the space key
 control = "control"
 
 # my tools of choice
-browser = "~/Downloads/helium-0.7.1.1-x86_64.AppImage"
+browser = "~/helium-0.7.1.1-x86_64.AppImage"
 browser2 = "firefox"
 files = "nautilus"
 terminal = "wezterm"
@@ -77,11 +77,11 @@ keys = [
     # =================
     # Qtile specific
     # =================
-    # Key([mod, control], "r", lazy.reload_config(), desc="[r]eload the config"),
     Key(
         [mod, control],
         "r",
         lazy.function(notify_restart()),
+        # lazy.reload_config(), -> not tinkering as much nowadays!
         lazy.restart(),
         desc="[r]estart qtile",
     ),
@@ -210,7 +210,9 @@ keys = [
             Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
             Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
-            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            # not using this atm!?
+            # Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
+            Key([], "t", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
             Key(
                 [],
                 "b",
