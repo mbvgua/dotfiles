@@ -1,5 +1,6 @@
 import os
 import subprocess
+import random
 
 from libqtile import hook, widget, bar, qtile
 from libqtile.command.base import expose_command
@@ -13,6 +14,30 @@ from .keybindings import terminal2
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
+
+# =====================
+# Wallpapers
+# =====================
+
+WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
+
+
+# have random wallpaper on each restart!
+def set_random_wallpaper():
+    wallpapers = []
+    for root, dirs, files in os.walk(WALLPAPER_DIR):
+        for f in files:
+            if f.lower().endswith((".jpg", ".jpeg", ".png")):
+                wallpapers.append(os.path.join(root, f))
+    if wallpapers:
+        chosen = random.choice(wallpapers)
+        subprocess.run(["feh", "--bg-fill", chosen])
+
+
+@hook.subscribe.startup_once
+def startup_wallpaper():
+    set_random_wallpaper()
+
 
 # =====================
 # Screens
