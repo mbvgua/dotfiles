@@ -9,7 +9,7 @@ local act = wezterm.action
 -- ############################### --
 
 -- set the leader key
--- Ctrl+a -> used by tmux, also allow navigation to beginning of line!
+-- Ctrl+a -> used by tmux -> No.. used for navigation to beginning of line!
 -- Ctrl+Space wass to tiresome
 config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 3003 }
 
@@ -73,7 +73,7 @@ config.keys = {
 	resize_pane("LeftArrow", "Left", 5),
 	-- close pane
 	{ key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
-	-- create new tab
+	-- create new tab.
 	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	-- cycle tabs
 	{ key = "l", mods = "ALT", action = act.ActivateTabRelative(1) },

@@ -47,6 +47,7 @@ groups.append(
             Match(wm_class="org.mozilla.firefox"),
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="helium"),
+            Match(wm_class="qbittorrent"),
             Match(wm_class="teams-for-linux"),
         ],
     ),
