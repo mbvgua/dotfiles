@@ -28,7 +28,7 @@ bind common q quit
 # default   night           spotify      dracula             gruvbox         xterm-white
 # gray-88   jellybeans      zenburn      green-mono-88       gruvbox-warm
 # NOTE: add monokai theme in official repo=> https://github.com/cmus/cmus
-colorscheme amazon
+colorscheme gruvbox
 
 # # DEFAULT MODS
 # # Playback

@@ -74,9 +74,8 @@ return {
 		vim.keymap.set("n", "<leader>fc", function()
 			require("telescope.builtin").find_files({
 				cwd = vim.fn.stdpath("config"),
-				desc = "[f]ind [c]onfig files",
 			})
-		end)
+		end, { desc = "[f]ind [c]onfig [files]" })
 
 		-- open the find files on one click
 		vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[f]ind [f]iles" })
