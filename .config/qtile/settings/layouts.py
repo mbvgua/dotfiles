@@ -55,8 +55,10 @@ floating_layout = layout.Floating(
         Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
+        Match(wm_class="Thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="gnome-calendar"),  # calender
+        Match(wm_class="qbittorrent"),  # qbittorrent
         Match(title="pinentry"),  # GPG key password entry
     ],
 )
@@ -81,6 +83,8 @@ def client_managed(client):
         "feh",
         "pavucontrol",
         "org.gnome.Nautilus",
+        "Thunar",
+        "qbittorrent",
     ]
     if client.get_wm_class()[0] in floating_windows_suite:
         client.set_size_floating(900, 750).set_position(300, 300)
