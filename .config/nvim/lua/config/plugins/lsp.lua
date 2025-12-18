@@ -84,7 +84,7 @@ return {
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
 				-- TODO: similar mapping in telescope, see which to keep
-				map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
+				-- map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 
 				-- Fuzzy find all the symbols in your current workspace.
 				--  Similar to document symbols, except searches over your entire project.
@@ -207,7 +207,7 @@ return {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			bashls = {}, -- bash
 			lua_ls = {}, -- lua
-			clangd = {}, -- c/c++
+			-- clangd = {}, -- c/c++
 			html = {}, -- html
 			cssls = {}, -- css
 			angularls = {}, -- angular

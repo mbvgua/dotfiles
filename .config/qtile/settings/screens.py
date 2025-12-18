@@ -22,7 +22,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
 
 
-# have random wallpaper on each restart!
+# have random wallpaper on each reboot!
 def set_random_wallpaper():
     wallpapers = []
     for root, dirs, files in os.walk(WALLPAPER_DIR):

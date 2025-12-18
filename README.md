@@ -5,6 +5,7 @@
 <p align="center">
     <b>Screenshots</b><br>
     <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/apps.png">Apps</a>&nbsp;&nbsp;&nbsp;
+    <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/cmus.png">Cmus</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/desktop.png">Desktop</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/mpv.png">Mpv</a>&nbsp;&nbsp;&nbsp;
     <a href="https://codeberg.org/mbvgua/dotfiles/src/branch/main/images/neovim.png">Neovim</a>&nbsp;&nbsp;&nbsp;
@@ -82,11 +83,11 @@
 <!-- ```-->
 
 <!--## So it begins young Padawan!-->
-
-<p align="center">
-<bold> If you only knew the power of the dark side. </bold><br>
-    <i> ~ Darth Vader.</i>
-</p>
+<!---->
+<!--<p align="center">-->
+<!--<bold> If you only knew the power of the dark side. </bold><br>-->
+<!--    <i> ~ Darth Vader.</i>-->
+<!--</p>-->
 
 <!--## May I?-->
 <!---->

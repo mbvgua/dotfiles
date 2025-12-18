@@ -206,13 +206,12 @@ keys = [
         [mod],
         "o",
         [
+            Key([], "a", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
             Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
             Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
             Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
-            # not using this atm!?
-            # Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
-            Key([], "t", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
+            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
                 [],
                 "b",
