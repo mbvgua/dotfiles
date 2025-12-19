@@ -13,8 +13,7 @@ control = "control"
 
 # my tools of choice
 browser = "~/helium-0.7.1.1-x86_64.AppImage"
-browser2 = "firefox"
-files = "nautilus"
+files = "thunar"
 terminal = "wezterm"
 terminal2 = "alacritty"
 gui_editor = "subl"
@@ -207,9 +206,8 @@ keys = [
         "o",
         [
             Key([], "a", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
+            Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
-            Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
-            Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
             Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
             Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
