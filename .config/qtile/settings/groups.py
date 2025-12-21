@@ -1,3 +1,4 @@
+import os
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
@@ -86,7 +87,7 @@ groups.append(
             # simple notes scratchpad
             DropDown(
                 "diary",
-                f"{terminal2} -e nvim notes.md",
+                f"{terminal2} -e nvim {os.path.expanduser('~/.diary/README.md')}",
                 match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
