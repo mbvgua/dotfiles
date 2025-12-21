@@ -277,7 +277,8 @@ keys = [
     # Screenshots
     # =================
     Key(
-        [mod, shift],
+        # NOTE: removed wezterm scratchpad changed this from alt+shift+s to alt+s
+        [mod2],
         "s",
         lazy.spawn("deepin-screenshot"),
         desc="[s]elect region screenshot",
