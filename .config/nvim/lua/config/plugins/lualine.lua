@@ -27,9 +27,9 @@ return {
 			lualine_c = {
 				{ "diagnostics" },
 				{
-                    -- shown in tabline & also when i save a file
+					-- shown in tabline & also when i save a file
 					-- "filename", -- present in filetree/telescope & buffername
-                    -- Values:   0: Just the filename
+					-- Values:   0: Just the filename
 					--           1: Relative path
 					--           2: Absolute path
 					--           3: Absolute path, with tilde as the home directory
@@ -76,8 +76,8 @@ return {
 					function()
 						return "LOC: " .. vim.fn.line(".") .. "/" .. vim.fn.line("$")
 					end,
+					separator = { left = "", right = "" },
 				},
-				{ "progress", separator = { left = "", right = "" } },
 			},
 		},
 		tabline = {
