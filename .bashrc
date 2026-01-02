@@ -81,7 +81,6 @@ alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Be
 
 # substitutions
 alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
-alias ls='eza --icons --sort=extension'         # ls for eza. modern with icons
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias hist='history'                            # show history

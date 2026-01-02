@@ -29,7 +29,6 @@
 <!--    - [ranger](https://github.com/ranger/ranger) - a VIM-inspired filemanager for the console .-->
 <!--    - [ytdlp](https://github.com/yt-dlp/yt-dlp) - a feature-rich command-line audio/video downloader.-->
 <!--    - [keyd](https://github.com/rvaiya/keyd) - a key remapping daemon for linux.-->
-<!--    - [eza](https://github.com/eza-community/eza) - a modern alternative to ls.-->
 <!--    - [redshift](https://github.com/jonls/redshift) - Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.-->
 <!--    - [stow](https://www.gnu.org/software/stow/) - a symlink farm manager, to store and sync your configuration files in one common location.-->
 <!--    - [nm-applet](https://gitlab.gnome.org/GNOME/network-manager-applet) - tray applet and an advanced network connection editor.-->
