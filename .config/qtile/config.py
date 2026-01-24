@@ -2,7 +2,6 @@ import os
 import subprocess
 
 from libqtile import hook
-from libqtile.lazy import lazy
 
 from settings.groups import groups
 from settings.keybindings import keys
