@@ -25,7 +25,7 @@ fi
 export PATH
 
 ############################################
-# 3.Packages                               #
+# 2.Packages                               #
 ############################################
 
 # mssql-server
@@ -56,7 +56,7 @@ esac
 export PATH="$HOME/.odin/:$PATH"
 
 ############################################
-# 2.Aliases                                #
+# 3.Aliases                                #
 ############################################
 
 # default for opening files in ranger
@@ -81,6 +81,7 @@ alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Be
 
 # substitutions
 alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
+alias ls='eza --icons --sort=extension'         # rust slop. weird colours in current machine
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias hist='history'                            # show history
@@ -93,10 +94,6 @@ alias notes='wezterm -e nvim ~/notes.md'           # notes app? whats that
 # view images with feh {default image and slideahow}
 alias feh='feh --fullscreen --draw-filename --info %h%S'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
-
-# toggle wifi
-alias wifi-on="nmcli radio wifi on"
-alias wifi-off="nmcli radio wifi off"
 
 # typos
 alias :q="exit"
@@ -203,7 +200,7 @@ fi
 
 IFS=$SAVEIFS
 
-# Calc app? whats that
+# mini-calc app
 calc() {
 	local result=""
 	result="$(printf "scale=10;%s\\n" "$*" | bc --mathlib | tr -d '\\\n')"

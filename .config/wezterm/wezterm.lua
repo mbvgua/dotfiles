@@ -11,7 +11,7 @@ local act = wezterm.action
 -- set the leader key
 -- Ctrl+a -> used by tmux -> No.. used for navigation to beginning of line!
 -- Ctrl+Space wass to tiresome
-config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 3003 }
+config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 3003 }
 
 -- show when leader key is active
 wezterm.on("update-right-status", function(window, _)
