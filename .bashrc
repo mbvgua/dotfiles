@@ -1,13 +1,14 @@
 #################################################################
-# We programmers are lazy,                                      #
-# so let’s bring laziness to a whole new level,                 #
-# shall we?                                                     #
 # Sections:                                                     #
 #    1.General...................general bash behaviour         #
 #    2.Packages .................installed packages             #
 #    3.Aliases....................general aliases               #
 #    3.Functions..................useful functions              #
 #################################################################
+
+# We programmers are lazy,
+# so let’s bring laziness to a whole new level,
+# shall we?
 
 ############################################
 # 1.General                                #
@@ -227,6 +228,3 @@ clean(){
     sudo dnf clean packages
     sudo dnf clean all
 }
-
-# starship
-eval "$(starship init bash)"

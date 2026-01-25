@@ -3,7 +3,6 @@ import subprocess
 import random
 
 from libqtile import hook, widget, bar, qtile
-from libqtile.command.base import expose_command
 from libqtile.lazy import lazy
 from libqtile.config import Screen
 
