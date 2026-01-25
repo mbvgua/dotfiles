@@ -22,17 +22,17 @@ return {
 			end,
 		},
 	},
+	{
+		"sindrets/diffview.nvim",
+		config = function()
+			require("diffview").setup()
+			vim.keymap.set("n", "<leader>dc", [[:DiffviewClose<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>do", [[:DiffviewOpen<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>dd", [[:DiffviewOpen develop<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>dh", [[:DiffviewFileHistory %<CR>]], { silent = true })
+		end,
+	},
 	-- NOT A PRIORITY NOW
-	-- {
-	-- 	"sindrets/diffview.nvim",
-	-- 	config = function()
-	-- 		require("diffview").setup()
-	-- 		vim.keymap.set("n", "<leader>dc", [[:DiffviewClose<CR>]], { silent = true })
-	-- 		vim.keymap.set("n", "<leader>gd", [[:DiffviewOpen<CR>]], { silent = true })
-	-- 		vim.keymap.set("n", "<leader>gD", [[:DiffviewOpen develop<CR>]], { silent = true })
-	-- 		vim.keymap.set("n", "<leader>fh", [[:DiffviewFileHistory %<CR>]], { silent = true })
-	-- 	end,
-	-- },
 	-- {
 	-- 	"NeogitOrg/neogit",
 	-- 	version = "2.0.0",

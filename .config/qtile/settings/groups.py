@@ -2,7 +2,7 @@ import os
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys, mod, terminal, terminal2
+from .keybindings import keys, mod, terminal2
 
 
 # =====================

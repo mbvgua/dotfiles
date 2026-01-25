@@ -64,8 +64,10 @@ return {
 				},
 			},
 			lualine_y = {
-				{ "filetype", icon = { align = "right" } },
-				"fileformat",
+                -- already in tabline. total duplication
+                -- also want to minimize items on statusline
+				-- { "filetype", icon = { align = "right" } },
+				-- "fileformat",
 			},
 			lualine_z = {
 				{
