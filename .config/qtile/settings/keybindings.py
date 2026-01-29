@@ -117,7 +117,7 @@ keys = [
         "h",
         lazy.layout.shuffle_up(),
         lazy.layout.shuffle_left(),
-        # lazy.layout.swap_left(),
+        lazy.layout.swap_left(),
         desc="Move window up/left",
     ),
     Key(
@@ -125,7 +125,7 @@ keys = [
         "l",
         lazy.layout.shuffle_down(),
         lazy.layout.shuffle_right(),
-        # lazy.layout.swap_right(),
+        lazy.layout.swap_right(),
         desc="Move window down/right",
     ),
     # Resize windows. If current window is on the edge of screen and direction
@@ -154,7 +154,7 @@ keys = [
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
-        desc="Grow window down",
+        desc="Decrease window downwards",
     ),
     Key(
         [mod, shift],
@@ -162,9 +162,10 @@ keys = [
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
-        desc="Grow window up",
+        desc="Increase window upwards",
     ),
     Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
+    # not set to mod+q to match broswers. i.e ctrl+w to quite tab
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
@@ -195,12 +196,13 @@ keys = [
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
-    Key(
-        [mod],
-        "h",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-        desc="[h]elp with keybindings mapping",
-    ),
+    # TODO: figure out how to make this work with ?
+    # Key(
+    #     [mod],
+    #     "?",
+    #     lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
+    #     desc="[h]elp with keybindings mapping",
+    # ),
     KeyChord(
         [mod],
         "o",
