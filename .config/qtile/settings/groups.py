@@ -2,7 +2,7 @@ import os
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys, mod, terminal2
+from .keybindings import keys, mod, terminal, terminal2
 
 
 # =====================
@@ -60,17 +60,17 @@ groups.append(
         "scratchpad",
         [
             # normal terminal scratchpad
-            # DropDown(
-            #     "wezterm",
-            #     terminal,
-            #     match=Match(wm_class="org.wezfurlong.wezterm"),
-            #     on_focus_lost_hide=False,
-            #     width=0.6,
-            #     height=0.6,
-            #     x=0.2,
-            #     y=0.02,
-            #     opacity=0.95,
-            # ),
+           # DropDown(
+           #      "wezterm",
+           #      f"{terminal} --config hide_tab_bar_if_only_one_tab=true -e=tmux",
+           #      match=Match(wm_class="org.wezfurlong.wezterm"),
+           #      on_focus_lost_hide=False,
+           #      width=0.6,
+           #      height=0.6,
+           #      x=0.2,
+           #      y=0.02,
+           #      opacity=0.95,
+           #  ),
             # alacritty terminal with tmux
             DropDown(
                 "alacritty",

@@ -194,7 +194,7 @@ keys = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal2), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     # TODO: figure out how to make this work with ?
     # Key(
@@ -207,7 +207,7 @@ keys = [
         [mod],
         "o",
         [
-            Key([], "a", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
+            Key([], "w", lazy.spawn(terminal), desc="Open [w]ezterm"),
             Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
             Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
