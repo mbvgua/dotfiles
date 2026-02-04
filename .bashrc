@@ -60,6 +60,8 @@ export PATH="$HOME/.odin/:$PATH"
 # 3.Aliases                                #
 ############################################
 
+export TERM="xterm-256color"
+
 # default for opening files in ranger
 export EDITOR="nvim"
 export VISUAL="nvim"
