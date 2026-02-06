@@ -18,7 +18,6 @@
 <!--- CLI-->
 <!--    - [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.-->
 <!--    - [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.-->
-<!--    - [wezterm](https://github.com/wezterm/wezterm) - A GPU-accelerated cross-platform terminal emulator and multiplexer written and implemented in Rust .-->
 <!--    - [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.-->
 <!--    - [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.-->
 <!--    - [git](https://github.com/git/git) - A free and open source distributed version control system.-->
@@ -47,7 +46,6 @@
 <!--    - [nautilus](https://gitlab.gnome.org/GNOME/nautilus) - this is the project of the Files app, a file browser for GNOME, internally known by its historical name `nautilus`.-->
 <!--    - [xfce4-power-manager](https://gitlab.xfce.org/xfce/xfce4-power-manager) - power manager for Xfce.-->
 <!--    - [xfce4-screensaver](https://gitlab.xfce.org/apps/xfce4-screensaver) - a simple screen saver and locker well integrated with Xfce.-->
-<!--    - [firefox](https://github.com/mozilla-firefox/firefox) - the browser that helps you get sh*t done.-->
 <!--    - [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.-->
 <!--    - [sublime text](https://www.sublimetext.com) - A sophisticated text editor for code, markup and prose.-->
 <!--    - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.-->

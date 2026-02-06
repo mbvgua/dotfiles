@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
-from .keybindings import terminal2
+from .keybindings import terminal
 
 # gruvbox_dark monokai_pro
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
@@ -157,7 +157,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e btop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e btop")
                     },
                 ),
                 create_separator(),
