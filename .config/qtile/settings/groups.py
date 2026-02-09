@@ -15,6 +15,7 @@ from .keybindings import keys, mod, terminal
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
 group_layouts = [
     "tile",
     "max",
@@ -26,7 +27,6 @@ group_layouts = [
     "tile",
     "tile",
 ]
-# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
 
 
 for i in range(len(group_names)):
@@ -59,11 +59,11 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            # alacritty terminal with tmux
+            # wezterm terminal with tmux
             DropDown(
-                "alacritty",
+                "wezterm",
                 f"{terminal} -e tmux",
-                match=Match(wm_class="Alacritty"),
+                match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.6,
@@ -75,7 +75,7 @@ groups.append(
             DropDown(
                 "diary",
                 f"{terminal} -e nvim {os.path.expanduser('~/.diary/README.md')}",
-                match=Match(wm_class="Alacritty"),
+                match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.7,
