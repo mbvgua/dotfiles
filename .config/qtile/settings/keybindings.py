@@ -14,7 +14,7 @@ control = "control"
 # my tools of choice
 browser = "~/helium-0.7.1.1-x86_64.AppImage"
 files = "thunar"
-terminal = "alacritty"
+terminal = "wezterm"
 gui_editor = "subl"
 teams = "teams-for-linux"
 
@@ -294,9 +294,12 @@ keys = [
     # =================
     Key(
         [mod],
+        # using a since it was alacritty before hence got used to it
+        # also will have nested tmux instance, thus navigating between
+        # Ctrl+A and Tux+a is really convenient
         "a",
-        lazy.group["scratchpad"].dropdown_toggle("alacritty"),
-        desc="open [a]lacritty with tmux scratchpad",
+        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
+        desc="open [w]wezterm with tmux scratchpad",
     ),
     # lock all input, allow interacting with nested Xephyr instace
     # activated by using mod+x + mod+x
