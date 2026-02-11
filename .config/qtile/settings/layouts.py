@@ -12,7 +12,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # Layouts
 # =====================
 # some default layouts themes for each theme
-layout_theme = {
+layout_theme: dict[str, int | str] = {
     "margin": 3,
     "border_width": 3,
     "border_focus": workspaceColor,
@@ -64,22 +64,11 @@ floating_layout = layout.Floating(
 )
 
 
-# change layout even for floating windows
-# default retains them in floating
-# https://github.com/qtile/qtile/discussions/3722
-# @hook.subscribe.layout_change
-# def _(layout, group):
-#     for window in group.windows:
-#         window.floating = False
-# BUG: change layout of scratchpads to normal layout when I
-# switch the group. Very annoying!
-
-
 # floating windows in fixed screen position
 # sweet spot!! in centred position
 @hook.subscribe.client_managed
 def client_managed(client):
-    floating_windows_suite = [
+    floating_windows_suite: list[str] = [
         "feh",
         "pavucontrol",
         "org.gnome.Nautilus",
@@ -90,6 +79,6 @@ def client_managed(client):
         client.set_size_floating(900, 750).set_position(300, 300)
 
 
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
+auto_fullscreen: bool = True
+focus_on_window_activation: str = "smart"
+reconfigure_screens: bool = True

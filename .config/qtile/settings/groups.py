@@ -10,13 +10,11 @@ from .keybindings import keys, mod, terminal
 # =====================
 # group_names should remain 0-9 to match MOD+0-9 keybindings
 # group_labels are how they appear in the bar. changes this freely
-
-# matches=[Match(wm_class="Firefox")]
 groups = []
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_names: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_labels: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 # group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
-group_layouts = [
+group_layouts: list[str] = [
     "tile",
     "max",
     "matrix",
