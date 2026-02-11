@@ -18,22 +18,22 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # Wallpapers
 # =====================
 
-WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
+WALLPAPER_DIR: str = os.path.expanduser("~/.config/qtile/wallpapers")
 
 
 # have random wallpaper on each reboot!
 def set_random_wallpaper():
-    wallpapers = []
+    wallpapers: list[str] = []
     for root, dirs, files in os.walk(WALLPAPER_DIR):
         for f in files:
             if f.lower().endswith((".jpg", ".jpeg", ".png")):
                 wallpapers.append(os.path.join(root, f))
     if wallpapers:
-        chosen = random.choice(wallpapers)
+        chosen: str = random.choice(wallpapers)
         subprocess.run(["feh", "--bg-fill", chosen])
 
 
-@hook.subscribe.startup_once
+@hook.subscribe.startup
 def startup_wallpaper():
     set_random_wallpaper()
 
@@ -42,7 +42,7 @@ def startup_wallpaper():
 # Screens
 # =====================
 
-widget_defaults = dict(
+widget_defaults: dict[str, str | int] = dict(
     font="JetBrains Mono Nerd Font Bold",
     fontsize=22,
     padding=4,
@@ -50,7 +50,7 @@ widget_defaults = dict(
     foreground=foregroundColor,
 )
 
-extension_defaults = widget_defaults.copy()
+extension_defaults: dict[str, str | int] = widget_defaults.copy()
 
 
 # Custom separator to match Polybar
@@ -63,7 +63,7 @@ def create_separator():
     )
 
 
-screens = [
+screens: list[Screen] = [
     Screen(
         top=bar.Bar(
             [

@@ -5,18 +5,18 @@ from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile import qtile
 
-mod = "mod4"  # the TUX/SUPER/WINDOWS key
-mod2 = "mod1"  # the ALT key
-shift = "shift"  # the left/right shift keys
-space = "space"  # the space key
-control = "control"
+mod: str = "mod4"  # the TUX/SUPER/WINDOWS key
+mod2: str = "mod1"  # the ALT key
+shift: str = "shift"  # the left/right shift keys
+space: str = "space"  # the space key
+control: str = "control"
 
 # my tools of choice
-browser = "~/helium-0.7.1.1-x86_64.AppImage"
-files = "thunar"
-terminal = "wezterm"
-gui_editor = "subl"
-teams = "teams-for-linux"
+browser: str = "~/helium-0.7.1.1-x86_64.AppImage"
+files: str = "thunar"
+terminal: str = "wezterm"
+gui_editor: str = "subl"
+teams: str = "teams-for-linux"
 
 
 # =====================
@@ -69,7 +69,7 @@ def notify_restart():
 # Keybindings
 # =====================
 
-keys = [
+keys: list[Key | KeyChord] = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # =================
@@ -281,12 +281,14 @@ keys = [
         [mod2],
         "s",
         lazy.spawn("deepin-screenshot"),
+        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
         lazy.spawn("deepin-screenshot -f"),
+        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="full screen screenshot",
     ),
     # =================
