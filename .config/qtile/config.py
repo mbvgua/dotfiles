@@ -1,5 +1,6 @@
 import os
 import subprocess
+from types import NoneType
 
 from libqtile import hook
 
@@ -11,14 +12,14 @@ from settings.screens import *
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
-auto_minimize = True
+auto_minimize:bool = True
 
 # When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
+wl_input_rules:NoneType = None
 
 # xcursor theme (string or None) and size (integer) for Wayland backend
-wl_xcursor_theme = None
-wl_xcursor_size = 24
+wl_xcursor_theme:NoneType = None
+wl_xcursor_size:int = 24
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
@@ -28,11 +29,11 @@ wl_xcursor_size = 24
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname:str = "LG3D"
 
 
 # a bash script to autostart programs on startup
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser("~")
+    home:str = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])

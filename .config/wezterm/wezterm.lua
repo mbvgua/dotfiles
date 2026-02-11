@@ -10,9 +10,10 @@ config.keys = {
 
 -- not using it as a multiplexer anymore. Tmux for the win!
 config.enable_tab_bar = false
-config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
-config.font_size = 13.3 -- increase font size. My eyes!!!
+-- config.tab_bar_at_bottom = true
+-- config.use_fancy_tab_bar = false
+
+config.font_size = 14 -- increase font size. My eyes!!!
 config.color_scheme = "Monokai (base16)"
 -- remove uneccessary padding on window. More RealEstate!
 config.window_padding = {
