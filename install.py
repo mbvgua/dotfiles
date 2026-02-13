@@ -108,6 +108,7 @@ apps = {
         "xcb-util-xrm-devel",
         "xset",
         "Xephyr",
+        "xrandr",
     ],
 }
 

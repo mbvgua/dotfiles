@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
 paplay ~/.config/qtile/sounds/screenshot_sound.mp3
