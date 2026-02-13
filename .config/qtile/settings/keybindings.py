@@ -315,6 +315,13 @@ keys: list[Key | KeyChord] = [
         mode=True,
         name="[x]ephyr instance",
     ),
+    # toggle grayscale mode!! less distraction from shiny lights systemwide...
+    Key(
+        [mod],
+        "g",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
+        desc="toggle [g]rayscale mode systemwide",
+    ),
 ]
 
 # Add key bindings to switch VTs in Wayland.

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+CONFIG_PATH="$HOME/.config/picom/picom.conf"
+GRAY_CONFIG_PATH="$HOME/.config/picom/picom-grayscale.conf"
+
+# Identify the active monitor
+MONITOR=$(xrandr | grep " connected" | cut -d' ' -f1 | head -n 1)
+
+# clean up stuck gamma/brightness
+reset_colors() {
+    xrandr --output "$MONITOR" --gamma 1:1:1 --brightness 1
+}
+
+if pgrep -a picom | grep -q "picom-grayscale.conf"; then
+    # EXITING GRAYSCALE: Turn Redshift back on
+    killall picom
+    sleep 0.1
+    reset_colors
+    redshift-gtk &
+    picom --config ${CONFIG_PATH} -b &
+else
+    # ENTERING GRAYSCALE: Kill Redshift to prevent color conflicts
+    killall redshift
+    killall picom
+    sleep 0.1
+    # Reset gamma to clean the slate
+    reset_colors
+    picom --config ${GRAY_CONFIG_PATH} -b &
+fi
+
