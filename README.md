@@ -15,7 +15,7 @@
 
 ## How?
 
-Currently, these dots work neatly on fedora systems, if you have another OS/distro, please change the package manager in the [install.py](./install.py) file accordingly; though not all the packages may be present in the official repositories.
+Currently, these dots work neatly on fedora systems, if you are on another OS/distro, please change the package manager in the [install.py](./install.py) file accordingly; though not all the packages may be present in the official repositories.
 
 To get this up and running, simply navigate to your `$HOME` directory and:
 ```bash
