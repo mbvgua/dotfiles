@@ -58,7 +58,7 @@ def notify_restart():
 
     def _notify_restart(qtile):
         subprocess.run(
-            ["notify-send Qtile Restarting... -t 2000 -u normal"],
+            ["notify-send Qtile Restarting... -t 3000 -u normal"],
             shell=True,
         )
 

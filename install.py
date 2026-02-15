@@ -38,10 +38,12 @@ apps = {
         "zathura-cb",
         "zathura-djvu",
         "nautilus",
+        # "helium",    #main browser
+        "qutebrowser",
+        "brave-browser",
     ],
     "cli_tools": [
         # "wezterm",
-        # "alacritty",
         "ranger",
         "tmux",
         "git",
@@ -77,6 +79,7 @@ apps = {
         "network-manager-applet",
         "pavucontrol",
         "pulsemixer",
+        "paplay",
         "pamixer",
         "pipewire-pulse",
         "deepin-screenshot",
