@@ -3,12 +3,11 @@ import subprocess
 import random
 
 from libqtile import hook, widget, bar, qtile
-from libqtile.command.base import expose_command
 from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
-from .keybindings import terminal2
+from .keybindings import terminal
 
 # gruvbox_dark monokai_pro
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
@@ -19,22 +18,22 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # Wallpapers
 # =====================
 
-WALLPAPER_DIR = os.path.expanduser("~/.config/qtile/wallpapers")
+WALLPAPER_DIR: str = os.path.expanduser("~/.config/qtile/wallpapers")
 
 
-# have random wallpaper on each restart!
+# have random wallpaper on each reboot!
 def set_random_wallpaper():
-    wallpapers = []
+    wallpapers: list[str] = []
     for root, dirs, files in os.walk(WALLPAPER_DIR):
         for f in files:
             if f.lower().endswith((".jpg", ".jpeg", ".png")):
                 wallpapers.append(os.path.join(root, f))
     if wallpapers:
-        chosen = random.choice(wallpapers)
+        chosen: str = random.choice(wallpapers)
         subprocess.run(["feh", "--bg-fill", chosen])
 
 
-@hook.subscribe.startup_once
+@hook.subscribe.startup
 def startup_wallpaper():
     set_random_wallpaper()
 
@@ -43,7 +42,7 @@ def startup_wallpaper():
 # Screens
 # =====================
 
-widget_defaults = dict(
+widget_defaults: dict[str, str | int] = dict(
     font="JetBrains Mono Nerd Font Bold",
     fontsize=22,
     padding=4,
@@ -51,7 +50,7 @@ widget_defaults = dict(
     foreground=foregroundColor,
 )
 
-extension_defaults = widget_defaults.copy()
+extension_defaults: dict[str, str | int] = widget_defaults.copy()
 
 
 # Custom separator to match Polybar
@@ -64,7 +63,7 @@ def create_separator():
     )
 
 
-screens = [
+screens: list[Screen] = [
     Screen(
         top=bar.Bar(
             [
@@ -158,7 +157,7 @@ screens = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal2 + " -e btop")
+                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e btop")
                     },
                 ),
                 create_separator(),

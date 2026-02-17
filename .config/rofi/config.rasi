@@ -1,11 +1,10 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,window,filebrowser,run";
+	modi:                       "drun,window,filebrowser";
     show-icons:                 true;
     display-drun:               " Apps";
     display-window:             " Windows";
     display-filebrowser:        " Files";
-    display-run:                " Run";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }

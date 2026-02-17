@@ -13,6 +13,6 @@
 # - Are there any side effects?
 #------------------------------------------------> <BLANK LINE>
 # [OPTIONAL FOOTER(S)]
-# - Provide links or keys to any relevant tickets:
-#   - (close|fix|resolve) #ISSUE-NUMBER
+# - Provide links or keys to any relevant tickets, e.g:
+# - (close|fix|resolve) #ISSUE-NUMBER
 #------------------------------------------------> <BLANK LINE>

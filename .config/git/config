@@ -54,3 +54,5 @@
 	diffFilter = diff-so-fancy --patch
 [gpg]
 	format = ssh
+[help]
+	autocorrect = 3

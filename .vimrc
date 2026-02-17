@@ -28,7 +28,7 @@ set sidescrolloff=8
 " no colors!!! no higlighting at all. plain black and white
 syntax on
 set termguicolors
-colorscheme desert
+"colorscheme desert
 
 " split go below always
 set splitbelow

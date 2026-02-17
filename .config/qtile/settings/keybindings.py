@@ -5,20 +5,18 @@ from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile import qtile
 
-mod = "mod4"  # the TUX/SUPER/WINDOWS key
-mod2 = "mod1"  # the ALT key
-shift = "shift"  # the left/right shift keys
-space = "space"  # the space key
-control = "control"
+mod: str = "mod4"  # the TUX/SUPER/WINDOWS key
+mod2: str = "mod1"  # the ALT key
+shift: str = "shift"  # the left/right shift keys
+space: str = "space"  # the space key
+control: str = "control"
 
 # my tools of choice
-browser = "~/helium-0.7.1.1-x86_64.AppImage"
-browser2 = "firefox"
-files = "nautilus"
-terminal = "wezterm"
-terminal2 = "alacritty"
-gui_editor = "subl"
-teams = "teams-for-linux"
+terminal: str = "wezterm"
+browser: str = "~/helium-0.7.1.1-x86_64.AppImage"
+browser2: str = "qutebrowser"
+files: str = "thunar"
+teams: str = "teams-for-linux"
 
 
 # =====================
@@ -60,7 +58,7 @@ def notify_restart():
 
     def _notify_restart(qtile):
         subprocess.run(
-            ["notify-send Qtile Restarting... -t 2000 -u normal"],
+            ["notify-send Qtile Restarting... -t 3000 -u normal"],
             shell=True,
         )
 
@@ -71,9 +69,7 @@ def notify_restart():
 # Keybindings
 # =====================
 
-keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+keys: list[Key | KeyChord] = [
     # =================
     # Qtile specific
     # =================
@@ -118,7 +114,7 @@ keys = [
         "h",
         lazy.layout.shuffle_up(),
         lazy.layout.shuffle_left(),
-        # lazy.layout.swap_left(),
+        lazy.layout.swap_left(),
         desc="Move window up/left",
     ),
     Key(
@@ -126,7 +122,7 @@ keys = [
         "l",
         lazy.layout.shuffle_down(),
         lazy.layout.shuffle_right(),
-        # lazy.layout.swap_right(),
+        lazy.layout.swap_right(),
         desc="Move window down/right",
     ),
     # Resize windows. If current window is on the edge of screen and direction
@@ -155,7 +151,7 @@ keys = [
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
-        desc="Grow window down",
+        desc="Decrease window downwards",
     ),
     Key(
         [mod, shift],
@@ -163,9 +159,10 @@ keys = [
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
-        desc="Grow window up",
+        desc="Increase window upwards",
     ),
     Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
+    # not set to mod+q to match broswers. i.e ctrl+w to quit tab
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
@@ -180,10 +177,6 @@ keys = [
     # =================
     # Focus Control
     # =================
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     Key(
         [mod],
@@ -194,8 +187,9 @@ keys = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch wezterm terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
+    # TODO: how can i make this work with '?' like nvim
     Key(
         [mod],
         "h",
@@ -207,12 +201,9 @@ keys = [
         "o",
         [
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
-            Key([], "f", lazy.spawn(browser2), desc="Open [f]irefox"),
-            Key([], "n", lazy.spawn(files), desc="Open [n]autilus"),
-            Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
-            # not using this atm!?
-            # Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
-            Key([], "t", lazy.spawn(terminal2), desc="Open alacri[t]ty"),
+            Key([], "q", lazy.spawn(browser2), desc="Open [q]utebrowser"),
+            Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
+            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
                 [],
                 "b",
@@ -262,7 +253,6 @@ keys = [
     ),
     # =================
     # LED Brightness controls
-    # get devices with "brightnessctl --list"
     # =================
     Key(
         [],
@@ -280,15 +270,17 @@ keys = [
     # Screenshots
     # =================
     Key(
-        [mod, shift],
+        [mod2],
         "s",
         lazy.spawn("deepin-screenshot"),
+        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
         lazy.spawn("deepin-screenshot -f"),
+        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="full screen screenshot",
     ),
     # =================
@@ -296,9 +288,19 @@ keys = [
     # =================
     Key(
         [mod],
+        # using a since it was alacritty before hence got used to it
+        # also will have nested tmux instance, thus navigating between
+        # Ctrl+A and Tux+a is really convenient
         "a",
-        lazy.group["scratchpad"].dropdown_toggle("alacritty"),
-        desc="open [a]lacritty with tmux scratchpad",
+        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
+        desc="open wezterm with tmux scratchpad",
+    ),
+    # toggle grayscale mode!! less distraction from shiny lights systemwide...
+    Key(
+        [mod],
+        "g",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
+        desc="toggle [g]rayscale mode systemwide",
     ),
     # lock all input, allow interacting with nested Xephyr instace
     # activated by using mod+x + mod+x

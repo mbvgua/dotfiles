@@ -1,13 +1,14 @@
 #################################################################
-# We programmers are lazy,                                      #
-# so let’s bring laziness to a whole new level,                 #
-# shall we?                                                     #
 # Sections:                                                     #
 #    1.General...................general bash behaviour         #
 #    2.Packages .................installed packages             #
 #    3.Aliases....................general aliases               #
 #    3.Functions..................useful functions              #
 #################################################################
+
+# We programmers are lazy,
+# so let’s bring laziness to a whole new level,
+# shall we?
 
 ############################################
 # 1.General                                #
@@ -25,7 +26,7 @@ fi
 export PATH
 
 ############################################
-# 3.Packages                               #
+# 2.Packages                               #
 ############################################
 
 # mssql-server
@@ -56,8 +57,10 @@ esac
 export PATH="$HOME/.odin/:$PATH"
 
 ############################################
-# 2.Aliases                                #
+# 3.Aliases                                #
 ############################################
+
+export TERM="xterm-256color"
 
 # default for opening files in ranger
 export EDITOR="nvim"
@@ -66,6 +69,10 @@ export VISUAL="nvim"
 # open man pages in neovim
 # thanks @mental_outlaw - Yt
 export MANPAGER="nvim +Man!"
+# set MANWIDTH to 80 if terminal is wider then that,
+# and to COLUMNS(current terminal width) if narrower,
+# prevents ugly line breaks
+export MANWIDTH="$((COLUMNS > 80 ? 80 : COLUMNS)) man"
 
 # ignore duplicates in history
 export HISTCONTROL=ignoredups:erasedups
@@ -81,23 +88,18 @@ alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Be
 
 # substitutions
 alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
-alias ls='eza --icons --sort=extension'         # ls for eza. modern with icons
+alias ls='eza --icons --sort=extension'         # rust slop. weird colours in current machine
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
-alias hist='history'                            # show history
 alias cl='clear'                                # clear things quickly
+alias hist='history'                            # show history
 alias hgrep='history | grep'                    # search for command in history
 alias lgrep='ls -l | grep'                      # search for file/directory in .
 alias files='xdg-open .'                        # open files easily
-alias notes='wezterm -e nvim ~/notes.md'           # notes app? whats that
 
 # view images with feh {default image and slideahow}
 alias feh='feh --fullscreen --draw-filename --info %h%S'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
-
-# toggle wifi
-alias wifi-on="nmcli radio wifi on"
-alias wifi-off="nmcli radio wifi off"
 
 # typos
 alias :q="exit"
@@ -136,6 +138,9 @@ alias wn="xprop WM_CLASS"
 
 # open qtile logs
 alias qlogs="nvim ~/.local/share/qtile/qtile.log"
+
+# what fonts ae here?
+alias fonts="fc-list : family , style"
 
 ############################################
 # 4.Functions                              #
@@ -204,7 +209,7 @@ fi
 
 IFS=$SAVEIFS
 
-# Calc app? whats that
+# mini-calc app
 calc() {
 	local result=""
 	result="$(printf "scale=10;%s\\n" "$*" | bc --mathlib | tr -d '\\\n')"
@@ -231,6 +236,3 @@ clean(){
     sudo dnf clean packages
     sudo dnf clean all
 }
-
-# starship
-eval "$(starship init bash)"

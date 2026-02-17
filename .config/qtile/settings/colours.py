@@ -1,6 +1,6 @@
 # Gruvbox Dark
-def gruvbox_dark():
-    colors = [
+def gruvbox_dark() -> tuple[list[list[str]], str, str, str, str]:
+    colors: list[list[str]] = [
         ["#282828", "#282828"],  # bg
         ["#ebdbb2", "#ebdbb2"],  # fg
         ["#000000", "#000000"],  # color01
@@ -20,8 +20,8 @@ def gruvbox_dark():
 
 
 # Monokai Pro
-def monokai_pro():
-    colors = [
+def monokai_pro() -> tuple[list[list[str]], str, str, str, str]:
+    colors: list[list[str]] = [
         ["#2D2A2E", "#2D2A2E"],  # bg
         ["#FCFCFA", "#FCFCFA"],  # fg
         ["#403E41", "#403E41"],  # color01

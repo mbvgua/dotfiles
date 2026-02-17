@@ -12,13 +12,14 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # Layouts
 # =====================
 # some default layouts themes for each theme
-layout_theme = {
+layout_theme: dict[str, int | str] = {
     "margin": 3,
     "border_width": 3,
     "border_focus": workspaceColor,
     "border_normal": foregroundColorTwo,
 }
 
+# less is more!
 layouts = [
     layout.Tile(
         **layout_theme,
@@ -55,37 +56,30 @@ floating_layout = layout.Floating(
         Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
+        Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="gnome-calendar"),  # calender
+        Match(wm_class="qbittorrent"),  # qbittorrent
         Match(title="pinentry"),  # GPG key password entry
     ],
 )
-
-
-# change layout even for floating windows
-# default retains them in floating
-# https://github.com/qtile/qtile/discussions/3722
-# @hook.subscribe.layout_change
-# def _(layout, group):
-#     for window in group.windows:
-#         window.floating = False
-# BUG: change layout of scratchpads to normal layout when I
-# switch the group. Very annoying!
 
 
 # floating windows in fixed screen position
 # sweet spot!! in centred position
 @hook.subscribe.client_managed
 def client_managed(client):
-    floating_windows_suite = [
+    floating_windows_suite: list[str] = [
         "feh",
         "pavucontrol",
         "org.gnome.Nautilus",
+        "thunar",
+        "qbittorrent",
     ]
     if client.get_wm_class()[0] in floating_windows_suite:
         client.set_size_floating(900, 750).set_position(300, 300)
 
 
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
+auto_fullscreen: bool = True
+focus_on_window_activation: str = "smart"
+reconfigure_screens: bool = True
