@@ -27,13 +27,14 @@ return {
 			lualine_c = {
 				{ "diagnostics" },
 				{
-					"filename", -- present in filetree/telescope & buffername
-                    -- Values:   0: Just the filename
+					-- shown in tabline & also when i save a file
+					-- "filename", -- present in filetree/telescope & buffername
+					-- Values:   0: Just the filename
 					--           1: Relative path
 					--           2: Absolute path
 					--           3: Absolute path, with tilde as the home directory
 					--           4: Filename and parent dir, with tilde as the home directory
-					path = 4,
+					-- path = 4,
 					-- shorten path to leave 40 spaces in window
 					shorting_target = 40,
 					newfile_status = true,
@@ -63,8 +64,10 @@ return {
 				},
 			},
 			lualine_y = {
-				{ "filetype", icon = { align = "right" } },
-				"fileformat",
+                -- already in tabline. total duplication
+                -- also want to minimize items on statusline
+				-- { "filetype", icon = { align = "right" } },
+				-- "fileformat",
 			},
 			lualine_z = {
 				{
@@ -75,8 +78,8 @@ return {
 					function()
 						return "LOC: " .. vim.fn.line(".") .. "/" .. vim.fn.line("$")
 					end,
+					separator = { left = "", right = "" },
 				},
-				{ "progress", separator = { left = "", right = "" } },
 			},
 		},
 		tabline = {

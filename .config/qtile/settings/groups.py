@@ -1,7 +1,8 @@
+import os
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
-from .keybindings import keys, mod, terminal, terminal2
+from .keybindings import keys, mod, terminal
 
 
 # =====================
@@ -9,12 +10,11 @@ from .keybindings import keys, mod, terminal, terminal2
 # =====================
 # group_names should remain 0-9 to match MOD+0-9 keybindings
 # group_labels are how they appear in the bar. changes this freely
-
-# matches=[Match(wm_class="Firefox")]
 groups = []
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-group_layouts = [
+group_names: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_labels: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
+group_layouts: list[str] = [
     "tile",
     "max",
     "matrix",
@@ -25,7 +25,6 @@ group_layouts = [
     "tile",
     "tile",
 ]
-# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
 
 
 for i in range(len(group_names)):
@@ -47,6 +46,7 @@ groups.append(
             Match(wm_class="org.mozilla.firefox"),
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="helium"),
+            Match(wm_class="qbittorrent"),
             Match(wm_class="teams-for-linux"),
         ],
     ),
@@ -57,24 +57,11 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            # normal terminal scratchpad
-            # DropDown(
-            #     "wezterm",
-            #     terminal,
-            #     match=Match(wm_class="org.wezfurlong.wezterm"),
-            #     on_focus_lost_hide=False,
-            #     width=0.6,
-            #     height=0.6,
-            #     x=0.2,
-            #     y=0.02,
-            #     opacity=0.95,
-            # ),
-            # alacritty terminal with tmux
+            # wezterm terminal with tmux
             DropDown(
-                "alacritty",
-                f"{terminal2} -e tmux",
-                # terminal2,
-                match=Match(wm_class="Alacritty"),
+                "wezterm",
+                f"{terminal} -e tmux",
+                match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.6,
@@ -85,8 +72,8 @@ groups.append(
             # simple notes scratchpad
             DropDown(
                 "diary",
-                f"{terminal2} -e nvim notes.md",
-                match=Match(wm_class="Alacritty"),
+                f"{terminal} -e nvim {os.path.expanduser('~/.diary/README.md')}",
+                match=Match(wm_class="org.wezfurlong.wezterm"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.7,
