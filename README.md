@@ -1,6 +1,6 @@
 <h1 align="center">dotfiles ~/.</h1>
 
-![mbugua's dotfiles](./images/fastfetch.png)
+![.](./images/fastfetch.png)
 
 <p align="center">
     <b>Screenshots</b><br>
@@ -13,11 +13,29 @@
     <a href="https://codeberg.org/mbugua/dotfiles/src/branch/main/images/scratchpad.png">Scratchpad</a>&nbsp;&nbsp;&nbsp;
 </p>
 
+## What?
+
+- **OS**: fedora
+- **window manager**: qtile
+- **compositor**: picom
+- **shell**: bash
+- **terminal emulator**: wezterm
+- **terminal multiplexer**: tmux
+- **text editor**: nvim
+- **version controll**: git
+- **video player/music player**: mpv
+- **audio player**: cmus
+- **web browser**: helium/qutebrowser
+- **app launcher**: rofi
+- **image viewer**: feh
+- **file manager**: thunar/ranger
+- **pdf reader**: zathura
+- **blue light**: redshift
+- **notifications**: dunst
+
 ## How?
 
-Currently, these dots work neatly on fedora systems, if you are on another OS/distro, please change the package manager in the [install.py](./install.py) file accordingly; though not all the packages may be present in the official repositories.
-
-To get this up and running, simply navigate to your `$HOME` directory and:
+Navigate to your `$HOME` directory and:
 ```bash
     git clone https://codeberg.org/mbugua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
@@ -29,11 +47,7 @@ To get this up and running, simply navigate to your `$HOME` directory and:
 
 > [!IMPORTANT]
 >
-> A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchpad. This can be done in the config if you are on wayland, but here we are ;) :
-> ```bash
->   sudoedit /usr/share/X11/xorg.conf.d/40-libinput.conf
-> ``` 
-> using your `$EDITOR`(set this in your [.bashrc](./.bashrc)) change the "Option" "Tapping" "True" in the below section:
+> A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchpad. This can be done in the config if you are on wayland, but here we are ;) `sudoedit /usr/share/X11/xorg.conf.d/40-libinput.conf`. Then add the `"Option" "Tapping" "True"` in the below section:
 >  
 >  ```bash
 >  Section "InputClass"

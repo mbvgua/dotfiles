@@ -19,6 +19,7 @@ layout_theme: dict[str, int | str] = {
     "border_normal": foregroundColorTwo,
 }
 
+# less is more!
 layouts = [
     layout.Tile(
         **layout_theme,
@@ -55,7 +56,7 @@ floating_layout = layout.Floating(
         Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="org.gnome.Nautilus"),  # nautilus files
-        Match(wm_class="Thunar"),  # thunar files
+        Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="gnome-calendar"),  # calender
         Match(wm_class="qbittorrent"),  # qbittorrent
@@ -72,7 +73,7 @@ def client_managed(client):
         "feh",
         "pavucontrol",
         "org.gnome.Nautilus",
-        "Thunar",
+        "thunar",
         "qbittorrent",
     ]
     if client.get_wm_class()[0] in floating_windows_suite:
