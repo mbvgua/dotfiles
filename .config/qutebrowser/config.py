@@ -9,7 +9,7 @@ config = config  # type: ConfigAPI
 c = c  # type: ConfigContainer
 
 ## remove configs set via the GUI
-config.load_autoconfig(False)
+config.load_autoconfig(True)
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -23,7 +23,7 @@ c.aliases = {
 }
 
 ## always restore open sites when qutebrowser is reopened
-# c.auto_save.session = False
+c.auto_save.session = False
 
 ## Which categories to show (in which order) in the :open completion.
 c.completion.open_categories = [
@@ -38,14 +38,21 @@ c.completion.open_categories = [
 # NOTE: none of the other work, only ddg
 c.url.searchengines = {
     "DEFAULT": "https://duckduckgo.com/?q={}",
-    "ddg": "https://duckduckgo.com/?q={}",
-    'gg':  'https://google.com/search?hl=en&q={}',
-    "aw": "https://wiki.archlinux.org/index.php?search={}",
-    "wiki": "https://en.wikipedia.org/wiki/{}",
-    "yt": "https://www.youtube.com/results?search_query={}",
+    ## use inbuilt ddg bangs instead: https://duckduckgo.com/bangs
+    # !r    -> reddit
+    # !yt   -> youtube
+    # !w    -> wikipedia
+    # !gh   -> github
+    # !g    -> google
+    # !di   -> dictionary
+    # !g    -> google
+    # !m    -> google maps
+    ## techstuff
+    # !py   -> official python docs
+    # !a2   -> aletrnative 2 website
+    # !archwiki -> archwiki
+    # !dockerhub    -> dockerhub
     "cb": "https://codeberg.org/explore/users?q={}",
-    'fd':      'https://thefreedictionary.com/{}',
-    'red':       'https://www.reddit.com/search?q={}',
 }
 
 ## Require a confirmation before quitting the application.
@@ -81,6 +88,9 @@ c.editor.command = ["nvim", "-f", "{file}", "-c", "normal {line}G{column0}l"]
 
 ## set colorscheme
 config.source("./monokai.py")
+config.set("colors.webpage.preferred_color_scheme", "dark")
+config.set("colors.webpage.bg", "black")
+config.set("colors.webpage.darkmode.enabled", True)
 
 ## Default font families to use. Whenever "default_family" is used in a
 c.fonts.default_family = ["Source Code Pro"]
@@ -134,18 +144,24 @@ c.zoom.default = "110%"
 # c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
 
 # paywall bypassing
-config.bind('xb', 'spawn bash -c "echo {url} >> ~/.dotfiles/.config/qutebrowser/js_blacklist.txt"')
+config.bind(
+    "<Space>bs",
+    'spawn bash -c "echo {url} >> ~/.dotfiles/.config/qutebrowser/js_blacklist.txt"',
+)
 with open(f"{home}/.config/qutebrowser/js_blacklist.txt") as f:
     js_blacklist = f.read().splitlines()
 
 for item in js_blacklist:
     domain = urlparse(item).netloc
-    config.set('content.javascript.enabled', False, f"*://{domain}/*")
-    config.set('content.javascript.enabled', False, f"*://www.{domain}/*")
+    config.set("content.javascript.enabled", False, f"*://{domain}/*")
+    config.set("content.javascript.enabled", False, f"*://www.{domain}/*")
 
 ## Bindings for normal mode
 config.bind("<Space>m", "hint links spawn mpv {hint-url}")
-config.bind("<Space>w", "hint links spawn wezterm -e yt-dlp -f 'bestvideo+bestaudio/best' {hint-url} -o '~/Videos/Youtube/%(title)s.%(ext)s'")
+config.bind(
+    "<Space>w",
+    "hint links spawn wezterm -e yt-dlp -f 'bestvideo+bestaudio/best' {hint-url} -o '~/Videos/Youtube/%(title)s.%(ext)s'",
+)
 config.bind("<Space>b", "bookmark-list --jump")
 config.bind("<Space>h", "history")
 config.bind("<Space>bl", "bookmark-list")
@@ -185,5 +201,5 @@ config.bind("^", "move-to-start-of-line", mode="caret")
 ## Bindings for command mode
 config.bind("<Ctrl-n>", "command-history-next", mode="command")
 config.bind("<Ctrl-p>", "command-history-prev", mode="command")
-config.bind("j", "completion-item-focus --history next", mode="command")
-config.bind("k", "completion-item-focus --history prev", mode="command")
+config.bind("<Ctrl-j>", "completion-item-focus --history next", mode="command")
+config.bind("<Ctrl-k>", "completion-item-focus --history prev", mode="command")

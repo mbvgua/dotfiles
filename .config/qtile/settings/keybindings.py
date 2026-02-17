@@ -12,10 +12,10 @@ space: str = "space"  # the space key
 control: str = "control"
 
 # my tools of choice
-browser: str = "~/helium-0.7.1.1-x86_64.AppImage"
-files: str = "thunar"
 terminal: str = "wezterm"
-gui_editor: str = "subl"
+browser: str = "~/helium-0.7.1.1-x86_64.AppImage"
+browser2: str = "qutebrowser"
+files: str = "thunar"
 teams: str = "teams-for-linux"
 
 
@@ -70,8 +70,6 @@ def notify_restart():
 # =====================
 
 keys: list[Key | KeyChord] = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # =================
     # Qtile specific
     # =================
@@ -164,7 +162,7 @@ keys: list[Key | KeyChord] = [
         desc="Increase window upwards",
     ),
     Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
-    # not set to mod+q to match broswers. i.e ctrl+w to quite tab
+    # not set to mod+q to match broswers. i.e ctrl+w to quit tab
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
@@ -179,10 +177,6 @@ keys: list[Key | KeyChord] = [
     # =================
     # Focus Control
     # =================
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     Key(
         [mod],
@@ -193,22 +187,22 @@ keys: list[Key | KeyChord] = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch wezterm terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
-    # TODO: figure out how to make this work with ?
-    # Key(
-    #     [mod],
-    #     "?",
-    #     lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-    #     desc="[h]elp with keybindings mapping",
-    # ),
+    # TODO: how can i make this work with '?' like nvim
+    Key(
+        [mod],
+        "h",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
+        desc="[h]elp with keybindings mapping",
+    ),
     KeyChord(
         [mod],
         "o",
         [
-            Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
-            Key([], "s", lazy.spawn(gui_editor), desc="Open [s]ublime text"),
+            Key([], "q", lazy.spawn(browser2), desc="Open [q]utebrowser"),
+            Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
                 [],
@@ -259,7 +253,6 @@ keys: list[Key | KeyChord] = [
     ),
     # =================
     # LED Brightness controls
-    # get devices with "brightnessctl --list"
     # =================
     Key(
         [],
@@ -277,7 +270,6 @@ keys: list[Key | KeyChord] = [
     # Screenshots
     # =================
     Key(
-        # NOTE: removed wezterm scratchpad changed this from alt+shift+s to alt+s
         [mod2],
         "s",
         lazy.spawn("deepin-screenshot"),
@@ -301,7 +293,14 @@ keys: list[Key | KeyChord] = [
         # Ctrl+A and Tux+a is really convenient
         "a",
         lazy.group["scratchpad"].dropdown_toggle("wezterm"),
-        desc="open [w]wezterm with tmux scratchpad",
+        desc="open wezterm with tmux scratchpad",
+    ),
+    # toggle grayscale mode!! less distraction from shiny lights systemwide...
+    Key(
+        [mod],
+        "g",
+        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
+        desc="toggle [g]rayscale mode systemwide",
     ),
     # lock all input, allow interacting with nested Xephyr instace
     # activated by using mod+x + mod+x
@@ -314,13 +313,6 @@ keys: list[Key | KeyChord] = [
         ],
         mode=True,
         name="[x]ephyr instance",
-    ),
-    # toggle grayscale mode!! less distraction from shiny lights systemwide...
-    Key(
-        [mod],
-        "g",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
-        desc="toggle [g]rayscale mode systemwide",
     ),
 ]
 
