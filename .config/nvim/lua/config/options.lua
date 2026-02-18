@@ -6,7 +6,8 @@ local opt = vim.opt
 local fn = vim.fn
 local wo = vim.wo
 
--- Enable mouse mode, can be useful for resizing splits for example!
+-- Enable mouse mode: 
+-- {"a"- all, "n"-normal, "v"-visual,"i"-insert,"c"-command,"nv"-normal&visual}
 o.mouse = "a"
 
 -- enable line numbers
@@ -66,8 +67,7 @@ opt.foldlevel = 99
 opt.foldlevelstart = 4 --top level is not folded. only nested folds
 opt.foldnestmax = 5
 
--- automatically re-read changes done on file.
--- no need to ask me everytime!!
+-- automatically re-read changes done on file. no need to ask me everytime!!
 opt.autoread = true
 
 -- allow backspace to delete over identations, EOL, e.t.c

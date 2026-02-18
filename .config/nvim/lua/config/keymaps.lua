@@ -6,35 +6,35 @@ local map = vim.keymap.set
 -- Normal Mode Tricks
 -- copy & paste with Shift-(y/p)
 map({ "n", "x" }, "<S-y>", '"+y', { desc = "copy to clipboard" })
-map({ "n", "x" }, "<S-p>", '"+p', { desc = "paste clipboard text" })
+map({ "n", "x" }, "<S-p>", '"+p', { desc = "paste clipboard" })
 
 -- save current file
-map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
+map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
 
 -- close current window
-map("n", "<leader>x", "<C-w>c", { desc = "Close current window" })
+map("n", "<leader>x", "<c-w>c", { desc = "close current window" })
 
 -- stop highlighting after search
-map("n", "<leader>so", ":nohlsearch<CR>", { desc = "Removing highlighted text after a search" })
+map("n", "<leader>so", ":nohlsearch<CR>", { desc = "removing highlighted text after a search" })
 
 -- check spelling within file
 map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
 
 -- window navigation with leader-(h,l,k,j)
-map("n", "<leader>h", "<C-w>h", { desc = "Navigate to left window" })
-map("n", "<leader>l", "<C-w>l", { desc = "Navigate to right window" })
-map("n", "<leader>k", "<C-w>k", { desc = "Navigate to window above" })
-map("n", "<leader>j", "<C-w>j", { desc = "Navigate to window below" })
+map("n", "<leader>h", "<C-w>h", { desc = "navigate to left window" })
+map("n", "<leader>l", "<C-w>l", { desc = "navigate to right window" })
+map("n", "<leader>k", "<C-w>k", { desc = "navigate to window above" })
+map("n", "<leader>j", "<C-w>j", { desc = "navigate to window below" })
 
 -- resize windows with Ctrl+h\j\k\l Keys
-map("n", "<C-k>", ":resize +2<CR>", { desc = "Resize horizontally to be bigger" })
-map("n", "<C-j>", ":resize -2<CR>", { desc = "Resize horizontally to be smaller" })
-map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "Resize vertically to be smaller" })
-map("n", "<C-l>", ":vertical resize +2<CR>", { desc = "Resize vertically to be bigger" })
+map("n", "<C-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
+map("n", "<C-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
+map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
+map("n", "<C-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
 
 -- navigate buffers easily with leader-(N)ext and (P)revious
-map("n", "<leader>n", ":bnext<CR>", { desc = "Navigate to next buffer" })
-map("n", "<leader>p", ":bprevious<CR>", { desc = "Navigate to previous buffer" })
+map("n", "<leader>n", ":bnext<CR>", { desc = "navigate to next buffer" })
+map("n", "<leader>p", ":bprevious<CR>", { desc = "navigate to previous buffer" })
 
 -- easily split windows with - & | like tmux
 map("n", "<leader>-",":split<CR>",{desc = "[-]Split window horizontally "})
@@ -55,13 +55,19 @@ map("n", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!"
 -- map("i", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
 
 -- Visual Mode Tricks
+-- Disable arrow keys in visual mode
+map("v", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
+map("v", "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
+map("v", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+map("v", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+
 -- remain in visual mode while identing to the right/left
-map("v", "<", "<gv", { desc = "Ident leftwards" })
-map("v", ">", ">gv", { desc = "Ident rightwards" })
+map("v", "<", "<gv", { desc = "ident leftwards" })
+map("v", ">", ">gv", { desc = "ident rightwards" })
 
 -- Move text up and down
-map("v", "<A-j>", ":m .+1<CR>==", { desc = "Move chunk downwards" })
-map("v", "<A-k>", ":m .-2<CR>==", { desc = "Move chunk upwards" })
+map("v", "<A-j>", ":m .+1<CR>==", { desc = "move chunk downwards" })
+map("v", "<A-k>", ":m .-2<CR>==", { desc = "move chunk upwards" })
 
 -- Continously move block of text up and down
 map("x", "J", ":move '>+1<CR>gv-gv")
@@ -92,8 +98,3 @@ map("n", "<leader>bd", function()
 		end
 	end
 end, { desc = "[d]elete all [b]uffers except current" })
-
--- Terminal Tricks
--- easily navigate modes in terminal
-map("t", "<Esc>", "<C-\\><C-n>")
-
