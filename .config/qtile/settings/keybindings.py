@@ -13,7 +13,7 @@ control: str = "control"
 
 # my tools of choice
 terminal: str = "wezterm"
-browser: str = "~/helium-0.7.1.1-x86_64.AppImage"
+browser: str = "~/helium-0.9.2.1-x86_64.AppImage"
 browser2: str = "qutebrowser"
 files: str = "thunar"
 teams: str = "teams-for-linux"
