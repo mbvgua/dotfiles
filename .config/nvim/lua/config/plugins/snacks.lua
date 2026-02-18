@@ -26,7 +26,7 @@ return {
 		},
 		-- not in use...
 		dashboard = { enabled = false }, -- too much. totally uneccessary
-		explorer = { enabled = false }, -- have netrw!
+		explorer = { enabled = false }, -- have nvim-tree!
 		terminal = { enabled = false }, -- float term is harzardous at best
 		statuscolumn = { enabled = false }, -- lol. makes my numbers disappear
 	},
