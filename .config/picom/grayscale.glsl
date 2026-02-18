@@ -24,9 +24,7 @@ vec4 window_shader() {
 }
 
 
-//NOTE: left dark patches after one too many switches, hence
-//needed to turn off redhsift to stop the interference, thus went
-//for the above one
+// no inbuilt bluelight filter yet redshift is deactivated hence used above one
 // #version 330
 //
 // in vec2 texcoord;             
@@ -45,24 +43,3 @@ vec4 window_shader() {
 //
 //     return vec4(grayscale * opacity, color.a * opacity);
 // }
-
-
-// NOTE: doesnt work for some reason
-// #version 330
-// in vec2 texcoord;             // Texture coordinates
-// uniform sampler2D tex;        // The screen texture
-// uniform float opacity;        // Window opacity
-//
-// vec4 window_shader() {
-//     // 1. Get the original color of the pixel
-//     vec2 texsize = textureSize(tex, 0);
-//     vec4 color = texture2D(tex, texcoord / texsize, 0);
-//
-//     // 2. Convert to Grayscale using the Luminosity Method
-//     // These weights (0.2126, 0.7152, 0.0722) match human eye perception
-//     float gray = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
-//
-//     // 3. Return the new color (Gray, Gray, Gray) while preserving Alpha
-//     return vec4(vec3(gray) * opacity, color.a * opacity);
-// }
-
