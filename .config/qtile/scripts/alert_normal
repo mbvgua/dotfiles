@@ -1,3 +1,0 @@
-#!/bin/bash
-
-paplay ~/.config/qtile/sounds/default.mp3

@@ -12,7 +12,8 @@ Navigate to your `$HOME` directory and:
 ```bash
     git clone https://codeberg.org/mbvgua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
-    python install.py
+    git checkout [branch name]
+    ./install
 
     # create symlinks to necessary files
     stow .
