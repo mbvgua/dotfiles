@@ -103,9 +103,10 @@ alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
 
 # typos
 alias :q="exit"
+alias :qa="exit"
 alias :wq="exit"
-alias :Wq="exit"
 alias :wqa="exit"
+alias :Wq="exit"
 alias :Wqa="exit"
 alias quit="exit"
 
@@ -121,7 +122,7 @@ alias .5='cd ../../../../..'
 alias dots='cd ~/.dotfiles && ls -1a'
 alias dt='cd ~/Desktop && ls -1a'
 alias docs='cd ~/Documents && ls -1a'
-alias dl='cd ~/Downloads'
+alias dl='cd ~/Downloads && ls -1a'
 alias vids='cd ~/Videos && ls -1a'
 alias music='cd ~/Music && ls -1a'
 alias pics='cd ~/Pictures'

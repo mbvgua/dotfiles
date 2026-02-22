@@ -2,11 +2,6 @@
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
-local act = wezterm.action
-
-config.keys = {
-	{ key = "w", mods = "CTRL", action = act.CloseCurrentTab({ confirm = true }) },
-}
 
 -- not using it as a multiplexer anymore. Tmux for the win!
 config.enable_tab_bar = false
