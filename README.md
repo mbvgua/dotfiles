@@ -1,10 +1,7 @@
 <h1 align="center">dotfiles ~/.</h1>
 
-The branches present depend on what OS you're currently on:
-- `xorg/fedora`: fedora + qtile wm
-- `xorg/void`: void + qtile wm
-- `server`:
-- `rasp`:
+Choose a branch depending on the OS currently in use:
+- `xorg/fedora`: gnu/linux + fedora workstation + qtile wm
 
 ## How?
 
