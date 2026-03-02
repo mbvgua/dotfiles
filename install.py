@@ -87,8 +87,6 @@ apps = {
         "xfce4-screensaver",
         "picom",
         "polkit",
-        "dmenu",
-        "mpd",
         "brightnessctl",
         "redshift",
         "unzip",
@@ -116,65 +114,11 @@ apps = {
 }
 
 not_installed = []
-package_manager = ""
 # define the colours
 red = "\033[0;31m"
 green = "\033[0;32m"
 cyan = "\033[0;36m"
 normal = "\033[0m"
-
-
-def get_environ():
-    """
-    use platform to get underlying system, hence the
-    package manager to use.
-    platform.system() will either return:
-        - linux = 'Linux'
-        - mac = 'Darwin'
-        - window = 'Windows'
-    """
-
-    user_system = platform.system()
-    if user_system == "Linux":
-        distro = platform.freedesktop_os_release()
-        print("Aha! A man of culture... ")
-        print(f"Running on {distro["ID"].capitalize()}")
-        check_installed()
-    elif user_system == "Darwin":
-        print("Running on a Mac system")
-        print("Good for you!")
-    elif user_system == "Windows":
-        print(red)
-        print("Massive L dude! This script will not run")
-        print("Try something else... like changing your OS!")
-        print(normal)
-    else:
-        print(red)
-        print("Unable to get the host OS. Try again later?!")
-        print(normal)
-
-
-def check_installed():
-    """
-    check what the user already had installed in their system,
-    eliminating it from installed list
-    """
-    print(f"Check if required applications are installed: ")
-    for app in apps.values():
-        i = 0
-        while i < len(app):
-            # shell=True allow concatenating a command
-            is_installed = subprocess.run(
-                [f"which {app[i]}"], shell=True, capture_output=True
-            )
-            if is_installed.returncode == 0:
-                print(f"{green} ✓ {app[i].capitalize()} is installed{normal}")
-            else:
-                not_installed.append(app[i])
-                print(f"{red} ✗ {app[i].capitalize()} is not installed{normal}")
-
-            i += 1
-    install_tools(not_installed)
 
 
 def install_tools(install_this):
@@ -219,7 +163,27 @@ def main():
         {normal}
     """
     )
-    get_environ()
+
+    """
+    check what the user already had installed in their system,
+    eliminating it from installed list
+    """
+    print(f"Check if required applications are installed: ")
+    for app in apps.values():
+        i = 0
+        while i < len(app):
+            # shell=True allow concatenating a command
+            is_installed = subprocess.run(
+                [f"which {app[i]}"], shell=True, capture_output=True
+            )
+            if is_installed.returncode == 0:
+                print(f"{green} ✓ {app[i].capitalize()} is installed{normal}")
+            else:
+                not_installed.append(app[i])
+                print(f"{red} ✗ {app[i].capitalize()} is not installed{normal}")
+
+            i += 1
+    install_tools(not_installed)
 
 
 if __name__ == "__main__":

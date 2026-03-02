@@ -1,0 +1,30 @@
+"query:Favourites:tags # \"Favs\""
+https://stallman.org/rss/rss.xml linux #the OG
+https://drewdevault.com/blog/index.xml tech
+https://eev.ee/feeds/atom.xml tech
+
+"query:Blogs:tags # \"Blog\""
+https://ericmurphy.xyz/index.xml blog
+https://cadence.moe/blog/rss.xml blog
+https://cafebedouin.org/feed/ blog
+https://planet.gnu.org/rss20.xml foss "tech-blog"
+https://brennan.io/blog/rss.xml "tech-blog"
+https://danielmiessler.com/feed.rss "tech-blog"
+https://www.barbarianmeetscoding.com/atom.xml "tech-blog"
+https://vonheikemen.github.io/devlog/atom.xml "tech-blog"
+https://tomrenner.com/index.xml "tech-blog"
+https://www.atns.net/blog-feed.xml "tech-blog"
+https://thevaluable.dev/index.xml "tech-blog"
+https://www.norvig.com/rss-feed.xml "tech-blog"
+https://smarttech101.com/rss "tech-blog"
+https://news.ycombinator.com/rss "tech-blog"
+
+"query:Miscallenous:tags # \"Miscallenous\""
+https://www.reddit.com/r/nairobitechies.rss?limit=30 reddit tech
+https://www.reddit.com/r/linux/best/.rss?limit=50 reddit linux
+https://www.reddit.com/r/neovim/best/.rss?limit=20 reddit neovim linux
+https://www.reddit.com/r/qtile/best/.rss?limit=10 reddit qtile linux
+https://www.reddit.com/user/folke.rss "~folke" reddit neovim
+https://www.reddit.com/user/echasnovski.rss "~mini.plugins" reddit neovim
+https://nitter.net/tsoding/rss twitter tech
+https://rss-bridge.org/bridge01/?action=display&bridge=InstagramBridge&context=Username&u=blakeoftoday&media_type=all&format=Atom insta "life-journal"
