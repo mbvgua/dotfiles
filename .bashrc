@@ -89,6 +89,7 @@ alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Be
 # substitutions
 alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
 alias ls='eza --icons --sort=extension'         # rust slop. weird colours in current machine
+alias mail='aerc'                               # mail on the terminal. with vim keys!
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly

@@ -23,7 +23,7 @@ c.aliases = {
 }
 
 ## always restore open sites when qutebrowser is reopened
-c.auto_save.session = False
+c.auto_save.session = True
 
 ## Which categories to show (in which order) in the :open completion.
 c.completion.open_categories = [

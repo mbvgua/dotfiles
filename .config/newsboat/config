@@ -1,0 +1,51 @@
+# general settings
+cleanup-on-quit yes
+confirm-exit no
+datetime-format "%F"
+error-log "~/.config/newsboat/error.log"
+goto-first-unread no
+goto-next-feed no
+wrap-scroll yes
+save-path "~/.dotfiles/.config/newsboat/articles/"
+feedlist-format "%?T?║%4i %n %8u %t &╠═════════════════════════════════════════════════════════════════════════════ %t ?"
+highlight feedlist "[║│]" color3 color0
+highlight feedlist "╠═.*" color3 color0 
+browser "qutebrowser %u"
+# feedlist-format     "%4i %n %11u %t"
+# articlelist-format  "%4i %f %D   %?T?|%-17T|  ?%t"
+# notify-format       "%d new articles (%n unread articles, %f unread feeds)"
+# podlist-format      "%4i [%-5p %%] %-12S %F"
+
+#vim keys
+bind k feedlist,articlelist,article,urlview,help up
+bind j feedlist,articlelist,article,urlview,help down
+bind-key ^F pagedown 
+bind-key ^B pageup 
+bind-key ^D halfpagedown 
+bind-key ^U halfpageup 
+bind-key BACKSPACE quit
+# o-> open article in "browser"
+# u-> show current links in article
+# s-> save article
+
+# TODO: when you figure out how to play youtube and insta videos 
+# in newsboat, bind them to a macro, allowing you instantly open
+# them from TUI in mpv. or even download them with yt-dlp
+
+# inkpotish color scheme for newsbeuter <http://www.newsbeuter.org/>
+# found at: /usr/share/docs/newsboat/contrib
+color background          color229   default
+color listnormal          color229   default
+color listnormal_unread   color229   default
+color listfocus           color229   color61 bold
+color listfocus_unread    color229   color61 bold
+color info                color247   color235
+color article             color229   default
+
+# highlights
+highlight article "^(Feed|Link):.*$" color46 default bold
+highlight article "^(Title|Date|Author):.*$" color39 default bold
+highlight article "https?://[^ ]+" color46 default underline
+highlight article "\\[[0-9]+\\]" color63 default bold
+highlight article "\\[image\\ [0-9]+\\]" color63 default bold
+highlight feedlist "^─.*$" color61 color235 bold
