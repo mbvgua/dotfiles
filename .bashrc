@@ -53,9 +53,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# odin
-export PATH="$HOME/.odin/:$PATH"
-
 ############################################
 # 3.Aliases                                #
 ############################################
@@ -72,7 +69,7 @@ export MANPAGER="nvim +Man!"
 # set MANWIDTH to 80 if terminal is wider then that,
 # and to COLUMNS(current terminal width) if narrower,
 # prevents ugly line breaks
-export MANWIDTH="$((COLUMNS > 80 ? 80 : COLUMNS)) man"
+export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 # ignore duplicates in history
 export HISTCONTROL=ignoredups:erasedups
