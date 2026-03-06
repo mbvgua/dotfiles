@@ -139,11 +139,8 @@ screens: list[Screen] = [
                     foreground=foregroundColorTwo,
                     mouse_callbacks={"Button1": lazy.spawn("pavucontrol")},
                 ),
+                # only mute/unmute from here. the toggle volume with keybinds
                 widget.Volume(
-                    mute_command="pamixer -t",
-                    volume_up_command="pamixer -i 2",
-                    volume_down_command="pamixer -d 2",
-                    get_volume_command="pamixer --get-volume-human",
                     check_mute_command="pamixer --get-mute",
                     check_mute_string="true",
                     foreground=foregroundColor,

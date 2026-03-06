@@ -1,4 +1,3 @@
-//NOTE: version with bluelight filter inbuilt
 #version 330
 
 in vec2 texcoord;
