@@ -77,7 +77,7 @@ keys: list[Key | KeyChord] = [
         [mod, control],
         "r",
         lazy.function(notify_restart()),
-        # lazy.reload_config(), -> not tinkering as much nowadays!
+        # lazy.reload_config(), #-> not tinkering as much nowadays!
         lazy.restart(),
         desc="[r]estart qtile",
     ),
@@ -110,7 +110,7 @@ keys: list[Key | KeyChord] = [
     # Window actions
     # =================
     Key(
-        [mod, shift],
+        [mod],
         "h",
         lazy.layout.shuffle_up(),
         lazy.layout.shuffle_left(),
@@ -118,7 +118,7 @@ keys: list[Key | KeyChord] = [
         desc="Move window up/left",
     ),
     Key(
-        [mod, shift],
+        [mod],
         "l",
         lazy.layout.shuffle_down(),
         lazy.layout.shuffle_right(),
@@ -190,12 +190,12 @@ keys: list[Key | KeyChord] = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch wezterm terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     # TODO: how can i make this work with '?' like nvim
-    Key(
-        [mod],
-        "h",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-        desc="[h]elp with keybindings mapping",
-    ),
+    # Key(
+    #     [mod],
+    #     "h",
+    #     lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
+    #     desc="[h]elp with keybindings mapping",
+    # ),
     KeyChord(
         [mod],
         "o",
@@ -295,24 +295,12 @@ keys: list[Key | KeyChord] = [
         lazy.group["scratchpad"].dropdown_toggle("wezterm"),
         desc="open wezterm with tmux scratchpad",
     ),
-    # toggle grayscale mode!! less distraction from shiny lights systemwide...
+    # toggle grayscale mode!! shiny lights bad...
     Key(
         [mod],
         "g",
         lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
         desc="toggle [g]rayscale mode systemwide",
-    ),
-    # lock all input, allow interacting with nested Xephyr instace
-    # activated by using mod+x + mod+x
-    # deactivate using mod+x+x OR esc key
-    KeyChord(
-        [mod],
-        "x",
-        [
-            Key([], "x", lazy.ungrab_all_chords(), desc="grab all input to xephyr"),
-        ],
-        mode=True,
-        name="[x]ephyr instance",
     ),
 ]
 

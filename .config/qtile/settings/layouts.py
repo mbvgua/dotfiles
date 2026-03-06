@@ -3,7 +3,6 @@ from libqtile.config import Match
 
 from .colours import *
 
-
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
@@ -13,7 +12,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme: dict[str, int | str] = {
-    "margin": 3,
+    "margin": 5,
     "border_width": 3,
     "border_focus": workspaceColor,
     "border_normal": foregroundColorTwo,
@@ -21,10 +20,7 @@ layout_theme: dict[str, int | str] = {
 
 # less is more!
 layouts = [
-    layout.Tile(
-        **layout_theme,
-        add_after_last=True,
-    ),
+    layout.Tile(**layout_theme),
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
     # layout.MonadTall(**layout_theme),
@@ -54,8 +50,7 @@ floating_layout = layout.Floating(
         Match(wm_class="feh"),  # image viewer
         Match(wm_class="lxappearance"),  # lxappearance
         Match(wm_class="pavucontrol"),  # pavucontrol
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="org.gnome.Nautilus"),  # nautilus files
+        Match(wm_class="sshpass"),  # sshpass
         Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="gnome-calendar"),  # calender
