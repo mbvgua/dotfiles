@@ -1,19 +1,3 @@
-#################################################################
-# Sections:                                                     #
-#    1.General...................general bash behaviour         #
-#    2.Packages .................installed packages             #
-#    3.Aliases....................general aliases               #
-#    3.Functions..................useful functions              #
-#################################################################
-
-# We programmers are lazy,
-# so let’s bring laziness to a whole new level,
-# shall we?
-
-############################################
-# 1.General                                #
-############################################
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -25,9 +9,11 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
-############################################
-# 2.Packages                               #
-############################################
+# load alises and functions
+for file in ~/.{bash_aliases,bash_functions}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
 # mssql-server
 if [ -d ~/.bashrc.d ]; then
@@ -53,10 +39,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-############################################
-# 3.Aliases                                #
-############################################
-
 export TERM="xterm-256color"
 
 # default for opening files in ranger
@@ -66,9 +48,6 @@ export VISUAL="nvim"
 # open man pages in neovim
 # thanks @mental_outlaw - Yt
 export MANPAGER="nvim +Man!"
-# set MANWIDTH to 80 if terminal is wider then that,
-# and to COLUMNS(current terminal width) if narrower,
-# prevents ugly line breaks
 export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 # ignore duplicates in history
@@ -76,162 +55,3 @@ export HISTCONTROL=ignoredups:erasedups
 
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
-
-# downloads
-# entire websites with wget
-alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
-alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"   # Best video + audio merged
-alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
-
-# substitutions
-alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
-alias ls='eza --icons --sort=extension'         # rust slop. weird colours in current machine
-alias mail='aerc'                               # mail on the terminal. with vim keys!
-alias fdir='find . -type d -name'               # find directories
-alias ff='find . -type f -name'                 # find files
-alias cl='clear'                                # clear things quickly
-alias hist='history'                            # show history
-alias hgrep='history | grep'                    # search for command in history
-alias lgrep='ls -l | grep'                      # search for file/directory in .
-alias files='xdg-open .'                        # open files easily
-
-# view images with feh {default image and slideahow}
-alias feh='feh --fullscreen --draw-filename --info %h%S'
-alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
-
-# typos
-alias :q="exit"
-alias :qa="exit"
-alias :wq="exit"
-alias :wqa="exit"
-alias :Wq="exit"
-alias :Wqa="exit"
-alias quit="exit"
-
-# navigation
-alias treee='tree --filelimit 15'
-alias .1='cd ..'
-alias .2='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
-
-# Bookmarks
-alias dots='cd ~/.dotfiles && ls -1a'
-alias dt='cd ~/Desktop && ls -1a'
-alias docs='cd ~/Documents && ls -1a'
-alias dl='cd ~/Downloads && ls -1a'
-alias vids='cd ~/Videos && ls -1a'
-alias music='cd ~/Music && ls -1a'
-alias pics='cd ~/Pictures'
-
-# working with docker
-alias dils="docker image ls"
-alias dcls="docker container ls"
-alias dclsa="docker container ls -a"
-alias dvls="docker volumes ls"
-alias dpls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
-
-# get window class name for qtile
-alias wn="xprop WM_CLASS"
-
-# open qtile logs
-alias qlogs="nvim ~/.local/share/qtile/qtile.log"
-
-# what fonts ae here?
-alias fonts="fc-list : family , style"
-
-############################################
-# 4.Functions                              #
-############################################
-# Create a new git directory and enter it
-gitdir() {
-    mkdir -p "$@" && cd "$@" && git init
-}
-
-# activate virtual environements
-sauce() {
-    source "$@"/bin/activate
-    # make it work like this eventually
-    # if exit 0; then
-    #     source "$@"/bin/activate
-    # else
-    #     python -m venv "$@" --prompt page-tracker
-    #     python -m venv "$@" && source "$@"/bin/activate
-    # fi
-}
-
-# extract files cleanly
-# from DistroTube
-#https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc?ref_type=heads
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
-
-### ARCHIVE EXTRACTION
-# usage: ex <file>
-function ex {
- if [ -z "$1" ]; then
-    # display usage if no parameters given
-    echo "Usage: ex <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
- else
-    for n in "$@"
-    do
-      if [ -f "$n" ] ; then
-          case "${n%,}" in
-            *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
-                         tar xvf "$n"       ;;
-            *.lzma)      unlzma ./"$n"      ;;
-            *.bz2)       bunzip2 ./"$n"     ;;
-            *.cbr|*.rar)       unrar x -ad ./"$n" ;;
-            *.gz)        gunzip ./"$n"      ;;
-            *.cbz|*.epub|*.zip)       unzip ./"$n"       ;;
-            *.z)         uncompress ./"$n"  ;;
-            *.7z|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
-                         7z x ./"$n"        ;;
-            *.xz)        unxz ./"$n"        ;;
-            *.exe)       cabextract ./"$n"  ;;
-            *.cpio)      cpio -id < ./"$n"  ;;
-            *.cba|*.ace)      unace x ./"$n"      ;;
-            *)
-                         echo "ex: '$n' - unknown archive method"
-                         return 1
-                         ;;
-          esac
-      else
-          echo "'$n' - file does not exist"
-          return 1
-      fi
-    done
-fi
-}
-
-IFS=$SAVEIFS
-
-# mini-calc app
-calc() {
-	local result=""
-	result="$(printf "scale=10;%s\\n" "$*" | bc --mathlib | tr -d '\\\n')"
-	#						└─ default (when `--mathlib` is used) is 20
-
-	if [[ "$result" == *.* ]]; then
-		# improve the output for decimal numbers
-		# add "0" for cases like ".5"
-		# add "0" for cases like "-.5"
-		# remove trailing zeros
-		printf "%s" "$result" |
-			sed -e 's/^\./0./'  \
-			-e 's/^-\./-0./' \
-			-e 's/0*$//;s/\.$//'
-	else
-		printf "%s" "$result"
-	fi
-	printf "\\n"
-}
-
-# clean unused packages
-clean(){
-    sudo dnf autoremove
-    sudo dnf clean packages
-    sudo dnf clean all
-}
