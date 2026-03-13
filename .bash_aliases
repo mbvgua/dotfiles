@@ -22,6 +22,10 @@ alias files='thunar'                            # open files easily
 alias feh='feh --fullscreen --draw-filename --info %h%S'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
 
+# alter system volume
+alias vol+='pulsemixer --change-volume +10'
+alias vol-='pulsemixer --change-volume -10'
+
 # typos
 alias :q="exit"
 alias :qa="exit"
@@ -32,7 +36,8 @@ alias :Wqa="exit"
 
 # navigation
 alias treee='tree --filelimit 15'
-alias ls='ls --group-directories-first --indicator-style=slash --color -1'
+# add the --color flag clashes with wezterm theme making text illegible
+alias ls='ls --group-directories-first --indicator-style=slash -1'
 alias .1='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
@@ -54,6 +59,9 @@ alias dcls="docker container ls"
 alias dclsa="docker container ls -a"
 alias dvls="docker volumes ls"
 alias dpls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
+alias digrep='docker image ls -a | grep'
+alias dcgrep='docker container ls -a | grep'
+alias drma='docker system prune -a --volumes'
 
 # get window class name for qtile
 alias wn="xprop WM_CLASS"
@@ -61,5 +69,5 @@ alias wn="xprop WM_CLASS"
 # open qtile logs
 alias qlogs="nvim ~/.local/share/qtile/qtile.log"
 
-# what fonts ae here?
+# what fonts are here?
 alias fonts="fc-list : family , style"

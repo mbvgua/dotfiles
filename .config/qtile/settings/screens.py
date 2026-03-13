@@ -137,7 +137,6 @@ screens: list[Screen] = [
                 widget.TextBox(
                     text="󰕾",
                     foreground=foregroundColorTwo,
-                    mouse_callbacks={"Button1": lazy.spawn("pavucontrol")},
                 ),
                 # only mute/unmute from here. the toggle volume with keybinds
                 widget.Volume(

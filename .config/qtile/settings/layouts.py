@@ -48,8 +48,6 @@ floating_layout = layout.Floating(
         # or `wn` thanks to my bash script
         *layout.Floating.default_float_rules,
         Match(wm_class="feh"),  # image viewer
-        Match(wm_class="lxappearance"),  # lxappearance
-        Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="sshpass"),  # sshpass
         Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
@@ -66,8 +64,6 @@ floating_layout = layout.Floating(
 def client_managed(client):
     floating_windows_suite: list[str] = [
         "feh",
-        "pavucontrol",
-        "org.gnome.Nautilus",
         "thunar",
         "qbittorrent",
     ]
