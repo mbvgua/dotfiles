@@ -44,7 +44,6 @@ groups.append(
         name=group_names[1],
         matches=[
             Match(wm_class="helium"),
-            Match(wm_class="qutebrowser"),
             Match(wm_class="brave-browser"),
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="qbittorrent"),

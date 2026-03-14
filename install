@@ -8,9 +8,9 @@ tools=(
     "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     # wm_tools
     "mpv zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
-    "Thunar rofi dunst feh picom polkit brightnessctl redshift unzip lxappearance"
+    "deepin-screenshot rofi dunst feh picom polkit brightnessctl redshift unzip"
     "network-manager-applet pulsemixer paplay pipewire-pulse"
-    "deepin-screenshot xfce4-power-manager xfce4-screensaver ImageMagick"
+    "lxappearance Thunar xfce4-power-manager xfce4-screensaver ImageMagick"
     "autoconf automake libXinerama libXrandr pkgconf xset xrandr"
     "cairo-devel libev-devel libjpeg-turbo-devel libxkbcommon-devel libxkbcommon-x11-devel"
     "libXrandr-devel imlib2-devel pam-devel xcb-util-image-devel xcb-util-xrm-devel"

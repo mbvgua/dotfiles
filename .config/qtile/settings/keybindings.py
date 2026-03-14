@@ -14,7 +14,6 @@ control: str = "control"
 # my tools of choice
 terminal: str = "wezterm"
 browser: str = "~/helium-0.9.2.1-x86_64.AppImage"
-browser2: str = "qutebrowser"
 files: str = "thunar"
 teams: str = "teams-for-linux"
 
@@ -201,7 +200,6 @@ keys: list[Key | KeyChord] = [
         "o",
         [
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
-            Key([], "q", lazy.spawn(browser2), desc="Open [q]utebrowser"),
             Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
