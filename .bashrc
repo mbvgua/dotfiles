@@ -1,18 +1,6 @@
-#################################################################
-# Sections:                                                     #
-#    1.General...................general bash behaviour         #
-#    2.Packages .................installed packages             #
-#    3.Aliases....................general aliases               #
-#    3.Functions..................useful functions              #
-#################################################################
-
 # We programmers are lazy,
 # so let’s bring laziness to a whole new level,
 # shall we?
-
-############################################
-# 1.General                                #
-############################################
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -25,54 +13,9 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
-############################################
-# 2.Packages                               #
-############################################
-
-# mssql-server
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# cargo for rust
-. "$HOME/.cargo/env"
-
-# pnpm
-export PNPM_HOME="/home/daagi/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# odin
-export PATH="$HOME/.odin/:$PATH"
-
-############################################
-# 3.Aliases                                #
-############################################
-
 export TERM="xterm-256color"
 
-# default for opening files in ranger
-export EDITOR="nvim"
-export VISUAL="nvim"
-
-# open man pages in neovim
-# thanks @mental_outlaw - Yt
-export MANPAGER="nvim +Man!"
-# set MANWIDTH to 80 if terminal is wider then that,
-# and to COLUMNS(current terminal width) if narrower,
-# prevents ugly line breaks
-export MANWIDTH="$((COLUMNS > 80 ? 80 : COLUMNS)) man"
+export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 # ignore duplicates in history
 export HISTCONTROL=ignoredups:erasedups
@@ -87,8 +30,6 @@ alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"   # Best video + audio merged
 alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
 
 # substitutions
-alias vim='nvim'                                # the time has come!!!Sorry Bram ;(
-alias ls='eza --icons --sort=extension'         # rust slop. weird colours in current machine
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly
@@ -111,6 +52,7 @@ alias quit="exit"
 
 # navigation
 alias treee='tree --filelimit 15'
+alias ls='ls --group-directories-first --indicator-style=slash --color -1'
 alias .1='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
@@ -133,18 +75,9 @@ alias dclsa="docker container ls -a"
 alias dvls="docker volumes ls"
 alias dpls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
 
-# get window class name for qtile
-alias wn="xprop WM_CLASS"
-
-# open qtile logs
-alias qlogs="nvim ~/.local/share/qtile/qtile.log"
-
-# what fonts ae here?
+# what fonts are here?
 alias fonts="fc-list : family , style"
 
-############################################
-# 4.Functions                              #
-############################################
 # Create a new git directory and enter it
 gitdir() {
     mkdir -p "$@" && cd "$@" && git init
@@ -228,11 +161,4 @@ calc() {
 		printf "%s" "$result"
 	fi
 	printf "\\n"
-}
-
-# clean unused packages
-clean(){
-    sudo dnf autoremove
-    sudo dnf clean packages
-    sudo dnf clean all
 }
