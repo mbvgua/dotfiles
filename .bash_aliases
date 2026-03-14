@@ -71,3 +71,6 @@ alias qlogs="nvim ~/.local/share/qtile/qtile.log"
 
 # what fonts are here?
 alias fonts="fc-list : family , style"
+
+# opposite of startx.logout of qtile basically
+alias killx="qtile cmd-obj -o cmd -f shutdown"

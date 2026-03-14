@@ -1,2 +1,6 @@
 ! make fonts larger. My eyesss!!!
 Xft.dpi: 110
+
+! cursor
+Xcursor.size: 24
+Xcursor.theme: Adwaita
