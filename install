@@ -7,13 +7,11 @@ tools=(
     "bash tmux nvim vim btop wezterm cmus"
     "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     # wm_tools
-    "mpv zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
-    "deepin-screenshot rofi dunst feh picom polkit brightnessctl redshift unzip"
-    "network-manager-applet pulsemixer paplay pipewire-pulse"
-    "lxappearance Thunar xfce4-power-manager xfce4-screensaver ImageMagick"
-    "autoconf automake libXinerama libXrandr pkgconf xset xrandr"
-    "cairo-devel libev-devel libjpeg-turbo-devel libxkbcommon-devel libxkbcommon-x11-devel"
-    "libXrandr-devel imlib2-devel pam-devel xcb-util-image-devel xcb-util-xrm-devel"
+    "zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
+    "deepin-screenshot rofi dunst feh picom brightnessctl redshift"
+    "mpv network-manager-applet pamixer paplay pipewire-pulse"
+    "lxappearance Thunar xfce4-power-manager xfce4-screensaver"
+    "polkit unzip autoconf automake xset xrandr ImageMagick"
 )
 
 

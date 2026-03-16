@@ -3,7 +3,6 @@ local vim = vim or {}
 -- meta accessors for vim autocmds
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
-local hl = vim.api.nvim_set_hl
 local bo = vim.bo
 local wo = vim.wo
 local o = vim.o
@@ -40,7 +39,3 @@ autocmd({ "BufNewFile", "BufRead" }, {
 		bo.fileformat = "unix" -- format all files to have unix base EOF
 	end,
 })
-
--- nice border on snacks picker
-hl(0, "NormalFloat", { bg = "none" })
-hl(0, "FloatBorder", { bg = "none" })

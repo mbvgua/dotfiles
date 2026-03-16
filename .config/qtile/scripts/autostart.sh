@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # polkit
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &

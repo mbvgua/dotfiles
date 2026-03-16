@@ -2,9 +2,7 @@ set window-title-basename "true"
 set selection-clipboard "clipboard"
 map p print
 
-#
 # Startup options
-#
 set adjust-open width
 set recolor false
 
@@ -47,10 +45,7 @@ set render-loading              true
 set render-loading-fg           rgba(39,40,34,1)       # Background
 set render-loading-bg           rgba(248,248,242,1)    # Foreground
 
-#
 # Recolor mode settings
-#
-
 set recolor-lightcolor          rgba(39,40,34,1)       # Background
 set recolor-darkcolor           rgba(248,248,242,1)    # Foreground
 
