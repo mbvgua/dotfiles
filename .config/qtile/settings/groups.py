@@ -13,7 +13,6 @@ from .keybindings import keys, mod, terminal
 groups = []
 group_names: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 group_labels: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-# group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "MISC"]
 group_layouts: list[str] = [
     "tile",
     "max",
@@ -86,18 +85,6 @@ groups.append(
                 "bt",
                 "blueman-manager",
                 match=Match(wm_class="blueman-manager"),
-                on_focus_lost_hide=True,
-                width=0.6,
-                height=0.7,
-                x=0.2,
-                y=0.02,
-                opacity=1,
-            ),
-            # calender
-            DropDown(
-                "cal",
-                "gnome-calendar",
-                match=Match(wm_class="gnome-calendar"),
                 on_focus_lost_hide=True,
                 width=0.6,
                 height=0.7,

@@ -20,10 +20,10 @@ layout_theme: dict[str, int | str] = {
 
 # less is more!
 layouts = [
-    layout.Tile(**layout_theme),
+    layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
-    # layout.MonadTall(**layout_theme),
+    # layout.Tile(**layout_theme), #same as monadtall. place new window before
     # layout.Columns(**layout_theme), # same as monadtall
     # Try more layouts by unleashing below layouts.
     # layout.Floating(**layout_theme), # dont know how to use this
@@ -51,7 +51,6 @@ floating_layout = layout.Floating(
         Match(wm_class="sshpass"),  # sshpass
         Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
-        Match(wm_class="gnome-calendar"),  # calender
         Match(wm_class="qbittorrent"),  # qbittorrent
         Match(title="pinentry"),  # GPG key password entry
     ],

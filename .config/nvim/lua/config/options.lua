@@ -107,6 +107,10 @@ opt.splitright = true
 -- always put new horizontal windows below
 opt.splitbelow = true
 
+-- border on floating boxes/snacks picker e.t.c
+-- options: "bold","double","none","rounded","shadow","single","solid"
+o.winborder = "rounded"
+
 -- BACKUP FILES SETTINGS
 -- put swap,backup and undo files in a special location instead of current directory
 -- thanks https://stackoverflow.com/a/15317146/30236232

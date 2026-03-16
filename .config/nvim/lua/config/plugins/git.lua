@@ -32,16 +32,4 @@ return {
 			vim.keymap.set("n", "<leader>dh", [[:DiffviewFileHistory %<CR>]], { silent = true })
 		end,
 	},
-	-- NOT A PRIORITY NOW
-	-- {
-	-- 	"NeogitOrg/neogit",
-	-- 	version = "2.0.0",
-	-- 	-- enabled = false,
-	-- 	config = function()
-	-- 		require("neogit").setup({ auto_show_console = false })
-	-- 		vim.keymap.set("n", "<leader>ts", function()
-	-- 			require("neogit").open()
-	-- 		end, { silent = true })
-	-- 	end,
-	-- },
 }
