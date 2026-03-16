@@ -76,7 +76,6 @@ keys: list[Key | KeyChord] = [
         [mod, control],
         "r",
         lazy.function(notify_restart()),
-        # lazy.reload_config(), #-> not tinkering as much nowadays!
         lazy.restart(),
         desc="[r]estart qtile",
     ),
@@ -210,12 +209,6 @@ keys: list[Key | KeyChord] = [
             ),
             Key(
                 [],
-                "c",
-                lazy.group["scratchpad"].dropdown_toggle("cal"),
-                desc="open [c]alender scratchpad",
-            ),
-            Key(
-                [],
                 "d",
                 lazy.group["scratchpad"].dropdown_toggle("diary"),
                 desc="open [d]iary scratchpad",
@@ -271,14 +264,12 @@ keys: list[Key | KeyChord] = [
         [mod2],
         "s",
         lazy.spawn("deepin-screenshot"),
-        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
         lazy.spawn("deepin-screenshot -f"),
-        # lazy.spawn(os.path.expanduser("~/.config/qtile/sounds/screenshot_sound.mp3")),
         desc="full screen screenshot",
     ),
     # =================

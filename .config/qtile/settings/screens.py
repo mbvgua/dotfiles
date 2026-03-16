@@ -53,7 +53,6 @@ widget_defaults: dict[str, str | int] = dict(
 extension_defaults: dict[str, str | int] = widget_defaults.copy()
 
 
-# Custom separator to match Polybar
 def create_separator():
     return widget.TextBox(
         text="|",
@@ -108,7 +107,6 @@ screens: list[Screen] = [
                 widget.Clock(
                     format="%a,%b %-d",
                     foreground=foregroundColor,
-                    # mouse_callbacks={"Button1": lazy.spawn("gnome-calendar")},
                 ),
                 create_separator(),
                 widget.Clock(

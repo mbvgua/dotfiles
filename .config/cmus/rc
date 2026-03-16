@@ -16,7 +16,7 @@ bind common L player-next
 bind common ^P player-prev
 bind common ^N player-next
 
-# play al songs in artist/album
+# play all songs in artist/album
 set continue=true
 
 # quit without asking for confirmation

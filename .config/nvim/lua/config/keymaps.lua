@@ -26,11 +26,11 @@ map("n", "<leader>l", "<C-w>l", { desc = "navigate to right window" })
 map("n", "<leader>k", "<C-w>k", { desc = "navigate to window above" })
 map("n", "<leader>j", "<C-w>j", { desc = "navigate to window below" })
 
--- resize windows with Ctrl+h\j\k\l Keys
-map("n", "<C-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
-map("n", "<C-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
-map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
-map("n", "<C-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
+-- resize windows with Ctrl+h\j\k\l Keys. like tmux
+map("n", "<A-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
+map("n", "<A-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
+map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
+map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
 
 -- navigate buffers easily with leader-(N)ext and (P)revious
 map("n", "<leader>n", ":bnext<CR>", { desc = "navigate to next buffer" })
@@ -41,39 +41,22 @@ map("n", "<leader>-",":split<CR>",{desc = "[-]Split window horizontally "})
 map("n", "<leader>\\",":vsplit<CR>",{desc = "[|] Split window vertically "})
 
 -- Hardmode ON!! from kickstart nvim
--- Disable arrow keys in normal mode
-map("n", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
-map("n", "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-map("n", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-map("n", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
-
--- Insert Mode Tricks
--- Disable arrow keys in insert mode with a styled message
--- map("i", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
--- map("i", "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
--- map("i", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
--- map("i", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+-- Disable arrow keys in normal & visual mode
+map({"v","n"}, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
+map({"v","n"}, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
+map({"v","n"}, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+map({"v","n"}, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
 
 -- Visual Mode Tricks
--- Disable arrow keys in visual mode
-map("v", "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
-map("v", "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-map("v", "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-map("v", "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
-
 -- remain in visual mode while identing to the right/left
 map("v", "<", "<gv", { desc = "ident leftwards" })
 map("v", ">", ">gv", { desc = "ident rightwards" })
 
--- Move text up and down
-map("v", "<A-j>", ":m .+1<CR>==", { desc = "move chunk downwards" })
-map("v", "<A-k>", ":m .-2<CR>==", { desc = "move chunk upwards" })
-
 -- Continously move block of text up and down
-map("x", "J", ":move '>+1<CR>gv-gv")
-map("x", "K", ":move '<-2<CR>gv-gv")
-map("x", "<A-j>", ":move '>+1<CR>gv-gv")
-map("x", "<A-k>", ":move '<-2<CR>gv-gv")
+map({"v","x"}, "K", ":move '<-2<CR>gv-gv",{ desc = "move chunk upwards" })
+map({"v","x"}, "J", ":move '>+1<CR>gv-gv",{desc="move chunk downwards"} )
+map({"v","x"}, "<A-k>", ":move '<-2<CR>gv-gv",{ desc = "move chunk upwards" })
+map({"v","x"}, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
 
 -- delete current buffer
 map("n","<leader>bb",":bd<CR>",{desc="[d]elete current [b]uffer"})
@@ -98,3 +81,7 @@ map("n", "<leader>bd", function()
 		end
 	end
 end, { desc = "[d]elete all [b]uffers except current" })
+
+-- insert base html desc
+-- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<cR>9jwf>a", { desc = "insert html boilerplate" })

@@ -1,30 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# NOTE: change away from pamixer to pulsemixer. both projects are unmaintained
-# and I like the TUI and functionality of the latter better.
-# try to fork and maintain it yourself:)
+# NOTE: pamixer is no longer maintained. fork and maintain it yourself:)
 dir="$HOME/.config/qtile/icons/notifications/"
 
 function send_notification() {
-	volume=$(pulsemixer --get-volume)
+	volume=$(pamixer --get-volume)
 	dunstify -a "changevolume" -u low -r "9993" -h int:value:"$volume" -i ${dir}/"volume-$1".png "Volume: ${volume}%" -t 2000
 }
 
 case $1 in
 up)
 	# Set the volume on (if it was muted)
-	pulsemixer --unmute
-	pulsemixer --change-volume +5 --max-volume 100
+	pamixer --unmute
+	pamixer -i 5 --allow-boost
 	send_notification $1
 	;;
 down)
-	pulsemixer --unmute
-	pulsemixer --change-volume -5 --max-volume 100
+	pamixer --unmute
+    pamixer -d 5
 	send_notification $1
 	;;
 mute)
-	pulsemixer --toggle-mute
-	if $(pulsemixer --get-mute); then
+	pamixer --toggle-mute
+	if $(pamixer --get-mute); then
 		dunstify -i ${dir}/volume-mute.png -a "changevolume" -t 2000 -r 9993 -u low "Muted"
 	else
 		send_notification up
