@@ -1,7 +1,7 @@
 [user]
 	name = mbvgua
 	email = 105845499+mbvgua@users.noreply.github.com
-	signingKey = /home/daagi/.ssh/id_ed25519_gitlab.pub
+	signingKey = /home/daagi/.ssh/id_ed25519_codeberg.pub
 [color]
 	ui = true
 [alias]
