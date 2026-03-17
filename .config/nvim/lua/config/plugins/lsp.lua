@@ -217,7 +217,6 @@ return {
 			ts_ls = {}, -- javascript, typescript
 			dockerls = {},
 			docker_compose_language_service = {},
-			volar = {}, -- vue
 			sqlls = {}, -- sql
 			taplo = {}, -- tomml
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen

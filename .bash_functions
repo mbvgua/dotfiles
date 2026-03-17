@@ -1,6 +1,3 @@
-############################################
-# 4.Functions                              #
-############################################
 # Create a new git directory and enter it
 gitdir() {
     mkdir -p "$@" && cd "$@" && git init

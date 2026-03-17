@@ -1,7 +1,3 @@
-############################################
-# 3.Aliases                                #
-############################################
-
 # downloads
 # entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "

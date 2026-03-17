@@ -26,9 +26,11 @@ set scrolloff=7
 set sidescrolloff=8 
 
 " no colors!!! no higlighting at all. plain black and white
-syntax on
+"syntax on
 set termguicolors
-"colorscheme desert
+" unokai -> monokai	retrobox->gruvbox
+" sorbet -> dracula	zaibatsu -> tokyo night
+colorscheme unokai
 
 " split go below always
 set splitbelow
@@ -73,9 +75,6 @@ set hidden
 
 " Automatically re-read the file if it has changed and not ask me every single time!!!
 set autoread
-
-" Disable showmode - i.e. Don't show mode texts like --INSERT-- in current statusline.
-set noshowmode 
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -139,30 +138,7 @@ map <silent> <leader>e :call ToggleVexplorer()<CR>
 " }}}
 
 
-" 3.Status Bar -------------------------------------------------------------- {{{
-
-" custom colours for different sections of status line
-hi User1 ctermbg=black ctermfg=grey guibg=black guifg=grey
-hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
-hi User3 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
-
-" StatuslineMode: which mode that you are currently in
-" t -> the filename
-" m -> modified flag text, either [+] or [-]
-set statusline+=%*\ %{StatuslineMode()}\ %3*\ %t\ %m
-
-" Use a divider to separate the left side from the right side.
-set statusline+=%=
-
-" y -> type of file
-" ff -> file encoding
-" r -> if file is read only 
-set statusline+=%3*\ %r\ LOC:\%l/%L\ %p%%\ %*
-
-"}}}
-
-
-" 4.Vimscript -------------------------------------------------------------- {{{ 
+" 3.Vimscript -------------------------------------------------------------- {{{ 
 
 " MODIFY NETWR
 " From this stackoverflow dicussion: https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
@@ -233,22 +209,7 @@ function! ToggleVexplorer()
   endif
 endfunction
 
-" custom statusline functions to get the Vim Mode you are in
-function! StatuslineMode()
-  let l:mode=mode()
-  if l:mode==#"n"
-      return "NORMAL"
-  elseif l:mode==?"v"
-      return "VISUAL"
-  elseif l:mode==#"i"
-      return "INSERT"
-  elseif l:mode==#"R"
-      return "REPLACE"
-  endif
-endfunction
-
-" This will enable code folding.
-" Use the marker method of folding.
+" This will enable code folding using the marker method
 " only in this specific .vimrc file
 augroup filetype_vim
     autocmd!
