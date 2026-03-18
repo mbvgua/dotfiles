@@ -12,17 +12,11 @@
     - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Make your diffs human readable instead of machine readable.
     - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
 - **Video/Music player**: [mpv](https://github.com/mpv-player/mpv) - command line media player.
-- **Audio player**:
-    - [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems.
-    - [kew](https://codeberg.org/ravachol/kew) - Music for the Shell
-- **Web browser**:
-    - [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
-    - [qutebrowser](https://github.com/qutebrowser/qutebrowser) - A keyboard-driven, vim-like browser based on Python and Qt
+- **Audio player**: [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems.
+- **Web browser**: [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
 - **App launcher**: [rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
 - **Image viewer**: [feh](https://github.com/derf/feh) - a fast and light image viewer.
-- **File manager**:
-    - [thunar](https://gitlab.xfce.org/xfce/thunar) - Modern, fast and easy-to-use file manager for Xfce
-    - [ranger](https://github.com/ranger/ranger) - a VIM-inspired filemanager for the console .
+- **File manager**: [thunar](https://gitlab.xfce.org/xfce/thunar) - Modern, fast and easy-to-use file manager for Xfce
 - **Pdf reader**: [zathura](https://pwmt.org/projects/zathura) - a highly customizable and functional document viewer. It provides a minimalistic and space saving interface as well as an easy usage that mainly focuses on keyboard interaction.
 - **Blue light filter**: [redshift](https://github.com/jonls/redshift) - Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
 - **Notifications**: [dunst](https://github.com/dunst-project/dunst) - A highly configurable and lightweight notification daemon.
@@ -32,7 +26,6 @@
 - CLI
     - [yt-dlp](https://github.com/yt-dlp/yt-dlp) - a feature-rich command-line audio/video downloader.
     - [keyd](https://github.com/rvaiya/keyd) - a key remapping daemon for linux.
-    - [eza](https://github.com/eza-community/eza) - a modern alternative to ls.
     - [nm-applet](https://gitlab.gnome.org/GNOME/network-manager-applet) - tray applet and an advanced network connection editor.
     - [blueman-applet](https://github.com/blueman-project/blueman) - a GTK+ Bluetooth Manager.
     - [btop](https://github.com/aristocratos/btop) - Linux/OSX/FreeBSD resource monitor.
