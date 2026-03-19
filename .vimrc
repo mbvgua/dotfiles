@@ -50,12 +50,35 @@ set noswapfile
 
 " 2.key bindings--------------------------------------------------------------------- {{{
 
+" map leader to space
+nnoremap <Space> <Nop>
+let mapleader = " "
+
+" add some mods to match nvim
+map <leader>w :w<CR>			" save file content
+map <leader>c <C-w>c<CR>		" close a window
+map <leader>so :noh<CR>		        " stop search highlight
+map <leader>\ :vsplit<CR>		" vertical split
+map <leader>- :split<CR>		" horizontal split
+
 " netrw from this discussion: https://stackoverflow.com/a/51199145/30236232
 map <silent> <leader>e :call ToggleNetrw()<CR>
 
 " navigate between recent buffers
 noremap <leader>n :bnext<CR>
 noremap <leader>p :bprevious<CR>
+
+" insert automatic closing and opening brackets,parens,quotation marks
+" to escape them use ctrl+v before typing mapped command
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap < <><left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " }}}
 

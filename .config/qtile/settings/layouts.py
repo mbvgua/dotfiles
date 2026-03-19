@@ -20,10 +20,13 @@ layout_theme: dict[str, int | str] = {
 
 # less is more!
 layouts = [
-    layout.MonadTall(**layout_theme),
+    layout.Tile(
+        **layout_theme,
+        add_after_last=True,
+    ),#better than monadtall imo. main window is larger
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
-    # layout.Tile(**layout_theme), #same as monadtall. place new window before
+    # layout.MonadTall(**layout_theme),
     # layout.Columns(**layout_theme), # same as monadtall
     # Try more layouts by unleashing below layouts.
     # layout.Floating(**layout_theme), # dont know how to use this
