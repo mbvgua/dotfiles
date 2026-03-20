@@ -2,8 +2,21 @@
 	name = mbugua
 	email = mbuguadouglas17@gmail.com
 	signingKey = /home/daagi/.ssh/id_ed25519_codeberg.pub
-[color]
-	ui = true
+[core]
+	editor = nvim -u ~/.vimrc
+	symlink = true
+	pager = diff-so-fancy | less --tabs=4 -RF
+[init]
+	defaultBranch = main
+[commit]
+	template = ~/.config/git/message
+	gpgSign = true
+[status]
+	submodulesummary = 1
+[pull]
+	rebase = false
+[merge]
+	tool = smerge
 [alias]
     ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Creset' --all --abbrev-commit
@@ -25,29 +38,16 @@
     sur = submodule update --remote
     ; pull all remote branches into local working directory
 	pa = "!git branch -r | grep -v \"\\->\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && git fetch --all && git pull --all"
-[core]
-	editor = nvim -u ~/.vimrc
-	symlink = true
-	pager = diff-so-fancy | less --tabs=4 -RF
-[merge]
-	tool = smerge
-[init]
-	defaultBranch = main
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[pull]
-	rebase = false
-[commit]
-	template = ~/.config/git/message
-	gpgSign = true
-[status]
-	submodulesummary = 1
-[interactive]
-	diffFilter = diff-so-fancy --patch
 [gpg]
 	format = ssh
+[color]
+	ui = true
 [help]
 	autocorrect = 3
+[interactive]
+	diffFilter = diff-so-fancy --patch

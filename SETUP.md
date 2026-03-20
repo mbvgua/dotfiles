@@ -28,7 +28,6 @@
     - [keyd](https://github.com/rvaiya/keyd) - a key remapping daemon for linux.
     - [nm-applet](https://gitlab.gnome.org/GNOME/network-manager-applet) - tray applet and an advanced network connection editor.
     - [blueman-applet](https://github.com/blueman-project/blueman) - a GTK+ Bluetooth Manager.
-    - [btop](https://github.com/aristocratos/btop) - Linux/OSX/FreeBSD resource monitor.
     - [paplay](https://linux.die.net/man/1/paplay) - play back audio files on a PulseAudio sound server.
     - [wget](https://cgit.git.savannah.gnu.org/cgit/wget.git) - A free software package for retrieving files using HTTP, HTTPS, FTP, and FTPS.
     - [curl](https://github.com/curl/curl) - a command-line tool for transferring data specified with URL syntax.
