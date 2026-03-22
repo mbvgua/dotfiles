@@ -19,10 +19,7 @@ return {
 			lualine_a = { { "mode", separator = { left = "", right = "" } } },
 			lualine_b = {
 				{ "branch", icon = "" },
-				{
-					"diff",
-					symbols = { added = " ", modified = " ", removed = " " },
-				},
+				{ "diff" },
 			},
 			lualine_c = {
 				{ "diagnostics" },
@@ -64,8 +61,8 @@ return {
 				},
 			},
 			lualine_y = {
-                -- already in tabline. total duplication
-                -- also want to minimize items on statusline
+				-- already in tabline. total duplication
+				-- also want to minimize items on statusline
 				-- { "filetype", icon = { align = "right" } },
 				-- "fileformat",
 			},
