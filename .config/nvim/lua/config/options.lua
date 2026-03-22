@@ -6,7 +6,7 @@ local opt = vim.opt
 local fn = vim.fn
 local wo = vim.wo
 
--- Enable mouse mode: 
+-- Enable mouse mode:
 -- {"a"- all, "n"-normal, "v"-visual,"i"-insert,"c"-command,"nv"-normal&visual}
 o.mouse = "a"
 
@@ -43,7 +43,7 @@ opt.softtabstop = 4
 
 -- how whitespace characters are displayed
 opt.list = true
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", extends = "▸", precedes = "◂" }
 
 -- highlight text when doing a search
 o.hlsearch = true
@@ -109,7 +109,7 @@ opt.splitbelow = true
 
 -- border on floating boxes/snacks picker e.t.c
 -- options: "bold","double","none","rounded","shadow","single","solid"
-o.winborder = "rounded"
+-- o.winborder = "rounded"
 
 -- BACKUP FILES SETTINGS
 -- put swap,backup and undo files in a special location instead of current directory
