@@ -1,7 +1,7 @@
 [user]
 	name = mbvgua
 	email = 105845499+mbvgua@users.noreply.github.com
-	signingKey = /home/daagi/.ssh/id_ed25519_codeberg.pub
+	signingkey = /home/daagi/.ssh/id_ed25519_gitlab.pub
 [core]
 	editor = nvim -u ~/.vimrc
 	symlink = true
@@ -10,7 +10,9 @@
 	defaultBranch = main
 [commit]
 	template = ~/.config/git/message
-	gpgSign = true
+	gpgsign = true
+[gpg]
+	format = ssh
 [status]
 	submodulesummary = 1
 [pull]
@@ -43,8 +45,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[gpg]
-	format = ssh
 [color]
 	ui = true
 [help]
