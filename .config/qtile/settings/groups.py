@@ -58,9 +58,9 @@ groups.append(
         [
             # wezterm terminal with tmux
             DropDown(
-                "wezterm",
+                "terminal",
                 f"{terminal} -e tmux",
-                match=Match(wm_class="org.wezfurlong.wezterm"),
+                match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
                 height=0.6,

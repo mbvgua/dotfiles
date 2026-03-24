@@ -207,7 +207,7 @@ return {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			bashls = {}, -- bash
 			lua_ls = {}, -- lua
-			-- clangd = {}, -- c/c++
+			clangd = {}, -- c/c++
 			html = {}, -- html
 			cssls = {}, -- css
 			angularls = {}, -- angular

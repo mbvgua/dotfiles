@@ -12,7 +12,7 @@ space: str = "space"  # the space key
 control: str = "control"
 
 # my tools of choice
-terminal: str = "wezterm"
+terminal: str = "alacritty"
 browser: str = "~/helium-0.9.2.1-x86_64.AppImage"
 files: str = "thunar"
 teams: str = "teams-for-linux"
@@ -281,7 +281,7 @@ keys: list[Key | KeyChord] = [
         # also will have nested tmux instance, thus navigating between
         # Ctrl+A and Tux+a is really convenient
         "a",
-        lazy.group["scratchpad"].dropdown_toggle("wezterm"),
+        lazy.group["scratchpad"].dropdown_toggle("terminal"),
         desc="open wezterm with tmux scratchpad",
     ),
     # toggle grayscale mode!! shiny lights bad...

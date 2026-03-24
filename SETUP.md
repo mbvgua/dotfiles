@@ -4,7 +4,7 @@
 - **Window manager**: [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
 - **Compositor**: [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
 - **Shell**: [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.
-- **Terminal emulator**: [wezterm](https://github.com/wezterm/wezterm) - A GPU-accelerated cross-platform terminal emulator and multiplexer written and implemented in Rust .
+- **Terminal emulator**: [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.
 - **Terminal multiplexer**: [tmux](https://github.com/tmux/tmux) - A terminal multiplexer.
 - **Text editor**: [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
 - **Version controll**: 

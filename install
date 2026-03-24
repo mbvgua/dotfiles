@@ -4,7 +4,7 @@ tools=(
     # dev tools
     "cpp perl lua python luajit make gcc clang"
     "git git-lfs diff-so-fancy stow keyd wget curl"
-    "bash tmux nvim vim btop wezterm cmus"
+    "bash tmux nvim vim btop alacritty cmus"
     "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     # wm_tools
     "zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
@@ -32,9 +32,6 @@ install_base(){
 #     pull helium appimage
 #     move to home directory
 #     make it executable
-#
-#     WEZTERM
-#     install wezterm via copr
 #
 #     PYTHON
 #     pip install pipx
