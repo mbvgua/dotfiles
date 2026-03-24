@@ -33,7 +33,7 @@ alias :Wqa="exit"
 # navigation
 alias treee='tree --filelimit 15'
 # add the --color flag clashes with wezterm theme making text illegible
-alias ls='ls --group-directories-first --indicator-style=slash -1'
+alias ls='ls --group-directories-first --indicator-style=slash --color -1'
 alias .1='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
