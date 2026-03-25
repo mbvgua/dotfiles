@@ -6,9 +6,7 @@ map p print
 set adjust-open width
 set recolor false
 
-# Monokai color theme for Zathura
-# Swaps Foreground for Background to get a light version if the user prefers
-# To switch between backgrounds, use <C-r>
+# monokai colour scheme!!! use <C-r> to switch
 
 set notification-error-bg       rgba(249,38,114,1)     # Red/Pink
 set notification-error-fg       rgba(248,248,242,1)    # Foreground
@@ -23,11 +21,6 @@ set completion-group-bg         rgba(39,40,34,1)       # Background
 set completion-group-fg         rgba(117,113,94,1)     # Comment
 set completion-highlight-bg     rgba(73,72,62,1)       # Selection
 set completion-highlight-fg     rgba(248,248,242,1)    # Foreground
-
-set index-bg                    rgba(39,40,34,1)       # Background
-set index-fg                    rgba(248,248,242,1)    # Foreground
-set index-active-bg             rgba(73,72,62,1)       # Current Line
-set index-active-fg             rgba(248,248,242,1)    # Foreground
 
 set inputbar-bg                 rgba(39,40,34,1)       # Background
 set inputbar-fg                 rgba(248,248,242,1)    # Foreground
