@@ -45,7 +45,7 @@ def startup_wallpaper():
 widget_defaults: dict[str, str | int] = dict(
     font="JetBrains Mono Nerd Font Bold",
     fontsize=24,
-    padding=7,
+    padding=5,
     background=backgroundColor,
     foreground=foregroundColor,
 )
@@ -142,7 +142,7 @@ screens: list[Screen] = [
                     # still doent work?
                     get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
                     check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
-                    check_mute_string="Volume: 0.00",
+                    check_mute_string="Volume: 0.00 [MUTED]",
                     foreground=foregroundColor,
                 ),
                 create_separator(),
@@ -184,7 +184,7 @@ screens: list[Screen] = [
                 create_separator(),
                 widget.TextBox(
                     foreground=foregroundColor,
-                    fmt="⏻",
+                    fmt="⏻ ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
                             os.path.expanduser("~/.local/bin/power"),
