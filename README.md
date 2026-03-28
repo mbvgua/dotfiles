@@ -1,7 +1,8 @@
 <h1 align="center">dotfiles ~/.</h1>
 
 Choose a branch depending on the OS currently in use:
-- `xorg/fedora`: gnu/linux + fedora + qtile wm
+- `xorg/fedora`: gnu/linux + fedora
+- `xorg/void`: gnu/linux + void
 
 ## How?
 
