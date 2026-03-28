@@ -51,11 +51,9 @@ floating_layout = layout.Floating(
         # or `wn` thanks to my bash script
         *layout.Floating.default_float_rules,
         Match(wm_class="feh"),  # image viewer
-        Match(wm_class="sshpass"),  # sshpass
         Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="qbittorrent"),  # qbittorrent
-        Match(title="pinentry"),  # GPG key password entry
     ],
 )
 

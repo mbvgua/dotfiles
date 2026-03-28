@@ -13,7 +13,7 @@ control: str = "control"
 
 # my tools of choice
 terminal: str = "alacritty"
-browser: str = "~/helium-0.9.2.1-x86_64.AppImage"
+browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
 files: str = "thunar"
 teams: str = "teams-for-linux"
 
@@ -70,16 +70,16 @@ def notify_restart():
 
 keys: list[Key | KeyChord] = [
     # =================
-    # Qtile specific
+    # Qtile General
     # =================
     Key(
-        [mod, control],
+        [mod, shift],
         "r",
         lazy.function(notify_restart()),
         lazy.restart(),
         desc="[r]estart qtile",
     ),
-    Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
+    Key([mod, shift], "q", lazy.shutdown(), desc="shutdown [q]tile"),
     Key(
         [mod, mod2],
         "l",
@@ -89,7 +89,7 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "delete",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/power")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/power")),
         desc="activate poweroff menu",
     ),
     # =================
@@ -123,11 +123,10 @@ keys: list[Key | KeyChord] = [
         lazy.layout.swap_right(),
         desc="Move window down/right",
     ),
-    # Resize windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
+    # Resize windows
     Key(
         [mod, shift],
-        "left",
+        "h",
         lazy.layout.grow_left(),
         lazy.layout.shrink(),
         lazy.layout.decrease_ratio(),
@@ -136,7 +135,7 @@ keys: list[Key | KeyChord] = [
     ),
     Key(
         [mod, shift],
-        "right",
+        "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
@@ -145,7 +144,7 @@ keys: list[Key | KeyChord] = [
     ),
     Key(
         [mod, shift],
-        "down",
+        "j",
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
@@ -153,29 +152,29 @@ keys: list[Key | KeyChord] = [
     ),
     Key(
         [mod, shift],
-        "up",
+        "k",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
         desc="Increase window upwards",
     ),
     Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
-    # not set to mod+q to match broswers. i.e ctrl+w to quit tab
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
     # =================
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key(
-        [mod],
-        "t",
+        [mod, shift],
+        "space",
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
     # =================
     # Focus Control
     # =================
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "n", lazy.layout.previous(), desc="Move window focus to previous window"),
+    Key([mod], "p", lazy.layout.next(), desc="Move window focus to next window"),
     Key(
         [mod],
         "f",
@@ -185,15 +184,8 @@ keys: list[Key | KeyChord] = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch wezterm terminal"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
-    # TODO: how can i make this work with '?' like nvim
-    # Key(
-    #     [mod],
-    #     "h",
-    #     lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/help")),
-    #     desc="[h]elp with keybindings mapping",
-    # ),
     KeyChord(
         [mod],
         "o",
@@ -207,12 +199,6 @@ keys: list[Key | KeyChord] = [
                 lazy.group["scratchpad"].dropdown_toggle("bt"),
                 desc="open [b]luetooth scratchpad",
             ),
-            Key(
-                [],
-                "d",
-                lazy.group["scratchpad"].dropdown_toggle("diary"),
-                desc="open [d]iary scratchpad",
-            ),
         ],
     ),
     # =================
@@ -221,25 +207,25 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "m",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume mute")),
         desc="Mute/Unmute",
     ),
     Key(
         [],
         "XF86AudioRaiseVolume",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changevolume up")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume up")),
         desc="Volume up",
     ),
     Key(
         [],
         "XF86AudioLowerVolume",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changevolume down")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume down")),
         desc="Volume down",
     ),
     Key(
         [],
         "XF86AudioMute",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume mute")),
         desc="Mute/Unmute",
     ),
     # =================
@@ -248,13 +234,13 @@ keys: list[Key | KeyChord] = [
     Key(
         [],
         "XF86MonBrightnessUp",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changebrightness up")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/changebrightness up")),
         desc="Brightness up",
     ),
     Key(
         [],
         "XF86MonBrightnessDown",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/changebrightness down")),
+        lazy.spawn(os.path.expanduser("~/.local/bin down")),
         desc="Brightness down",
     ),
     # =================
@@ -288,7 +274,7 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "g",
-        lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/toggle_grayscale")),
+        lazy.spawn(os.path.expanduser("~/.local/bin/toggle_grayscale")),
         desc="toggle [g]rayscale mode systemwide",
     ),
 ]

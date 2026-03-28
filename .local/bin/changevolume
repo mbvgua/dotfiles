@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+dir="$HOME/.local/share/icons/"
+step=5
+
+function send_notification() {
+	volume_raw=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+	volume_float=$(echo "$volume_raw" | awk '{print $2}')          # e.g. 0.85
+	volume_percent=$(echo "$volume_float * 100" | bc -l)          # 85.0
+	volume_int=$(printf "%.0f" "$volume_percent")                  # 85
+
+	dunstify \
+		-a "changevolume" \
+		-u low \
+		-r "9993" \
+		-h int:value:"$volume_int" \
+		-i "$dir/volume-$1.png" \
+		"${volume_int}%" \
+		-t 2000
+}
+
+case $1 in
+    up)
+        # Set the volume on (if it was muted)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$step%+" --limit 1.0
+        send_notification $1
+        ;;
+    down)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$step%-"
+        send_notification $1
+        ;;
+    mute)
+        wpctl set-mute @DEFAULT_SINK@ toggle
+        if $(pamixer --get-mute); then
+            dunstify -i ${dir}/volume-mute.png -a "changevolume" -t 2000 -r 9993 -u low "Muted"
+        else
+            send_notification up
+        fi
+        ;;
+esac

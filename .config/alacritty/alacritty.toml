@@ -17,24 +17,11 @@ y = 2
 [font]
 size = 14
 
+# NOTE: ensure youve installed the entire NerdFonts package
+# that eliminates incorrect font fallback
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Regular"
-
-# NOTE: fallsback to normal font specified,
-# else font rendering will be weird
-
-[font.bold]
-family = "JetBrainsMono Nerd Font"
-style = "Bold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font"
-style = "Italic"
-
-[font.bold_italic]
-family = "JetBrainsMono Nerd Font"
-style = "Bold Italic"
 
 [colors]
 draw_bold_text_with_bright_colors = true

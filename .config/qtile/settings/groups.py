@@ -43,7 +43,6 @@ groups.append(
         name=group_names[1],
         matches=[
             Match(wm_class="helium"),
-            Match(wm_class="brave-browser"),
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="qbittorrent"),
             Match(wm_class="teams-for-linux"),
@@ -56,7 +55,7 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            # wezterm terminal with tmux
+            # terminal scratchpad with tmux
             DropDown(
                 "terminal",
                 f"{terminal} -e tmux",
@@ -67,18 +66,6 @@ groups.append(
                 x=0.2,
                 y=0.02,
                 opacity=0.95,
-            ),
-            # simple notes scratchpad
-            DropDown(
-                "diary",
-                f"{terminal} -e nvim {os.path.expanduser('~/.diary/README.md')}",
-                match=Match(wm_class="org.wezfurlong.wezterm"),
-                on_focus_lost_hide=False,
-                width=0.6,
-                height=0.7,
-                x=0.2,
-                y=0.02,
-                opacity=1,
             ),
             # bluetooth UI
             DropDown(
