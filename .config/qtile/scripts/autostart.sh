@@ -37,6 +37,3 @@ pipewire &
 
 # mount and unmount drives
 udiskie --automount --notify --smart-tray --file-manager thunar &
-
-# appeanrance settings
-lxappearance &

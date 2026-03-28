@@ -38,4 +38,4 @@ xfce4-screensaver &
 udiskie --automount --notify --smart-tray --file-manager thunar &
 
 # appeanrance settings
-lxappearance &
+# lxappearance &
