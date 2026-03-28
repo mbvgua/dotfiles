@@ -1,7 +1,8 @@
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# basic fedora-coloured+void-minimalist bash prompt
+export PS1='\[\e[01;32m\][\u@\h \W]\$\[\e[00m\] '
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
@@ -15,29 +16,15 @@ for file in ~/.{bash_aliases,bash_functions}; do
 done
 unset file
 
-# mssql-server
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# cargo for rust
-. "$HOME/.cargo/env"
-
 # pnpm
-export PNPM_HOME="/home/daagi/.local/share/pnpm"
+export PNPM_HOME="/home/mbugua/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+# Load Angular CLI autocompletion.
+#source <(ng completion script)
 
 export TERM="xterm-256color"
 
@@ -55,3 +42,9 @@ export HISTCONTROL=ignoredups:erasedups
 
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
+
+# set 3.10 as global python verions
+# its of cultural significance whre im from
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"

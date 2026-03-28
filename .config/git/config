@@ -1,7 +1,7 @@
 [user]
 	name = mbugua
 	email = mbuguadouglas17@gmail.com
-	signingkey = /home/daagi/.ssh/id_ed25519_gitlab.pub
+	signingKey = /home/mbugua/.ssh/id_ed25519_codeberg.pub
 [core]
 	editor = nvim -u ~/.vimrc
 	symlink = true
@@ -10,7 +10,7 @@
 	defaultBranch = main
 [commit]
 	template = ~/.config/git/message
-	gpgsign = true
+	gpgSign = true
 [gpg]
 	format = ssh
 [status]
@@ -18,7 +18,8 @@
 [pull]
 	rebase = false
 [merge]
-	tool = smerge
+	tool = subl-merge
+	conflictStyle = zdiff3
 [alias]
     ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Creset' --all --abbrev-commit
@@ -31,7 +32,7 @@
 	ch = checkout
     cl = clone
 	last = log -1 HEAD
-	visual = !smerge .
+	visual = !subl-merge .
     contributors = shortlog -nse
 	standup = log --since='yesterday' --author='mbugua'
     mine = log --author='mbugua'

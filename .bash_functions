@@ -85,7 +85,6 @@ calc() {
 
 # clean unused packages
 clean(){
-    sudo dnf autoremove
-    sudo dnf clean packages
-    sudo dnf clean all
+    sudo xbps-remove -o
+    sudo xbps-remove -O
 }

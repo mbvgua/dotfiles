@@ -3,6 +3,7 @@ import subprocess
 from types import NoneType
 
 from libqtile import hook
+from libqtile.log_utils import logger
 
 from settings.groups import groups
 from settings.keybindings import keys
@@ -35,5 +36,6 @@ wmname:str = "LG3D"
 # a bash script to autostart programs on startup
 @hook.subscribe.startup_once
 def start_once():
+    logger.warning("Start autostart script")
     home:str = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])

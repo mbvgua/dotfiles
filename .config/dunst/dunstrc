@@ -142,7 +142,7 @@
 
     ### Text ###
 
-    font = JetBrainsMono Nerd Font 11
+    font = JetBrainsMono Nerd Font 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -238,7 +238,7 @@
     max_icon_size = 32
 
     # Paths to default icons (only necessary when not using recursive icon lookup)
-    icon_path = /home/daagi/.config/dunst/icons/
+    icon_path = /home/mbugua/.config/dunst/icons/
 
     ### History ###
 
@@ -359,7 +359,7 @@
     #override_pause_level = 30
     # Icon for notifications with normal urgency
     default_icon = dialog-information
-    script = "/home/daagi/.config/qtile/scripts/alert_normal"
+    script = "/home/mbugua/.local/bin/alert_normal"
 
 
 [urgency_critical]
@@ -373,12 +373,8 @@
     # Icon for notifications with critical urgency
     default_icon = dialog-warning
     # play sound for critical alerts
-    script = "/home/daagi/.config/qtile/scripts/alert_battery"
+    script = "/home/mbugua/.local/bin/alert_battery"
 
-
-#[play_sound]
-#    summary = "*"
-#    script = "/home/daagi/.config/qtile/scripts/normal_alert"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

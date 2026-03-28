@@ -4,11 +4,9 @@
 /usr/lib/polkit-1/polkit-agent-helper-1 &
 
 # background
-# handled in ./../settings/screens.py to allow for random wallpapers
-# feh --bg-fill  ~/.config/qtile/wallpapers/ &
+feh --bg-fill  ~/.config/i3/wallpapers/ &
 
 # compositor
-# start in grayscale mode
 picom --config ~/.config/picom/picom.conf -b &
 
 # Notifications
@@ -17,10 +15,14 @@ dunst -config ~/.config/dunst/dunstrc &
 # network manager
 nm-applet --indicator &
 
+# for audio
+# wpctl set-default 51
+pipewire &
+
 # bluetooth manager
 blueman-applet &
 
-# restore brightness
+# set my brightness, runit doesnt restore
 brightnessctl set 10% &
 
 # blue light filter
@@ -31,9 +33,6 @@ xfce4-power-manager &
 
 # lockscreen functionality, turns out xfce is nice!
 xfce4-screensaver &
-
-# for audio
-pipewire &
 
 # mount and unmount drives
 udiskie --automount --notify --smart-tray --file-manager thunar &

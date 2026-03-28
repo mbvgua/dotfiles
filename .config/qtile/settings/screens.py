@@ -44,8 +44,8 @@ def startup_wallpaper():
 
 widget_defaults: dict[str, str | int] = dict(
     font="JetBrains Mono Nerd Font Bold",
-    fontsize=22,
-    padding=4,
+    fontsize=24,
+    padding=7,
     background=backgroundColor,
     foreground=foregroundColor,
 )
@@ -138,8 +138,11 @@ screens: list[Screen] = [
                 ),
                 # only mute/unmute from here. the toggle volume with keybinds
                 widget.Volume(
-                    check_mute_command="pamixer --get-mute",
-                    check_mute_string="true",
+                    # NOTE: uses amixer by default. not using that here
+                    # still doent work?
+                    get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
+                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
+                    check_mute_string="Volume: 0.00",
                     foreground=foregroundColor,
                 ),
                 create_separator(),
@@ -151,15 +154,15 @@ screens: list[Screen] = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(terminal + " -e btop")
+                        "Button1": lambda: qtile.spawn(terminal + " -e btop")
                     },
                 ),
                 create_separator(),
                 widget.BatteryIcon(
                     scale=1.5,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(
-                            os.path.expanduser("~/.config/qtile/scripts/battery"),
+                        "Button1": lambda: qtile.spawn(
+                            os.path.expanduser("~/.local/bin/battery"),
                         )
                     },
                 ),
@@ -173,8 +176,8 @@ screens: list[Screen] = [
                     notify_below=20,  # send notification below this %
                     notification_timeout=0,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(
-                            os.path.expanduser("~/.config/qtile/scripts/battery"),
+                        "Button1": lambda: qtile.spawn(
+                            os.path.expanduser("~/.local/bin/battery"),
                         )
                     },
                 ),
@@ -183,8 +186,8 @@ screens: list[Screen] = [
                     foreground=foregroundColor,
                     fmt="⏻",
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(
-                            os.path.expanduser("~/.config/qtile/scripts/power"),
+                        "Button1": lambda: qtile.spawn(
+                            os.path.expanduser("~/.local/bin/power"),
                         )
                     },
                 ),

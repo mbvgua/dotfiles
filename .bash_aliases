@@ -11,7 +11,7 @@ alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly
 alias hist='history'                            # show history
 alias hgrep='history | grep'                    # search for command in history
-alias lgrep='ls -1a | grep'                      # search for file/directory in .
+alias lgrep='ls -1a | grep'                     # search for file/directory in .
 alias files='thunar'                            # open files easily
 
 # view images with feh {default image and slideahow}
@@ -19,8 +19,8 @@ alias feh='feh --fullscreen --draw-filename --info %h%S'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
 
 # alter system volume
-alias vol+='pulsemixer --change-volume +10'
-alias vol-='pulsemixer --change-volume -10'
+alias vol+='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+'
+alias vol-='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-'
 
 # typos
 alias :q="exit"
@@ -32,7 +32,6 @@ alias :Wqa="exit"
 
 # navigation
 alias treee='tree --filelimit 15'
-# add the --color flag clashes with wezterm theme making text illegible
 alias ls='ls --group-directories-first --indicator-style=slash --color -1'
 alias .1='cd ..'
 alias .2='cd ../..'
@@ -62,11 +61,5 @@ alias drma='docker system prune -a --volumes'
 # get window class name for qtile
 alias wn="xprop WM_CLASS"
 
-# open qtile logs
-alias qlogs="nvim ~/.local/share/qtile/qtile.log"
-
 # what fonts are here?
-alias fonts="fc-list : family , style"
-
-# opposite of startx.logout of qtile basically
-alias killx="qtile cmd-obj -o cmd -f shutdown"
+alias ls-fonts="fc-list : family , style"

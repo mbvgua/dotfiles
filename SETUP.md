@@ -1,7 +1,9 @@
 ## Tools
 
-- **OS**: fedora
-- **Window manager**: [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
+- **OS**: GNU/Linux + Void
+- **Window manager**: 
+    - [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
+    - [i3](https://github.com/i3/i3) - A tiling window manager for X11.
 - **Compositor**: [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
 - **Shell**: [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.
 - **Terminal emulator**: [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.
@@ -52,15 +54,17 @@ Navigate to your `$HOME` directory and:
 
 > [!IMPORTANT]
 >
-> A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchpad. This can be done in the config if you are on wayland, but I am yet to migrate ;). In your terminal of choice, input: `sudoedit /usr/share/X11/xorg.conf.d/40-libinput.conf`. Then add the `"Option" "Tapping" "True"` in the below section:
+> A neccessary QoL if you are on the `qtile` WM is adding click support, which allows for click actions using the touchpad. This can be done in the config if you are on wayland, but I am yet to migrate ;). In your terminal of choice, input: `sudoedit /etc/X11/xorg.conf.d/40-libinput.conf`. Then add the code block below:
 >  
 >  ```bash
->  Section "InputClass"
->          Identifier "libinput touchpad catchall"
->          MatchIsTouchpad "on"
->          MatchDevicePath "/dev/input/event*"
->          Driver "libinput"
->          Option "Tapping" "True" # this option here
->  EndSection
+> Section "InputClass"
+> 	Identifier "libinput touchpad catchall"
+> 	MatchIsTouchpad "on"
+> 	MatchDevicePath "/dev/input/event*"
+> 	Driver "libinput"
+> 	Option "Tapping" "on"
+> 	Option "TappingDrag" "on"
+> 	Option "NaturalScrolling" "false"
+> EndSection
 >  ```
 

@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
-#
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
-
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/"
 theme='style-2'
@@ -62,18 +53,16 @@ run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
-			systemctl poweroff
+			loginctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
-			systemctl reboot
+			loginctl reboot
 		elif [[ $1 == '--suspend' ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
+			loginctl suspend
 		elif [[ $1 == '--logout' ]]; then
 			if [[ "$DESKTOP_SESSION" == 'qtile' ]]; then
 				qtile cmd-obj -o cmd -f shutdown
-			elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
-				bspc quit
+			elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
+				i3-msg exit
 			fi
 		fi
 	else
@@ -93,8 +82,6 @@ case ${chosen} in
     $lock)
 		if [[ -x '/usr/bin/betterlockscreen' ]]; then
 			betterlockscreen -l
-		# elif [[ -x '/usr/bin/slock' ]]; then
-		# 	slock
 		elif [[ -x '/usr/bin/xfce4-screensaver' ]]; then
 			xfce4-screensaver-command -l
 		fi

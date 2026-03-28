@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
 tools=(
-    # dev tools
-    "cpp perl lua python luajit make gcc clang"
-    "git git-lfs diff-so-fancy stow keyd wget curl"
-    "bash tmux nvim vim btop alacritty cmus"
-    "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
-    # wm_tools
+    # cpp deepin-screenshot
+    "perl lua python LuaJIT make gcc clang nodejs pnpm"
+    "git git-lfs  stow keyd wget curl bluez libspa-bluetooth lxappearance"
+    "i3 i3status qtile bash tmux neovim vim btop alacritty cmus nerd-fonts"
+    "docker docker-buildx docker-compose btop void-repo-nonfree gnome-themes-extra"
     "zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
-    "deepin-screenshot rofi dunst feh picom brightnessctl redshift"
-    "mpv network-manager-applet pamixer paplay pipewire-pulse"
-    "lxappearance Thunar xfce4-power-manager xfce4-screensaver"
-    "polkit unzip autoconf automake xset xrandr ImageMagick"
+    "rofi dunst feh mpv brightnessctl redshift redshift-gtk pipewire ripgrep alsa-pipewire"
+    "polkit xfce4 picom NetworkManager network-manager-applet pamixer blueman"
+    "unzip autoconf automake xset xrandr ffmpeg ImageMagick gparted udiskie udisks2"
+    "python3-pipx python3-psutil python3-dbus-fast python3-xcffib xclip"
+    "base-devel libffi-devel bzip2-devel openssl openssl-devel readline readline-devel sqlite-devel xz liblzma-devel zlib zlib-devel libzstd-devel"     #build deps for pyenv
 )
 
 
-pkg_manager="dnf"
+pkg_manager="xbps-query"
 
 install_base(){
-    sudo ${pkg_manager} install -y ${tools[@]}
+    sudo ${pkg_manager} ${tools[@]}
 }
 
 # post_install(){
@@ -28,6 +28,13 @@ install_base(){
 #     STOW
 #     add stow symlinks
 #
+#     CARGO
+#     install tree-sitter
+#
+#     PNPM
+#     install typescript globally
+#     diff-so-fancy globally
+#
 #     HELIUM
 #     pull helium appimage
 #     move to home directory
@@ -35,7 +42,7 @@ install_base(){
 #
 #     PYTHON
 #     pip install pipx
-#     pipx install poetry "fastapi[standard]"
+#     pipx install "fastapi[standard]"
 #
 #     TTY
 #     change default font size for tty
