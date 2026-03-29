@@ -21,14 +21,10 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-# Standard docs
-^README(\..*)?$
-^LICENSE(\..*)?$
-^COPYING$
-
 # My files
-\.images$
-# \.scripts
-^install\.py$
-^default\.conf$
-# \.default.*
+^/README.*
+^/SETUP.*
+^/LICENSE
+^/default.*
+^/install
+^/wallpapers

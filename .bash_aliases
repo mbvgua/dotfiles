@@ -61,5 +61,6 @@ alias drma='docker system prune -a --volumes'
 # get window class name for qtile
 alias wn="xprop WM_CLASS"
 
-# what fonts are here?
+# 1.update font cache   2.see available fonts
+alias fonts="fc-cache -fv"
 alias ls-fonts="fc-list : family , style"

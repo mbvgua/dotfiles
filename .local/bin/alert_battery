@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-pw-cat -p ~/.local/share/sounds/battery.mp3

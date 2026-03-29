@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dir="$HOME/.local/share/icons/"
+dir="$HOME/.local/scripts/icons/"
 
 function send_notification() {
     brightness=$(brightnessctl get)

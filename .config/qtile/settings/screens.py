@@ -18,7 +18,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # Wallpapers
 # =====================
 
-WALLPAPER_DIR: str = os.path.expanduser("~/.config/qtile/wallpapers")
+WALLPAPER_DIR: str = os.path.expanduser("~/.dotfiles/wallpapers")
 
 
 # have random wallpaper on each reboot!
@@ -45,7 +45,7 @@ def startup_wallpaper():
 widget_defaults: dict[str, str | int] = dict(
     font="JetBrains Mono Nerd Font Bold",
     fontsize=24,
-    padding=5,
+    padding=3,
     background=backgroundColor,
     foreground=foregroundColor,
 )
@@ -69,9 +69,7 @@ screens: list[Screen] = [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
                 widget.CurrentLayout(
-                    custom_icon_paths=[
-                        os.path.expanduser("~/.config/qtile/icons/layouts/")
-                    ],
+                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons/")],
                     foreground=foregroundColorTwo,
                     scale=0.6,
                     mode="both",
@@ -162,7 +160,7 @@ screens: list[Screen] = [
                     scale=1.5,
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/bin/battery"),
+                            os.path.expanduser("~/.local/scripts/battery"),
                         )
                     },
                 ),
@@ -177,7 +175,7 @@ screens: list[Screen] = [
                     notification_timeout=0,
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/bin/battery"),
+                            os.path.expanduser("~/.local/scripts/battery"),
                         )
                     },
                 ),
@@ -187,7 +185,7 @@ screens: list[Screen] = [
                     fmt="⏻ ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/bin/power"),
+                            os.path.expanduser("~/.local/.scripts/power"),
                         )
                     },
                 ),

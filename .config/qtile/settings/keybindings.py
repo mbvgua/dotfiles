@@ -89,7 +89,7 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "delete",
-        lazy.spawn(os.path.expanduser("~/.local/bin/power")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/power")),
         desc="activate poweroff menu",
     ),
     # =================
@@ -207,25 +207,25 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "m",
-        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
         desc="Mute/Unmute",
     ),
     Key(
         [],
         "XF86AudioRaiseVolume",
-        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume up")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume up")),
         desc="Volume up",
     ),
     Key(
         [],
         "XF86AudioLowerVolume",
-        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume down")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume down")),
         desc="Volume down",
     ),
     Key(
         [],
         "XF86AudioMute",
-        lazy.spawn(os.path.expanduser("~/.local/bin/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
         desc="Mute/Unmute",
     ),
     # =================
@@ -234,13 +234,13 @@ keys: list[Key | KeyChord] = [
     Key(
         [],
         "XF86MonBrightnessUp",
-        lazy.spawn(os.path.expanduser("~/.local/bin/changebrightness up")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changebrightness up")),
         desc="Brightness up",
     ),
     Key(
         [],
         "XF86MonBrightnessDown",
-        lazy.spawn(os.path.expanduser("~/.local/bin down")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changebrightness down")),
         desc="Brightness down",
     ),
     # =================
@@ -274,7 +274,7 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "g",
-        lazy.spawn(os.path.expanduser("~/.local/bin/toggle_grayscale")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/toggle_grayscale")),
         desc="toggle [g]rayscale mode systemwide",
     ),
 ]
