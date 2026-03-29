@@ -32,10 +32,14 @@ case $1 in
         send_notification $1
         ;;
     mute)
-        wpctl set-mute @DEFAULT_SINK@ toggle
-        if $(pamixer --get-mute); then
-            dunstify -i ${dir}/volume-mute.png -a "changevolume" -t 2000 -r 9993 -u low "Muted"
+        # if muted, unmute
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+        # if after toggle, sound is muted
+        if $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'); then
+            dunstify -i "$dir/volume-$1.png" -a "changevolume" -t 2000 -r 9993 -u low "Muted"
         else
+            # if after toggle, sound is unmuted
             send_notification up
         fi
         ;;
