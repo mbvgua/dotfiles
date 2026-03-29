@@ -1,9 +1,7 @@
 ## Tools
 
 - **OS**: GNU/Linux + Void
-- **Window manager**: 
-    - [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
-    - [i3](https://github.com/i3/i3) - A tiling window manager for X11.
+- **Window manager**: [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
 - **Compositor**: [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
 - **Shell**: [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.
 - **Terminal emulator**: [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.

@@ -359,7 +359,7 @@
     #override_pause_level = 30
     # Icon for notifications with normal urgency
     default_icon = dialog-information
-    script = "/home/mbugua/.local/bin/alert_normal"
+    script = "/home/mbugua/.local/scripts/alert_normal"
 
 
 [urgency_critical]
@@ -373,7 +373,7 @@
     # Icon for notifications with critical urgency
     default_icon = dialog-warning
     # play sound for critical alerts
-    script = "/home/mbugua/.local/bin/alert_battery"
+    script = "/home/mbugua/.local/scripts/alert_battery"
 
 
 # Every section that isn't one of the above is interpreted as a rules to

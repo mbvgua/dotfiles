@@ -48,7 +48,7 @@ floating_layout = layout.Floating(
     **layout_theme,  # use custom theming
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        # or `wn` thanks to my bash script
+        # or `wn` thanks to my bash alias
         *layout.Floating.default_float_rules,
         Match(wm_class="feh"),  # image viewer
         Match(wm_class="thunar"),  # thunar files
