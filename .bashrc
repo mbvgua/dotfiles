@@ -24,7 +24,7 @@ case ":$PATH:" in
 esac
 
 # Load Angular CLI autocompletion.
-#source <(ng completion script)
+source <(ng completion script)
 
 export TERM="xterm-256color"
 

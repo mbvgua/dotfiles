@@ -6,6 +6,9 @@
 # background
 feh --bg-fill  ~/.dotfiles/wallpapers/ &
 
+# compositor
+picom --config ~/.config/picom/picom.conf -b &
+
 # Notifications
 dunst -config ~/.config/dunst/dunstrc &
 
