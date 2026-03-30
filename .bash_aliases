@@ -1,7 +1,7 @@
 # downloads
 # entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
-alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"   # Best video + audio merged
+alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"                            # Best video + audio merged
 alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
 
 # substitutions

@@ -25,7 +25,7 @@ tiling_drag modifier titlebar
 bar {
         position top
         tray_output primary
-        font pango:JetBrains Mono Nerd Font ExtraBold 15
+        font pango:JetBrains Mono Nerd Font ExtraBold 16
         separator_symbol "|"
         # binding_mode_indicator no
         status_command i3status

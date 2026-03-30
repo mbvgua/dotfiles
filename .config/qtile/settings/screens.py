@@ -139,8 +139,8 @@ screens: list[Screen] = [
                     # NOTE: uses amixer by default. not using that here
                     # still doent work?
                     get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
-                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
-                    check_mute_string="Volume: 0.00 [MUTED]",
+                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'",
+                    # check_mute_string="Volume: 0.00[MUTED]",
                     foreground=foregroundColor,
                 ),
                 create_separator(),
