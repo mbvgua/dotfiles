@@ -127,7 +127,7 @@ screens: list[Screen] = [
                     foreground=foregroundColorTwo,
                 ),
                 widget.Systray(
-                    icon_size=22,
+                    icon_size=27,
                 ),
                 create_separator(),
                 widget.TextBox(
@@ -138,10 +138,10 @@ screens: list[Screen] = [
                 widget.Volume(
                     # NOTE: uses amixer by default. not using that here
                     # still doent work?
-                    get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
-                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'",
-                    # check_mute_string="Volume: 0.00[MUTED]",
-                    foreground=foregroundColor,
+                    # get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
+                    # check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'",
+                    # # check_mute_string="Volume: 0.00[MUTED]",
+                    # foreground=foregroundColor,
                 ),
                 create_separator(),
                 widget.TextBox(

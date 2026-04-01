@@ -228,6 +228,12 @@ keys: list[Key | KeyChord] = [
         lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
         desc="Mute/Unmute",
     ),
+    Key(
+        [],
+        "XF86AudioMicMute",
+        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
+        desc="Mute/Unmute",
+    ),
     # =================
     # LED Brightness controls
     # =================
