@@ -222,23 +222,12 @@
     enable_recursive_icon_lookup = true
 
     # Set icon theme (only used for recursive icon lookup)
-    # icon_theme = Adwaita
-    # You can also set multiple icon themes, with the leftmost one being used first.
-    # icon_theme = "Adwaita, breeze"
-
-    # Align icons left/right/top/off
+    icon_theme = gnome
     icon_position = left
-
-    # Scale small icons up to this size, set to 0 to disable. Helpful
-    # for e.g. small files or high-dpi screens. In case of conflict,
-    # max_icon_size takes precedence over this.
-    min_icon_size = 16
-
-    # Scale larger icons down to this size, set to 0 to disable
+    min_icon_size = 32
     max_icon_size = 32
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
-    # Paths to default icons (only necessary when not using recursive icon lookup)
-    icon_path = /home/mbugua/.config/dunst/icons/
 
     ### History ###
 
@@ -340,40 +329,31 @@
 
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
     background = "#0d1117"
     foreground = "#8b949e"
     frame_color = "#539bf5"
     timeout = 10
     highlight = "#539bf5"
-    # Icon for notifications with low urgency
     default_icon = dialog-information
+    script = "$HOME/.local/scripts/alert_low"
 
 [urgency_normal]
     background = "#0d1117"
     foreground = "#d0d7de"
     frame_color = "#d29922"
-    timeout = 10
+    timeout = 30
     highlight = "#d29922"
-    #override_pause_level = 30
-    # Icon for notifications with normal urgency
     default_icon = dialog-information
-    script = "/home/mbugua/.local/scripts/alert_normal"
-
+    script = "$HOME/.local/scripts/alert_normal"
 
 [urgency_critical]
     background = "#0d1117"
     foreground = "#d0d7de"
     frame_color = "#ff0000"
     highlight = "#ff0000"
-    # must click to remove. no timeout
-    #timeout = 30
-    #override_pause_level = 60
-    # Icon for notifications with critical urgency
+    timeout = 0
     default_icon = dialog-warning
-    # play sound for critical alerts
-    script = "/home/mbugua/.local/scripts/alert_battery"
+    script = "$HOME/.local/scripts/alert_critical"
 
 
 # Every section that isn't one of the above is interpreted as a rules to

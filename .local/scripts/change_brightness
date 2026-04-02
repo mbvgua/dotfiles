@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# strict mode
+set -euo pipefail
+
+dir="$HOME/.local/scripts/icons/"
+choice=$1
+
+# error check for no. of inputs
+if [[ "$#" -ne 1 ]]; then
+    echo "usage: $0 <up/down>"
+    exit 1
+fi
+
+function send_notification() {
+    local brightness=$(brightnessctl get)
+    local max_brightness=$(brightnessctl max)
+    # Calculate brightness percentage
+    local percent=$(( 100 * brightness / max_brightness ))
+    dunstify -a "changebrightness" -u low -r "9994" -h int:value:"$percent" -i ${dir}/"brightness-$choice".png "Brightness: ${percent}%" -t 2000
+}
+
+case $choice in
+up)
+    brightnessctl set 5%+
+    send_notification $choice
+    ;;
+down)
+    brightnessctl set 5%-
+    send_notification $choice
+    ;;
+esac

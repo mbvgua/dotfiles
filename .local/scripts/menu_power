@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# strict mode
+set -eou pipefail
 
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/"

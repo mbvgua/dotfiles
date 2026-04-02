@@ -160,7 +160,7 @@ screens: list[Screen] = [
                     scale=1.5,
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/scripts/battery"),
+                            os.path.expanduser("~/.local/scripts/menu_battery"),
                         )
                     },
                 ),
@@ -175,7 +175,7 @@ screens: list[Screen] = [
                     notification_timeout=0,
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/scripts/battery"),
+                            os.path.expanduser("~/.local/scripts/menu_battery"),
                         )
                     },
                 ),
@@ -185,7 +185,7 @@ screens: list[Screen] = [
                     fmt="⏻ ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/.scripts/power"),
+                            os.path.expanduser("~/.local/.scripts/menu_power"),
                         )
                     },
                 ),

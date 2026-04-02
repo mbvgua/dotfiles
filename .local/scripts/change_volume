@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# strict mode
+set -eou pipefail
+
+dir="/usr/share/icons/gnome/32x32/status/"
+choice=$1
+step=5
+
+# error check
+if [[ "$#" -ne 1 ]]; then
+    echo "usage: $0 <up/down/mute>"
+    exit 1
+fi
+
+function send_notification() {
+	local volume_raw=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+	local volume_float=$(echo "$volume_raw" | awk '{print $2}')          # e.g. 0.85
+	local volume_percent=$(echo "$volume_float * 100" | bc -l)          # 85.0
+	local volume_int=$(printf "%.0f" "$volume_percent")                  # 85
+
+	dunstify \
+		-a "changevolume" \
+		-u low \
+		-r "9993" \
+		-h int:value:"$volume_int" \
+		-i "$dir/$icon.png" \
+		"Volume: ${volume_int}%" \
+		-t 2000
+}
+
+case $choice in
+    up)
+        icon="audio-volume-high"
+        # Set the volume on (if it was muted)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$step%+" --limit 1.0
+        send_notification $icon
+        ;;
+    down)
+        icon="audio-volume-low"
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$step%-"
+        send_notification $icon
+        ;;
+    mute)
+        # if muted, unmute
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+        # if after toggle, sound is muted
+        if $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'); then
+            icon="audio-volume-muted"
+            dunstify -i "$dir/$icon.png" -a "changevolume" -t 2000 -r 9993 -u low "Muted"
+        else
+            # if after toggle, sound is unmuted
+            icon="audio-volume-high"
+            send_notification up
+        fi
+        ;;
+esac

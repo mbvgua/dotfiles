@@ -3,11 +3,9 @@
 # enforce strict mode
 set -euo pipefail
 
-# NOTE: using strict mode above causes this toalways fail.
-# find better way to put a help section
 # if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
 #     echo " Usage:
-#         This script plays a normal notification sound.
+#         This script plays a low notification sound.
 #         Specifically meant to be used by dunstc(the notification daemon)
 #         Run it like so:
 #             $ $0
@@ -15,4 +13,4 @@ set -euo pipefail
 #     exit 1
 # fi
 
-pw-cat -p ~/.local/scripts/sounds/normal.mp3
+pw-cat -p ~/.local/scripts/sounds/low.mp3
