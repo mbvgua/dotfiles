@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# enforce strict mode
+set -euo pipefail
+
+# if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+#     echo " Usage:
+#         This script plays a screenshot notification sound.
+#         Specifically meant to be used by scrot(the screenshot tool)
+#         Run it like so:
+#             $ $0
+#         "
+#     exit 1
+# fi
+
+pw-cat -p ~/.local/scripts/sounds/screenshot.mp3

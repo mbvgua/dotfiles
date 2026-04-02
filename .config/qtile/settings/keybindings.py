@@ -89,7 +89,7 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "delete",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/power")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/menu_power")),
         desc="activate poweroff menu",
     ),
     # =================
@@ -207,31 +207,31 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod],
         "m",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume mute")),
         desc="Mute/Unmute",
     ),
     Key(
         [],
         "XF86AudioRaiseVolume",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume up")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume up")),
         desc="Volume up",
     ),
     Key(
         [],
         "XF86AudioLowerVolume",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume down")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume down")),
         desc="Volume down",
     ),
     Key(
         [],
         "XF86AudioMute",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume mute")),
         desc="Mute/Unmute",
     ),
     Key(
         [],
         "XF86AudioMicMute",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changevolume mute")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume mute")),
         desc="Mute/Unmute",
     ),
     # =================
@@ -240,13 +240,13 @@ keys: list[Key | KeyChord] = [
     Key(
         [],
         "XF86MonBrightnessUp",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changebrightness up")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_brightness up")),
         desc="Brightness up",
     ),
     Key(
         [],
         "XF86MonBrightnessDown",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/changebrightness down")),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_brightness down")),
         desc="Brightness down",
     ),
     # =================
