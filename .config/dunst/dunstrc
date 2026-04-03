@@ -335,7 +335,7 @@
     timeout = 10
     highlight = "#539bf5"
     default_icon = dialog-information
-    script = "$HOME/.local/scripts/alert_low"
+    # script = "$HOME/.local/scripts/alert_low"
 
 [urgency_normal]
     background = "#0d1117"

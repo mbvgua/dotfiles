@@ -3,8 +3,8 @@
 tools=(
     # cpp deepin-screenshot
     "perl lua python LuaJIT make gcc clang nodejs pnpm git git-lfs stow keyd"
-    "wget curl bluez libspa-bluetooth lxappearance qbittorrent scrot"
-    "qtile bash tmux neovim vim btop alacritty cmus mariadb nerd-fonts"
+    "wget curl bluez libspa-bluetooth qbittorrent scrot"
+    "qtile bash tmux vim btop alacritty cmus mariadb nerd-fonts"
     "docker docker-buildx docker-compose btop void-repo-nonfree gnome-themes-extra"
     "zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu"
     "rofi dunst feh mpv brightnessctl redshift redshift-gtk pipewire ripgrep alsa-pipewire"
@@ -30,6 +30,10 @@ install_base(){
 #
 #     CARGO
 #     install tree-sitter
+#
+#     NEOVIM
+#     clone neovim repo. checkout tag 0.10.4
+#     install from source here
 #
 #     PNPM
 #     install typescript globally

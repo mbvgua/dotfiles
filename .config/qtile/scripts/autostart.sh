@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 
-# polkit
-/usr/lib/polkit-1/polkit-agent-helper-1 &
+# polkit auth agent
+/usr/libexec/xfce-polkit &
 
-# background
-# handled in ./../settings/screens.py to allow for random wallpapers
-# feh --bg-fill  ~/.config/qtile/wallpapers/ &
+# battery power management
+xfce4-power-manager &
 
-# compositor
-# start in grayscale mode
+# lockscreen functionality, turns out xfce is nice!
+xfce4-screensaver &
+
+# ensure qtile inherits xfce settings!!
+xfsettingsd &
+
+# for audio
+pipewire &
+
+# compositor, prevents screen tearing
 picom --config ~/.config/picom/picom.conf -b &
 
-# Notifications
+# get de/wm independent notifications
 dunst -config ~/.config/dunst/dunstrc &
 
 # network manager
@@ -20,20 +27,11 @@ nm-applet --indicator &
 # bluetooth manager
 blueman-applet &
 
-# restore brightness
+# restore brightness. runit doesnt recall previous session
 brightnessctl set 10% &
 
-# blue light filter
+# blue light filter. my eyess!!
 redshift-gtk &
-
-# battery power management
-xfce4-power-manager &
-
-# lockscreen functionality, turns out xfce is nice!
-xfce4-screensaver &
-
-# for audio
-pipewire &
 
 # mount and unmount drives
 udiskie --automount --notify --smart-tray --file-manager thunar &
