@@ -15,7 +15,7 @@ x = 2
 y = 2
 
 [font]
-size = 14
+size = 16.5
 
 # NOTE: ensure youve installed the entire NerdFonts package
 # that eliminates incorrect font fallback

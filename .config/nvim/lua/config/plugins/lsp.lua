@@ -219,6 +219,7 @@ return {
 			docker_compose_language_service = {},
 			sqlls = {}, -- sql
 			taplo = {}, -- tomml
+            nginx_language_server = {},
 			-- intelephense = {}, -- NOT using PhP. F***k SSD conmen
 			-- ols = {},-- Not yet, first master the lang!! ~ by Ginger Bill
 		}
