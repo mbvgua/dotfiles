@@ -1,18 +1,29 @@
-# Create a new git directory and enter it
-gitdir() {
-    mkdir -p "$@" && cd "$@" && git init
+# prevent github from rebelling against my move to codeberg
+gh_rada() {
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519_github
+    echo "tuko best sasa!"
 }
 
-# activate virtual environements
+# Create a new git directory and move to it
+gitdir() {
+    local new_dir="$1"
+    mkdir -p "$new_dir" && cd "$new_dir" && git init
+}
+
+# activate/create virtual environements instantly
 sauce() {
-    source "$@"/bin/activate
-    # make it work like this eventually
-    # if exit 0; then
-    #     source "$@"/bin/activate
-    # else
-    #     python -m venv "$@" --prompt page-tracker
-    #     python -m venv "$@" && source "$@"/bin/activate
-    # fi
+    local virtual_env="$1"
+    if [[ -d "$virtual_env" ]]; then
+        source "$virtual_env/bin/activate"
+    else
+        echo "create venv: $virtual_env? (Y/n)"
+        read choice
+        if [[ $choice == "y" ]]; then
+            python -m venv "$virtual_env"
+            source "$virtual_env/bin/activate"
+        fi
+    fi
 }
 
 # extract files cleanly

@@ -1,11 +1,10 @@
-# downloads
-# entire websites with wget
+# downloads entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
 alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"                            # Best video + audio merged
 alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
 
 # substitutions
-alias vim='nvim -u ~/.vimrc'                    # the time has come!!!Sorry Bram ;(
+# alias vim='nvim -u ~/.vimrc'                    # the time has come!!!Sorry Bram ;(
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly
@@ -18,17 +17,11 @@ alias files='thunar'                            # open files easily
 alias feh='feh --fullscreen --draw-filename --info %h%S'
 alias fehs='feh --fullscreen --draw-filename --slideshow-delay 5'
 
-# alter system volume
-alias vol+='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+'
-alias vol-='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-'
-
-# typos
+# creature of habit?
 alias :q="exit"
 alias :qa="exit"
 alias :wq="exit"
 alias :wqa="exit"
-alias :Wq="exit"
-alias :Wqa="exit"
 
 # navigation
 alias treee='tree --filelimit 15'
@@ -61,6 +54,15 @@ alias drma='docker system prune -a --volumes'
 # get window class name for qtile
 alias wn="xprop WM_CLASS"
 
-# 1.update font cache   2.see available fonts
+# fonts stuff
 alias fonts="fc-cache -fv"
 alias ls-fonts="fc-list : family , style"
+
+# excuse my fat fingers
+alias :Wq="exit"
+alias :Wqa="exit"
+alias la="ls"
+
+# temp-> haveno 'fn' key on keyboard
+alias vol+='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+'
+alias vol-='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-'

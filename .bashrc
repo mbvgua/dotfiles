@@ -35,12 +35,6 @@ unset file
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
-export TERM="xterm-256color"
-
-# default for opening files in ranger
-export EDITOR="nvim"
-export VISUAL="nvim"
-
 # open man pages in neovim
 # thanks @mental_outlaw - Yt
 export MANPAGER="nvim +Man!"

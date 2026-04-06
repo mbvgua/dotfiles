@@ -9,7 +9,6 @@ from libqtile.config import Screen
 from .colours import *
 from .keybindings import terminal
 
-# gruvbox_dark monokai_pro
 colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
     monokai_pro()
 )
@@ -136,12 +135,12 @@ screens: list[Screen] = [
                 ),
                 # only mute/unmute from here. the toggle volume with keybinds
                 widget.Volume(
-                    # NOTE: uses amixer by default. not using that here
-                    # still doent work?
-                    # get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
-                    # check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED'",
-                    # # check_mute_string="Volume: 0.00[MUTED]",
-                    # foreground=foregroundColor,
+                    # NOTE: uses amixer by default. not using that here. fix?!?!
+                    get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
+                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
+                    mute_command="~/.local/scripts/change_volume mute",
+                    check_mute_string="Volume: 0.00[MUTED]",
+                    foreground=foregroundColor,
                 ),
                 create_separator(),
                 widget.TextBox(
