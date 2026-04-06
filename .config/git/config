@@ -3,7 +3,7 @@
 	email = mbuguadouglas17@gmail.com
 	signingKey = /home/mbugua/.ssh/id_ed25519_codeberg.pub
 [core]
-	editor = nvim -u ~/.vimrc
+	editor = nvim
 	symlink = true
 	pager = diff-so-fancy | less --tabs=4 -RF
 [init]

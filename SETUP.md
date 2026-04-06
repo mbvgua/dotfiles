@@ -43,7 +43,7 @@ Navigate to your `$HOME` directory and:
 ```bash
     git clone https://codeberg.org/mbugua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
-    git checkout xorg/fedora
+    git checkout xorg/void
     ./install
 
     # create symlinks to necessary files
