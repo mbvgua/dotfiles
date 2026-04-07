@@ -136,10 +136,10 @@ screens: list[Screen] = [
                 # only mute/unmute from here. the toggle volume with keybinds
                 widget.Volume(
                     # NOTE: uses amixer by default. not using that here. fix?!?!
-                    get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
-                    check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
+                    # get_volume_command="wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' | bc -l",
+                    # check_mute_command="wpctl get-volume @DEFAULT_AUDIO_SINK@",
                     mute_command="~/.local/scripts/change_volume mute",
-                    check_mute_string="Volume: 0.00[MUTED]",
+                    # check_mute_string="Volume: 0.00[MUTED]",
                     foreground=foregroundColor,
                 ),
                 create_separator(),

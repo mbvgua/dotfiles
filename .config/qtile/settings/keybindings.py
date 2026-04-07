@@ -255,13 +255,13 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod2],
         "s",
-        lazy.spawn("deepin-screenshot"),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/screenshot selection")),
         desc="[s]elect region screenshot",
     ),
     Key(
         [mod2],
         "space",
-        lazy.spawn("deepin-screenshot -f"),
+        lazy.spawn(os.path.expanduser("~/.local/scripts/screenshot fullscreen")),
         desc="full screen screenshot",
     ),
     # =================
