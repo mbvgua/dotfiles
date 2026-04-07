@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+icon="/usr/share/icons/gnome/32x32/emblems/emblem-photos.png"
+output_dir="$HOME/Pictures/Screenshots/%Y-%m-%d_%T_screenshot.png"
+# whatdoes this datevariable work?
+# output_dir="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%T)_screenshot.png"
+choice="$1"
+
+usage() {
+    echo ""
+    echo "Usage
+    $ $0 [select] [window]
+    "
+}
+
+function send_notification() {
+	dunstify \
+		-a "scrot" \
+		-u low \
+		-r "9993" \
+		-i "$icon" \
+		-t 2000 \
+        "Screenshot taken!"
+
+    # screenshot sound
+    pw-cat -p ~/.local/scripts/sounds/screenshot.mp3
+}
+
+#ensure only 1 arg passed
+if [[ "$#" -ne 1 ]]; then
+    usage
+else
+    case "$choice" in
+        selection)
+            scrot --file "$output_dir" --quality 90 --select --freeze
+            send_notification
+            ;;
+        fullscreen)
+            scrot --file "$output_dir" --quality 90 --pointer --monitor 0
+            send_notification
+            ;;
+    esac
+fi
