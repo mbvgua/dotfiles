@@ -1,6 +1,5 @@
 # environment variables
 .env
-.env.*
 
 # virtual environment
 .venv/

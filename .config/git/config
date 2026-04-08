@@ -1,7 +1,7 @@
 [user]
-	name = mbugua
-	email = mbuguadouglas17@gmail.com
-	signingKey = /home/mbugua/.ssh/id_ed25519_codeberg.pub
+	name = mbvgua
+	email = mbvgua@gmail.com
+	signingKey = ~/.ssh/id_ed25519_codeberg.pub
 [core]
 	editor = nvim
 	symlink = true
@@ -34,8 +34,8 @@
 	last = log -1 HEAD
 	visual = !subl-merge .
     contributors = shortlog -nse
-	standup = log --since='yesterday' --author='mbugua'
-    mine = log --author='mbugua'
+	standup = log --since='yesterday' --author='mbvgua'
+    mine = log --author='mbvgua'
     ; for cloning repos with submodules
     clrs = clone --recurse-submodules
     sur = submodule update --remote
