@@ -25,10 +25,3 @@ _darcs
 ^README(\..*)?$
 ^LICENSE(\..*)?$
 ^COPYING$
-
-# My files
-\.images$
-# \.scripts
-^install\.py$
-^default\.conf$
-# \.default.*

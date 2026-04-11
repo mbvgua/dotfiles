@@ -8,7 +8,7 @@ Choose a branch depending on the OS currently in use:
 
 Navigate to your `$HOME` directory and:
 ```bash
-    git clone https://codeberg.org/mbvgua/dotfiles ~/.dotfiles
+    git clone https://github.com/mbvgua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
     git checkout [branch name]
     ./install
