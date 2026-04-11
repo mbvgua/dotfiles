@@ -1,15 +1,8 @@
 [user]
-	name = mbugua
-	email = mbuguadouglas17@gmail.com
-	signingKey = /home/daagi/.ssh/id_ed25519_codeberg.pub
+	name = mbvgua
+	email = mbvgua@gmail.com
 [color]
 	ui = true
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
 [alias]
     ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Cresetby %an' --all --abbrev-commit
@@ -47,7 +40,6 @@
 	rebase = false
 [commit]
 	template = ~/.config/git/message
-	gpgSign = true
 [status]
 	submodulesummary = 1
 [interactive]
