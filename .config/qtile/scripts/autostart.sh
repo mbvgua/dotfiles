@@ -25,7 +25,7 @@ dunst -config ~/.config/dunst/dunstrc &
 nm-applet --indicator &
 
 # bluetooth manager
-blueman-applet &
+# blueman-applet &
 
 # restore brightness. runit doesnt recall previous session
 brightnessctl set 10% &

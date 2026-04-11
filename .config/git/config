@@ -1,7 +1,7 @@
 [user]
 	name = mbvgua
 	email = mbvgua@gmail.com
-	signingKey = ~/.ssh/id_ed25519_codeberg.pub
+	signingKey = ~/.ssh/id_ed25519_github.pub
 [core]
 	editor = nvim
 	symlink = true
@@ -31,6 +31,7 @@
     coa = commit --amend
 	ch = checkout
     cl = clone
+    unadd = reset HEAD
 	last = log -1 HEAD
 	visual = !subl-merge .
     contributors = shortlog -nse
