@@ -1,142 +1,96 @@
-local vim = vim or {}
-
--- meta accessor for options
-local o = vim.o
-local opt = vim.opt
-local fn = vim.fn
-local wo = vim.wo
-
--- Enable mouse mode:
--- {"a"- all, "n"-normal, "v"-visual,"i"-insert,"c"-command,"nv"-normal&visual}
-o.mouse = "a"
-
--- enable line numbers
-o.number = true
-
--- make the numbers relative!!
-wo.relativenumber = true
-
--- reserve space in the gutter to show icons/errors
-o.signcolumn = "yes"
-
--- show row position of cursor
-opt.cursorline = true
-
--- elegantly display 1 column after crossing 'my textwidth=90'
-opt.colorcolumn = "91"
-
--- keep identation from previous line
-opt.autoindent = true
-
--- convert tabs to spaces
-opt.expandtab = true
-opt.shiftround = true
+-- global options settings. see :help options
 
 -- number of spaces that a tab will count for
-o.tabstop = 4
+vim.o.tabstop = 2 
 
--- number of spaces to use with auto-indent(<< & >>)
-o.shiftwidth = 4
+-- number of spaces to use for after each auto-indent 
+-- if not set, tabstop value is used
+vim.o.shiftwidth = 2
 
--- how many spaces are applied when pressing tab
-opt.softtabstop = 4
+-- use spaces as tabs
+vim.opt.shiftround = true
+vim.opt.expandtab = true
 
--- how whitespace characters are displayed
-opt.list = true
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", extends = "▸", precedes = "◂" }
-
+-- search $ highlighting
 -- highlight text when doing a search
-o.hlsearch = true
+vim.o.hlsearch = true
 
 -- incrementally highlight matching characters as you search
-o.incsearch = true
+vim.o.incsearch = true
 
 -- ignore caps while searching
-o.ignorecase = true
+vim.o.ignorecase = true
 
 -- override ignorecase when searching for capital letters,
 -- allowing you to search specifically for caps
-o.smartcase = true
+vim.o.smartcase = true
 
--- allow code folding with tree sitter
--- gotten from: https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for code folding
-opt.foldtext = "" -- you can see what is inside the fold
-opt.foldlevel = 99
-opt.foldlevelstart = 4 --top level is not folded. only nested folds
-opt.foldnestmax = 5
+-- set auto cold folding
+vim.o.foldmethod = 'indent'
+vim.o.foldmethod = 'syntax'
+vim.o.foldlevel = 3
+vim.o.foldlevelstart = 3
 
--- automatically re-read changes done on file. no need to ask me everytime!!
-opt.autoread = true
+-- automatically re-read changes done on file.
+-- no need to ask me everytime!!
+vim.opt.autoread = true
+
+-- save changes on file when closed abruptly.
+vim.opt.autowrite = true
 
 -- allow backspace to delete over identations, EOL, e.t.c
-opt.backspace = "2"
+vim.opt.backspace = '2'
 
 -- ignore certain files that were unlikely to edit with vim
-opt.wildignore = {
-	"*.o",
-	"*.docx",
-	"*.jpg",
-	"*.png",
-	"*.gif",
-	"*.pdf",
-	"*.pyc",
-	"*.exe",
-	"*.flv",
-	"*.img",
-	"*.xlsx",
-	"*.xls",
+vim.opt.wildignore = {
+    '*.o',
+    '*.docx',
+    '*.jpg',
+    '*.png',
+    '*.gif',
+    '*.pdf',
+    '*.pyc',
+    '*.exe',
+    '*.flv',
+    '*.img',
+    '*.xlsx',
+    '*.xls'
 }
 
--- min number of columns to keep above & below cursor line
-o.scrolloff = 8
-
--- min number of columns to keep on left/right of cursor
-o.sidescrolloff = 8
-
--- always show the status line
-opt.laststatus = 2
-
--- dont show current mode. already in statusline
-opt.showmode = false
-
--- always put new vertical window to the right always
-opt.splitright = true
-
--- always put new horizontal windows below
-opt.splitbelow = true
-
--- border on floating boxes/snacks picker e.t.c
--- options: "bold","double","none","rounded","shadow","single","solid"
--- o.winborder = "rounded"
-
--- BACKUP FILES SETTINGS
--- put swap,backup and undo files in a special location instead of current directory
+-- put swap,backup and undo files in a special location
+-- instead of the current working directory
 -- thanks https://stackoverflow.com/a/15317146/30236232
 -- and https://toddknutson.bio/posts/how-to-enable-neovim-undo-backup-and-swap-files-when-switching-linux-groups/
-SWAPDIR = "/tmp/swap//"
-BACKUPDIR = "/tmp/backup//"
-UNDODIR = "/tmp/undo//"
+SWAPDIR = 'tmp/swap//'
+BACKUPDIR = 'tmp/backup//'
+UNDODIR = 'tmp/undo//'
 
 -- if directories do not exist, make them
-if fn.isdirectory(SWAPDIR) == 0 then
-	fn.mkdir(SWAPDIR, "p", "0o700")
+if vim.fn.isdirectory(SWAPDIR) == 0 then
+	vim.fn.mkdir(SWAPDIR, "p", "0o700")
 end
 
-if fn.isdirectory(BACKUPDIR) == 0 then
-	fn.mkdir(BACKUPDIR, "p", "0o700")
+if vim.fn.isdirectory(BACKUPDIR) == 0 then
+	vim.fn.mkdir(BACKUPDIR, "p", "0o700")
 end
 
-if fn.isdirectory(UNDODIR) == 0 then
-	fn.mkdir(UNDODIR, "p", "0o700")
+if vim.fn.isdirectory(UNDODIR) == 0 then
+	vim.fn.mkdir(UNDODIR, "p", "0o700")
 end
 
 -- enable swap, backup and persistent update
-opt.swapfile = true
-opt.backup = true
-opt.undofile = true
+vim.opt.swapfile = true
+vim.opt.backup = true
+vim.opt.undofile = true
 
-opt.directory = SWAPDIR
-opt.backupdir = BACKUPDIR
-opt.undodir = UNDODIR
+vim.opt.directory = SWAPDIR
+vim.opt.backupdir = BACKUPDIR
+vim.opt.undodir = UNDODIR
+
+-- Append backup files with timestamp
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function()
+		local extension = "~" .. vim.fn.strftime("%Y-%m-%d-%H%M%S")
+		vim.o.backupext = extension
+	end,
+})
