@@ -1,0 +1,8 @@
+.config/cmus/lib.pl
+.config/cmus/playlists/
+.config/cmus/cache
+.config/cmus/command-history
+.config/cmus/search-history
+.config/nvim/lazy-lock.json
+.config/qtile/__pycache__
+*.pyc
