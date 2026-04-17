@@ -26,7 +26,6 @@ return {
 				"javascript",
 				"typescript",
 				"python",
-				"perl",
 				"lua",
 				"angular",
 				"sql",

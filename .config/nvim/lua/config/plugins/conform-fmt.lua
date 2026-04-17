@@ -24,10 +24,8 @@ return {
 			-- langs
 			lua = { "stylua" },
 			python = { "black" },
-			-- odin = { "odinfmt" }, -- Not yet! activate alongside lsp...
-			-- sql = { "sqls" }, --really teribble formatter. pretty good LSP
-			-- c = { "clangd" },
-			-- cpp = { "clangd" },
+			c = { "clangd" },
+			cpp = { "clangd" },
 		},
 	},
 	-- format using key bindings
