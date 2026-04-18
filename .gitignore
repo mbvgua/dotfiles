@@ -6,3 +6,19 @@
 .config/nvim/lazy-lock.json
 .config/qtile/__pycache__
 *.pyc
+
+# emacs stuff
+.emacs.d/auto-save-list/
+.emacs.d/eln-cache/
+.emacs.d/elpa/
+.emacs.d/melpa/
+.emacs.d/eshell/
+.emacs.d/shell/
+.emacs.d/transient/
+.emacs.d/tutorial/
+.emacs.d/*.elc
+.emacs.d/.cache
+
+# all temps from emacs
+*~$
+
