@@ -15,36 +15,8 @@ control: str = "control"
 terminal: str = "alacritty"
 browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
 files: str = "thunar"
+emacs: str = "emacs"
 teams: str = "teams-for-linux"
-
-
-# =====================
-# Useful resize functions
-# =====================
-
-
-def focus_left():
-    """Focus window to the left, or cycle if floating"""
-
-    def _focus_left(qtile):
-        if qtile.current_layout.name == "floating" or qtile.current_window.floating:
-            qtile.current_group.cmd_prev_window()
-        else:
-            qtile.current_layout.cmd_left()
-
-    return _focus_left
-
-
-def focus_right():
-    """Focus window to the right, or cycle if floating"""
-
-    def _focus_right(qtile):
-        if qtile.current_layout.name == "floating" or qtile.current_window.floating:
-            qtile.current_group.cmd_next_window()
-        else:
-            qtile.current_layout.cmd_right()
-
-    return _focus_right
 
 
 # =====================
@@ -73,13 +45,13 @@ keys: list[Key | KeyChord] = [
     # Qtile General
     # =================
     Key(
-        [mod, shift],
+        [mod, control],
         "r",
         lazy.function(notify_restart()),
         lazy.restart(),
         desc="[r]estart qtile",
     ),
-    Key([mod, shift], "q", lazy.shutdown(), desc="shutdown [q]tile"),
+    Key([mod, control], "q", lazy.shutdown(), desc="shutdown [q]tile"),
     Key(
         [mod, mod2],
         "l",
@@ -107,58 +79,35 @@ keys: list[Key | KeyChord] = [
     # =================
     # Window actions
     # =================
-    Key(
-        [mod],
-        "h",
-        lazy.layout.shuffle_up(),
-        lazy.layout.shuffle_left(),
-        lazy.layout.swap_left(),
-        desc="Move window up/left",
-    ),
-    Key(
-        [mod],
-        "l",
-        lazy.layout.shuffle_down(),
-        lazy.layout.shuffle_right(),
-        lazy.layout.swap_right(),
-        desc="Move window down/right",
-    ),
+    Key([mod], "h", lazy.layout.shuffle_left(), desc="Move to window to the left"),
+    Key([mod], "j", lazy.layout.shuffle_down(), desc="Move to window down"),
+    Key([mod], "k", lazy.layout.shuffle_up(), desc="Move to window up"),
+    Key([mod], "l", lazy.layout.shuffle_right(), desc="Move to window to the right"),
     # Resize windows
     Key(
         [mod, shift],
-        "h",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        desc="Decrease active window size",
-    ),
-    Key(
-        [mod, shift],
-        "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        desc="Increase active window size",
-    ),
-    Key(
-        [mod, shift],
         "j",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        desc="Decrease window downwards",
+        lazy.layout.shrink(),          # Shrinks windows in MonadTall
+        lazy.layout.decrease_ratio(),  # Decreases master pane in Tile
+        lazy.layout.grow_down(),       # Shifts boundaries in Columns
+        lazy.layout.grow_left(),       # Shifts boundaries in Columns
+        desc="Reduce active window size",
     ),
     Key(
         [mod, shift],
         "k",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        desc="Increase window upwards",
+        lazy.layout.grow(),            # Grows windows in MonadTall
+        lazy.layout.increase_ratio(),  # Increases master pane in Tile
+        lazy.layout.grow_up(),         # Shifts boundaries in Columns
+        lazy.layout.grow_right(),      # Shifts boundaries in Columns
+        desc="Increase active window size",
     ),
-    Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window [s]izes"),
+    Key(
+        [mod,shift],
+        "n",
+        lazy.layout.normalize(),
+        desc = "Reset all window sizes"
+    ),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
@@ -173,7 +122,9 @@ keys: list[Key | KeyChord] = [
     # =================
     # Focus Control
     # =================
-    Key([mod], "n", lazy.layout.previous(), desc="Move window focus to previous window"),
+    Key(
+        [mod], "n", lazy.layout.previous(), desc="Move window focus to previous window"
+    ),
     Key([mod], "p", lazy.layout.next(), desc="Move window focus to next window"),
     Key(
         [mod],
@@ -185,6 +136,7 @@ keys: list[Key | KeyChord] = [
     # Open My Tools
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "e", lazy.spawn(emacs), desc="Launch emacs"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],
@@ -269,12 +221,11 @@ keys: list[Key | KeyChord] = [
     # =================
     Key(
         [mod],
-        # using a since it was alacritty before hence got used to it
-        # also will have nested tmux instance, thus navigating between
-        # Ctrl+A and Tux+a is really convenient
+        # using a since Ill also have nested tmux instance, thus navigating 
+        # between Ctrl+A and Tux+a is really convenient
         "a",
         lazy.group["scratchpad"].dropdown_toggle("terminal"),
-        desc="open wezterm with tmux scratchpad",
+        desc="open terminal with tmux scratchpad",
     ),
     # toggle grayscale mode!! shiny lights bad...
     Key(
