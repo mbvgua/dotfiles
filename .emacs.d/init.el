@@ -39,6 +39,7 @@
   :config
   (evil-collection-init))
 
+
 ;; add my customization directory to path
 (add-to-list 'load-path "~/.emacs.d/settings")
 

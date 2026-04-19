@@ -18,7 +18,7 @@ y = 2
 size = 16.5
 
 [font.normal]
- family = "FiraMono Nerd Font"
+family = "FiraMono Nerd Font"
 style = "Regular"
 
 [colors]
