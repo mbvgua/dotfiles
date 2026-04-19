@@ -11,7 +11,7 @@
 (set-fringe-mode 10)
 
 ;; increase font size for better readability
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 160)
+(set-face-attribute 'default nil :height 170)
 
 ;; Monokai Colorscheme - No brainer!!
 (load-theme 'monokai-pro-classic t)

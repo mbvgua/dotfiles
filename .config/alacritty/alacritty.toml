@@ -17,10 +17,8 @@ y = 2
 [font]
 size = 16.5
 
-# NOTE: ensure youve installed the entire NerdFonts package
-# that eliminates incorrect font fallback
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+ family = "FiraMono Nerd Font"
 style = "Regular"
 
 [colors]

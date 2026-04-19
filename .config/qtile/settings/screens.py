@@ -42,7 +42,7 @@ def startup_wallpaper():
 # =====================
 
 widget_defaults: dict[str, str | int] = dict(
-    font="JetBrains Mono Nerd Font Bold",
+    font="FiraMono Nerd Font Bold",
     fontsize=24,
     padding=3,
     background=backgroundColor,
