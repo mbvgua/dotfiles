@@ -12,7 +12,7 @@ autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank()
+		vim.hl.on_yank()
 	end,
 	desc = "Highlight yank",
 })
