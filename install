@@ -10,11 +10,12 @@ LANG_PACKAGES=(
     python3-pipx python3-psutil python3-dbus-fast python3-xcffib
 )
 USERLAND_PACKAGES=(
-    qtile bash tmux vim btop alacritty cmus gnome-themes-extra nerd-fonts
-    qbittorrent scrot gparted wget curl bluez libspa-bluetooth xclip
-    mariadb scrot sublime-merge void-repo-nonfree pipewire ripgrep alsa-pipewire
+    qtile xfce4 bash btop alacritty cmus gnome-themes-extra
+    vim neovim tmux alacritty noto-fonts-emoji scrot
+    qbittorrent gparted wget curl bluez libspa-bluetooth xclip
+    mariadb sublime-merge void-repo-nonfree pipewire ripgrep alsa-pipewire
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
-    polkit xfce4 picom NetworkManager network-manager-applet rtkit blueman
+    polkit picom NetworkManager network-manager-applet rtkit blueman
     rofi dunst feh mpv brightnessctl redshift redshift-gtk btop ImageMagick
     unzip autoconf automake xset xrandr ffmpeg udisks2 udiskie
 )
@@ -30,7 +31,6 @@ usage() {
 
     -a, --all               perfom all needed system configurations
     -b, --base              install base packages and exit
-    -c, --config            symlink dotfiles configurations with the system using stow
     -s, --services          symlink essential startup daemons in /var/services
     -d, --audio             configure system audio
     -t, --bluetooth         configure system bluetooth
@@ -52,15 +52,18 @@ if [[ "$#" -eq 1 ]]; then
     OPERATION="$1"
 
     case $OPERATION in
-        "--all" | "-a" )
+        "--base" | "-b" )
+            echo "Installing needed packages..."
+            # TODO: conacatenate these two for loops
             for package in "${LANG_PACKAGES[@]}"; do
+                sudo xbps-install "$package"
+            done
+
+            for package in "${USERLAND_PACKAGES[@]}"; do
                 sudo xbps-install -Su && sudo xbps-install "$package"
             done
-            ;;
-        "--base")
-            echo "base"
 
-            echo "installing fonts"
+            echo "Installing system fonts..."
             install_fonts() {
                 # currently using Firamono
                 local fonts_dir="$HOME/.local/share/fonts"
@@ -76,25 +79,59 @@ if [[ "$#" -eq 1 ]]; then
                 unzip JetBrainsMono.zip -d "$fonts_dir"
                 fc-cache -fv
             }
-
             install_fonts
+
+            # touchpad click support
+            echo "Add touchpad click support..."
+            sudo cp ./40-libinput-touchpad.conf /etc/X11/xorg.conf.d/
+
+            # remapping keyboard keys with keyd
+            echo "Remap keyboard layout with keyd..."
+            sudo cp ./default.conf /etc/keyd/
+
+            # install pnpm and its packages
+            sudo pnpm install -g typescript @angular/cli diff-so-fancy
+
+            # install pipx and some packages
+            pipx install git-filter-repo yt-dlp
+
             ;;
-        "--config")
-            echo "config"
+        "--services" | "-s")
+            echo "Configure system services to launch on startup..."
+
+            startup_services() {
+                local services=(
+                    lightdm elogind NetworkManager bluetooth bluetoothd
+                    containerd dbus docker mysqld
+                )
+
+                for service in "${services[@]}"; do
+                    if [[ ! -d "/etc/sv/$service" ]]; then
+                        echo "$service not found in /etc/sv directory..."
+                        echo "aborting operation"
+                        echo "please install: $service"
+                        exit 1
+                    fi
+
+                    # If present, symlink...
+                    # FIX: it would be better to first recursively go through loop above
+                    # then if all are present,now do this. if some are absent, add to a
+                    # not_found array, then present list to user
+                    sudo ln -s /etc/sv/"$service" /var/service
+                done
+            }
+            startup_services
             ;;
-        "--services")
-            echo "services"
-            ;;
-        "--audio")
+        "--audio" | "-a")
             echo "audio"
             ;;
-        "--bluetooth")
+        "--bluetooth" | "t")
             echo "bluetooth"
             ;;
-        "--network")
+        "--network" | "-n")
             echo "network"
             ;;
-        "--help")
+        "--help" | "-h")
             echo "help"
             ;; 
         *)
@@ -114,37 +151,16 @@ fi
 
 
 # post_install(){
-#     KEYD
-#     add keyd config
-#
 #     STOW
 #     add stow symlinks
-#
-#     CARGO
-#     install tree-sitter
-#
-#     NEOVIM
-#     clone neovim repo. checkout tag 0.10.4
-#     install from source here
-#
-#     PNPM
-#     install typescript globally
-#     diff-so-fancy globally
 #
 #     HELIUM
 #     pull helium appimage
 #     move to home directory
 #     make it executable
 #
-#     PYTHON
-#     pip install pipx
-#     pipx install "fastapi[standard]"
-#
 #     TTY
 #     change default font size for tty
-#
-#     DOCKER
-#     enable docker engine on every bootup
 #
 # }
 
