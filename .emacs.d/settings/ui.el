@@ -11,7 +11,7 @@
 (set-fringe-mode 10)
 
 ;; increase font size for better readability
-(set-face-attribute 'default nil :font "FiraMono Nerd Font" :height 170)
+(set-face-attribute 'default nil :height 170)
 
 ;; Monokai Colorscheme - No brainer!!
 (load-theme 'monokai-pro-classic t)
@@ -24,15 +24,13 @@
 
 ;; show line numbers
 (global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+
 ;; but not everywhere
 (dolist (mode '(term-mode-hook
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-;; TODO: figure out how to show relative linenumbers?
-(setq display-line-numbers-type 'relative)
-;;(global-display-line-numbers-mode +1)
 
 ;; disable bi-directional text scanning
 (setq-default bidi-display-reordering 'left-to-right
