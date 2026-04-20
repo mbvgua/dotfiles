@@ -1,5 +1,4 @@
 ;; Install essential packages
-;; Try M-x list-packages to see what's available.
 (require 'package)
 (add-to-list 'package-archives '(("melpa" . "https://melpa.org/packages/")
                                  ("elpa" . "https://elpa.gnu.org/packages/"))
@@ -13,18 +12,17 @@
 ;; manually with M-x package-install
 (defvar my-packages
   '(
-    monokai-pro-theme          ;; monokai theme
-    evil                 ;; vim motions!!!
+    monokai-pro-theme                   ;; monokai theme
+    evil                                ;; vim motions!!!
     evil-collection
     )
   )
 
-;; install the packages
+;; Install and load packages
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; enable evil mode :|
 (use-package evil
   :ensure t
   :init
@@ -39,6 +37,9 @@
   :config
   (evil-collection-init))
 
+;; Any Customize-based settings should live in custom.el, not here.
+(setq custom-file "~/.dotfiles/.emacs.d/settings/custom.el")
+(load custom-file 'noerror)
 
 ;; add my customization directory to path
 (add-to-list 'load-path "~/.emacs.d/settings")
