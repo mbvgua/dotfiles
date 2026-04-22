@@ -26,5 +26,6 @@ _darcs
 ^/SETUP.*
 ^/LICENSE
 ^/default.*
+^/40-libinput-touchpad.*
 ^/install
 ^/wallpapers
