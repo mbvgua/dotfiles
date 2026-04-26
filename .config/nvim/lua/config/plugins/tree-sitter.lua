@@ -3,7 +3,7 @@
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	version = "v0.9.3",
+	version = "v0.10.0",
 	-- enabled = false,
 	build = ":TSUpdate",
 	config = function()
