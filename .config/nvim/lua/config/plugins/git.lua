@@ -17,6 +17,23 @@ return {
 					vim.keymap.set(mode, l, r, opts)
 				end
 
+				-- Navigation
+				map("n", "]c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gitsigns.nav_hunk("next")
+					end
+				end, { desc = "Jump to next git [c]hange" })
+
+				map("n", "[c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gitsigns.nav_hunk("prev")
+					end
+				end, { desc = "Jump to previous git [c]hange" })
+
 				-- only functionality added is git blame. dont need the rest rn
 				map("n", "<leader>cb", gitsigns.toggle_current_line_blame, { desc = "git [c]ode [b]lame" })
 			end,
