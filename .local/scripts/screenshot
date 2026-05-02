@@ -2,30 +2,14 @@
 
 set -eou pipefail
 
-icon="/usr/share/icons/gnome/32x32/emblems/emblem-photos.png"
-output_dir="$HOME/Pictures/Screenshots/%Y-%m-%d_%T_screenshot.png"
-# whatdoes this datevariable work?
-# output_dir="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%T)_screenshot.png"
+output_dir="$HOME/Pictures/Screenshots/"
 choice="$1"
 
 usage() {
     echo ""
     echo "Usage
-    $ $0 [select] [window]
+    $ $0 [selection] [fullscreen] [all]
     "
-}
-
-function send_notification() {
-	dunstify \
-		-a "scrot" \
-		-u low \
-		-r "9993" \
-		-i "$icon" \
-		-t 2000 \
-        "Screenshot taken!"
-
-    # screenshot sound
-    pw-cat -p ~/.local/scripts/sounds/screenshot.mp3
 }
 
 #ensure only 1 arg passed
@@ -34,12 +18,15 @@ if [[ "$#" -ne 1 ]]; then
 else
     case "$choice" in
         selection)
-            scrot --file "$output_dir" --quality 90 --select --freeze
-            send_notification
+            flameshot gui --path "$output_dir"
             ;;
         fullscreen)
-            scrot --file "$output_dir" --quality 90 --pointer --monitor 0
-            send_notification
+            # takes full screenshot of where cursor is
+            flameshot screen --delay 500 --path "$output_dir"
             ;;
+        all)
+            # takes screenshot of all screens
+            flameshot full --delay 500 --path "$output_dir"
+        ;;
     esac
 fi

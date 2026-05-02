@@ -11,7 +11,7 @@ LANG_PACKAGES=(
 )
 USERLAND_PACKAGES=(
     qtile xfce4 bash btop alacritty cmus gnome-themes-extra
-    vim neovim tmux alacritty noto-fonts-emoji scrot
+    vim neovim tmux alacritty noto-fonts-emoji flameshot
     qbittorrent gparted wget curl bluez libspa-bluetooth xclip
     mariadb sublime-merge void-repo-nonfree pipewire ripgrep alsa-pipewire
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
