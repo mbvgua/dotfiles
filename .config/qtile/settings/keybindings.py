@@ -15,7 +15,7 @@ control: str = "control"
 terminal: str = "alacritty"
 browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
 files: str = "thunar"
-teams: str = "teams-for-linux"
+emacs: str = "emacs"
 
 
 # =====================
@@ -134,7 +134,8 @@ keys: list[Key | KeyChord] = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="launch terminal"),
+    Key([mod], "e", lazy.spawn(emacs), desc="launch [e]macs"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],
@@ -142,7 +143,6 @@ keys: list[Key | KeyChord] = [
         [
             Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
             Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
-            Key([], "t", lazy.spawn(teams), desc="Open [t]eams"),
             Key(
                 [],
                 "b",

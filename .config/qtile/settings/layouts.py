@@ -51,7 +51,6 @@ floating_layout = layout.Floating(
         # or `wn` thanks to my bash alias
         *layout.Floating.default_float_rules,
         Match(wm_class="feh"),  # image viewer
-        Match(wm_class="thunar"),  # thunar files
         Match(wm_class="blueman-manager"),  # bluetooth settings
         Match(wm_class="qbittorrent"),  # qbittorrent
     ],
@@ -64,7 +63,6 @@ floating_layout = layout.Floating(
 def client_managed(client):
     floating_windows_suite: list[str] = [
         "feh",
-        "thunar",
         "qbittorrent",
     ]
     if client.get_wm_class()[0] in floating_windows_suite:

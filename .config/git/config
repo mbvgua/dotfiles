@@ -54,3 +54,7 @@
 	autocorrect = 3
 [interactive]
 	diffFilter = diff-so-fancy --patch
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git@codeberg.org:"]
+	insteadOf = https://codeberg.org/
