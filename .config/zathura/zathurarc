@@ -7,7 +7,6 @@ set adjust-open width
 set recolor false
 
 # monokai colour scheme!!! use <C-r> to switch
-
 set notification-error-bg       rgba(249,38,114,1)     # Red/Pink
 set notification-error-fg       rgba(248,248,242,1)    # Foreground
 set notification-warning-bg     rgba(253,151,31,1)     # Orange
@@ -41,4 +40,3 @@ set render-loading-bg           rgba(248,248,242,1)    # Foreground
 # Recolor mode settings
 set recolor-lightcolor          rgba(39,40,34,1)       # Background
 set recolor-darkcolor           rgba(248,248,242,1)    # Foreground
-

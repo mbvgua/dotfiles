@@ -3,6 +3,8 @@ local vim = vim or {}
 -- meta accessors for vim autocmds
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
+local map = vim.keymap.set
+local cmd = vim.cmd
 local bo = vim.bo
 local wo = vim.wo
 local o = vim.o
@@ -10,11 +12,10 @@ local o = vim.o
 -- Highlight text for some time after yanking
 autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
-	pattern = "*",
 	callback = function()
 		vim.hl.on_yank()
 	end,
-	desc = "Highlight yank",
+	desc = "Highlight when yanking text",
 })
 
 -- Append backup files with timestamp
@@ -39,3 +40,18 @@ autocmd({ "BufNewFile", "BufRead" }, {
 		bo.fileformat = "unix" -- format all files to have unix base EOF
 	end,
 })
+
+-- make terminal navigation much easier
+function _G.set_terminal_keymaps()
+	local opts = { buffer = 0 }
+	map("t", "<esc>", [[<C-\><C-n>]], opts)
+	map("t", "jk", [[<C-\><C-n>]], opts)
+	map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+	map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+	map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+	map("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")

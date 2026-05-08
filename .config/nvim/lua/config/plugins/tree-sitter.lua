@@ -1,5 +1,4 @@
--- install tree-sitter. for better syntax highlighting
--- and code navigation
+-- install tree-sitter for better syntax highlighting and code navigation
 
 return {
 	"nvim-treesitter/nvim-treesitter",
@@ -11,22 +10,26 @@ return {
 
 		configs.setup({
 			ensure_installed = {
+                "bash",
 				"c",
 				"cpp",
 				"cmake",
 				"make",
+                "diff",
 				"dockerfile",
+				"lua",
+                "luadoc",
 				"nginx",
 				"markdown",
+                "markdown_inline",
 				"yaml",
-				"json",
 				"html",
 				"css",
 				"http",
+				"json",
 				"javascript",
 				"typescript",
 				"python",
-				"lua",
 				"angular",
 				"sql",
 			},

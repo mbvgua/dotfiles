@@ -1,4 +1,3 @@
-import os
 from libqtile.config import DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 

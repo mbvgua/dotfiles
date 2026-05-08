@@ -5,10 +5,7 @@
  * 
  * Colors
  *
- * Available Colors Schemes
- *
- *  gruvbox    monokai
- *
+ * Available Colors Scheme: monokai
  **/
 
 /* Import color-scheme from `colors` directory */

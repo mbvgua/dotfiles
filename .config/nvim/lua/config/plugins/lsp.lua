@@ -205,21 +205,21 @@ return {
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-			bashls = {}, -- bash
-			lua_ls = {}, -- lua
-			clangd = {}, -- c/c++
-			html = {}, -- html
-			cssls = {}, -- css
-			angularls = {}, -- angular
-			jsonls = {}, -- json
-			yamlls = {}, -- yaml
-			basedpyright = {}, -- python
-			ts_ls = {}, -- javascript, typescript
-			dockerls = {},
-			docker_compose_language_service = {},
-			sqlls = {}, -- sql
-			taplo = {}, -- tomml
-            nginx_language_server = {},
+            bashls = {},                            -- bash
+            lua_ls = {},                            -- lua
+            clangd = {},                            -- c/c++
+            html = {},                              -- html
+            cssls = {},                             -- css
+            angularls = {},                         -- angular
+            jsonls = {},                            -- json
+            yamlls = {},                            -- yaml
+            basedpyright = {},                      -- python
+            ts_ls = {},                             -- javascript, typescript
+            dockerls = {},                          -- docker
+            docker_compose_language_service = {},   -- docker compose
+            sqlls = {},                             -- sql
+            taplo = {},                             -- tomml
+            nginx_language_server = {},             -- nginx
 		}
 
 		-- To check the current status of installed tools and/or manually install

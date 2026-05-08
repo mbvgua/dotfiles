@@ -1,13 +1,12 @@
--- quick popup for keymaps if i forget them
+-- quick popup for keymaps for memorability
+
 return {
 	"folke/which-key.nvim",
 	version = "v3.17.0",
 	-- enabled = false,
 	event = "VeryLazy",
 	opts = {
-		-- your configuration comes here
-		-- or leave it empty to use the default settings
-		-- refer to the configuration section below
+		-- classic | modern | helix
 		preset = "helix",
 	},
 	keys = {

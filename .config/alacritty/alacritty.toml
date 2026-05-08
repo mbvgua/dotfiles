@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/monokai.toml"]
+import = ["~/.config/alacritty/themes/monokai.toml"]
 
 [env]
 # merges well with tmux

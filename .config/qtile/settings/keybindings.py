@@ -5,18 +5,16 @@ from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile import qtile
 
-mod: str = "mod4"  # the TUX/SUPER/WINDOWS key
-mod2: str = "mod1"  # the ALT key
-shift: str = "shift"  # the left/right shift keys
-space: str = "space"  # the space key
+mod: str = "mod4"                   # TUX/SUPER/WINDOWS key
+mod2: str = "mod1"                  # ALT key
+shift: str = "shift"                # left/right shift keys
+space: str = "space"                # space key
 control: str = "control"
 
 # my tools of choice
 terminal: str = "alacritty"
 browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
 files: str = "thunar"
-emacs: str = "emacs"
-
 
 # =====================
 # Useful notification functions
@@ -135,7 +133,6 @@ keys: list[Key | KeyChord] = [
     # Open My Tools
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="launch terminal"),
-    Key([mod], "e", lazy.spawn(emacs), desc="launch [e]macs"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],

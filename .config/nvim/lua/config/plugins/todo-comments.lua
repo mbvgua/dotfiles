@@ -2,7 +2,7 @@
 
 return {
 	"folke/todo-comments.nvim",
-	version = "v1.4.0",
+	version = "v1.5.0",
 	-- enabled = false,
 	dependencies = { "nvim-lua/plenary.nvim" },
 	opts = {

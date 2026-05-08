@@ -2,7 +2,7 @@
 
 return {
 	"nvim-tree/nvim-tree.lua",
-	version = "*",
+	version = "v1.17.0",
 	-- enabled = false,
 	lazy = false,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -76,9 +76,7 @@ return {
 			},
 		},
 
-		-- my custom mappings
-		-- toggle easily with <Leader>e
+		-- custom mapping to toggle easily
 		vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<CR>", { desc = "toggle [e]xplorer" }),
-		vim.keymap.set("n", "<leader>E", "<cmd>:NvimTreeFocus<CR>", { desc = "focus [e]xplorer" }),
 	},
 }

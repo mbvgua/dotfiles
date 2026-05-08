@@ -1,4 +1,4 @@
--- setup the statusline and bufferline to be more informative and prettier
+-- statusline and bufferline settings
 
 return {
 	"nvim-lualine/lualine.nvim",
@@ -12,8 +12,6 @@ return {
 			component_separators = { left = "", right = "" },
 			always_divide_middle = true,
 			always_show_tabline = true,
-			-- only 1 statusline for all windows/buffers
-			-- globalstatus = true,
 		},
 		sections = {
 			lualine_a = { { "mode", separator = { left = "", right = "" } } },
@@ -34,20 +32,17 @@ return {
 					},
 				},
 			},
-			-- TODO: add the LSP ICON here instead of search count
 			lualine_x = {
 				{
 					"lsp_status",
-					icon = "", -- f013
+					icon = "",
 					symbols = {
 						-- Standard unicode symbols to cycle through for LSP progress:
 						spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
 						-- Standard unicode symbol for when LSP is done:
 						done = "✓",
-						-- Delimiter inserted between LSP names:
 						separator = " ",
 					},
-					-- List of LSP names to ignore (e.g., `null-ls`):
 					ignore_lsp = {},
 				},
 			},
@@ -59,10 +54,6 @@ return {
 			},
 			lualine_z = {
 				{
-					-- show line of code in file, like Vim. but proved quite hard
-					-- TODO: make this more readable later on, quite hard
-					-- still works like: '%l/%L' in vim statusline
-					-- . -> current line no. $ -> total lines
 					function()
 						return "LOC: " .. vim.fn.line(".") .. "/" .. vim.fn.line("$")
 					end,
@@ -71,14 +62,12 @@ return {
 			},
 		},
 		tabline = {
-			-- show open buffers
-			lualine_a = { "buffers" },
+			lualine_a = { "buffers" },          -- show open buffers(numbered)
 			lualine_b = { "" },
 			lualine_c = { "" },
 			lualine_x = {},
 			lualine_y = {},
-			-- show open tabs
-			lualine_z = { "tabs" },
+			lualine_z = { "tabs" },             -- show open tabs
 		},
 	},
 }

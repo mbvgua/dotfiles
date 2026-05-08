@@ -15,7 +15,7 @@ map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
 map("n", "<leader>x", "<c-w>c", { desc = "close current window" })
 
 -- stop highlighting after search
-map("n", "<leader>so", ":nohlsearch<CR>", { desc = "removing highlighted text after a search" })
+map("n", "<esc>", ":nohlsearch<CR>", { desc = "removing highlighted text after a search" })
 
 -- check spelling within file
 map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
@@ -37,15 +37,15 @@ map("n", "<leader>n", ":bnext<CR>", { desc = "navigate to next buffer" })
 map("n", "<leader>p", ":bprevious<CR>", { desc = "navigate to previous buffer" })
 
 -- easily split windows with - & | like tmux
-map("n", "<leader>-",":split<CR>",{desc = "[-]Split window horizontally "})
-map("n", "<leader>\\",":vsplit<CR>",{desc = "[|] Split window vertically "})
+map("n", "<leader>-", ":split<CR>", { desc = "[-]Split window horizontally " })
+map("n", "<leader>\\", ":vsplit<CR>", { desc = "[|] Split window vertically " })
 
 -- Hardmode ON!! from kickstart nvim
 -- Disable arrow keys in normal & visual mode
-map({"v","n"}, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
-map({"v","n"}, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-map({"v","n"}, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-map({"v","n"}, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
 
 -- Visual Mode Tricks
 -- remain in visual mode while identing to the right/left
@@ -53,13 +53,13 @@ map("v", "<", "<gv", { desc = "ident leftwards" })
 map("v", ">", ">gv", { desc = "ident rightwards" })
 
 -- Continously move block of text up and down
-map({"v","x"}, "K", ":move '<-2<CR>gv-gv",{ desc = "move chunk upwards" })
-map({"v","x"}, "J", ":move '>+1<CR>gv-gv",{desc="move chunk downwards"} )
-map({"v","x"}, "<A-k>", ":move '<-2<CR>gv-gv",{ desc = "move chunk upwards" })
-map({"v","x"}, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
+map({ "v", "x" }, "K", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
+map({ "v", "x" }, "J", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
+map({ "v", "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
+map({ "v", "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
 
 -- delete current buffer
-map("n","<leader>bb",":bd<CR>",{desc="[d]elete current [b]uffer"})
+map("n", "<leader>bb", ":bd<CR>", { desc = "[d]elete current [b]uffer" })
 
 -- delete all buffers in background
 map("n", "<leader>bd", function()
