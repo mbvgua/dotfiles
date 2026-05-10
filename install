@@ -4,14 +4,14 @@ set -eou pipefail
 
 
 LANG_PACKAGES=(
-    perl lua python LuaJIT make gcc clang nodejs pnpm git git-lfs stow keyd
+    perl lua python LuaJIT make gcc clang nodejs git git-lfs stow keyd
     clisp sbcl docker docker-buildx docker-compose base-devel libffi-devel
-    bzip2-devel openssl openssl-devel readline
+    bzip2-devel openssl openssl-devel readline bash-completion
     python3-pipx python3-psutil python3-dbus-fast python3-xcffib
 )
 USERLAND_PACKAGES=(
-    qtile xfce4 bash btop alacritty cmus gnome-themes-extra
-    vim neovim tmux alacritty noto-fonts-emoji flameshot
+    qtile xfce4 bash btop alacritty cmus gnome-themes-extra flameshot
+    vim neovim tmux alacritty noto-fonts-emoji noto-fonts-ttf noto-fonts-cjk
     qbittorrent gparted wget curl bluez libspa-bluetooth xclip
     mariadb sublime-merge void-repo-nonfree pipewire ripgrep alsa-pipewire
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
@@ -29,12 +29,9 @@ usage() {
 
     A list of options is listed below:
 
-    -a, --all               perfom all needed system configurations
-    -b, --base              install base packages and exit
-    -s, --services          symlink essential startup daemons in /var/services
-    -d, --audio             configure system audio
-    -t, --bluetooth         configure system bluetooth
-    -n, --network           configure system network
+    -b, --base              install system packages and configurations
+    -d, --dots              clone dotfiles and set them up
+    -s, --services          symlink essential startup daemons
     -h, ---help             print this help segment and exit
     "
 }
@@ -56,11 +53,11 @@ if [[ "$#" -eq 1 ]]; then
             echo "Installing needed packages..."
             # TODO: conacatenate these two for loops
             for package in "${LANG_PACKAGES[@]}"; do
-                sudo xbps-install "$package"
+                sudo xbps-install -Syu "$package"
             done
 
             for package in "${USERLAND_PACKAGES[@]}"; do
-                sudo xbps-install -Su && sudo xbps-install "$package"
+                sudo xbps-install -Syu "$package"
             done
 
             echo "Installing system fonts..."
@@ -81,6 +78,24 @@ if [[ "$#" -eq 1 ]]; then
             }
             install_fonts
 
+            setup_audio() {
+                sudo xbps-install pipewire alsa-pipewire wireplumber
+
+                ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+                ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
+                # enable pipewire and pipewire-pulse autostart
+                if [ -e "/usr/share/applications/pipewire.desktop" ] && [ -e "/etc/xdg/autostart/" ]; then
+                    ln -s /usr/share/applications/pipewire.desktop /etc/xdg/autostart/pipewire.desktop
+                    ln -s /usr/share/applications/pipewire-pulse.desktop /etc/xdg/autostart/pipewire-pulse.desktop
+                fi
+
+                # alsa configuration
+                ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+                ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+            }
+            setup_audio
+
             # touchpad click support
             echo "Add touchpad click support..."
             sudo cp ./40-libinput-touchpad.conf /etc/X11/xorg.conf.d/
@@ -90,11 +105,38 @@ if [[ "$#" -eq 1 ]]; then
             sudo cp ./default.conf /etc/keyd/
 
             # install pnpm and its packages
-            sudo pnpm install -g typescript @angular/cli diff-so-fancy
+            sudo npm install -g typescript @angular/cli diff-so-fancy
 
             # install pipx and some packages
-            pipx install git-filter-repo yt-dlp
+            pipx install git-filter-repo yt-dlp fastapi
+            ;;
+        "--dots" | "-d")
+            echo "Configure dotfiles..."
 
+            setup_dots() {
+                local DOTS_DIR="~/.dotfiles"
+                local TARGET_BRANCH="xorg/void"
+
+                git clone git@github.com:mbvgua/dotfiles.git "$DOTS_DIR"
+                cd "$DOTS_DIR"
+                # pull all remote branches locally
+                git !git branch -r | \
+                    grep -v "\->" | \
+                    while read remote; do \
+                        git branch --track "${remote#origin/}" "$remote"; \
+                    done && \
+                    git fetch --all && \
+                    git pull --all
+                git checkout "$TARGET_BRANCH"
+                stow .
+            }
+
+            if [[ ! -d "$DOTS_DIR" ]]; then
+                setup_dots
+            else
+                rm -rf "$DOTS_DIR"
+                setup_dots
+            fi
             ;;
         "--services" | "-s")
             echo "Configure system services to launch on startup..."
@@ -102,7 +144,7 @@ if [[ "$#" -eq 1 ]]; then
             startup_services() {
                 local services=(
                     lightdm elogind NetworkManager bluetooth bluetoothd
-                    containerd dbus docker mysqld
+                    containerd dbus docker mysqld keyd polkitd
                 )
 
                 for service in "${services[@]}"; do
@@ -122,18 +164,9 @@ if [[ "$#" -eq 1 ]]; then
             }
             startup_services
             ;;
-        "--audio" | "-a")
-            echo "audio"
-            ;;
-        "--bluetooth" | "t")
-            echo "bluetooth"
-            ;;
-        "--network" | "-n")
-            echo "network"
-            ;;
         "--help" | "-h")
-            echo "help"
-            ;; 
+            usage
+            ;;
         *)
             echo "Unkown option $OPERATION"
             echo "Use --help for usage information"
@@ -149,19 +182,3 @@ else
     exit 2
 fi
 
-
-# post_install(){
-#     STOW
-#     add stow symlinks
-#
-#     HELIUM
-#     pull helium appimage
-#     move to home directory
-#     make it executable
-#
-#     TTY
-#     change default font size for tty
-#
-# }
-
-# install_base

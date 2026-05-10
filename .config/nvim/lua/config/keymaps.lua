@@ -59,10 +59,10 @@ map({ "v", "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" 
 map({ "v", "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
 
 -- delete current buffer
-map("n", "<leader>bb", ":bd<CR>", { desc = "[d]elete current [b]uffer" })
+map("n", "<leader>bd", ":bd<CR>", { desc = "current [b]uffer [d]elete" })
 
 -- delete all buffers in background
-map("n", "<leader>bd", function()
+map("n", "<leader>bb", function()
 	local current = vim.api.nvim_get_current_buf()
 
 	-- First, save all modified buffers
@@ -80,7 +80,7 @@ map("n", "<leader>bd", function()
 			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { desc = "[d]elete all [b]uffers except current" })
+end, { desc = "delete all [b]uffers in [b]ackgrond" })
 
 -- insert base html desc
 -- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
