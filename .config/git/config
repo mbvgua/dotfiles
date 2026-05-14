@@ -1,7 +1,7 @@
 [user]
 	name = mbvgua
-	email = 105845499+mbvgua@users.noreply.github.com
-	signingKey = ~/.ssh/id_ed25519_github.pub
+	email = mbugua@noreply.codeberg.org
+	signingKey = ~/.ssh/id_ed25519_codeberg.pub
 [core]
 	editor = nvim
 	symlink = true

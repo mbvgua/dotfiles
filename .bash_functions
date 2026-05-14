@@ -1,10 +1,3 @@
-# prevent github from rebelling against my move to codeberg
-gh_rada() {
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_ed25519_github
-    echo "tuko best sasa!"
-}
-
 # Create a new git directory and move to it
 gitdir() {
     local new_dir="$1"
