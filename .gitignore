@@ -7,6 +7,9 @@
 .config/qtile/__pycache__
 *.pyc
 
+# ignore emacs in its entirety for now
+.emacs.d/
+
 # emacs stuff
 .emacs.d/auto-save-list/
 .emacs.d/eln-cache/

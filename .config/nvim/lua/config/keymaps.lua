@@ -1,15 +1,16 @@
+-- meta accessors for keymaps
 local vim = vim or {}
-
--- meta accessor for keymap
 local map = vim.keymap.set
 
--- Normal Mode Tricks
+-- save current file
+map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
+
 -- copy & paste with Shift-(y/p)
 map({ "n", "x" }, "<S-y>", '"+y', { desc = "copy to clipboard" })
 map({ "n", "x" }, "<S-p>", '"+p', { desc = "paste clipboard" })
 
--- save current file
-map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
+-- copy entire file
+map({ "n", "x" }, "<C-a>", ":%y+<CR>", { desc = "copy entire file" })
 
 -- close current window
 map("n", "<leader>x", "<c-w>c", { desc = "close current window" })
@@ -26,19 +27,25 @@ map("n", "<leader>l", "<C-w>l", { desc = "navigate to right window" })
 map("n", "<leader>k", "<C-w>k", { desc = "navigate to window above" })
 map("n", "<leader>j", "<C-w>j", { desc = "navigate to window below" })
 
--- resize windows with Ctrl+h\j\k\l Keys. like tmux
+-- resize windows with Alt+h\j\k\l Keys
 map("n", "<A-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
 map("n", "<A-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
 map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
 map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
 
--- navigate buffers easily with leader-(N)ext and (P)revious
-map("n", "<leader>n", ":bnext<CR>", { desc = "navigate to next buffer" })
-map("n", "<leader>p", ":bprevious<CR>", { desc = "navigate to previous buffer" })
+-- navigate buffers with leader-(N)ext and (P)revious
+map("n", "<leader>n", ":bnext<CR>", { desc = "next buffer" })
+map("n", "<leader>p", ":bprevious<CR>", { desc = "previous buffer" })
 
 -- easily split windows with - & | like tmux
 map("n", "<leader>-", ":split<CR>", { desc = "[-]Split window horizontally " })
 map("n", "<leader>\\", ":vsplit<CR>", { desc = "[|] Split window vertically " })
+
+-- navigate tabs. dont use tabs alot though
+map("n", "<leader>ta", ":tabnew<CR>", { desc = "new tab" })
+map("n", "<leader>td", ":tabclose<CR>", { desc = "delete tab" })
+map("n", "<leader>tn", ":tabnext<CR>", { desc = "next tab" })
+map("n", "<leader>tp", ":tabprevious<CR>", { desc = "previous tab" })
 
 -- Hardmode ON!! from kickstart nvim
 -- Disable arrow keys in normal & visual mode
@@ -82,6 +89,6 @@ map("n", "<leader>bb", function()
 	end
 end, { desc = "delete all [b]uffers in [b]ackgrond" })
 
--- insert base html desc
+-- insert base html template
 -- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
 map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<cR>9jwf>a", { desc = "insert html boilerplate" })

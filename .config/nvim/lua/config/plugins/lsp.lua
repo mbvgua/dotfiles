@@ -81,11 +81,6 @@ return {
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
 
-				-- Fuzzy find all the symbols in your current document.
-				--  Symbols are things like variables, functions, types, etc.
-				-- TODO: similar mapping in telescope, see which to keep
-				-- map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
-
 				-- Fuzzy find all the symbols in your current workspace.
 				--  Similar to document symbols, except searches over your entire project.
 				map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
@@ -148,14 +143,14 @@ return {
 				-- code, if the language server you are using supports them
 				--
 				-- This may be unwanted, since they displace some of your code
-				-- if
-				-- 	client
-				-- 	and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
-				-- then
-				-- 	map("<leader>th", function()
-				-- 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-				-- 	end, "[T]oggle Inlay [H]ints")
-				-- end
+				if
+					client
+					and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
+				then
+					map("<leader>th", function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+					end, "[T]oggle Inlay [H]ints")
+				end
 			end,
 		})
 
@@ -196,38 +191,26 @@ return {
 		-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-		--
-		--  Add any additional override configuration in the following tables. Available keys are:
-		--  - cmd (table): Override the default command used to start the server
-		--  - filetypes (table): Override the default list of associated filetypes for the server
-		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-		--  - settings (table): Override the default settings passed when initializing the server.
-		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-            bashls = {},                            -- bash
-            lua_ls = {},                            -- lua
-            clangd = {},                            -- c/c++
-            html = {},                              -- html
-            cssls = {},                             -- css
-            angularls = {},                         -- angular
-            jsonls = {},                            -- json
-            yamlls = {},                            -- yaml
-            basedpyright = {},                      -- python
-            ts_ls = {},                             -- javascript, typescript
-            dockerls = {},                          -- docker
-            docker_compose_language_service = {},   -- docker compose
-            sqlls = {},                             -- sql
-            taplo = {},                             -- tomml
-            nginx_language_server = {},             -- nginx
+			bashls = {}, -- bash
+			lua_ls = {}, -- lua
+			clangd = {}, -- c/c++
+			html = {}, -- html
+			cssls = {}, -- css
+			jsonls = {}, -- json
+			yamlls = {}, -- yaml
+			basedpyright = {}, -- python
+			ts_ls = {}, -- javascript, typescript
+			dockerls = {}, -- docker
+			docker_compose_language_service = {}, -- docker compose
+			sqlls = {}, -- sql
+			taplo = {}, -- tomml
 		}
 
 		-- To check the current status of installed tools and/or manually install
 		-- other tools, you can run
 		--    :Mason
-		--
-		-- You can add other tools here that you want Mason to install
-		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format Lua code

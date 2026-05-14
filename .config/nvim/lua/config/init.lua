@@ -1,4 +1,3 @@
--- main entrypoint that loads everything
 -- lazy.vim config
 require("config.lazy")
 

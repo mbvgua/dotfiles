@@ -3,14 +3,14 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	version = "v8.12.0",
-	enabled = false,
+	-- enabled = false,
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
 	---@module 'render-markdown'
 	---@type render.md.UserConfig
-	opts = { 
-        latex = { enabled = false },
-    },
+	opts = {
+		latex = { enabled = false },
+	},
 }
