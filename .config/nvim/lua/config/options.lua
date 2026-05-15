@@ -80,7 +80,7 @@ opt.undofile = true                     -- allow for persistent undo
 -- thanks https://stackoverflow.com/a/15317146/30236232
 -- and https://toddknutson.bio/posts/how-to-enable-neovim-undo-backup-and-swap-files-when-switching-linux-groups/
 -- ]]
-UNDODIR = "~/.vim/undodir"
+UNDODIR = "/tmp/undodir//"
 
 -- if directories do not exist, make them
 if fn.isdirectory(UNDODIR) == 0 then

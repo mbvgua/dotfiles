@@ -105,7 +105,7 @@ if [[ "$#" -eq 1 ]]; then
             sudo cp ./default.conf /etc/keyd/
 
             # install pnpm and its packages
-            sudo npm install -g typescript @angular/cli diff-so-fancy
+            sudo npm install -g typescript diff-so-fancy
 
             # install pipx and some packages
             pipx install git-filter-repo yt-dlp fastapi
@@ -117,7 +117,7 @@ if [[ "$#" -eq 1 ]]; then
                 local DOTS_DIR="~/.dotfiles"
                 local TARGET_BRANCH="xorg/void"
 
-                git clone git@github.com:mbvgua/dotfiles.git "$DOTS_DIR"
+                git clone ssh://git@codeberg.org/mbugua/dotfiles.git "$DOTS_DIR"
                 cd "$DOTS_DIR"
                 # pull all remote branches locally
                 git !git branch -r | \

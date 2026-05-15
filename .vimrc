@@ -29,6 +29,11 @@ colorscheme unokai
 set splitright                          " cursor remain on left window
 set splitbelow                          " cursor remain on top window
 
+" show cursoline & statusline
+set statusline=" "
+set laststatus=2
+set cursorline
+
 " netrw optimizations
 let g:netrw_banner = 0                  " do not display info on the top of window
 let g:netrw_keepdir = 0                 " keep current directory same as browsing directory
