@@ -20,6 +20,9 @@ export PATH
 # add path to *my* scripts
 export PATH="$PATH:$HOME/.local/scripts"
 
+# make bash vim like
+set -o vi
+
 # load alises and functions
 for file in ~/.{bash_aliases,bash_functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
