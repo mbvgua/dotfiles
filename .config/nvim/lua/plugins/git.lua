@@ -18,24 +18,24 @@ return {
 				end
 
 				-- Navigation
-				map("n", "]c", function()
+				map("n", "]g", function()
 					if vim.wo.diff then
 						vim.cmd.normal({ "]c", bang = true })
 					else
 						gitsigns.nav_hunk("next")
 					end
-				end, { desc = "Jump to next git [c]hange" })
+				end, { desc = "Jump to next [g]it change" })
 
-				map("n", "[c", function()
+				map("n", "[g", function()
 					if vim.wo.diff then
 						vim.cmd.normal({ "[c", bang = true })
 					else
 						gitsigns.nav_hunk("prev")
 					end
-				end, { desc = "Jump to previous git [c]hange" })
+				end, { desc = "Jump to previous [g]it change" })
 
 				-- only functionality added is git blame. dont need the rest rn
-				map("n", "<leader>cb", gitsigns.toggle_current_line_blame, { desc = "git [c]ode [b]lame" })
+				map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { desc = "[g]it code blame" })
 			end,
 		},
 	},
@@ -43,10 +43,10 @@ return {
 		"sindrets/diffview.nvim",
 		config = function()
 			require("diffview").setup()
-			vim.keymap.set("n", "<leader>dc", [[:DiffviewClose<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>do", [[:DiffviewOpen<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>dd", [[:DiffviewOpen develop<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>dh", [[:DiffviewFileHistory %<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>gdc", [[:DiffviewClose<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>gdo", [[:DiffviewOpen<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>gdd", [[:DiffviewOpen develop<CR>]], { silent = true })
+			vim.keymap.set("n", "<leader>gdh", [[:DiffviewFileHistory %<CR>]], { silent = true })
 		end,
 	},
 }
