@@ -20,7 +20,7 @@ return {
 				-- Navigation
 				map("n", "]g", function()
 					if vim.wo.diff then
-						vim.cmd.normal({ "]c", bang = true })
+						vim.cmd.normal({ "]g", bang = true })
 					else
 						gitsigns.nav_hunk("next")
 					end
@@ -28,25 +28,30 @@ return {
 
 				map("n", "[g", function()
 					if vim.wo.diff then
-						vim.cmd.normal({ "[c", bang = true })
+						vim.cmd.normal({ "[g", bang = true })
 					else
 						gitsigns.nav_hunk("prev")
 					end
 				end, { desc = "Jump to previous [g]it change" })
 
 				-- only functionality added is git blame. dont need the rest rn
-				map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { desc = "[g]it code blame" })
+				map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { desc = "[g]it code [b]lame" })
 			end,
 		},
 	},
+
+	-- just too good, should have used this sooner.
+	-- also,one less reason to move to emacs :)
 	{
-		"sindrets/diffview.nvim",
-		config = function()
-			require("diffview").setup()
-			vim.keymap.set("n", "<leader>gdc", [[:DiffviewClose<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>gdo", [[:DiffviewOpen<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>gdd", [[:DiffviewOpen develop<CR>]], { silent = true })
-			vim.keymap.set("n", "<leader>gdh", [[:DiffviewFileHistory %<CR>]], { silent = true })
-		end,
+		"NeogitOrg/neogit",
+		lazy = true,
+		dependencies = {
+			"sindrets/diffview.nvim",
+			"m00qek/baleia.nvim",
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "show neogit ui" },
+		},
 	},
 }

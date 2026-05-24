@@ -2,8 +2,10 @@
 local vim = vim or {}
 local opt = vim.opt
 local fn = vim.fn
+local cmd = vim.cmd
 
 opt.mouse = "a"                         -- enable mouse mode:
+cmd.colorscheme("monokai-pro")          -- set colorscheme
 
 -- ui options
 opt.number = true                       -- enable line numbers
@@ -13,13 +15,13 @@ opt.cursorline = true                   -- highlight current line of cursor
 opt.colorcolumn = "91"                  -- highlight column 91. for code readability
 opt.scrolloff = 8                       -- keep 8 columns above/below cursor
 opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
-opt.cmdheight = 1                       -- height of command line
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
 
 -- indentation
 opt.smartindent = true                  -- smart auto-indention
 opt.autoindent = true                   -- keep identation from previous line
+opt.copyindent = true                   -- copy indentation from previous line
 opt.expandtab = true                    -- convert tabs to spaces
 opt.tabstop = 4                         -- no. of spaces a tab counts for
 opt.softtabstop = 4                     -- spaces applied when pressing tab

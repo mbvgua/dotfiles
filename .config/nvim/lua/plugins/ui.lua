@@ -25,11 +25,10 @@ return {
 				},
 				-- classic | octagon | pro | machine | ristretto | spectrum
 				filter = "classic",
-				-- Enable this will disable filter option
 				day_night = {
-					enable = false, -- turn off by default
-					day_filter = "light", -- classic | octagon | pro | machine | ristretto | spectrum
-					night_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
+					enable = false, -- turn off by default. light theme not that good
+					day_filter = "light",
+					night_filter = "classic",
 				},
 				inc_search = "background", -- underline | background
 				background_clear = {
@@ -41,7 +40,7 @@ return {
 					"nvim-tree",
 					"bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
 					-- "renamer",
-				}, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
+				},
 				plugins = {
 					bufferline = {
 						underline_selected = false,
@@ -53,9 +52,6 @@ return {
 					},
 				},
 			})
-
-			-- set colorscheme to now configured monokai
-			vim.cmd.colorscheme("monokai-pro")
 		end,
 	},
 
@@ -154,6 +150,10 @@ return {
 				component_separators = { left = "", right = "" },
 				always_divide_middle = true,
 				always_show_tabline = true,
+				disabled_filetypes = {
+					statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "NvimTree" },
+					winbar = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "NvimTree" },
+				},
 			},
 			sections = {
 				lualine_a = { { "mode", separator = { left = "", right = "" } } },
@@ -205,8 +205,8 @@ return {
 			},
 			tabline = {
 				lualine_a = { "buffers" }, -- show open buffers(numbered)
-				lualine_b = { "" },
-				lualine_c = { "" },
+				lualine_b = {},
+				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = { "tabs" }, -- show open tabs
@@ -218,7 +218,7 @@ return {
 	{
 		"folke/snacks.nvim",
 		-- enabled = false,
-		version = "v2.31.0",
+		-- version = "v2.31.0",
 		priority = 1000,
 		lazy = false,
 		---@type snacks.Config

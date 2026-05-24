@@ -62,8 +62,6 @@ return {
 				callback = function()
 					-- Enable treesitter highlighting and disable regex syntax
 					pcall(vim.treesitter.start)
-					-- Enable treesitter-based indentation
-					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end,
 			})
 		end,
@@ -374,6 +372,7 @@ return {
 				python = { "black" },
 				c = { "clangd" },
 				cpp = { "clangd" },
+				markdown = { "prettier" },
 			},
 		},
 		-- format using key bindings

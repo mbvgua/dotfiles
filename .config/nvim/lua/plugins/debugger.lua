@@ -3,7 +3,7 @@ local map = vim.keymap.set
 
 return {
 	"mfussenegger/nvim-dap",
-	version = "v0.10.0",
+	-- version = "v0.10.0",
 	-- enabled=false,
 	event = "VeryLazy",
 	dependencies = {
@@ -34,45 +34,47 @@ return {
 
 		-- Dap UI setup
 		dapui.setup({
-			-- NOTE: better arrangement when i uncomment this. find out why?
-			-- icons = { expanded = "▾", collapsed = "▸" },
-			-- mappings = {
-			-- 	open = "o",
-			-- 	remove = "d",
-			-- 	edit = "e",
-			-- 	repl = "r",
-			-- 	toggle = "t",
-			-- },
-			-- expand_lines = vim.fn.has("nvim-0.7"),
-			-- layouts = {
-			-- 	{
-			-- 		elements = {
-			-- 			"scopes",
-			-- 		},
-			-- 		size = 0.3,
-			-- 		position = "right",
-			-- 	},
-			-- 	{
-			-- 		elements = {
-			-- 			"repl",
-			-- 			"breakpoints",
-			-- 		},
-			-- 		size = 0.3,
-			-- 		position = "bottom",
-			-- 	},
-			-- },
-			-- floating = {
-			-- 	max_height = nil,
-			-- 	max_width = nil,
-			-- 	border = "single",
-			-- 	mappings = {
-			-- 		close = { "q", "<Esc>" },
-			-- 	},
-			-- },
-			-- windows = { indent = 1 },
-			-- render = {
-			-- 	max_type_length = nil,
-			-- },
+			-- NOTE: better arrangement for me
+			mappings = {
+				open = "o",
+				remove = "d",
+				edit = "e",
+				expand = "<cr>",
+				repl = "r",
+				toggle = "t",
+			},
+			expand_lines = vim.fn.has("nvim-0.7"),
+			layouts = {
+				{
+					elements = {
+						"scopes",
+						-- "breakpoints",
+						"stacks",
+					},
+					size = 0.3,
+					position = "right",
+				},
+				{
+					elements = {
+						"repl",
+						"console",
+					},
+					size = 0.3,
+					position = "bottom",
+				},
+			},
+			floating = {
+				max_height = nil,
+				max_width = nil,
+				border = "single",
+				mappings = {
+					close = { "q", "<Esc>" },
+				},
+			},
+			windows = { indent = 1 },
+			render = {
+				max_type_length = nil,
+			},
 		})
 
 		-- dap virtual text setup
@@ -105,28 +107,41 @@ return {
 		})
 
 		-- Automatically open/close DAP UI
-		dap.listeners.after.event_initialized["dapui_config"] = function()
+		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
-
-		dap.listeners.before.event_terminated["dapui_config"] = function()
+		dap.listeners.before.launch.dapui_config = function()
+			dapui.open()
+		end
+		dap.listeners.before.event_terminated.dapui_config = function()
 			dapui.close()
 		end
-
-		dap.listeners.before.event_exited["dapui_config"] = function()
+		dap.listeners.before.event_exited.dapui_config = function()
 			dapui.close()
 		end
 
 		-- keybinds
 		-- core stepping
-		map("n", "<leader>ds", function() dap.continue() end, { desc = "continue/[s]tart dap debugging" })
-		map("n", "<leader>du", function() dapui.toggle() end, { desc = "toggle dap [u]i" })
-		map("n", "<leader>do", function() dap.step_over() end, { desc = "dap step [o]ver" })
-		map("n", "<leader>di", function() dap.step_into() end, { desc = "dap step [i]nto" })
-		map("n", "<leader>dt", function() dap.step_out() end, { desc = "dap step ou[t]" })
+		map("n", "<leader>ds", function()
+			dap.continue()
+		end, { desc = "continue/[s]tart dap debugging" })
+		map("n", "<leader>du", function()
+			dapui.toggle()
+		end, { desc = "toggle dap [u]i" })
+		map("n", "<leader>do", function()
+			dap.step_over()
+		end, { desc = "dap step [o]ver" })
+		map("n", "<leader>di", function()
+			dap.step_into()
+		end, { desc = "dap step [i]nto" })
+		map("n", "<leader>dt", function()
+			dap.step_out()
+		end, { desc = "dap step ou[t]" })
 
 		-- breakpoints
-		map("n", "<leader>db", function() dap.toggle_breakpoint() end, { desc = "toggle dap [b]reakpoint" })
+		map("n", "<leader>db", function()
+			dap.toggle_breakpoint()
+		end, { desc = "toggle dap [b]reakpoint" })
 		map("n", "<leader>dB", function()
 			dap.set_breakpoint(vim.fn.input("Condition: "))
 		end, { desc = "set conditional [B]reakpoint" })
@@ -147,6 +162,8 @@ return {
 		-- exit debugger
 		map("n", "<leader>dq", function()
 			dap.clear_breakpoints()
+			dapui.close()
+			dap_virtual_text.toggle()
 			dap.terminate()
 			vim.notify("debugger session ended", "WARN")
 		end, { desc = "[q]uit dap debugging" })
