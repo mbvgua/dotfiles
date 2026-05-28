@@ -12,11 +12,12 @@ opt.number = true                       -- enable line numbers
 opt.relativenumber = true               -- make the numbers relative!!
 opt.signcolumn = "yes"                  -- reserve space in the gutter to show icons/errors
 opt.cursorline = true                   -- highlight current line of cursor
-opt.colorcolumn = "91"                  -- highlight column 91. for code readability
+opt.colorcolumn = "100"                 -- highlight column 100. dont cross
 opt.scrolloff = 8                       -- keep 8 columns above/below cursor
 opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
+opt.wrap = false                        -- dont wrap lines when opening Nvimtree/splits
 
 -- indentation
 opt.smartindent = true                  -- smart auto-indention

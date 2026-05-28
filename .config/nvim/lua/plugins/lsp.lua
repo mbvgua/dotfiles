@@ -5,6 +5,7 @@ return {
 	-- install tree-sitter for better syntax highlighting and code navigation
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		version = "v0.10.0",
 		-- enabled = false,
 		build = ":TSUpdate",
@@ -23,8 +24,9 @@ return {
 					"lua",
 					"luadoc",
 					"nginx",
-					"markdown",
-					"markdown_inline",
+					-- NOTE: bug with markdown?!
+					-- "markdown",
+					-- "markdown_inline",
 					"yaml",
 					"html",
 					"css",

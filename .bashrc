@@ -21,7 +21,7 @@ export PATH
 export PATH="$PATH:$HOME/.local/scripts"
 
 # make bash vim like
-set -o vi
+# set -o vi
 
 # load alises and functions
 for file in ~/.{bash_aliases,bash_functions}; do

@@ -16,7 +16,6 @@ xfsettingsd &
 pipewire &
 
 # compositor, prevents screen tearing
-# TODO: figure out why grayscale does not work in void
 picom --config ~/.config/picom/picom.conf -b &
 
 # get de/wm independent notifications

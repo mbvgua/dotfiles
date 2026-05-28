@@ -20,8 +20,7 @@ sauce() {
 }
 
 # extract files cleanly
-# from DistroTube
-#https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc?ref_type=heads
+# from DistroTube: https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc?ref_type=heads
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 

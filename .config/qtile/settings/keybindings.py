@@ -5,15 +5,16 @@ from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from libqtile import qtile
 
-mod: str = "mod4"                   # TUX/SUPER/WINDOWS key
-mod2: str = "mod1"                  # ALT key
-shift: str = "shift"                # left/right shift keys
-space: str = "space"                # space key
+mod: str = "mod4"  # TUX/SUPER/WINDOWS key
+mod2: str = "mod1"  # ALT key
+shift: str = "shift"  # left/right shift keys
+space: str = "space"  # space key
 control: str = "control"
 
 # my tools of choice
 terminal: str = "alacritty"
 browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
+emacs: str = "emacs"
 files: str = "thunar"
 
 # =====================
@@ -84,27 +85,22 @@ keys: list[Key | KeyChord] = [
     Key(
         [mod, shift],
         "j",
-        lazy.layout.shrink(),          # Shrinks windows in MonadTall
+        lazy.layout.shrink(),  # Shrinks windows in MonadTall
         lazy.layout.decrease_ratio(),  # Decreases master pane in Tile
-        lazy.layout.grow_down(),       # Shifts boundaries in Columns
-        lazy.layout.grow_left(),       # Shifts boundaries in Columns
+        lazy.layout.grow_down(),  # Shifts boundaries in Columns
+        lazy.layout.grow_left(),  # Shifts boundaries in Columns
         desc="Reduce active window size",
     ),
     Key(
         [mod, shift],
         "k",
-        lazy.layout.grow(),            # Grows windows in MonadTall
+        lazy.layout.grow(),  # Grows windows in MonadTall
         lazy.layout.increase_ratio(),  # Increases master pane in Tile
-        lazy.layout.grow_up(),         # Shifts boundaries in Columns
-        lazy.layout.grow_right(),      # Shifts boundaries in Columns
+        lazy.layout.grow_up(),  # Shifts boundaries in Columns
+        lazy.layout.grow_right(),  # Shifts boundaries in Columns
         desc="Increase active window size",
     ),
-    Key(
-        [mod,shift],
-        "n",
-        lazy.layout.normalize(),
-        desc = "Reset all window sizes"
-    ),
+    Key([mod, shift], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     # =================
     # Layout Control
@@ -133,6 +129,7 @@ keys: list[Key | KeyChord] = [
     # Open My Tools
     # =================
     Key([mod], "Return", lazy.spawn(terminal), desc="launch terminal"),
+    Key([mod], "e", lazy.spawn(emacs), desc="launch [e]macs"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],
@@ -216,18 +213,11 @@ keys: list[Key | KeyChord] = [
     # =================
     Key(
         [mod],
-        # using a since Ill also have nested tmux instance, thus navigating 
+        # using a since Ill also have nested tmux instance, thus navigating
         # between Ctrl+A and Tux+a is really convenient
         "a",
         lazy.group["scratchpad"].dropdown_toggle("terminal"),
         desc="open terminal with tmux scratchpad",
-    ),
-    # toggle grayscale mode!! shiny lights bad...
-    Key(
-        [mod],
-        "g",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/toggle_grayscale")),
-        desc="toggle [g]rayscale mode systemwide",
     ),
 ]
 

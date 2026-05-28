@@ -2,24 +2,36 @@
 local vim = vim or {}
 local map = vim.keymap.set
 
+-- file actions
 -- save current file
 map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
+
+-- copy entire file
+map({ "n", "x" }, "<C-a>", ":%y+<CR>", { desc = "copy entire file" })
 
 -- copy & paste with Shift-(y/p)
 map({ "n", "x" }, "<S-y>", '"+y', { desc = "copy to clipboard" })
 map({ "n", "x" }, "<S-p>", '"+p', { desc = "paste clipboard" })
 
--- copy entire file
-map({ "n", "x" }, "<C-a>", ":%y+<CR>", { desc = "copy entire file" })
-
--- close current window
-map("n", "<leader>x", "<c-w>c", { desc = "close current window" })
+-- check spelling within file
+map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
 
 -- stop highlighting after search
 map("n", "<esc>", ":nohlsearch<CR>", { desc = "removing highlighted text after a search" })
 
--- check spelling within file
-map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
+-- remain in visual mode while identing to the right/left
+map("v", "<", "<gv", { desc = "ident leftwards" })
+map("v", ">", ">gv", { desc = "ident rightwards" })
+
+-- Continously move block of text up and down
+map({ "v", "x" }, "K", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
+map({ "v", "x" }, "J", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
+map({ "v", "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
+map({ "v", "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
+
+-- window actions
+-- close current window
+map("n", "<leader>x", "<c-w>c", { desc = "close current window" })
 
 -- window navigation with leader-(h,l,k,j)
 map("n", "<leader>h", "<C-w>h", { desc = "navigate to left window" })
@@ -33,37 +45,14 @@ map("n", "<A-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller"
 map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
 map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
 
--- navigate buffers with leader-(N)ext and (P)revious
-map("n", "<leader>n", ":bnext<CR>", { desc = "next buffer" })
-map("n", "<leader>p", ":bprevious<CR>", { desc = "previous buffer" })
-
 -- easily split windows with - & | like tmux
 map("n", "<leader>-", ":split<CR>", { desc = "[-]Split window horizontally " })
 map("n", "<leader>\\", ":vsplit<CR>", { desc = "[|] Split window vertically " })
 
--- navigate tabs. dont use tabs alot though
-map("n", "<leader>ta", ":tabnew<CR>", { desc = "new tab" })
-map("n", "<leader>td", ":tabclose<CR>", { desc = "delete tab" })
-map("n", "<leader>tn", ":tabnext<CR>", { desc = "next tab" })
-map("n", "<leader>tp", ":tabprevious<CR>", { desc = "previous tab" })
-
--- Hardmode ON!! from kickstart nvim
--- Disable arrow keys in normal & visual mode
-map({ "v", "n" }, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
-
--- Visual Mode Tricks
--- remain in visual mode while identing to the right/left
-map("v", "<", "<gv", { desc = "ident leftwards" })
-map("v", ">", ">gv", { desc = "ident rightwards" })
-
--- Continously move block of text up and down
-map({ "v", "x" }, "K", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
-map({ "v", "x" }, "J", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
-map({ "v", "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
-map({ "v", "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
+-- buffer actions
+-- navigate buffers with leader-(N)ext and (P)revious
+map("n", "<leader>n", ":bnext<CR>", { desc = "next buffer" })
+map("n", "<leader>p", ":bprevious<CR>", { desc = "previous buffer" })
 
 -- delete current buffer
 map("n", "<leader>bd", ":bd<CR>", { desc = "current [b]uffer [d]elete" })
@@ -89,6 +78,21 @@ map("n", "<leader>bb", function()
 	end
 end, { desc = "delete all [b]uffers in [b]ackgrond" })
 
--- insert base html template
+-- tabs actions
+-- navigate tabs. dont use tabs alot though
+map("n", "<tab>a", ":tabnew<CR>", { desc = "add new tab" })
+map("n", "<tab>n", ":tabnext<CR>", { desc = "go to next tab" })
+map("n", "<tab>p", ":tabprevious<CR>", { desc = "go to previous tab" })
+map("n", "<tab>x", ":tabclose<CR>", { desc = "delete current tab" })
+map("n", "<tab>d", ":tabonly<CR>", { desc = "delete all tabs in background" })
+
+-- Hardmode ON!! from kickstart nvim
+-- Disable arrow keys in normal & visual mode
+map({ "v", "n" }, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+
+-- insert templates
 -- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
 map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<cR>9jwf>a", { desc = "insert html boilerplate" })

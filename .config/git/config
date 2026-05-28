@@ -5,7 +5,7 @@
 [core]
 	editor = nvim
 	symlink = true
-	pager = diff-so-fancy | less --tabs=4 -RF
+	pager = less --tabs=4 -RF
 [init]
 	defaultBranch = main
 [commit]
@@ -21,12 +21,11 @@
 	tool = subl-merge
 	conflictStyle = zdiff3
 [alias]
-    ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Creset' --all --abbrev-commit
 	ao = remote add origin
 	br = branch
 	st = status
-    search = log -p --all -S newsboat   ; search keywords by commits
+    search = log -p --all -S newsboat           ; search keywords by commits
 	co = commit
     coan = commit --amend --no-edit
     coa = commit --amend
@@ -38,8 +37,7 @@
     contributors = shortlog -nse
 	standup = log --since='yesterday' --author='mbvgua'
     mine = log --author='mbvgua'
-    ; for cloning repos with submodules
-    clrs = clone --recurse-submodules
+    clrs = clone --recurse-submodules        ; for cloning repos with submodules
     sur = submodule update --remote
     ; pull all remote branches into local working directory
 	pa = "!git branch -r | grep -v \"\\->\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && git fetch --all && git pull --all"
@@ -51,9 +49,7 @@
 [color]
 	ui = true
 [help]
-	autocorrect = 3
-[interactive]
-	diffFilter = diff-so-fancy --patch
+	autocorrect = 5
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [url "git@codeberg.org:"]

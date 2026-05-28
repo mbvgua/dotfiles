@@ -8,6 +8,8 @@ LANG_PACKAGES=(
     clisp sbcl docker docker-buildx docker-compose base-devel libffi-devel
     bzip2-devel openssl openssl-devel readline bash-completion
     python3-pipx python3-psutil python3-dbus-fast python3-xcffib
+    # packages not in default void
+    psmisc tree
 )
 USERLAND_PACKAGES=(
     qtile xfce4 bash btop alacritty cmus gnome-themes-extra flameshot

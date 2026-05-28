@@ -11,7 +11,7 @@ local opt = vim.opt
 autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
 	callback = function()
-		vim.hl.on_yank()
+		(vim.hl or vim.highlight).on_yank()
 	end,
 	desc = "Highlight when yanking text",
 })
@@ -51,25 +51,25 @@ autocmd("FileType", {
 
 -- recall and go to last LOC when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-    group = augroup("LastLoc", { clear = true }),
-    callback = function(event)
-        local exclude = { "gitcommit", "commit", "gitrebase" }
-        local ft = vim.bo[event.buf].filetype
+	group = augroup("LastLoc", { clear = true }),
+	callback = function(event)
+		local exclude = { "gitcommit", "commit", "gitrebase" }
+		local ft = vim.bo[event.buf].filetype
 
-        -- Check if the current filetype is in the exclude list
-        if vim.tbl_contains(exclude, ft) then
-            return
-        end
+		-- Check if the current filetype is in the exclude list
+		if vim.tbl_contains(exclude, ft) then
+			return
+		end
 
-        -- Retrieve the mark for the last known cursor position
-        local mark = vim.api.nvim_buf_get_mark(event.buf, '"')
-        local lcount = vim.api.nvim_buf_line_count(event.buf)
+		-- Retrieve the mark for the last known cursor position
+		local mark = vim.api.nvim_buf_get_mark(event.buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(event.buf)
 
-        -- If the mark is valid (line 1 or greater) and within the file's line count
-        if mark[1] > 0 and mark[1] <= lcount then
-            pcall(vim.api.nvim_win_set_cursor, 0, mark)
-        end
-    end,
+		-- If the mark is valid (line 1 or greater) and within the file's line count
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
 })
 
 -- make terminal navigation much easier

@@ -83,13 +83,13 @@ return {
 				icons = {
 					glyphs = {
 						git = {
-							unstaged = "",
+							unstaged = "",
 							staged = "S",
 							renamed = "R",
-							untracked = "U",
-							unmerged = "",
-							deleted = "✗",
+							untracked = "",
+							deleted = "",
 							ignored = "◌",
+							unmerged = "",
 						},
 					},
 				},
@@ -159,10 +159,9 @@ return {
 				lualine_a = { { "mode", separator = { left = "", right = "" } } },
 				lualine_b = {
 					{ "branch", icon = "" },
-					{ "diff" },
 				},
 				lualine_c = {
-					{ "diagnostics" },
+					{ "diff" },
 					{
 						shorting_target = 40,
 						newfile_status = true,
@@ -188,12 +187,7 @@ return {
 						ignore_lsp = {},
 					},
 				},
-				lualine_y = {
-					-- already in tabline. total duplication
-					-- also want to minimize items on statusline
-					-- { "filetype", icon = { align = "right" } },
-					-- "fileformat",
-				},
+				lualine_y = { "fileformat" },
 				lualine_z = {
 					{
 						function()
@@ -207,14 +201,20 @@ return {
 				lualine_a = { "buffers" }, -- show open buffers(numbered)
 				lualine_b = {},
 				lualine_c = {},
-				lualine_x = {},
+				lualine_x = {
+					{
+						"diagnostics",
+						-- symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
+						colored = false,
+					},
+				},
 				lualine_y = {},
 				lualine_z = { "tabs" }, -- show open tabs
 			},
 		},
 	},
 
-	-- make most UI elements alot nicer visually, e/g code actions with the lsp
+	-- make most UI elements alot nicer visually
 	{
 		"folke/snacks.nvim",
 		-- enabled = false,
