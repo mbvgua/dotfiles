@@ -3,7 +3,7 @@
 	email = mbugua@noreply.codeberg.org
 	signingKey = ~/.ssh/id_ed25519_codeberg.pub
 [core]
-	editor = nvim
+	editor = emacs
 	symlink = true
 	pager = less --tabs=4 -RF
 [init]
