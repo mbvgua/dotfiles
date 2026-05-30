@@ -69,4 +69,4 @@ site-lisp/package/
 
 places
 # If you only want to use init.org
-#/init.el
+/init.el

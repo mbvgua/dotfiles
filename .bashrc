@@ -31,6 +31,9 @@ unset file
 
 # open man pages in neovim. thanks @mental_outlaw - Yt
 export MANPAGER="nvim +Man!"
+# man() {
+#     emacs -nw --eval "(man \"$1\")"
+# }
 export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 export HISTCONTROL=ignoredups:erasedups         # ignore duplicates in history
