@@ -17,7 +17,7 @@ opt.scrolloff = 8                       -- keep 8 columns above/below cursor
 opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
-opt.wrap = false                        -- dont wrap lines when opening Nvimtree/splits
+-- opt.wrap = false                        -- dont wrap lines when opening Nvimtree/splits
 
 -- indentation
 opt.smartindent = true                  -- smart auto-indention

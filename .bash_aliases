@@ -4,7 +4,7 @@ alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"                            # Be
 alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
 
 # substitutions
-alias vi='nvim'; alias vim='nvim'               # the future is now!
+# alias vi='nvim'; alias vim='nvim'               # the future is now!
 alias fdir='find . -type d -name'               # find directories
 alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly

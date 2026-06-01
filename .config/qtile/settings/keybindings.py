@@ -204,7 +204,7 @@ keys: list[Key | KeyChord] = [
     ),
     Key(
         [mod2],
-        "space",
+        "f",
         lazy.spawn(os.path.expanduser("~/.local/scripts/screenshot fullscreen")),
         desc="full screen screenshot",
     ),
