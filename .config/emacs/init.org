@@ -24,7 +24,6 @@
   - [[#undo][Undo]]
 - [[#appearance][Appearance]]
   - [[#set-theme][Set Theme]]
-  - [[#transparency][Transparency]]
   - [[#doom-modeline][Doom Modeline]]
   - [[#nerd-icons][Nerd Icons]]
 - [[#development][Development]]
@@ -242,15 +241,16 @@ automatically exports the configuration here to the associated output files.
 
 ** Show startup time
 #+begin_src emacs-lisp
-    (defun start/display-startup-time ()
-      (interactive)
-      (message "Emacs loaded in %s with %d garbage collections."
-               (format "%.2f seconds"
-                       (float-time
-                        (time-subtract after-init-time before-init-time)))
-               gcs-done))
+  (defun start/display-startup-time ()
+    (interactive)
+    (message "Emacs loaded %d packages in %s with %d garbage collections."
+  		   (length package-activated-list)
+             (format "%.2f seconds"
+                     (float-time
+                      (time-subtract after-init-time before-init-time)))
+             gcs-done))
 
-    (add-hook 'emacs-startup-hook #'start/display-startup-time)
+  (add-hook 'emacs-startup-hook #'start/display-startup-time)
 #+end_src
 
 ** Package manager
@@ -389,7 +389,7 @@ Only works with package.el.
     (recentf-mode t) ;; Enable recent file mode
     ;;(context-menu-mode t) ;; Right-click menu
 
-    ;;(global-visual-line-mode t)           ;; Enable line wrapping (NOTE: breaks vundo)
+    (global-visual-line-mode t)           ;; Enable line wrapping
     (global-display-line-numbers-mode t)  ;; Display line numbers
     (display-line-numbers-type 'relative) ;; Relative line numbers
     (global-hl-line-mode t)               ;; Highlight current line
@@ -430,17 +430,19 @@ Only works with package.el.
     (use-short-answers t)                           ;; Use short answers in prompts for quicker responses (y instead of yes)
     :hook
     (prog-mode . hs-minor-mode) ;; Enable folding hide/show globally
-    ;; (prog-mode . display-fill-column-indicator-mode) ;; Display line length indicator
+    ;; (prog-mode . display-fill-column-indicator-mode) ;; Display line length indicator on line 100
     (prog-mode . whitespace-mode)
     (prog-mode . display-line-numbers-mode)  ;; display line numbers in most progrmming modes
     ((term-mode shell-mode eshell-mode org-mode) . (lambda () (display-line-numbers-mode 0))) ;; Disable line numbers in terminal modes & org-mode
 
     ;; Add a hook to run code after Emacs has fully initialized.
+    ;; TODO: make a list of cool quotes id like to see on startup, and place them here
+    ;; to be displayed randomly
     (after-init . (lambda ()
                     (message "Emacs has fully loaded. This code runs after startup.")
                     (with-current-buffer (get-buffer-create "*scratch*")
                         (insert (format
-                                ";;    Welcome to Emacs!\n;;    Don't let this darkness fool you...\n;;\n;;    Loading time : %s\n;;    Packages     : %d\n"
+                                ";;    Welcome to Emacs!\n;;    Don't let this darkness fool you...\n;;\n\n"
   				    (emacs-init-time)
                                 (length package-activated-list))))))
     :config
@@ -560,15 +562,6 @@ More examples here:
           (global-evil-surround-mode 1))
 #+end_src
 
-*** Evil Commentary
-Use 'gc' for comments globally.
-
-#+begin_src emacs-lisp
-  ;; (use-package evil-commentary
-  ;;     :config
-  ;;     (evil-commentary-mode))
-#+end_src
-
 *** Evil Tutor
 Getting acquainted with evil mode in emacs.
 
@@ -668,7 +661,6 @@ Note: The Leader key is what you will press when you want to access your keybind
                   ;; misc
                   "." '(ansi-term :wk "open terminal[.]")
                   "/" '(display-line-numbers-mode :wk "toggle line numbers")
-                  "u" '(vundo :wk "toggle [line numbers")
 
                   ;; ;; Org mode
                   ;; "m" '(:ignore t :wk "Org")
@@ -795,19 +787,19 @@ If you want to use the built in methods I recommend using these ones:
   ;;     (when (get-buffer help-buffer)
   ;;       (switch-to-buffer-other-window help-buffer))))
 
-  ;; Commenting functionality for single and multiple lines
-  ;; this eliminates need for evil-commentary
-  (evil-define-key 'normal 'global (kbd "gcc")
-                   (lambda ()
-                     (interactive)
-                     (if (not (use-region-p))
-                         (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
+  ;; FIXME: terrible UB at times, figure out why
+   ;; Commenting functionality for single and multiple lines
+(evil-define-key 'normal 'global (kbd "gc")
+                (lambda ()
+                    (interactive)
+                    (if (not (use-region-p))
+                        (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
 
-  (evil-define-key 'visual 'global (kbd "gc")
-                   (lambda ()
-                     (interactive)
-                     (if (use-region-p)
-                         (comment-or-uncomment-region (region-beginning) (region-end)))))
+   (evil-define-key 'visual 'global (kbd "gc")
+                    (lambda ()
+                      (interactive)
+                      (if (use-region-p)
+                          (comment-or-uncomment-region (region-beginning) (region-end)))))
 #+end_src
 To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
 
@@ -816,12 +808,10 @@ Undotree like setup.
 
 Undo Fu: Simple, stable linear undo with redo for Emacs.
 Undo-fu-session: Persistent undo history
-Vundo: Visualizes undo history.
 
-If you want to use this. Don't forget to add keybindings for undu-fu and vundo.
+If you want to use this. Don't forget to add keybindings for undu-fu.
 Evil users don't need to add keybindings for undo-fu just change evil-undo-system to undo-fu.
 
-*To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp
   (use-package undo-fu
   :defer
@@ -840,11 +830,6 @@ Evil users don't need to add keybindings for undo-fu just change evil-undo-syste
       ;; is our priority within Emacs
       (setq undo-fu-session-compression 'zst)))
 
-  (use-package vundo
-      :defer
-      :custom
-      (vundo-glyph-alist vundo-unicode-symbols)
-      (vundo-compact-display t))
 #+end_src
 
 * Appearance
@@ -853,46 +838,52 @@ Set fonts in the early-init.el file
 Set monokai theme, if you want some themes try out doom-themes.
 Use consult-theme to easily try out themes (*Epilepsy* Warning).
 #+begin_src emacs-lisp
-  ;; NOTE: best monokai look-alike imo. abit outdated though
-  ;; (use-package monokai-pro-theme
-  ;;     :config
-  ;;     (load-theme 'monokai-pro-classic t))
+    ;; NOTE: best monokai look-alike imo. look into the modus-* and make mods
+    ;; (use-package monokai-pro-theme
+    ;;     :config
+    ;;     (load-theme 'monokai-pro-classic t))
 
-  (use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-            doom-themes-enable-italic t) ; if nil, italics is universally disabled
-      (load-theme 'doom-monokai-classic t)   ;; Sets the default theme to load!!!
-      (doom-themes-org-config))
+  (use-package monokai-theme
+    :config
+    (load-theme 'monokai t))
 
+    ;; use this when building your own theme
+    ;; (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+    ;; (load-theme 'monokai t)
 
-#+end_src
-
-** Transparency
-With Emacs version 29, true transparency has been added, but Ifind this distracting, so Id rather not have it.
-
-#+begin_src emacs-lisp
-   ;; (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
-
-   ;; Transparency in terminal
-  ;; (defun start/tui-enable-transparency ()
-  ;;    (unless (display-graphic-p (selected-frame))
-  ;;      (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-  ;;  (add-hook 'window-setup-hook 'start/tui-enable-transparency)
 #+end_src
 
 ** Doom Modeline
 A fancy, fast and customizable mode-line.
+
 #+begin_src emacs-lisp
-  (use-package doom-modeline
-    :custom
-    (doom-modeline-buffer-file-name-style 'buffer-name)  ;; Set the buffer file name style to just the buffer name (without path).
-    (doom-modeline-project-detection 'project)           ;; Enable project detection for displaying the project name.
-    (doom-modeline-buffer-name t)                        ;; Show the buffer name in the mode line.
-    (doom-modeline-vcs-max-length 25)                    ;; Limit the version control system (VCS) branch name length to 25 characters.
-    :hook
-    (after-init . doom-modeline-mode))
+    (use-package doom-modeline
+      :custom
+      (doom-modeline-height 30)
+      (doom-modeline-buffer-file-name-style 'auto)  ;; Set the buffer file name style to just the buffer name (without path).
+      (doom-modeline-project-detection 'project)           ;; Enable project detection for displaying the project name.
+      (doom-modeline-buffer-name t)                        ;; Show the buffer name in the mode line.
+      (doom-modeline-vcs-max-length 25)                    ;; Limit the version control system (VCS) branch name length to 25 characters.
+      (doom-modeline-position-line-format '("LOC: %l"))
+      (doom-modeline-percent-position nil)
+      (doom-modeline-buffer-encoding nil)
+      (doom-modeline-total-line-number t)
+      :hook
+      (after-init . doom-modeline-mode)
+      ;; :config
+      ;; ;; Redefine the default 'main' modeline layout to your exact specifications
+      ;; (doom-modeline-def-modeline 'main
+      ;;     ;; LEFT SIDE
+      ;;     ;; 1. Evil mode (modals)
+      ;;     ;; 2. Buffer name (buffer-info)
+      ;;     ;; 3. Diagnostics (checker)
+      ;;     ;; 4. Space / The rest (vcs for git branch, etc.)
+      ;;     '(modals vcs buffer-info)
+
+      ;;     ;; RIGHT SIDE
+      ;;     ;; Miscellaneous info, major mode, and LOC (buffer-position) at the absolute far right
+      ;;     '(misc-info minor-modes major-mode process buffer-position))
+  	)
 
 #+end_src
 
@@ -914,32 +905,6 @@ Also Doom modeline requires nerd icons.
 #+end_src
 
 * Development
-# ** Projectile
-# Project interaction library for Emacs.
-
-# Emacs has a built in project manager called project.el, but we don't use it.
-# You can try it out with the keybinds under C-x p because project.el does not require any special setup to use.
-
-# We use projectile because it:
-# - supports more features and project types.
-# - has better integration with projects.
-# - has better documentation.
-# - is developed faster.
-# More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons]] to use projectile.
-
-# You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
-# #+begin_src emacs-lisp
-#   (use-package projectile
-#     :hook (after-init . projectile-mode)
-#     :config
-#     (projectile-mode)
-#     :custom
-#     ;; (projectile-auto-discover nil) ;; Disable auto search for better startup times ;; Search with a keybind
-#     (projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
-#     (projectile-switch-project-action #'projectile-dired) ;; Open dired when switching to a project
-#     (projectile-project-search-path '("~/Desktop/projects/" "~/.dotfiles/")))
-# #+end_src
-
 ** Eglot
 Built in Emacs client for the Language Server Protocol.
 We use Eglot because it is fast and minimal.
@@ -992,10 +957,10 @@ If you plan to use something like LSP-mode don't forget to remove this.
 Check out more language servers in the [[https://mason-registry.dev/registry/list][mason registry]].
 
 #+begin_src emacs-lisp
-        (use-package mason
-          :hook (after-init . mason-ensure)
-    	  :config
-        (mason-setup))
+    (use-package mason
+        :hook (after-init . mason-ensure)
+        :config
+    (mason-setup))
 
     (mason-setup
       (dolist (pkg '("basedpyright"
@@ -1078,6 +1043,7 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
               (python "https://github.com/tree-sitter/tree-sitter-python")
               (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
               (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+              (yaml "https://github.com/ikatyang/tree-sitter-yaml")
               ;; (json "https://github.com/tree-sitter/tree-sitter-json")
               ;; (markdown "https://github.com/ikatyang/tree-sitter-markdown")
               ;; (rust "https://github.com/tree-sitter/tree-sitter-rust")
@@ -1090,7 +1056,6 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
               ;; (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
               ;; (vue "https://github.com/ikatyang/tree-sitter-vue")
               ;; (css "https://github.com/tree-sitter/tree-sitter-css")
-              ;; (yaml "https://github.com/ikatyang/tree-sitter-yaml")
   ))
 
       (defun start/install-treesit-grammars ()
@@ -1137,6 +1102,12 @@ Use C-SPC tab to uncomment the lines.
 #+begin_src emacs-lisp
     (use-package lua-mode
       :mode "\\.lua\\'") ;; Only start in a lua file
+#+end_src
+
+*** Python mode
+#+begin_src emacs-lisp
+  (use-package python-mode
+    :mode "\\.py\\'")
 #+end_src
 
 *** Org Mode
@@ -1345,59 +1316,59 @@ Notes:
 - Be aware when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
 #+begin_src emacs-lisp
-    (use-package yasnippet-capf :defer)
+  (use-package yasnippet-capf :defer)
 
-    (defun start/setup-capfs ()
-      "Configure completion backends"
-      ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
-      (let ((merge-backends (list
-                             #'cape-keyword      ;; Keyword completion
-                             ;; #'cape-abbrev       ;; Complete abbreviation
-                             #'cape-dabbrev      ;; Complete word from current buffers
-                             ;; #'cape-line         ;; Complete entire line from current buffer
-                             ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
-                             ;; #'cape-dict         ;; Dictionary completion (Needs Dictionary file installed)
-                             ;; #'cape-tex          ;; Complete Unicode char from TeX command, e.g. \hbar
-                             ;; #'cape-sgml         ;; Complete Unicode char from SGML entity, e.g., &alpha
-                             ;; #'cape-rfc1345      ;; Complete Unicode char using RFC 1345 mnemonics
-                             ;; #'snippy-capf       ;; Vscode Snippets (Snippy needs to be installed)
-                             #'yasnippet-capf    ;; Yasnippet snippets
-                             ))
-            (seperate-backends (list
-                                #'cape-file ;; Path completion
-                                #'cape-elisp-block ;; Complete elisp in Org or Markdown mode
-                                )))
-        ;; Remove keyword completion in git commits
-        (when (derived-mode-p 'git-commit-mode)
-          (setq merge-backends (remq #'cape-keyword merge-backends)))
+  (defun start/setup-capfs ()
+    "Configure completion backends"
+    ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
+    (let ((merge-backends (list
+                           #'cape-keyword      ;; Keyword completion
+                           ;; #'cape-abbrev       ;; Complete abbreviation
+                           #'cape-dabbrev      ;; Complete word from current buffers
+                           ;; #'cape-line         ;; Complete entire line from current buffer
+                           ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
+                           ;; #'cape-dict         ;; Dictionary completion (Needs Dictionary file installed)
+                           ;; #'cape-tex          ;; Complete Unicode char from TeX command, e.g. \hbar
+                           ;; #'cape-sgml         ;; Complete Unicode char from SGML entity, e.g., &alpha
+                           ;; #'cape-rfc1345      ;; Complete Unicode char using RFC 1345 mnemonics
+                           ;; #'snippy-capf       ;; Vscode Snippets (Snippy needs to be installed)
+                           #'yasnippet-capf    ;; Yasnippet snippets
+                           ))
+          (seperate-backends (list
+                              #'cape-file ;; Path completion
+                              #'cape-elisp-block ;; Complete elisp in Org or Markdown mode
+                              )))
+      ;; Remove keyword completion in git commits
+      (when (derived-mode-p 'git-commit-mode)
+        (setq merge-backends (remq #'cape-keyword merge-backends)))
 
-        ;; Add Elisp symbols only in Elisp modes
-        (when (derived-mode-p 'emacs-lisp-mode 'ielm-mode)
-          (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ;; Emacs Lisp code (functions, variables)
+      ;; Add Elisp symbols only in Elisp modes
+      (when (derived-mode-p 'emacs-lisp-mode 'ielm-mode)
+        (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ;; Emacs Lisp code (functions, variables)
 
-        ;; Add Eglot to the front of the list if it's active
-        (when (bound-and-true-p eglot--managed-mode)
-          (setq merge-backends (cons #'eglot-completion-at-point merge-backends)))
+      ;; Add Eglot to the front of the list if it's active
+      (when (bound-and-true-p eglot--managed-mode)
+        (setq merge-backends (cons #'eglot-completion-at-point merge-backends)))
 
-        ;; Create the super-capf and set it buffer-locally
-        (setq-local completion-at-point-functions
-                    (append
-                     seperate-backends
-                     (list (apply #'cape-capf-super merge-backends)))
-                    )))
+      ;; Create the super-capf and set it buffer-locally
+      (setq-local completion-at-point-functions
+                  (append
+                   seperate-backends
+                   (list (apply #'cape-capf-super merge-backends)))
+                  )))
 
-    (use-package cape
-      :after (corfu)
-      :init
-      ;; Add to the global default value of `completion-at-point-functions' which is
-      ;; used by `completion-at-point'.  The order of the functions matters, the
-      ;; first function returning a result wins.  Note that the list of buffer-local
-      ;; completion functions takes precedence over the global list.
+  (use-package cape
+    :after (corfu)
+    :init
+    ;; Add to the global default value of `completion-at-point-functions' which is
+    ;; used by `completion-at-point'.  The order of the functions matters, the
+    ;; first function returning a result wins.  Note that the list of buffer-local
+    ;; completion functions takes precedence over the global list.
 
-      ;; Seperate function needed, because we use setq-local (everything is replaced)
-      (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
-      (add-hook 'prog-mode-hook #'start/setup-capfs)
-      (add-hook 'text-mode-hook #'start/setup-capfs))
+    ;; Seperate function needed, because we use setq-local (everything is replaced)
+    (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
+    (add-hook 'prog-mode-hook #'start/setup-capfs)
+    (add-hook 'text-mode-hook #'start/setup-capfs))
 #+end_src
 
 ** Orderless
@@ -1484,56 +1455,57 @@ Telescope for Emacs.
 Check out their [[https://github.com/minad/consult][git repository]] for more awesome functions.
 
 #+begin_src emacs-lisp
-    (use-package consult
-      ;; Enable automatic preview at point in the *Completions* buffer. This is
-      ;; relevant when you use the default completion UI.
-      :hook (completion-list-mode . consult-preview-at-point-mode)
-      :init
-      ;; Optionally configure the register formatting. This improves the register
-      ;; preview for `consult-register', `consult-register-load',
-      ;; `consult-register-store' and the Emacs built-ins.
-      (setq register-preview-delay 0.5
-            register-preview-function #'consult-register-format)
+  (use-package consult
+    ;; Enable automatic preview at point in the *Completions* buffer. This is
+    ;; relevant when you use the default completion UI.
+    :hook (completion-list-mode . consult-preview-at-point-mode)
+    :init
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
 
-      ;; Optionally tweak the register preview window.
-      ;; This adds thin lines, sorting and hides the mode line of the window.
-      (advice-add #'register-preview :override #'consult-register-window)
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
 
-      ;; Use Consult to select xref locations with preview
-      (setq xref-show-xrefs-function #'consult-xref
-            xref-show-definitions-function #'consult-xref)
-      :config
-      ;; Optionally configure preview. The default value
-      ;; is 'any, such that any key triggers the preview.
-      (setq consult-preview-key 'any)
-      (setq consult-preview-key "M-.")
-      (setq consult-preview-key '("S-<down>" "S-<up>"))
+    ;; Use Consult to select xref locations with preview
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
+    :config
+    ;; Optionally configure preview. The default value
+    ;; is 'any, such that any key triggers the preview.
+    (setq consult-preview-key 'any)
+    (setq consult-preview-key "M-.")
+    ;; (setq consult-preview-key '("C-n" "C-p"))    ;; FIXME: make this work, with instant preview?
+    (setq consult-preview-key '("S-<down>" "S-<up>"))
 
-      ;; For some commands and buffer sources it is useful to configure the
-      ;; :preview-key on a per-command basis using the `consult-customize' macro.
-      ;; (consult-customize
-      ;; consult-theme :preview-key '(:debounce 0.2 any)
-      ;; consult-ripgrep consult-git-grep consult-grep
-      ;; consult-bookmark consult-recent-file consult-xref
-      ;; consult--source-bookmark consult--source-file-register
-      ;; consult--source-recent-file consult--source-project-recent-file
-      ;; :preview-key "M-."
-      ;; :preview-key '(:debounce 0.4 any))
+    ;; For some commands and buffer sources it is useful to configure the
+    ;; :preview-key on a per-command basis using the `consult-customize' macro.
+    ;; (consult-customize
+    ;; consult-theme :preview-key '(:debounce 0.2 any)
+    ;; consult-ripgrep consult-git-grep consult-grep
+    ;; consult-bookmark consult-recent-file consult-xref
+    ;; consult--source-bookmark consult--source-file-register
+    ;; consult--source-recent-file consult--source-project-recent-file
+    ;; :preview-key "M-."
+    ;; :preview-key '(:debounce 0.4 any))
 
-      ;; By default `consult-project-function' uses `project-root' from project.el.
-      ;; Optionally configure a different project root function.
-       ;;;; 1. project.el (the default)
-      ;; (setq consult-project-function #'consult--default-project--function)
-       ;;;; 2. vc.el (vc-root-dir)
-      ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-       ;;;; 3. locate-dominating-file
-      ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-       ;;;; 4. projectile.el (projectile-project-root)
-      (autoload 'projectile-project-root "projectile")
-      (setq consult-project-function (lambda (_) (projectile-project-root)))
-       ;;;; 5. No project support
-      ;; (setq consult-project-function nil)
-      )
+    ;; By default `consult-project-function' uses `project-root' from project.el.
+    ;; Optionally configure a different project root function.
+     ;;;; 1. project.el (the default)
+    ;; (setq consult-project-function #'consult--default-project--function)
+     ;; 2. vc.el (vc-root-dir)
+    ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+     ;;;; 3. locate-dominating-file
+    ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+     ;;;; 4. projectile.el (projectile-project-root)
+    ;; (autoload 'projectile-project-root "projectile")
+    ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+     ;;;; 5. No project support
+    ;; (setq consult-project-function nil)
+    )
 #+end_src
 
 ** Helpful
