@@ -1,6 +1,6 @@
 [user]
 	name = mbvgua
-	email = mbugua@noreply.codeberg.org
+	email = 105845499+mbvgua@users.noreply.github.com
 	signingKey = ~/.ssh/id_ed25519_codeberg.pub
 [core]
 	editor = emacs

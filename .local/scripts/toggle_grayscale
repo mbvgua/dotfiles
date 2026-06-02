@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# strict mode
+# set -euo pipefail
+
+CONFIG_PATH="$HOME/.config/picom/picom.conf"
+SHADER_PATH="$HOME/.config/picom/grayscale-shader.glsl"
+
+# Identify the active monitor
+MONITOR=$(xrandr | grep " connected" | cut -d' ' -f1 | head -n 1)
+
+# clean up stuck gamma/brightness
+reset_colours() {
+    xrandr --output "$MONITOR" --gamma 1:1:1 --brightness 1
+}
+
+if pgrep -a picom | grep "grayscale-shader.glsl"; then
+	# if grayscale is on, tuen it off
+    killall picom
+    while pgrep -x picom >/dev/null; do sleep 0.05; done
+    reset_colours
+    dunstify -a picom -t 3000 -u low "let there be colours :("
+    picom --config "${CONFIG_PATH}" -b &
+else
+	# turn off the colours
+    killall picom
+    while pgrep -x picom >/dev/null; do sleep 0.05; done
+    reset_colours
+    dunstify -a picom -t 3000 -u low "turning on grayscale :)"
+    picom --config "${CONFIG_PATH}" --window-shader-fg "${SHADER_PATH}" -b &
+fi

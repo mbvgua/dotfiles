@@ -16,7 +16,7 @@ xfsettingsd &
 pipewire &
 
 # compositor, prevents screen tearing
-picom --config ~/.config/picom/picom.conf -b &
+picom --config ~/.config/picom/picom.conf --window-shader-fg ~/.config/picom/grayscale-shader.glsl -b &
 
 # get de/wm independent notifications
 dunst -config ~/.config/dunst/dunstrc &
