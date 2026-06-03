@@ -1,9 +1,9 @@
 [user]
 	name = mbvgua
-	email = 105845499+mbvgua@users.noreply.github.com
-	signingKey = ~/.ssh/id_ed25519_codeberg.pub
+	email = mbvgua+dev@gmail.com
+	signingKey = ~/.ssh/id_ed25519_github.pub
 [core]
-	editor = emacs
+	editor = emacs -nw
 	symlink = true
 	pager = less --tabs=4 -RF
 [init]
