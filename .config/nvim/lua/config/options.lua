@@ -18,6 +18,7 @@ opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
 -- opt.wrap = false                        -- dont wrap lines when opening Nvimtree/splits
+opt.updatetime = 250                -- allow for immediate feedback, on hover
 
 -- indentation
 opt.smartindent = true                  -- smart auto-indention

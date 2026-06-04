@@ -219,6 +219,13 @@ keys: list[Key | KeyChord] = [
         lazy.group["scratchpad"].dropdown_toggle("terminal"),
         desc="open terminal with tmux scratchpad",
     ),
+    # toggle grayscale mode!! shiny lights bad...
+    Key(
+        [mod],
+        "g",
+        lazy.spawn(os.path.expanduser("~/.local/scripts/toggle_grayscale")),
+        desc="toggle [g]rayscale mode systemwide",
+    ),
 ]
 
 # Add key bindings to switch VTs in Wayland.

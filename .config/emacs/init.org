@@ -385,7 +385,6 @@ Only works with package.el.
     (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
     (use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 
-    (dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
     (recentf-mode t) ;; Enable recent file mode
     ;;(context-menu-mode t) ;; Right-click menu
 
@@ -481,18 +480,51 @@ below specify how file listings are displayed, the target for file operations,
 and associations for opening various file types with their respective applications.
 For example, image files will open with `feh', while audio and video files
  will utilize `mpv'.
- # TODO: make this work?
+
+The 'dired-open' package allowsopening files using external programs easily, by using the
+RETURN key, normally, the command i'd have to use in dired is 'dired-guess-shell-alist-user'
+thats isnt very accurate, and alsoactivated by pressing the '&' key.
+
  #+begin_src emacs-lisp
+    ;; NOTE: some nice defaults
+    ;; C - copy files
+    ;; D - delete file
+    ;; R - rename file
+    ;; Z- compress/uncompress directory
+    ;; %l - lowercase name
+    ;; %u - uppercase name
+    ;; M - chmod
+    ;; O - chown
+    ;; m - mark individual files/directories for operation
+    ;; u - undo mark for single dir/file
+    ;; U - unmark everything
+    ;; tm - toggle inverse mark selection
+    ;; */ - mark all directories for mass operation, copy, rename, delete
+    ;; M-Return - previes files contents
    (use-package dired
      :ensure nil                                                ;; This is built-in, no need to fetch it.
+     :hook
+     (rfn-eshadow-update-overlay . vertico-directory-tidy) ;; clear old path and keep only the current one
      :custom
      (dired-listing-switches "-lah --group-directories-first")  ;; Display files in a human-readable format and group directories first.
-     (dired-dwim-target t)                                      ;; Enable "do what I mean" for target directories.
-     (dired-guess-shell-alist-user
-      '(("\\.\\(png\\|jpe?g\\|tiff\\)" "feh" "xdg-open" "open") ;; Open image files with `feh' or the default viewer.
-        ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)" "mpv" "xdg-open" "open") ;; Open audio and video files with `mpv'.
-        (".*" "open" "xdg-open")))                              ;; Default opening command for other files.
-     (dired-kill-when-opening-new-dired-buffer t))               ;; Close the previous buffer when opening a new `dired' instance.
+    (dired-kill-when-opening-new-dired-buffer t)) ;; Dired don't create new buffer when opeing new dires instance
+
+
+   ;;source: https://github.com/Fuco1/dired-hacks#dired-open
+    (use-package dired-open
+    :after dired
+    :custom
+    (dired-open-extensions '(("png"  . "feh")
+                            ("jpeg" . "feh")
+                            ("jpg"  . "feh")
+                            ("gif"  . "feh")
+                            ("tiff" . "feh")
+                            ("mkv"  . "mpv")
+                            ("mp[34]" . "mpv")
+                            ("webm" . "mpv")
+                            ("pdf"  . "zathura")
+                            ("epub" . "zathura")
+                            (""     . "xdg-open")))) ;; for all others, ask user what to open with
  #+end_src
 
 * Important to load first
@@ -627,7 +659,7 @@ Note: The Leader key is what you will press when you want to access your keybind
                   "f S" '(sudo-edit-find-file :wk "[f]ind file to edit with [s]udo priviledges")
 
                   ;; windows
-                  ;; navigate windows with basic C-w h/j/k/l keys
+                  ;; navigate windows with basic C-w w/h/j/k/l keys
                   "-" '(evil-window-split :wk "[-] split window horizontally")
                   "\\" '(evil-window-vsplit :wk "[|] split window vertically")
                   "x" '(evil-window-delete :wk "close window")

@@ -187,7 +187,7 @@ return {
 						ignore_lsp = {},
 					},
 				},
-				lualine_y = { "fileformat" },
+				lualine_y = {},
 				lualine_z = {
 					{
 						function()
@@ -204,8 +204,7 @@ return {
 				lualine_x = {
 					{
 						"diagnostics",
-						-- symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
-						colored = false,
+						-- colored = false,
 					},
 				},
 				lualine_y = {},

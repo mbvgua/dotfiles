@@ -38,4 +38,42 @@ return {
 			require("todo-comments").jump_prev()
 		end, { desc = "[p]revious [t]odo comment" }),
 	},
+
+	-- org mode
+	{
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({
+				org_agenda_files = "~/orgfiles/**/*",
+				org_default_notes_file = "~/orgfiles/refile.org",
+
+				ui = {
+					menu = {
+						handler = function(data)
+							Menu:new():open(data)
+						end,
+					},
+				},
+			})
+
+			-- Experimental LSP support
+			vim.lsp.enable("org")
+		end,
+	},
+	{
+		"akinsho/org-bullets.nvim",
+		config = function()
+			require("org-bullets").setup()
+		end,
+	},
+	{
+		"lukas-reineke/headlines.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("headlines").setup()
+		end,
+	},
 }

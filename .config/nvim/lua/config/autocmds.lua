@@ -86,3 +86,25 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+-- follow emacs ways, dont have errors shouting ate me
+-- create an autocommand to show diagnostics in a floating window on hover
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = augroup("float_diagnostic", { clear = true }),
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
+
+
+-- Automatically enable inlay hints when an LSP attaches
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp_inlay_hints", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    -- Check if the attached LSP supports inlay hints
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+    end
+  end,
+})

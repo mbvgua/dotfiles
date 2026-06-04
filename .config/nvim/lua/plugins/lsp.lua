@@ -284,19 +284,26 @@ return {
 						[vim.diagnostic.severity.HINT] = "󰌶 ",
 					},
 				},
-				virtual_text = {
-					source = "if_many",
-					spacing = 2,
-					format = function(diagnostic)
-						local diagnostic_message = {
-							[vim.diagnostic.severity.ERROR] = diagnostic.message,
-							[vim.diagnostic.severity.WARN] = diagnostic.message,
-							[vim.diagnostic.severity.INFO] = diagnostic.message,
-							[vim.diagnostic.severity.HINT] = diagnostic.message,
-						}
-						return diagnostic_message[diagnostic.severity]
-					end,
-				},
+				-- NOTE: this is the default, too loud
+				-- virtual_text = {
+				-- 	source = "if_many",
+				-- 	spacing = 2,
+				-- 	format = function(diagnostic)
+				-- 		local diagnostic_message = {
+				-- 			[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.WARN] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.INFO] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.HINT] = diagnostic.message,
+				-- 		}
+				-- 		return diagnostic_message[diagnostic.severity]
+				-- 	end,
+				-- },
+
+                -- make diagostics hidden, only show up when iam on the same line
+                -- like in emacs. they dont pop at me
+                virtual_text = false, -- Turns off the inline text
+                underline = true,     -- Underlines the code that has the issue
+                update_in_insert = false, -- Don't update diagnostics while typing
 			})
 
 			-- LSP servers and clients are able to communicate to each other what features they support.

@@ -96,7 +96,8 @@ screens: list[Screen] = [
                     # scroll=True,
                     width=300,
                     format="{name}",
-                    foreground=workspaceColor,
+                    foreground=foregroundColorTwo,
+                    # parse_text=parse_window_name(),
                 ),
                 create_separator(),
                 widget.Spacer(),
@@ -184,7 +185,7 @@ screens: list[Screen] = [
                     fmt="⏻ ",
                     mouse_callbacks={
                         "Button1": lambda: qtile.spawn(
-                            os.path.expanduser("~/.local/.scripts/menu_power"),
+                            os.path.expanduser("~/.local/scripts/menu_power"),
                         )
                     },
                 ),
