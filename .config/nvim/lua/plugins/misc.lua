@@ -11,12 +11,12 @@ return {
 		opts = {
 			-- keywords recognized as todo comments
 			keywords = {
-				TODO = { icon = " ", color = "info" },
-				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-				WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-				FIX = { icon = " ", color = "error", alt = { "BUGFIX", "FIXME", "BUG", "FIXIT", "ISSUE" } },
-				PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE", "REFACTOR" } },
-				TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				TODO = { icon = "󰓾 ", color = "info" },
+				NOTE = { icon = "󰓾 ", color = "hint", alt = { "INFO" } },
+				WARN = { icon = "󰓾 ", color = "warning", alt = { "WARNING", "XXX" } },
+				FIX = { icon = "󰓾 ", color = "error", alt = { "BUGFIX", "FIXME", "BUG", "FIXIT", "ISSUE" } },
+				PERF = { icon = "󰓾 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE", "REFACTOR" } },
+				TEST = { icon = "󰓾 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 			},
 			-- list of named colors where we try to extract the guifg from the
 			-- list of highlight groups or use the hex color if hl not found as a fallback

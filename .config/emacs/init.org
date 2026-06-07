@@ -18,12 +18,14 @@
   - [[#package-manager][Package manager]]
   - [[#good-defaults][Good Defaults]]
   - [[#dired][Dired]]
+  - [[#eldoc--eldoc-box][Eldoc & Eldoc-Box]]
 - [[#important-to-load-first][Important to load first]]
   - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
   - [[#undo][Undo]]
 - [[#appearance][Appearance]]
   - [[#set-theme][Set Theme]]
+  - [[#transparency][Transparency]]
   - [[#minions][Minions]]
   - [[#nerd-icons][Nerd Icons]]
 - [[#development][Development]]
@@ -329,8 +331,9 @@ of packages and is considered the standard for Emacs users.
 
 You can also add more package archives later as needed.
 #+begin_src emacs-lisp
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
-                           ("elpa" . "https://elpa.gnu.org/packages/")))
+  (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
+                           ;; ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           ("melpa" . "https://melpa.org/packages/")))
 #+end_src
 
 *** Package quickstart
@@ -529,6 +532,50 @@ thats isnt very accurate, and alsoactivated by pressing the '&' key.
                              (""     . "xdg-open")))) ;; for all others, ask user what to open with
 #+end_src
 
+** Eldoc & Eldoc-Box
+Eldoc provides helpful inline documentation for functions and variables
+in the minibuffer, enhancing the development experience. It can be particularly useful
+in programming modes, as it helps you understand the context of functions as you type.
+This package is built-in, so there's no need to fetch it separately.
+
+eldoc-box enhances the default Eldoc experience by displaying documentation in a popup box,
+usually in a child frame. This makes it easier to read longer docstrings without relying on
+the minibuffer. It integrates seamlessly with Eldoc and activates when Eldoc is active.
+Useful for graphical Emacs; terminal users may want to fall back to `eldoc-box-display-at-point-mode'.
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :ensure nil                                ;; This is built-in, no need to fetch it.
+    :config
+    (setq eldoc-idle-delay 0)                  ;; Automatically fetch doc help
+    (setq eldoc-echo-area-use-multiline-p nil) ;; We use the "K" floating help instead
+    ;; set to t if you want docs on the echo area
+    (setq eldoc-echo-area-display-truncation-message nil)
+    ;; Make sure Eldoc prioritizes Flymake errors over standard documentation
+    (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+    :init
+    (global-eldoc-mode))
+
+    ;;; ELDOC-BOX
+  (use-package eldoc-box
+    :config
+    (defun rex/eldoc-box-scroll-up ()
+      "Scroll up in `eldoc-box--frame'"
+      (interactive)
+      (with-current-buffer eldoc-box--buffer
+        (with-selected-frame eldoc-box--frame
+          (scroll-down 3))))
+    (defun rex/eldoc-box-scroll-down ()
+      "Scroll down in `eldoc-box--frame'"
+      (interactive)
+      (with-current-buffer eldoc-box--buffer
+        (with-selected-frame eldoc-box--frame
+          (scroll-up 3))))
+    :bind (:map eglot-mode-map
+                ("C-k" . rex/eldoc-box-scroll-up)
+                ("C-j" . rex/eldoc-box-scroll-down)
+                ("K" . eldoc-box-eglot-help-at-point)))
+#+end_src
+
 * Important to load first
 Packages that we want to load first so we have them as soon as possible if something breaks.
 ** Evil Mode
@@ -550,6 +597,8 @@ Notes:
     :hook (after-init . evil-mode)
     :init
     (evil-mode)
+    :config
+    (global-set-key [C-backspace] 'evil-delete-backward-word) ;; Make C-backspace less agressive
     :custom
     (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
     (evil-want-C-u-scroll t)      ;; Set C-u to scroll up
@@ -574,7 +623,7 @@ keybindings and commands to fit the `evil' style.
   (use-package evil-collection
     :after evil
     :config
-    ;; Setting where to use evil-collection)
+    ;; Setting where to use evil-collection
     (setq evil-collection-mode-list '(dired ibuffer magit corfu consult info (package-menu package) bookmark))
     (evil-collection-init))
 #+end_src
@@ -587,8 +636,7 @@ quotes, and more.
 
 With this you can change 'hello there' with ci'" to have
 "hello there" and cs"<p> to get <p>hello there</p>.
-More examples here:
-- https://github.com/emacs-evil/evil-surround?tab=readme-ov-file#examples
+More examples [[https://github.com/emacs-evil/evil-surround?tab=readme-ov-file#examples][here]]
 
 #+begin_src emacs-lisp
   (use-package evil-surround
@@ -597,7 +645,7 @@ More examples here:
 #+end_src
 
 *** Evil Tutor
-Getting acquainted with evil mode in emacs.
+Getting acquainted with evil mode in emacs. good for comaparing it to the original vim tutor.
 
 #+begin_src emacs-lisp
   (use-package evil-tutor)
@@ -626,16 +674,16 @@ Note: The Leader key is what you will press when you want to access your keybind
     (load-file "~/.config/emacs/init.el"))
 
   (use-package general
-    :after (evil) ;; <- evil
+    :after (evil)
     :config
-    (general-evil-setup) ;; <- evil
+    (general-evil-setup)
 
     ;; Set up 'SPC' as the leader key
     (general-create-definer start/leader-keys
-      :states '(normal insert visual motion emacs) ;; <- evil
+      :states '(normal insert visual motion emacs)
       :keymaps 'override
       :prefix "SPC"
-      :global-prefix "M-SPC") ;; Set global leader key so we can access our keybindings from any state
+      :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
 
     (start/leader-keys
       ;; buffers
@@ -644,8 +692,7 @@ Note: The Leader key is what you will press when you want to access your keybind
       "p" '(previous-buffer :wk "buffer [p]revious")
       "w" '(save-buffer :wk "buffer [w]rite")
       "b s" '(consult-buffer :wk "[b]uffer [s]witch")
-      "b k" '(kill-current-buffer :wk "[b]uffer [k]ill")
-      "b x" '(kill-current-buffer :wk "[b]uffer [k]ill")
+      "b x" '(kill-current-buffer :wk "[b]uffer kill")
       "b r" '(revert-buffer :wk "[b]uffer [r]eload")
 
       ;; files
@@ -668,9 +715,10 @@ Note: The Leader key is what you will press when you want to access your keybind
       "x" '(evil-window-delete :wk "close window")
 
       ;; magit
-      "m" '(:ignore t :wk "magit")
-      "m s" '(magit-status :wk "[m]agit [s]tatus")
-      "m d" '(magit-diff-buffer-file :wk "current [m]agit file [d]iff")
+      "g" '(:ignore t :wk "magit")
+      "g s" '(magit-status :wk "ma[g]it [s]tatus")
+      "g d" '(magit-diff-buffer-file :wk "current ma[g]it file [d]iff")
+      "g l" '(magit-log-current :wk "ma[g]it [l]og current file")
 
       ;; dired
       "d" '(:ignore t :wk "dired")
@@ -685,17 +733,12 @@ Note: The Leader key is what you will press when you want to access your keybind
       "e d" '(eval-defun :wk "[e]valuate [d]efun containing/after point")
       "e l" '(eval-last-sexp :wk "[e]valuate elisp expression before point")
 
-      ;; better help with helpful
-      "h" '(:ignore t :wk "help")
-      "h f" '(helpful-callable :wk "[h]elp [f]unction")
-      "h v" '(helpful-variable :wk "[h]elp [v]ariable")
-      "h k" '(helpful-key :wk "[h]elp [k]eymap")
-      "h c" '(helpful-command :wk "[h]elp [c]ommand")
-      "h m" '(describe-mode :wk "[h]elp current [m]ode")
-
       ;; misc
-      ;; "." '(ansi-term :wk "open terminal[.]")
-      "/" '(display-line-numbers-mode :wk "toggle line numbers")
+      ;; "," '(emabark-act :wk "open embark actions")   ;; dont know what emabark does
+  	"t" '(:ignore t :wk "toggle settings")
+  	;; "t t" '(toggle/terminal :wk "toggle terminal") ;; FIXME:make it work
+      "t l" '(display-line-numbers-mode :wk "toggle line numbers")
+      "t p" '(toggle/tui-enable-transparency :wk "toggle transparency")
 
       ;; ;; Org mode
       ;; "m" '(:ignore t :wk "Org")
@@ -729,10 +772,7 @@ Note: The Leader key is what you will press when you want to access your keybind
       "c d" '(eldoc-doc-buffer :wk "generate [c]ode [d]ocumentation for buffer")
       "c f" '(apheleia-format-buffer :wk "[c]ode [f]ormat")
       "c r" '(eglot-rename :wk "[c]ode [r]ename")
-
       "c e" '(consult-flymake :wk "[c]onsult flymake for [e]rrors")
-      "c n" '(flymake-goto-next-error :wk "flymake [n]ext error")
-      "c p" '(flymake-goto-prev-error :wk "flymake [p]revious error")
       ))
 
   ;; Fix general.el leader key not working instantly in messages buffer with evil mode
@@ -774,37 +814,13 @@ If you want to use the built in methods I recommend using these ones:
   (evil-define-key 'normal 'global (kbd "[ T") 'tab-previous) ;; Go to previous tab
 
   ;; Goto definition is inbuilt with Evil 'gd' keybing, no need for this now
-  ;; (evil-define-key 'normal 'global (kbd "gd") 'xref-find-definitions) ;; Goto definitions
+  ;; (evil-define-key 'normal 'global (kbd "gd") 'xref-find-definitions) ;; evil-collection already provides gd
   (evil-define-key 'normal 'global (kbd "gr") 'xref-find-references) ;; Goto references
   (evil-define-key 'normal 'global (kbd "gi") 'eglot-find-implementation) ;; Goto implementations
+  (evil-define-key 'normal 'global (kbd "K") 'eldoc-box-help-at-point) ;; popup for manual
 
-  ;; ;; LSP commands keybindings
-  ;; TODO: make this work? moreso the 'K' and 'gd'
-  ;; (evil-define-key 'normal lsp-mode-map
-  ;;                  ;; (kbd "gd") 'lsp-find-definition                ;; evil-collection already provides gd
-  ;;                  (kbd "gr") 'lsp-find-references                   ;; Finds LSP references
-  ;;                  (kbd "<leader> c a") 'lsp-execute-code-action     ;; Execute code actions
-  ;;                  (kbd "<leader> r n") 'lsp-rename                  ;; Rename symbol
-  ;;                  (kbd "gI") 'lsp-find-implementation               ;; Find implementation
-  ;;                  (kbd "<leader> l f") 'lsp-format-buffer)          ;; Format buffer via lsp
-
-
-  ;; (defun ek/lsp-describe-and-jump ()
-  ;;   "Show hover documentation and jump to *lsp-help* buffer."
-  ;;   (interactive)
-  ;;   (lsp-describe-thing-at-point)
-  ;;   (let ((help-buffer "*lsp-help*"))
-  ;;     (when (get-buffer help-buffer)
-  ;;       (switch-to-buffer-other-window help-buffer))))
-
-  ;; FIXME: terrible UB at times, figure out why
   ;; Commenting functionality for single and multiple lines
-  (evil-define-key 'normal 'global (kbd "gc")
-    (lambda ()
-      (interactive)
-      (if (not (use-region-p))
-          (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
-
+  (evil-define-key 'normal 'global (kbd "gc") 'comment-line)
   (evil-define-key 'visual 'global (kbd "gc")
     (lambda ()
       (interactive)
@@ -844,14 +860,28 @@ Evil users don't need to add keybindings for undo-fu just change evil-undo-syste
 
 * Appearance
 Set fonts in the early-init.el file
+
 ** Set Theme
-Set monokai theme, if you want some themes try out doom-themes.
+Set gruvbox theme, if you want some themes try out doom-themes.
 Use consult-theme to easily try out themes (*Epilepsy* Warning).
 #+begin_src emacs-lisp
   (use-package monokai-theme
     :config
     (load-theme 'monokai t))
+#+end_src
 
+** Transparency
+With Emacs version 29, true transparency has been added.
+This is a bit distracting off-the-bat, made it appear only when i toggle it on/off
+#+begin_src emacs-lisp
+  ;; (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
+
+  ;; ;; Transparency in terminal
+  ;; (defun start/tui-enable-transparency ()
+  ;;   (unless (display-graphic-p (selected-frame))
+  ;;     (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+  ;; (add-hook 'window-setup-hook 'start/tui-enable-transparency)
 #+end_src
 
 ** Minions
@@ -907,17 +937,22 @@ If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mo
 #+begin_src emacs-lisp
   (use-package eglot
     :ensure nil ;; Don't install eglot because it's now built-in
+    ;; :preface
+    ;; (defun mp-eglot-eldoc ()
+    ;;   (setq eldoc-documentation-strategy
+    ;; 'eldoc-documentation-compose-eagerly))
     :hook ((c-mode          ;; Autostart lsp servers for a given mode
-  		  c++-mode
+    		  c++-mode
             python-base-mode
-  		  bash-ts-mode
-  		  sh-mode
-  		  lua-mode
+    		  bash-ts-mode
+    		  sh-mode
+    		  lua-mode
             js-mode
             typescript-ts-base-mode
             css-mode
             web-mode
             prog-mode) . eglot-ensure)
+    ((eglot-managed-mode . mp-eglot-eldoc))
     :custom
     ;; Good default
     (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
@@ -939,11 +974,11 @@ Check out more language servers in the [[https://mason-registry.dev/registry/lis
     (mason-setup))
 
   (mason-setup
-    (dolist (pkg '("clangd" "cpptools" "bash-language-server" "pyright" "lua-language-server"
+    (dolist (pkg '("clangd" "cpptools" "bash-language-server" "basedpyright" "lua-language-server" ;; "pyright"
                    "jdtls" "json-lsp" "yaml-language-server" "typescript-language-server"
                    "docker-compose-language-service"
   				 ;; formatter
-                   "black" "ruff" "stylua" "prettier"))
+                   "black" "stylua" "prettier"))
       (unless (mason-installed-p pkg)
         (ignore-errors (mason-install pkg)))))
 #+end_src
@@ -953,6 +988,7 @@ Allows for asynchronous code formatting using specialized tools.
 
 #+begin_src emacs-lisp
   ;;NOTE: uses 'black', 'prettier' and 'gofmt'
+  ;; make it format lua files with stylua
   (use-package apheleia)
 #+end_src
 
@@ -1051,14 +1087,12 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
   		(bash-mode . bash-ts-mode)
           (c-mode . c-ts-mode)
           (c++-mode . c++-ts-mode)
-  		(hexl-mode . heex-ts-mode)
   		(lua-mode . lua-ts-mode)
           (python-mode . python-ts-mode)
           (css-mode . css-ts-mode)
           (mhtml-mode . html-ts-mode)
           (javascript-mode . js-ts-mode)
           (js-mode . js-ts-mode)
-          (js2-mode . js-ts-mode)
           (json-mode . json-ts-mode)
           (typescript-mode . typescript-ts-mode)
           (conf-toml-mode . toml-ts-mode)
@@ -1091,8 +1125,15 @@ Use C-SPC tab to uncomment the lines.
 
 *** Markdown mode
 #+begin_src emacs-lisp
+  ;;; MARKDOWN-MODE
+  ;; Markdown Mode provides support for editing Markdown files in Emacs,
+  ;; enabling features like syntax highlighting, previews, and more.
+  ;; It’s particularly useful for README files, as it can be set
+  ;; to use GitHub Flavored Markdown for enhanced compatibility.
   (use-package markdown-mode
-    :mode "\\.md\\'")
+    :mode ("README\\.md\\'" . gfm-mode)            ;; Use gfm-mode for README.md files.
+    :init (setq markdown-command "multimarkdown")) ;; Set the Markdown processing command.
+
 #+end_src
 
 *** Org Mode
@@ -1241,7 +1282,6 @@ a comparable experience in Emacs with its own set of customizations.
            (magit-post-refresh . diff-hl-magit-post-refresh)
            (after-init . global-diff-hl-mode)))
 
-
 #+end_src
 
 * Completion
@@ -1308,7 +1348,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
     ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
     (let ((merge-backends (list
                            #'cape-keyword      ;; Keyword completion
-                           ;; #'cape-abbrev       ;; Complete abbreviation
+                           #'cape-abbrev       ;; Complete abbreviation
                            #'cape-dabbrev      ;; Complete word from current buffers
                            ;; #'cape-line         ;; Complete entire line from current buffer
                            ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
@@ -1392,18 +1432,18 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
                 ("C-d" . vertico-scroll-up))
     :custom
     (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-    ;; :config
-    ;; ;; Customize the display of the current candidate in the completion list.
-    ;; ;; This will prefix the current candidate with “» ” to make it stand out.
-    ;; ;; Reference: https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow
-    ;; (advice-add #'vertico--format-candidate :around
-    ;;             (lambda (orig cand prefix suffix index _start)
-    ;;                 (setq cand (funcall orig cand prefix suffix index _start))
-    ;;                 (concat
-    ;;                 (if (= vertico--index index)
-    ;;                     (propertize "» " 'face '(:foreground "#80adf0" :weight bold))
-    ;;                 "  ")
-    ;;                 cand)))
+    :config
+    ;; Customize the display of the current candidate in the completion list.
+    ;; This will prefix the current candidate with “» ” to make it stand out.
+    ;; Reference: https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow
+    (advice-add #'vertico--format-candidate :around
+                (lambda (orig cand prefix suffix index _start)
+                  (setq cand (funcall orig cand prefix suffix index _start))
+                  (concat
+                   (if (= vertico--index index)
+                       (propertize "» " 'face '(:foreground "#80adf0" :weight bold))
+                     "  ")
+                   cand)))
     )
 
   (savehist-mode) ;; Enables save history mode
@@ -1462,10 +1502,10 @@ Check out their [[https://github.com/minad/consult][git repository]] for more aw
     :config
     ;; Optionally configure preview. The default value
     ;; is 'any, such that any key triggers the preview.
-    (setq consult-preview-key 'any)
-    (setq consult-preview-key "M-.")
-    ;; (setq consult-preview-key '("C-n" "C-p"))    ;; FIXME: make this work, with instant preview?
-    (setq consult-preview-key '("S-<down>" "S-<up>"))
+    ;; (setq consult-preview-key 'any)
+    ;; (setq consult-preview-key "M-.")
+    ;; (setq consult-preview-key '("C-n" "C-p"))
+    ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
 
     ;; For some commands and buffer sources it is useful to configure the
     ;; :preview-key on a per-command basis using the `consult-customize' macro.
@@ -1498,10 +1538,15 @@ Check out their [[https://github.com/minad/consult][git repository]] for more aw
 An alternative to the built-in Emacs help that provides much more contextual information.
 
 #+begin_src emacs-lisp
-  ;; Note that the built-in `describe-function' includes both functions
-  ;; and macros. `helpful-function' is functions only, so we provide
-  ;; `helpful-callable' as a drop-in replacement.
-  (use-package helpful)
+  (use-package helpful
+    :bind
+    ;; NOTE: that the built-in `describe-function' includes both functions
+    ;; and macros. `helpful-function' is functions only, so we provide
+    ;; `helpful-callable' as a drop-in replacement.
+    ("C-h f" . helpful-callable)
+    ("C-h v" . helpful-variable)
+    ("C-h k" . helpful-key)
+    ("C-h x" . helpful-command))
 #+end_src
 
 ** Diminish

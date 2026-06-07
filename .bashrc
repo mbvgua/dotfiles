@@ -20,9 +20,6 @@ export PATH
 # add path to *my* scripts
 export PATH="$PATH:$HOME/.local/scripts"
 
-# make bash vim like
-# set -o vi
-
 # load alises and functions
 for file in ~/.{bash_aliases,bash_functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
@@ -31,9 +28,16 @@ unset file
 
 # open man pages in neovim. thanks @mental_outlaw - Yt
 # export MANPAGER="nvim +Man!"
-man() {
-    emacs -nw --eval "(man \"$1\")"
-}
+# man ()
+# {
+#     if [ "$TERM" == "eterm-color" ]; then
+#         emacsclient -e "(man \"$1\")";
+#         # emacs -nw -e "(man \"$1\")";
+#     else
+#         command man "@1"
+#     fi
+# }
+
 export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 export HISTCONTROL=ignoredups:erasedups         # ignore duplicates in history

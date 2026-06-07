@@ -14,19 +14,15 @@ return {
 
 			configs.setup({
 				ensure_installed = {
-					"bash",
-					"c",
+				    -- installed by default:
+					-- "bash", "c", "lua", "markdown", "markdown_inline", "vim", "vimdoc"
 					"cpp",
 					"cmake",
 					"make",
 					"diff",
 					"dockerfile",
-					"lua",
 					"luadoc",
 					"nginx",
-					-- NOTE: bug with markdown?!
-					-- "markdown",
-					-- "markdown_inline",
 					"yaml",
 					"html",
 					"css",
@@ -299,11 +295,10 @@ return {
 				-- 	end,
 				-- },
 
-                -- make diagostics hidden, only show up when iam on the same line
-                -- like in emacs. they dont pop at me
-                virtual_text = false, -- Turns off the inline text
-                underline = true,     -- Underlines the code that has the issue
-                update_in_insert = false, -- Don't update diagnostics while typing
+				-- make diagostics hidden, only show up when iam on the same line
+				-- like in emacs. they dont pop at me
+				virtual_text = false, -- Turns off the inline text
+				update_in_insert = false, -- Don't update diagnostics while typing
 			})
 
 			-- LSP servers and clients are able to communicate to each other what features they support.
