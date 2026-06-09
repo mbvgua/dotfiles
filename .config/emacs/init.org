@@ -18,6 +18,7 @@
   - [[#package-manager][Package manager]]
   - [[#good-defaults][Good Defaults]]
   - [[#dired][Dired]]
+  - [[#windows][Windows]]
   - [[#eldoc--eldoc-box][Eldoc & Eldoc-Box]]
 - [[#important-to-load-first][Important to load first]]
   - [[#evil-mode][Evil Mode]]
@@ -36,7 +37,7 @@
   - [[#yasnippet][Yasnippet]]
   - [[#tree-sitter][Tree-Sitter]]
   - [[#language-modes][Language modes]]
-  - [[#shells][Shells]]
+  - [[#terminals--shells][Terminals & Shells]]
   - [[#sudo-edit][Sudo Edit]]
   - [[#dotenv][Dotenv]]
 - [[#multi-file-example][Multi File Example]]
@@ -62,6 +63,7 @@
   - [[#indent-guide][Indent-guide]]
   - [[#which-key][Which-Key]]
   - [[#ws-butler][Ws-butler]]
+  - [[#racket-mode][Racket mode]]
 
 * Introduction
 #+begin_src emacs-lisp :tangle no
@@ -332,7 +334,7 @@ of packages and is considered the standard for Emacs users.
 You can also add more package archives later as needed.
 #+begin_src emacs-lisp
   (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-                           ;; ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")    ;; for EAT terminal
                            ("melpa" . "https://melpa.org/packages/")))
 #+end_src
 
@@ -445,9 +447,7 @@ Only works with package.el.
                     (message "Emacs has fully loaded. This code runs after startup.")
                     (with-current-buffer (get-buffer-create "*scratch*")
                       (insert (format
-                               ";;    Welcome to Emacs!\n;;    Don't let this darkness fool you...\n;;\n\n"
-  							 (emacs-init-time)
-                               (length package-activated-list))))))
+                               ";;    Welcome to Emacs!\n;;    Don't let this darkness fool you...\n;;\n\n")))))
     :config
     ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
     (setq custom-file (locate-user-emacs-file "custom-vars.el"))
@@ -532,6 +532,43 @@ thats isnt very accurate, and alsoactivated by pressing the '&' key.
                              (""     . "xdg-open")))) ;; for all others, ask user what to open with
 #+end_src
 
+** Windows
+This section configures window management in Emacs, enhancing the way buffers
+are displayed for a more efficient workflow. The `window' use-package helps
+streamline how various buffers are shown, especially those related to help,
+diagnostics, and completion.
+
+Note: I have left some commented-out code below that may facilitate your
+Emacs journey later on. These configurations can be useful for displaying
+other types of buffers in side windows, allowing for a more organized workspace.
+#+begin_src emacs-lisp
+  (use-package window
+    :ensure nil       ;; This is built-in, no need to fetch it.
+    :custom
+    (display-buffer-alist
+     '(
+       ;; ("\\*.*e?shell\\*"
+       ;;  (display-buffer-in-side-window)
+       ;;  (window-height . 0.25)
+       ;;  (side . bottom)
+       ;;  (slot . -1))
+
+       ;; keeps it always on right side using 35% of the available space:
+       ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|[Hh]elp\\|[Hh]elpful\\|Messages\\|Bookmark List\\|Ibuffer\\|Occur\\|eldoc.*\\)\\*"
+        (display-buffer-in-side-window)
+        (window-width . 0.35)
+        (side . right)
+        (slot . 0))
+
+       ;; Configuration for displaying various diagnostic buffers on
+       ;; bottom 25%:
+       ("\\*\\(Flymake diagnostics\\|xref\\||Completions\\)"
+        (display-buffer-in-side-window)
+        (window-height . 0.25)
+        (side . bottom)
+        (slot . 1))
+       )))
+#+end_src
 ** Eldoc & Eldoc-Box
 Eldoc provides helpful inline documentation for functions and variables
 in the minibuffer, enhancing the development experience. It can be particularly useful
@@ -1181,7 +1218,18 @@ Prettify headings and plain lists in Org mode. Modern version of org-bullets.
     :hook (org-mode . org-superstar-mode))
 #+end_src
 
-** Shells
+** Terminals & Shells
+*** Emulate A Terminal(EAT)
+Eat(Emulate A Terminal) is a terminal emulator within Emacs.
+It's more portable and less overhead for users over like vterm or eshell.
+We setup eat with eshell, if you want to use bash, zsh etc., check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
+
+If you want a faster and more responsive terminal emulator try out vterm.
+#+begin_src emacs-lisp
+    (use-package eat
+      :defer
+      :hook ('eshell-load-hook #'eat-eshell-mode))
+#+end_src
 *** Exec-path-from-shell
 Make Emacs use the $PATH set up by the user's shell
 #+begin_src emacs-lisp
@@ -1348,7 +1396,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
     ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
     (let ((merge-backends (list
                            #'cape-keyword      ;; Keyword completion
-                           #'cape-abbrev       ;; Complete abbreviation
+                           ;; #'cape-abbrev       ;; Complete abbreviation
                            #'cape-dabbrev      ;; Complete word from current buffers
                            ;; #'cape-line         ;; Complete entire line from current buffer
                            ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
@@ -1500,10 +1548,10 @@ Check out their [[https://github.com/minad/consult][git repository]] for more aw
     (setq xref-show-xrefs-function #'consult-xref
           xref-show-definitions-function #'consult-xref)
     :config
-    ;; Optionally configure preview. The default value
-    ;; is 'any, such that any key triggers the preview.
+    ;; Optionally configure preview. The default value is 'any, such that any key triggers the preview.
+    ;; but in langs with a heavy lsp, e.g lua, emacs hangs entirely
     ;; (setq consult-preview-key 'any)
-    ;; (setq consult-preview-key "M-.")
+    (setq consult-preview-key "C-.")
     ;; (setq consult-preview-key '("C-n" "C-p"))
     ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
 
@@ -1646,24 +1694,110 @@ Removes whitespace from the ends of lines.
     :hook (after-init . ws-butler-global-mode))
 #+end_src
 
-# FIXME: this is abit buggy atm, figure it out eventually
-# ** Pdf-tools
-# An emacs package for reading pdfs.
+** Racket mode
+#+begin_src emacs-lisp
+  (use-package racket-mode
+    :mode "\\.rkt\\'")
 
-# #+begin_src emacs-lisp
-# (use-package pdf-tools
-#   :defer t
-#   :commands (pdf-loader-install)
-#   :mode "\\.pdf\\'"
-#   :bind (:map pdf-view-mode-map
-#               ("j" . pdf-view-next-line-or-next-page)
-#               ("k" . pdf-view-previous-line-or-previous-page)
-#               ("C-=" . pdf-view-enlarge)
-#               ("C--" . pdf-view-shrink))
-#   :init (pdf-loader-install)
-#   :config (add-to-list 'revert-without-query ".pdf"))
+#+end_src
 
-# (add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)
-#                                                          (blink-cursor-mode -1)
-#                                                          (doom-modeline-mode -1)))
-# #+end_src
+
+
+**** Work with EaT
+#+begin_src emacs-lisp :tangle no
+;; ─── Emacs Server (start if not already running) ────────────────────────────
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;; ─── vterm ──────────────────────────────────────────────────────────────────
+(use-package vterm
+  :ensure t
+  :config
+  (setq vterm-max-scrollback 10000)
+  (setq vterm-kill-buffer-on-exit t)
+  ;; Allow vterm to use full terminal features
+  (setq vterm-shell (executable-find "bash"))) ;; or "zsh", "fish"
+
+;; ─── vterm-toggle (pop terminal in/out) ─────────────────────────────────────
+(use-package vterm-toggle
+  :ensure t
+  :config
+  (setq vterm-toggle-scope 'project)) ;; terminal is scoped to current project
+
+;; ─── Terminal split functions ────────────────────────────────────────────────
+(defun my/vterm-split-right ()
+  "Open a new vterm in a right vertical split."
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (vterm (generate-new-buffer-name "*vterm*")))
+
+(defun my/vterm-split-below ()
+  "Open a new vterm in a bottom horizontal split."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (vterm (generate-new-buffer-name "*vterm*")))
+
+(defun my/vterm-new ()
+  "Open a standalone new vterm buffer."
+  (interactive)
+  (vterm (generate-new-buffer-name "*vterm*")))
+
+;; ─── Keybindings via Evil leader ─────────────────────────────────────────────
+;; Assumes you are using general.el for leader key bindings.
+;; If you use evil-leader or which-key differently, adapt accordingly.
+
+(use-package general
+  :ensure t
+  :config
+  (general-evil-setup t)
+
+  (general-define-key
+   :states '(normal visual motion emacs)
+   :prefix "SPC"  ;; change to "," if that's your leader
+
+   ;; Terminal bindings under SPC .
+   ". ." #'vterm-toggle          ;; toggle terminal in/out
+   ". t" #'my/vterm-new          ;; new terminal buffer
+   ". r" #'my/vterm-split-right  ;; split right with terminal
+   ". b" #'my/vterm-split-below  ;; split below with terminal
+
+   ;; Window navigation (tmux-style pane switching)
+   ". h" #'windmove-left
+   ". l" #'windmove-right
+   ". k" #'windmove-up
+   ". j" #'windmove-down
+
+   ;; Window resizing
+   ". H" (lambda () (interactive) (evil-window-decrease-width 5))
+   ". L" (lambda () (interactive) (evil-window-increase-width 5))
+   ". K" (lambda () (interactive) (evil-window-decrease-height 5))
+   ". J" (lambda () (interactive) (evil-window-increase-height 5))
+
+   ;; Close current window (like tmux pane close)
+   ". x" #'delete-window
+   ". o" #'delete-other-windows)) ;; keep only current pane
+
+;; ─── Make Evil play nicely inside vterm ─────────────────────────────────────
+;; vterm needs to capture all keys, so we drop to emacs state inside it
+(evil-set-initial-state 'vterm-mode 'emacs)
+
+;; But still let SPC . work inside vterm for split/nav
+(with-eval-after-load 'vterm
+  (define-key vterm-mode-map (kbd "C-SPC") nil) ;; free up C-SPC if needed
+  (general-define-key
+   :states 'emacs
+   :keymaps 'vterm-mode-map
+   :prefix "C-SPC" ;; use C-SPC as leader inside terminal (SPC is consumed by shell)
+   "." #'vterm-toggle
+   "r" #'my/vterm-split-right
+   "b" #'my/vterm-split-below
+   "t" #'my/vterm-new
+   "x" #'delete-window
+   "h" #'windmove-left
+   "l" #'windmove-right
+   "k" #'windmove-up
+   "j" #'windmove-down))
+#+end_src

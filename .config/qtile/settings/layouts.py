@@ -12,7 +12,7 @@ colors, backgroundColor, foregroundColor, workspaceColor, foregroundColorTwo = (
 # =====================
 # some default layouts themes for each theme
 layout_theme: dict[str, int | str] = {
-    "margin": 5,
+    "margin": 2,
     "border_width": 3,
     "border_focus": workspaceColor,
     "border_normal": foregroundColorTwo,

@@ -55,7 +55,7 @@ map("n", "<leader>n", ":bnext<CR>", { desc = "next buffer" })
 map("n", "<leader>p", ":bprevious<CR>", { desc = "previous buffer" })
 
 -- delete current buffer
-map("n", "<leader>bd", ":bd<CR>", { desc = "current [b]uffer [d]elete" })
+map("n", "<leader>bx", ":bd<CR>", { desc = "current [b]uffer delete" })
 
 -- delete all buffers in background
 map("n", "<leader>bb", function()
@@ -80,11 +80,14 @@ end, { desc = "delete all [b]uffers in [b]ackgrond" })
 
 -- tabs actions
 -- navigate tabs. dont use tabs alot though
-map("n", "<tab>a", ":tabnew<CR>", { desc = "add new tab" })
-map("n", "<tab>n", ":tabnext<CR>", { desc = "go to next tab" })
-map("n", "<tab>p", ":tabprevious<CR>", { desc = "go to previous tab" })
-map("n", "<tab>x", ":tabclose<CR>", { desc = "delete current tab" })
-map("n", "<tab>d", ":tabonly<CR>", { desc = "delete all tabs in background" })
+map("n", "<leader>ta", ":tabnew<CR>", { desc = "[t]ab [a]dd" })
+map("n", "<leader>tn", ":tabnext<CR>", { desc = "[t]ab [n]ext" })
+map("n", "<leader>tp", ":tabprevious<CR>", { desc = "[t]ab [p]revious" })
+map("n", "<leader>tx", ":tabclose<CR>", { desc = "delete current [t]ab" })
+map("n", "<leader>tb", ":tabonly<CR>", { desc = "delete all [t]abs in [b]ackground" })
+
+-- inspect tree
+map("n", "<leader>ci", "<cmd>InspectTree<CR>", { desc = "[c]ode [i]nspect tree-sitter" })
 
 -- Hardmode ON!! from kickstart nvim
 -- Disable arrow keys in normal & visual mode

@@ -7,6 +7,10 @@ local cmd = vim.cmd
 opt.mouse = "a"                         -- enable mouse mode:
 cmd.colorscheme("monokai-pro")          -- set colorscheme
 
+-- sync clipboard between os and neovim.
+--  schedule the setting after `uienter` because it can increase startup-time.
+vim.schedule(function() opt.clipboard = 'unnamedplus' end)
+
 -- ui options
 opt.number = true                       -- enable line numbers
 opt.relativenumber = true               -- make the numbers relative!!
@@ -72,6 +76,30 @@ opt.wildignore = {
 -- split behaviour
 opt.splitright = true                   -- always put vertical splitsto the right
 opt.splitbelow = true                   -- always put horizontal splits below
+
+-- builtin treesitter
+-- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
+-- Add extras with :TSInstall <lang> manually, or via the block below
+local parsers = {
+  "cpp", "cmake", "make", "diff", "dockerfile",
+  "python", "sql", "luadoc", "nginx", "yaml",
+  "html", "css", "json", "javascript", "typescript",
+}
+
+-- Install missing parsers on startup
+for _, lang in ipairs(parsers) do
+  local ok, _ = pcall(vim.treesitter.language.add, lang, nil, true)
+  if not ok then
+    vim.cmd("TSInstall " .. lang)
+  end
+end
+
+-- Enable treesitter highlighting per filetype
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
 
 -- file handling
 opt.autoread = true                     -- auto read changes done on files outside vim
