@@ -1011,7 +1011,7 @@ Check out more language servers in the [[https://mason-registry.dev/registry/lis
     (mason-setup))
 
   (mason-setup
-    (dolist (pkg '("clangd" "cpptools" "bash-language-server" "basedpyright" "lua-language-server" ;; "pyright"
+    (dolist (pkg '("clangd" "cpptools" "bash-language-server" "basedpyright" "lua-language-server" "pyright"
                    "jdtls" "json-lsp" "yaml-language-server" "typescript-language-server"
                    "docker-compose-language-service"
   				 ;; formatter
@@ -1158,6 +1158,19 @@ Use C-SPC tab to uncomment the lines.
 #+begin_src emacs-lisp
   (use-package python-mode
     :mode "\\.py\\'")
+
+  (use-package pyvenv
+    :ensure t
+    :config
+    (pyvenv-tracking-mode 1)
+    ;; Auto-activate .venv if found at project root
+    (add-hook 'python-mode-hook
+              (lambda ()
+                (let ((venv-path (concat (locate-dominating-file
+                                          default-directory ".venv")
+                                         ".venv")))
+                  (when (file-directory-p venv-path)
+                    (pyvenv-activate venv-path))))))
 #+end_src
 
 *** Markdown mode
@@ -1226,9 +1239,9 @@ We setup eat with eshell, if you want to use bash, zsh etc., check out their git
 
 If you want a faster and more responsive terminal emulator try out vterm.
 #+begin_src emacs-lisp
-    (use-package eat
-      :defer
-      :hook ('eshell-load-hook #'eat-eshell-mode))
+  (use-package eat
+    :defer
+    :hook ('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 *** Exec-path-from-shell
 Make Emacs use the $PATH set up by the user's shell
@@ -1699,105 +1712,4 @@ Removes whitespace from the ends of lines.
   (use-package racket-mode
     :mode "\\.rkt\\'")
 
-#+end_src
-
-
-
-**** Work with EaT
-#+begin_src emacs-lisp :tangle no
-;; ─── Emacs Server (start if not already running) ────────────────────────────
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-;; ─── vterm ──────────────────────────────────────────────────────────────────
-(use-package vterm
-  :ensure t
-  :config
-  (setq vterm-max-scrollback 10000)
-  (setq vterm-kill-buffer-on-exit t)
-  ;; Allow vterm to use full terminal features
-  (setq vterm-shell (executable-find "bash"))) ;; or "zsh", "fish"
-
-;; ─── vterm-toggle (pop terminal in/out) ─────────────────────────────────────
-(use-package vterm-toggle
-  :ensure t
-  :config
-  (setq vterm-toggle-scope 'project)) ;; terminal is scoped to current project
-
-;; ─── Terminal split functions ────────────────────────────────────────────────
-(defun my/vterm-split-right ()
-  "Open a new vterm in a right vertical split."
-  (interactive)
-  (split-window-right)
-  (other-window 1)
-  (vterm (generate-new-buffer-name "*vterm*")))
-
-(defun my/vterm-split-below ()
-  "Open a new vterm in a bottom horizontal split."
-  (interactive)
-  (split-window-below)
-  (other-window 1)
-  (vterm (generate-new-buffer-name "*vterm*")))
-
-(defun my/vterm-new ()
-  "Open a standalone new vterm buffer."
-  (interactive)
-  (vterm (generate-new-buffer-name "*vterm*")))
-
-;; ─── Keybindings via Evil leader ─────────────────────────────────────────────
-;; Assumes you are using general.el for leader key bindings.
-;; If you use evil-leader or which-key differently, adapt accordingly.
-
-(use-package general
-  :ensure t
-  :config
-  (general-evil-setup t)
-
-  (general-define-key
-   :states '(normal visual motion emacs)
-   :prefix "SPC"  ;; change to "," if that's your leader
-
-   ;; Terminal bindings under SPC .
-   ". ." #'vterm-toggle          ;; toggle terminal in/out
-   ". t" #'my/vterm-new          ;; new terminal buffer
-   ". r" #'my/vterm-split-right  ;; split right with terminal
-   ". b" #'my/vterm-split-below  ;; split below with terminal
-
-   ;; Window navigation (tmux-style pane switching)
-   ". h" #'windmove-left
-   ". l" #'windmove-right
-   ". k" #'windmove-up
-   ". j" #'windmove-down
-
-   ;; Window resizing
-   ". H" (lambda () (interactive) (evil-window-decrease-width 5))
-   ". L" (lambda () (interactive) (evil-window-increase-width 5))
-   ". K" (lambda () (interactive) (evil-window-decrease-height 5))
-   ". J" (lambda () (interactive) (evil-window-increase-height 5))
-
-   ;; Close current window (like tmux pane close)
-   ". x" #'delete-window
-   ". o" #'delete-other-windows)) ;; keep only current pane
-
-;; ─── Make Evil play nicely inside vterm ─────────────────────────────────────
-;; vterm needs to capture all keys, so we drop to emacs state inside it
-(evil-set-initial-state 'vterm-mode 'emacs)
-
-;; But still let SPC . work inside vterm for split/nav
-(with-eval-after-load 'vterm
-  (define-key vterm-mode-map (kbd "C-SPC") nil) ;; free up C-SPC if needed
-  (general-define-key
-   :states 'emacs
-   :keymaps 'vterm-mode-map
-   :prefix "C-SPC" ;; use C-SPC as leader inside terminal (SPC is consumed by shell)
-   "." #'vterm-toggle
-   "r" #'my/vterm-split-right
-   "b" #'my/vterm-split-below
-   "t" #'my/vterm-new
-   "x" #'delete-window
-   "h" #'windmove-left
-   "l" #'windmove-right
-   "k" #'windmove-up
-   "j" #'windmove-down))
 #+end_src

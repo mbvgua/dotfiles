@@ -6,9 +6,6 @@ return {
 	tag = "v2.0.0",
 	-- enabled = false,
 	dependencies = {
-		-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-		-- NOTE: had to tag the versions since Neovim 0.11 has built in lsp support and
-		-- introduces breaking changes in most plugins
 		{ "mason-org/mason.nvim", tag = "v1.11.0", opts = {} },
 		{ "mason-org/mason-lspconfig.nvim", tag = "v1.32.0" },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -74,8 +71,7 @@ return {
 				-- Jump to the definition of the word under your cursor.
 				--  This is where a variable was first declared, or where a function is defined, etc.
 				--  To jump back, press <C-t>.
-				-- map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
-				map("gd", require("snacks.picker").lsp_definitions, "[g]oto [d]efinition")
+				map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
 
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
@@ -168,25 +164,10 @@ return {
 					[vim.diagnostic.severity.HINT] = "󰌶 ",
 				},
 			},
-			-- NOTE: this is the default, too loud
-			-- virtual_text = {
-			-- 	source = "if_many",
-			-- 	spacing = 2,
-			-- 	format = function(diagnostic)
-			-- 		local diagnostic_message = {
-			-- 			[vim.diagnostic.severity.ERROR] = diagnostic.message,
-			-- 			[vim.diagnostic.severity.WARN] = diagnostic.message,
-			-- 			[vim.diagnostic.severity.INFO] = diagnostic.message,
-			-- 			[vim.diagnostic.severity.HINT] = diagnostic.message,
-			-- 		}
-			-- 		return diagnostic_message[diagnostic.severity]
-			-- 	end,
-			-- },
-
 			-- make diagostics hidden, only show up when iam on the same line
 			-- like in emacs. they dont pop at me
 			virtual_text = false, -- Turns off the inline text
-			update_in_insert = false, -- Don't update diagnostics while typing
+			update_in_insert = true, --  update diagnostics while typing
 		})
 
 		-- LSP servers and clients are able to communicate to each other what features they support.
@@ -200,17 +181,17 @@ return {
 		local servers = {
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			bashls = {}, -- bash
-			lua_ls = {}, -- lua
 			clangd = {}, -- c/c++
-			html = {}, -- html
-			cssls = {}, -- css
-			jsonls = {}, -- json
-			yamlls = {}, -- yaml
-			basedpyright = {}, -- python
+			lua_ls = {}, -- lua
+			pyright = {}, -- python
 			ts_ls = {}, -- javascript, typescript
 			dockerls = {}, -- docker
 			docker_compose_language_service = {}, -- docker compose
 			sqlls = {}, -- sql
+			html = {}, -- html
+			cssls = {}, -- css
+			jsonls = {}, -- json
+			yamlls = {}, -- yaml
 			taplo = {}, -- tomml
 		}
 
@@ -219,10 +200,11 @@ return {
 		--    :Mason
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
-			"prettier", -- format js and ts code
-			"prettierd", -- format js and ts code, but running on a dedicated daemon
-			"black", -- format python code
+		    -- formatter for different langs
+			"black", -- python
+			"stylua", -- lua
+			"prettier", -- js/ts
+			"prettierd", -- js/ts but on a dedicated daemon
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -16,8 +16,8 @@ return {
 		-- 'none' for no mappings
 		keymap = {
 			preset = "default",
-			-- use tabs to auto-complete alongside default settings
-			["<Tab>"] = { "accept", "fallback" },
+			-- use enter to auto-complete alongside default settings
+			["<CR>"] = { "accept", "fallback" },
 			-- ["<C-k>"] = { "select_prev", "fallback" },
 			-- ["<C-j>"] = { "select_next", "fallback" },
 		},

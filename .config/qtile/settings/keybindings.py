@@ -13,8 +13,8 @@ control: str = "control"
 
 # my tools of choice
 terminal: str = "alacritty"
+editor: str = "alacritty -e nvim"
 browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
-emacs: str = "emacs"
 files: str = "thunar"
 
 # =====================
@@ -128,8 +128,7 @@ keys: list[Key | KeyChord] = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(terminal), desc="launch terminal"),
-    Key([mod], "e", lazy.spawn(emacs), desc="launch [e]macs"),
+    Key([mod], "Return", lazy.spawn(editor), desc="launch neovim in terminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],

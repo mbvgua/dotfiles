@@ -16,7 +16,7 @@ xfsettingsd &
 pipewire &
 
 # compositor, prevents screen tearing
-picom --config ~/.config/picom/picom.conf --window-shader-fg ~/.config/picom/grayscale-shader.glsl -b &
+picom --config ~/.config/picom/picom.conf &
 
 # get de/wm independent notifications
 dunst -config ~/.config/dunst/dunstrc &
@@ -32,6 +32,3 @@ brightnessctl set 10% &
 
 # blue light filter. my eyess!!
 redshift-gtk &
-
-# mount and unmount drives
-udiskie --automount --notify --smart-tray --file-manager thunar &

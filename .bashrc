@@ -27,17 +27,7 @@ done
 unset file
 
 # open man pages in neovim. thanks @mental_outlaw - Yt
-# export MANPAGER="nvim +Man!"
-# man ()
-# {
-#     if [ "$TERM" == "eterm-color" ]; then
-#         emacsclient -e "(man \"$1\")";
-#         # emacs -nw -e "(man \"$1\")";
-#     else
-#         command man "@1"
-#     fi
-# }
-
+export MANPAGER="nvim +Man!"
 export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
 
 export HISTCONTROL=ignoredups:erasedups         # ignore duplicates in history
@@ -47,8 +37,3 @@ shopt -s histappend                             # append to the history file, do
 
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
-
-# set 3.10 as global python version
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"

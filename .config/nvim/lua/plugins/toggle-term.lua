@@ -5,7 +5,7 @@ return {
 	-- enabled=false
 	version = "v2.13.1",
 	opts = {
-		open_mapping = "<leader>,",
+		open_mapping = [[<C-,>]],
 		shade_filetypes = {},
 		shade_terminals = true,
 		shading_factor = 2,

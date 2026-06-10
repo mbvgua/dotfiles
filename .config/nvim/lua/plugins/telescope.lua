@@ -50,9 +50,6 @@ return {
 				},
 			},
 
-			extensions = {
-				projects = {}, -- project.nvim extension config
-			},
 		})
 
 		-- edit neovim config files from wherever. Thanks to TJ!
