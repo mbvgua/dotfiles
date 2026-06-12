@@ -1,5 +1,4 @@
--- just too good, should have used this sooner.
--- best git frontend, though a Magit imitation
+-- magit, but in neovim. best git frontend
 
 return {
 	"NeogitOrg/neogit",

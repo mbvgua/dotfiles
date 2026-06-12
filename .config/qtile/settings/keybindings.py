@@ -128,7 +128,7 @@ keys: list[Key | KeyChord] = [
     # =================
     # Open My Tools
     # =================
-    Key([mod], "Return", lazy.spawn(editor), desc="launch neovim in terminal"),
+    Key([mod], "Return", lazy.spawn(editor), desc="launch editor"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],

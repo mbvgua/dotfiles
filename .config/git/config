@@ -3,7 +3,7 @@
 	email = mbvgua+dev@gmail.com
 	signingKey = ~/.ssh/id_ed25519_github.pub
 [core]
-	editor = emacs -nw
+	editor = nvim
 	symlink = true
 	pager = less --tabs=4 -RF
 [init]
@@ -17,6 +17,8 @@
 	submodulesummary = 1
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
 [merge]
 	tool = subl-merge
 	conflictStyle = zdiff3

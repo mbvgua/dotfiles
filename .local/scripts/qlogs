@@ -6,6 +6,5 @@ if [[ $1 = "clear" ]]; then
     truncate --size=0 "$logfile"
     echo "Qtile log cleared"
 else
-    # nvim "$logfile"
-    emacs -nw "$logfile"
+    nvim "$logfile"
 fi

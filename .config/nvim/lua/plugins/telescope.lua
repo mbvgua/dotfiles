@@ -49,7 +49,6 @@ return {
 					},
 				},
 			},
-
 		})
 
 		-- edit neovim config files from wherever. Thanks to TJ!
@@ -92,5 +91,5 @@ return {
 
 		-- find todo comments easily
 		vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope<cr>", { desc = "[f]ind [t]odos" })
-	end
+	end,
 }

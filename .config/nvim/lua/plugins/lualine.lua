@@ -66,7 +66,6 @@ return {
 			lualine_x = {
 				{
 					"diagnostics",
-					-- colored = false,
 				},
 			},
 			lualine_y = {},
