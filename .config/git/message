@@ -1,4 +1,5 @@
-# type(optional scope): subject                   ^TOO LONG(50 chars max)
+
+# type(optional scope): subject
 #   |       |               |
 #   |       |               +-> short descriptive summary(e.g update README.md)
 #   |       |
@@ -6,13 +7,12 @@
 #   |
 #   +-> fix, feat, docs, style, refactor, perf, test, build, ci, chore, revert,
 #------------------------------------------------> <BLANK LINE>
-# [OPTIONAL BODY]                                                      ^WRAP HERE(72 chars)
-# - Why was this change necessary?
-# - How does it address the problem?
-# - What has been changed in codebase?
-# - Are there any side effects?
+# CHANGES:
+# - what has been changed in the codebase?
 #------------------------------------------------> <BLANK LINE>
-# [OPTIONAL FOOTER(S)]
-# - Provide links or keys to any relevant tickets, e.g:
-# - (close|fix|resolve) #ISSUE-NUMBER
+# CONTEXT:
+# - why was this change necessary?
+# - how does the change adress the problem?
 #------------------------------------------------> <BLANK LINE>
+# CONSIDERATIONS:
+# - are there any side effects/risks of merging the changes?

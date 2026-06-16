@@ -21,7 +21,8 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-# Standard docs
-^README(\..*)?$
-^LICENSE(\..*)?$
-^COPYING$
+# My files
+^/README.*
+^/SETUP.*
+^/LICENSE
+^/install
