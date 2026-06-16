@@ -30,6 +30,10 @@ return {
 					"!**/node_modules/*", -- Exclude node_modules directory
 					"--glob",
 					"!**/.venv/*",
+					"--glob",
+					"!**/backupdir/*", -- exclude nvim swap,backup,undodir files
+					"--glob",
+					"!**/undodir/*",
 				},
 			},
 			pickers = {

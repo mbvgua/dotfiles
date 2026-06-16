@@ -183,7 +183,6 @@ return {
 			bashls = {}, -- bash
 			clangd = {}, -- c/c++
 			lua_ls = {}, -- lua
-			basedpyright = {},  -- just for the inlay hints
 			pyright = {}, -- python
 			ts_ls = {}, -- javascript, typescript
 			dockerls = {}, -- docker

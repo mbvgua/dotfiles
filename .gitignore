@@ -1,9 +1,16 @@
+# cmus
 .config/cmus/lib.pl
 .config/cmus/playlists/
 .config/cmus/cache
 .config/cmus/command-history
 .config/cmus/search-history
+
+# nvim
 .config/nvim/lazy-lock.json
 .config/nvim/nvim-pack-lock.json
+.config/nvim/undodir/
+.config/nvim/backupdir/
+
+# qtile
 .config/qtile/__pycache__
 *.pyc

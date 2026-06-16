@@ -20,8 +20,6 @@ map("v", "<", "<gv", { desc = "ident leftwards" })
 map("v", ">", ">gv", { desc = "ident rightwards" })
 
 -- Continously move block of text up and down
-map({ "v", "x" }, "K", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
-map({ "v", "x" }, "J", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
 map({ "v", "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { desc = "move chunk upwards" })
 map({ "v", "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { desc = "move chunk downwards" })
 
@@ -35,11 +33,11 @@ map("n", "<leader>l", "<C-w>l", { desc = "navigate to right window" })
 map("n", "<leader>k", "<C-w>k", { desc = "navigate to window above" })
 map("n", "<leader>j", "<C-w>j", { desc = "navigate to window below" })
 
--- resize windows with Alt+h\j\k\l Keys
-map("n", "<A-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
-map("n", "<A-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
-map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
-map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
+-- resize windows with Ctrl+h\j\k\l Keys
+map("n", "<C-k>", ":resize +2<CR>", { desc = "resize horizontally to be bigger" })
+map("n", "<C-j>", ":resize -2<CR>", { desc = "resize horizontally to be smaller" })
+map("n", "<C-h>", ":vertical resize -2<CR>", { desc = "resize vertically to be smaller" })
+map("n", "<C-l>", ":vertical resize +2<CR>", { desc = "resize vertically to be bigger" })
 
 -- easily split windows with - & | like tmux
 map("n", "<leader>-", ":split<CR>", { desc = "[-]Split window horizontally " })
@@ -94,4 +92,4 @@ map({ "v", "n" }, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j t
 
 -- insert templates
 -- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
-map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<cR>9jwf>a", { desc = "insert html boilerplate" })
+map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<CR>8jwf>a", { desc = "insert html boilerplate" })

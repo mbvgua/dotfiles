@@ -32,5 +32,5 @@ HISTSIZE=1000                                   # originally 500
 HISTFILESIZE=2000                               # originally 500,makeit waaayy larger
 shopt -s histappend                             # append to the history file, don't overwrite
 
-#ignore upper and lowercase when TAB completion
+# ignore differences in upper & lowercase for TAB completion
 bind "set completion-ignore-case on"

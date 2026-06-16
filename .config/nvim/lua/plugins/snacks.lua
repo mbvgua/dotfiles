@@ -10,7 +10,6 @@ return {
 	opts = {
 		-- your configuration comes here
 		indent = { enabled = true },
-		input = { enabled = true },
 		picker = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
@@ -20,11 +19,11 @@ return {
 		quickfile = { enabled = true }, -- render a new file as quick as possible before icons
 		notifier = {
 			enabled = true,
-			-- compact | minimal | fancy
 			style = "compact",
 			timeout = 4000,
 		},
 		-- not in use...
+		input = { enabled = false }, -- like to give my input down at the bottom
 		dashboard = { enabled = false }, -- too much. totally uneccessary
 		explorer = { enabled = false }, -- have nvim-tree!
 		terminal = { enabled = false }, -- float term is harzardous at best

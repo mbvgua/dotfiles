@@ -15,7 +15,7 @@ layout_theme: dict[str, int | str] = {
     "margin": 2,
     "border_width": 2,
     "border_focus": workspaceColor,
-    "border_normal": foregroundColorTwo,
+    # "border_normal": foregroundColorTwo,      # be blank
 }
 
 # less is more!

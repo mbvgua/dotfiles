@@ -18,23 +18,16 @@ return {
 			},
 		},
 		sections = {
-			lualine_a = { { "mode", separator = { left = "", right = "" } } },
+			lualine_a = {
+				{
+					"mode",
+					separator = { left = "", right = "" },
+				},
+			},
 			lualine_b = {
 				{ "branch", icon = "" },
 			},
-			lualine_c = {
-				{ "diff" },
-				{
-					shorting_target = 40,
-					newfile_status = true,
-					symbols = {
-						modified = "",
-						readonly = "",
-						unnamed = "[No Name]",
-						newfile = "",
-					},
-				},
-			},
+			lualine_c = { "diff" },
 			lualine_x = {
 				{
 					"lsp_status",
@@ -55,7 +48,6 @@ return {
 					function()
 						return "LOC: " .. vim.fn.line(".") .. "/" .. vim.fn.line("$")
 					end,
-					separator = { left = "", right = "" },
 				},
 			},
 		},
@@ -63,11 +55,7 @@ return {
 			lualine_a = { "buffers" }, -- show open buffers(numbered)
 			lualine_b = {},
 			lualine_c = {},
-			lualine_x = {
-				{
-					"diagnostics",
-				},
-			},
+			lualine_x = { "diagnostics" }, -- possible errors
 			lualine_y = {},
 			lualine_z = { "tabs" }, -- show open tabs
 		},

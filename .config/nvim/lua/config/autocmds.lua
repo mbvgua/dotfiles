@@ -87,9 +87,33 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
+-- builtin treesitter
+-- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
+-- possible to add extras with :TSInstall <lang> manually
+local parsers = {
+  "cpp", "cmake", "make", "diff", "dockerfile",
+  "python", "sql", "luadoc", "nginx", "yaml",
+  "html", "css", "json", "javascript", "typescript",
+}
+
+-- Install missing parsers on startup
+for _, lang in ipairs(parsers) do
+  local ok, _ = pcall(vim.treesitter.language.add, lang, nil, true)
+  if not ok then
+    cmd("TSInstall " .. lang)
+  end
+end
+
+-- Enable treesitter highlighting per filetype
+autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
 -- follow emacs ways, dont have errors shouting ate me
 -- create an autocommand to show diagnostics in a floating window on hover
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+autocmd({ "CursorHold", "CursorHoldI" }, {
   group = augroup("float_diagnostic", { clear = true }),
   callback = function()
     vim.diagnostic.open_float(nil, { focus = false })
@@ -97,7 +121,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 })
 
 -- Automatically enable inlay hints when an LSP attaches
-vim.api.nvim_create_autocmd("LspAttach", {
+autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_inlay_hints", { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -109,7 +133,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- activate virtual environments instantly
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
   pattern = "python",
   callback = function()
     -- look for .venv in current dir and parents
