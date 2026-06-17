@@ -18,10 +18,10 @@ opt.signcolumn = "yes"                  -- reserve space in the gutter to show i
 opt.cursorline = true                   -- highlight current line of cursor
 opt.colorcolumn = "100"                 -- highlight column 100. dont cross
 opt.scrolloff = 8                       -- keep 8 columns above/below cursor
-opt.sidescrolloff = 2                   -- keep 2 columns left/right of cursor. dont wrap
+opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
-opt.wrap = false                        -- dont wrap lines when opening splits,nvim-tree
+opt.wrap = true                        -- dont wrap lines when opening splits,nvim-tree
 opt.updatetime = 250                    -- allow for immediate feedback, on hover
 
 -- indentation

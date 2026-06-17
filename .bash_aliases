@@ -10,8 +10,28 @@ alias ff='find . -type f -name'                 # find files
 alias cl='clear'                                # clear things quickly
 alias hist='history'                            # show history
 alias hgrep='history | grep'                    # search for command in history
-alias lgrep='ls -1a | grep'                     # search for file/directory in .
+alias lgrep='ls -1a | grep'                     # search for file/directory in
+alias ll='ls -alF'                              # list files and minor details
+alias la='ls -A'                                # list even hidden files
+alias treee='tree --filelimit 15'               # list nested files & directories
 alias files='thunar'                            # open files easily
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --group-directories-first --indicator-style=slash --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto' 
+    alias egrep='egrep --color=auto' 
+fi
+
+# colored GCC warnings and errors 
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# send alerts to system instantly using dunst: e.g sleep 5;alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # view images with feh {default image and slideahow}
 alias feh='feh --fullscreen --draw-filename --info %h%S'
@@ -24,9 +44,6 @@ alias :wq="exit"
 alias :wqa="exit"
 
 # navigation
-alias treee='tree --filelimit 15'       # list nested files & directories
-alias ll='ls -alF'                      # list files and minor details
-alias la='ls -A'                        #list even hidden files
 alias .1='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
@@ -59,28 +76,6 @@ alias wn="xprop WM_CLASS"
 alias fonts="fc-cache -fv"
 alias ls-fonts="fc-list : family , style"
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --group-directories-first --indicator-style=slash --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto' 
-    alias egrep='egrep --color=auto' 
-fi
-
-# colored GCC warnings and errors 
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01' 
-
-# send alerts to system instantly using dunst: e.g sleep 5;alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # excuse my fat fingers
 alias :Wq="exit"
 alias :Wqa="exit"
-
-# temp-> haveno 'fn' key on keyboard
-alias vol+='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+'
-alias vol-='wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-'
