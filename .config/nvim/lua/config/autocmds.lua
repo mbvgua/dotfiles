@@ -131,30 +131,3 @@ autocmd("LspAttach", {
     end
   end,
 })
-
--- activate virtual environments instantly
-autocmd("FileType", {
-  pattern = "python",
-  callback = function()
-    -- look for .venv in current dir and parents
-    local venv_names = { ".venv", "venv", ".env", "env" }
-    for _, name in ipairs(venv_names) do
-      local root = vim.fs.root(0, name)
-      if root then
-        local venv_path = root .. "/" .. name
-        local python = venv_path .. "/bin/python"
-        if vim.fn.executable(python) == 1 then
-          -- tell venv-selector about it
-          vim.fn.setenv("VIRTUAL_ENV", venv_path)
-          vim.fn.setenv("PATH", venv_path .. "/bin:" .. vim.fn.getenv("PATH"))
-          vim.notify("venv: activated " .. venv_path, vim.log.levels.INFO)
-          -- restart pyright to pick it up
-          vim.defer_fn(function()
-            vim.cmd("LspRestart")
-          end, 100)
-          break
-        end
-      end
-    end
-  end,
-})

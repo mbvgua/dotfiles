@@ -39,17 +39,15 @@ return {
 						done = "✓",
 						separator = " ",
 					},
-					ignore_lsp = {},
 				},
-			},
-			lualine_y = {},
-			lualine_z = {
 				{
 					function()
-						return "LOC: " .. vim.fn.line(".") .. "/" .. vim.fn.line("$")
+						return "[" .. vim.fn.line(".") .. "/" .. vim.fn.line("$") .. "]"
 					end,
 				},
 			},
+			lualine_y = {},
+			lualine_z = {},
 		},
 		tabline = {
 			lualine_a = { "buffers" }, -- show open buffers(numbered)
