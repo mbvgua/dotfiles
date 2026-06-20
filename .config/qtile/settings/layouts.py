@@ -23,7 +23,7 @@ layouts = [
     layout.Tile(
         **layout_theme,
         add_after_last=True,
-    ),#better than monadtall imo. main window is larger
+    ),  # better than monadtall imo. main window is larger
     layout.Max(**layout_theme),
     layout.Matrix(**layout_theme),
     # layout.MonadTall(**layout_theme),

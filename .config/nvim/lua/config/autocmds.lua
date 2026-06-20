@@ -72,21 +72,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
--- make terminal navigation much easier
-function _G.set_terminal_keymaps()
-	local opts = { buffer = 0 }
-	map("t", "<esc>", [[<C-\><C-n>]], opts)
-	map("t", "jk", [[<C-\><C-n>]], opts)
-	map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-	map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-	map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-	map("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
 -- builtin treesitter
 -- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
 -- possible to add extras with :TSInstall <lang> manually

@@ -25,7 +25,7 @@ unset file
 
 # open man pages in neovim. thanks @mental_outlaw - Yt
 export MANPAGER="nvim +Man!"
-export MANWIDTH="$((COLUMNS > 90 ? 90 : COLUMNS)) man"
+export MANWIDTH="$((COLUMNS > 90 ? 100 : COLUMNS)) man"
 
 export HISTCONTROL=ignoredups:erasedups         # ignore duplicates in history
 HISTSIZE=1000                                   # originally 500

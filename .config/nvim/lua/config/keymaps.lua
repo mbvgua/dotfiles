@@ -13,7 +13,7 @@ map({ "n", "x" }, "<C-a>", ":%y+<CR>", { desc = "copy entire file" })
 map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })
 
 -- stop highlighting after search
-map("n", "<leader>co", ":nohlsearch<CR>", { desc = "[c]heck spelling [o]ff" })
+map("n", "<esc>", ":nohlsearch<CR>", { desc = "[c]heck spelling [o]ff" })
 
 -- remain in visual mode while identing to the right/left
 map("v", "<", "<gv", { desc = "ident leftwards" })

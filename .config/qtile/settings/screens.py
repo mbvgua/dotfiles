@@ -68,7 +68,7 @@ screens: list[Screen] = [
                 # Left modules - Layout & System Info
                 widget.Spacer(length=10),
                 widget.CurrentLayout(
-                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons/")],
+                    # custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons/")],
                     foreground=foregroundColorTwo,
                     scale=0.6,
                     mode="both",

@@ -27,7 +27,6 @@
 	ao = remote add origin
 	br = branch
 	st = status
-    search = log -p --all -S newsboat           ; search keywords by commits
 	co = commit
     coan = commit --amend --no-edit
     coa = commit --amend
@@ -54,5 +53,3 @@
 	autocorrect = 5
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[url "git@codeberg.org:"]
-	insteadOf = https://codeberg.org/

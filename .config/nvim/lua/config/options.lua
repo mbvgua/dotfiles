@@ -18,10 +18,10 @@ opt.signcolumn = "yes"                  -- reserve space in the gutter to show i
 opt.cursorline = true                   -- highlight current line of cursor
 opt.colorcolumn = "100"                 -- highlight column 100. dont cross
 opt.scrolloff = 8                       -- keep 8 columns above/below cursor
-opt.sidescrolloff = 8                   -- keep 8 columns left/right of cursor
+opt.sidescrolloff = 4                   -- keep 8 columns left/right of cursor
 opt.laststatus = 2                      -- show the status line
 opt.showmode = false                    -- dont show current mode. already in statusline
-opt.wrap = true                        -- dont wrap lines when opening splits,nvim-tree
+opt.wrap = false                        -- dont wrap lines when opening splits,nvim-tree
 opt.updatetime = 250                    -- allow for immediate feedback, on hover
 
 -- indentation
@@ -102,5 +102,5 @@ if fn.isdirectory(BACKUPDIR) == 0 then
 	fn.mkdir(BACKUPDIR, "p", "0o700")
 end
 
-opt.undodir = UNDODIR                       -- save undo change in .vim directory
-opt.backupdir = BACKUPDIR                   -- save backup change in .vim directory
+opt.undodir = UNDODIR                       -- save undo change in ~/nvim directory
+opt.backupdir = BACKUPDIR                   -- save backup change in ~/nvim directory
