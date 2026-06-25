@@ -1,13 +1,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# TODO: figure out which to retain
-# # If not running interactively, don't do anything
-# case $- in
-#     *i*) ;;
-#       *) return;;
-# esac
-
 # basic fedora-coloured+void-minimalist bash prompt
 export PS1='\[\e[01;32m\][\u@\h \W]\$\[\e[00m\] '
 

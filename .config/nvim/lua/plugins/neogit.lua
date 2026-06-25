@@ -9,6 +9,7 @@ return {
 	},
 	cmd = "Neogit",
 	keys = {
-		{ "<leader>gg", "<cmd>Neogit<cr>", desc = "show neogit ui" },
+		{ "<leader>gg", "<cmd>Neogit<cr>", desc = "show neo[g]it ui" },
+		{ "<leader>gd", "<cmd>Neogit diff<cr>", desc = "show [g]it [d]iff in current file" },
 	},
 }

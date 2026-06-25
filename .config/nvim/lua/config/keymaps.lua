@@ -6,8 +6,8 @@ local map = vim.keymap.set
 -- save current file
 map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
 
--- copy entire file
-map({ "n", "x" }, "<C-a>", ":%y+<CR>", { desc = "copy entire file" })
+-- select entire file
+map({ "n", "v" }, "<C-a>", "ggVG", { desc = "select entire file" })
 
 -- check spelling within file
 map("n", "<leader>cs", "<cmd>setlocal spell!<CR>", { desc = "[c]heck [s]pelling" })

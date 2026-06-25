@@ -88,6 +88,5 @@ calc() {
 
 # clean unused packages
 clean(){
-    sudo xbps-remove -o
-    sudo xbps-remove -O
+    sudo xbps-remove -oOR
 }
