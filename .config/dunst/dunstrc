@@ -28,10 +28,6 @@
     # The height of a single notification, excluding the frame.
     # dynamic height from 0 to 300
     height = (0, 300)
-    # constant height of 300
-    # height = 300
-    # NOTE: Dunst from version 1.11 and older don't support dynamic height
-    #       and the given value is treated as the maximum height
 
     # Position the notification in the top right corner
     origin = top-right
@@ -87,13 +83,19 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 40
+    transparency = 10
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
     # If gap_size is greater than 0, this setting will be ignored.
     separator_height = 2
+
+    # Size of gap to display between notifications - requires a compositor.
+    # If value is greater than 0, separator_height will be ignored and a border
+    # of size frame_width will be drawn around each notification instead.
+    # Click events on gaps do not currently propagate to applications below.
+    gap_size = 0
 
     # Padding between text and separator.
     padding = 10
@@ -110,12 +112,6 @@
 
     # Defines color of the frame around the notification window.
     frame_color = "#d29922"
-
-    # Size of gap to display between notifications - requires a compositor.
-    # If value is greater than 0, separator_height will be ignored and a border
-    # of size frame_width will be drawn around each notification instead.
-    # Click events on gaps do not currently propagate to applications below.
-    gap_size = 0
 
     # Define a color for the separator.
     # possible values are:
@@ -142,7 +138,7 @@
 
     ### Text ###
 
-    font = FiraMono Nerd Font 12
+    font = FiraMono Nerd Font 15
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -354,51 +350,4 @@
     timeout = 0
     default_icon = dialog-warning
     script = "$HOME/.local/scripts/alert_critical"
-
-
-# Every section that isn't one of the above is interpreted as a rules to
-# override settings for certain messages.
-#
-# Messages can be matched by
-#    appname (discouraged, see desktop_entry)
-#    body
-#    category
-#    desktop_entry
-#    icon
-#    match_transient
-#    msg_urgency
-#    stack_tag
-#    summary
-#
-# and you can override the
-#    background
-#    foreground
-#    format
-#    frame_color
-#    fullscreen
-#    new_icon
-#    set_stack_tag
-#    set_transient
-#    set_category
-#    timeout
-#    urgency
-#    icon_position
-#    skip_display
-#    history_ignore
-#    action_name
-#    word_wrap
-#    ellipsize
-#    alignment
-#    hide_text
-#    override_pause_level
-#
-# Shell-like globbing will get expanded.
-#
-# Instead of the appname filter, it's recommended to use the desktop_entry filter.
-# GLib based applications export their desktop-entry name. In comparison to the appname,
-# the desktop-entry won't get localized.
-#
-# You can also allow a notification to appear even when paused. Notification will appear whenever notification's override_pause_level >= dunst's paused level.
-# This can be used to set partial pause modes, where more urgent notifications get through, but less urgent stay paused. To do that, you can override the following in the rules:
-# override_pause_level = X
 

@@ -149,12 +149,6 @@ keys: list[Key | KeyChord] = [
     # Volume controls
     # =================
     Key(
-        [mod],
-        "m",
-        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume mute")),
-        desc="Mute/Unmute",
-    ),
-    Key(
         [],
         "XF86AudioRaiseVolume",
         lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume up")),
@@ -165,6 +159,12 @@ keys: list[Key | KeyChord] = [
         "XF86AudioLowerVolume",
         lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume down")),
         desc="Volume down",
+    ),
+    Key(
+        [mod],
+        "m",
+        lazy.spawn(os.path.expanduser("~/.local/scripts/change_volume mute")),
+        desc="Mute/Unmute",
     ),
     Key(
         [],
@@ -213,7 +213,7 @@ keys: list[Key | KeyChord] = [
     # =================
     Key(
         [mod],
-        # using a since Ill also have nested tmux instance, thus navigating
+        # since I'll also have nested tmux instance, thus navigating
         # between Ctrl+A and Tux+a is really convenient
         "a",
         lazy.group["scratchpad"].dropdown_toggle("terminal"),

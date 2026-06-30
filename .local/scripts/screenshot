@@ -1,20 +1,26 @@
 #!/usr/bin/env bash
 
-set -eou pipefail
+set -eo pipefail
 
 output_dir="$HOME/Pictures/Screenshots/"
 choice="$1"
 
+
 usage() {
-    echo ""
-    echo "Usage
-    $ $0 [selection] [fullscreen] [all]
-    "
+    echo " Usage:
+        This script takes a system screesnhot using flameshot
+        A notification is also sent using dunstc, showing if the screenshot
+        was successful or not,
+
+        To run it:
+        $ $0 [selection] [fullscreen] [all]
+        "
 }
 
 #ensure only 1 arg passed
 if [[ "$#" -ne 1 ]]; then
     usage
+    exit 1
 else
     case "$choice" in
         selection)
@@ -27,6 +33,10 @@ else
         all)
             # takes screenshot of all screens
             flameshot full --delay 500 --path "$output_dir"
+        ;;
+        *)
+            usage
+            exit 1
         ;;
     esac
 fi

@@ -6,7 +6,7 @@ local map = vim.keymap.set
 -- save current file
 map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
 
--- select entire file
+-- select entire file, then perform action c/y/d/gU/gu
 map({ "n", "v" }, "<C-a>", "ggVG", { desc = "select entire file" })
 
 -- check spelling within file
@@ -44,12 +44,12 @@ map("n", "<leader>-", ":split<CR>", { desc = "[-]Split window horizontally " })
 map("n", "<leader>\\", ":vsplit<CR>", { desc = "[|] Split window vertically " })
 
 -- buffer actions
--- navigate buffers with leader-(N)ext and (P)revious
-map("n", "<leader>n", ":bnext<CR>", { desc = "next buffer" })
-map("n", "<leader>p", ":bprevious<CR>", { desc = "previous buffer" })
+-- navigate buffers with leader-(n)ext and (p)revious
+map("n", "<leader>n", ":bnext<CR>", { desc = "[n]ext buffer" })
+map("n", "<leader>p", ":bprevious<CR>", { desc = "[p]revious buffer" })
 
 -- delete current buffer
-map("n", "<leader>bx", ":bd<CR>", { desc = "current [b]uffer delete" })
+map("n", "<leader>bd", ":bd<CR>", { desc = "current [b]uffer [d]elete" })
 
 -- delete all buffers in background
 map("n", "<leader>bb", function()
@@ -83,8 +83,7 @@ map("n", "<leader>tb", ":tabonly<CR>", { desc = "delete all [t]abs in [b]ackgrou
 -- inspect tree
 map("n", "<leader>ci", "<cmd>InspectTree<CR>", { desc = "[c]ode [i]nspect tree-sitter" })
 
--- Hardmode ON!! from kickstart nvim
--- Disable arrow keys in normal & visual mode
+-- Hardmode: Disable arrow keys in normal & visual mode
 map({ "v", "n" }, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
 map({ "v", "n" }, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
 map({ "v", "n" }, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')

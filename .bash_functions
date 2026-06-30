@@ -86,7 +86,7 @@ calc() {
 	printf "\\n"
 }
 
-# clean unused packages
+# clean unused packages. "OO" removes cached packages
 clean(){
-    sudo xbps-remove -oOR
+    sudo xbps-remove -oOOR
 }

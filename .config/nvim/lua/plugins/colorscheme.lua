@@ -1,4 +1,4 @@
--- monokai pro colorscheme. matches Sublime superbly!
+-- monokai pro colorscheme. the only correct answer!!
 
 return {
 	"loctvl842/monokai-pro.nvim",

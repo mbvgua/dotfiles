@@ -3,7 +3,6 @@ import subprocess
 import random
 
 from libqtile import hook, widget, bar, qtile
-from libqtile.lazy import lazy
 from libqtile.config import Screen
 
 from .colours import *
@@ -152,7 +151,7 @@ screens: list[Screen] = [
                     format="{load_percent:2.0f}%",
                     foreground=foregroundColor,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.spawn(terminal + " -e btop")
+                        "Button1": lambda: qtile.spawn(f"{terminal} -e btop")
                     },
                 ),
                 create_separator(),

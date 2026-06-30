@@ -2,7 +2,6 @@
 local vim = vim or {}
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
-local map = vim.keymap.set
 local cmd = vim.cmd
 local bo = vim.bo
 local opt = vim.opt
@@ -76,43 +75,43 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
 -- possible to add extras with :TSInstall <lang> manually
 local parsers = {
-  "cpp", "cmake", "make", "diff", "dockerfile",
-  "python", "sql", "luadoc", "nginx", "yaml",
-  "html", "css", "json", "javascript", "typescript",
+	"cpp", "cmake", "make", "diff", "dockerfile",
+	"python", "sql", "luadoc", "nginx", "yaml",
+	"html", "css", "json", "javascript", "typescript",
 }
 
 -- Install missing parsers on startup
 for _, lang in ipairs(parsers) do
-  local ok, _ = pcall(vim.treesitter.language.add, lang, nil, true)
-  if not ok then
-    cmd("TSInstall " .. lang)
-  end
+	local ok, _ = pcall(vim.treesitter.language.add, lang, nil, true)
+	if not ok then
+		cmd("TSInstall " .. lang)
+	end
 end
 
 -- Enable treesitter highlighting per filetype
 autocmd("FileType", {
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
 })
 
 -- follow emacs ways, dont have errors shouting ate me
 -- create an autocommand to show diagnostics in a floating window on hover
 autocmd({ "CursorHold", "CursorHoldI" }, {
-  group = augroup("float_diagnostic", { clear = true }),
-  callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
-  end,
+	group = augroup("float_diagnostic", { clear = true }),
+	callback = function()
+		vim.diagnostic.open_float(nil, { focus = false })
+	end,
 })
 
 -- Automatically enable inlay hints when an LSP attaches
 autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_inlay_hints", { clear = true }),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    -- Check if the attached LSP supports inlay hints
-    if client and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-    end
-  end,
+	group = augroup("lsp_inlay_hints", { clear = true }),
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- Check if the attached LSP supports inlay hints
+		if client and client.server_capabilities.inlayHintProvider then
+			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+		end
+	end,
 })

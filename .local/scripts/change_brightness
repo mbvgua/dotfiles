@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
 # strict mode
-set -euo pipefail
+set -eo pipefail
 
 dir="$HOME/.local/scripts/icons/"
 choice=$1
 
 usage() {
-    echo ""
-    echo "Usage
-    $ $0 [up] [down]
-    "
+    echo " Usage:
+        This script changes the system brightness using brightnessctl
+        A notification is also sent using dunstc, showing the current system
+        brightness after the change.
+
+        To run it:
+        $ $0 [up] [down] 
+        "
 }
 
 # error check for no. of inputs
@@ -40,5 +44,9 @@ case $choice in
     down)
         brightnessctl set 5%-
         send_notification $choice
+        ;;
+    *)
+        usage
+        exit 1
         ;;
 esac

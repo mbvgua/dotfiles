@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
 # strict mode
-set -eou pipefail
+set -eo pipefail
 
 dir="/usr/share/icons/gnome/32x32/status/"
 choice=$1
 step=5
 
-# error check
+usage() {
+    echo " Usage:
+        This script changes the system volume using wpctl
+        A notification is also sent using dunstc, showing the current system
+        volume after the change.
+
+        To run it:
+        $ $0 [up] [down] [mute]
+        "
+}
+
+# error check for no. of inputs
 if [[ "$#" -ne 1 ]]; then
-    echo "usage: $0 <up/down/mute>"
+    usage
     exit 1
 fi
 
@@ -56,4 +67,8 @@ case $choice in
             send_notification up
         fi
         ;;
+    # *)
+    #     usage
+    #     exit 1
+    #     ;;
 esac

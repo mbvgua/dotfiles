@@ -1,4 +1,4 @@
--- html tags auto closing
+-- ensure html tags auto close
 
 return {
 	"windwp/nvim-ts-autotag",

@@ -8,24 +8,24 @@ return {
 	opts = {
 		-- keywords recognized as todo comments
 		keywords = {
-		    -- reminder to add/change sth at a later  date
+			-- reminder to add/change sth at a later  date
 			TODO = { icon = "󰓾 ", color = "info" },
-            -- For code (or code paths) that are broken, unimplemented, or slow,
-            -- and may become bigger problems later.
+			-- For code (or code paths) that are broken, unimplemented, or slow,
+			-- and may become bigger problems later.
 			FIXME = { icon = "󰓾 ", color = "error", alt = { "BUGFIX", "FIX", "BUG", "FIXIT", "ISSUE" } },
-            -- For code that needs to be revisited later, either to upstream it,
-            -- improve it, or address non-critical issues.
+			-- For code that needs to be revisited later, either to upstream it,
+			-- improve it, or address non-critical issues.
 			REVIEW = { icon = "󰓾 ", alt = { "PERFORMANCE", "OPTIMIZE", "REFACTOR" } },
-            -- For sections of code that just gotta go, and will be gone soon.
-            -- Specifically, this means the code is deprecated, not necessarily
-            -- the feature it enables.
+			-- For sections of code that just gotta go, and will be gone soon.
+			-- Specifically, this means the code is deprecated, not necessarily
+			-- the feature it enables.
 			DEPRECATED = { icon = "󰓾 ", color = "warning", alt = { "HACK", "WARN", "WARNING", "XXX" } },
 			NOTE = { icon = "󰓾 ", color = "hint", alt = { "INFO" } },
 			TEST = { icon = "󰓾 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 		},
-        highlight = {
-            multiline = false, -- only 1  line.wouldve been better if only the keyword
-        },
+		highlight = {
+			multiline = false, -- only 1  line.wouldve been better if only the keyword
+		},
 		-- list of named colors where we try to extract the guifg from the
 		-- list of highlight groups or use the hex color if hl not found as a fallback
 		colors = {

@@ -8,7 +8,7 @@ opt.mouse = "a"                         -- enable mouse mode:
 cmd.colorscheme("monokai-pro")          -- set colorscheme
 
 -- sync clipboard between os and neovim.
---  schedule the setting after `uienter` because it can increase startup-time.
+-- schedule the setting after `uienter` because it can increase startup-time.
 vim.schedule(function() opt.clipboard = 'unnamedplus' end)
 
 -- ui options
@@ -19,8 +19,6 @@ opt.cursorline = true                   -- highlight current line of cursor
 opt.colorcolumn = "100"                 -- highlight column 100. dont cross
 opt.scrolloff = 8                       -- keep 8 columns above/below cursor
 opt.sidescrolloff = 4                   -- keep 8 columns left/right of cursor
-opt.laststatus = 2                      -- show the status line
-opt.showmode = false                    -- dont show current mode. already in statusline
 opt.wrap = false                        -- dont wrap lines when opening splits,nvim-tree
 opt.updatetime = 250                    -- allow for immediate feedback, on hover
 

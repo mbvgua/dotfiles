@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # strict mode
 set -eou pipefail
 
@@ -18,6 +19,20 @@ suspend='󰾊 Suspend'
 logout=' Logout'
 yes=' Yes'
 no=' No'
+
+# help message
+usage(){
+    echo " Usage:
+        This script displays the power menu as a floating rofi window.
+        The rofi window displayed will have the following options:
+            - lock: locks the PC screen
+            - suspend: suspends the PC screen
+            - logout: logout the current user from the current session
+            - reboot: restart the PC, killing current session
+            - shutdown: turn off the PC gracefully
+
+        "
+}
 
 # Rofi CMD
 rofi_cmd() {
@@ -54,10 +69,8 @@ run_rofi() {
 run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
-		if [[ $1 == '--shutdown' ]]; then
-			loginctl poweroff
-		elif [[ $1 == '--reboot' ]]; then
-			loginctl reboot
+	    if [[ $1 == '--lock' ]]; then
+            xfce4-screensaver-command -l
 		elif [[ $1 == '--suspend' ]]; then
 			loginctl suspend
 		elif [[ $1 == '--logout' ]]; then
@@ -66,8 +79,13 @@ run_cmd() {
 			elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
 				i3-msg exit
 			fi
+		elif [[ $1 == '--reboot' ]]; then
+			loginctl reboot
+		elif [[ $1 == '--shutdown' ]]; then
+			loginctl poweroff
 		fi
 	else
+	    usage
 		exit 0
 	fi
 }
@@ -82,11 +100,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/xfce4-screensaver' ]]; then
-			xfce4-screensaver-command -l
-		fi
+        run_cmd --lock
         ;;
     $suspend)
 		run_cmd --suspend

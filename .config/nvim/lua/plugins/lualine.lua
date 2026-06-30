@@ -1,4 +1,4 @@
--- statusline and bufferline settings
+-- for a minimal & highly configurable statusline and bufferline
 
 return {
 	"nvim-lualine/lualine.nvim",
@@ -18,25 +18,19 @@ return {
 			},
 		},
 		sections = {
-			lualine_a = {
-				{
-					"mode",
-					separator = { left = "", right = "" },
-				},
-			},
-			lualine_b = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = {
 				{ "branch", icon = "" },
+				{ "diff" },
 			},
-			lualine_c = { "diff" },
 			lualine_x = {
 				{
 					"lsp_status",
 					icon = "",
 					symbols = {
-						-- Standard unicode symbols to cycle through for LSP progress:
 						spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-						-- Standard unicode symbol for when LSP is done:
-						done = "✓",
+						done = "", -- when spinner disappears, I know its done!?
 						separator = " ",
 					},
 				},
@@ -50,12 +44,12 @@ return {
 			lualine_z = {},
 		},
 		tabline = {
-			lualine_a = { "buffers" }, -- show open buffers(numbered)
+			lualine_a = { "buffers" },          -- show open buffers(numbered)
 			lualine_b = {},
 			lualine_c = {},
-			lualine_x = { "diagnostics" }, -- possible errors
+			lualine_x = { "diagnostics" },      -- possible errors
 			lualine_y = {},
-			lualine_z = { "tabs" }, -- show open tabs
+			lualine_z = { "tabs" },             -- show open tabs(neogit mostly)
 		},
 	},
 }

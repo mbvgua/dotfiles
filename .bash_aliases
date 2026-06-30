@@ -73,7 +73,3 @@ alias wn="xprop WM_CLASS"
 # fonts stuff
 alias fonts="fc-cache -fv"
 alias ls-fonts="fc-list : family , style"
-
-# excuse my fat fingers
-alias :Wq="exit"
-alias :Wqa="exit"

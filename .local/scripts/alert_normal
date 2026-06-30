@@ -3,12 +3,13 @@
 # enforce strict mode
 set -euo pipefail
 
-# NOTE: using strict mode above causes this toalways fail.
-# find better way to put a help section
-# if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+# FIXME: when this check is activated, dunstc notification sounds fail
+# if [[ "$#" -ne 0 ]]; then
 #     echo " Usage:
 #         This script plays a normal notification sound.
 #         Specifically meant to be used by dunstc(the notification daemon)
+#         No arguments or flags are required
+#
 #         Run it like so:
 #             $ $0
 #         "

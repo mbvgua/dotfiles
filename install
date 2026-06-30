@@ -6,10 +6,10 @@ set -eou pipefail
 LANG_PACKAGES=(
     perl lua python LuaJIT make gcc clang nodejs git git-lfs stow keyd
     clisp sbcl docker docker-buildx docker-compose base-devel libffi-devel
-    bzip2-devel openssl openssl-devel readline bash-completion
+    bzip2-devel openssl openssl-devel readline
     python3-pipx python3-psutil python3-dbus-fast python3-xcffib
     # packages not in default void
-    psmisc tree
+    psmisc tree bash-completion
 )
 USERLAND_PACKAGES=(
     qtile xfce4 bash btop alacritty cmus gnome-themes-extra flameshot
