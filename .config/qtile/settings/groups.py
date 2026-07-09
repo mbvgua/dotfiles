@@ -54,7 +54,7 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            # this opens a tmux session called 'main'
+            # this opens a tmux session called 'scratch'
             DropDown(
                 "terminal",
                 f"{terminal} -e tmux new-session -s scratch",

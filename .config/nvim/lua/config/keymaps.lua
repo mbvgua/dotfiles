@@ -4,7 +4,7 @@ local map = vim.keymap.set
 
 -- file actions
 -- save current file
-map("n", "<leader>w", "<cmd>write<cr>", { desc = "save file" })
+map("n", "<leader>w", ":w<cr>", { desc = "save file" })
 
 -- select entire file, then perform action c/y/d/gU/gu
 map({ "n", "v" }, "<C-a>", "ggVG", { desc = "select entire file" })
@@ -84,11 +84,14 @@ map("n", "<leader>tb", ":tabonly<CR>", { desc = "delete all [t]abs in [b]ackgrou
 map("n", "<leader>ci", "<cmd>InspectTree<CR>", { desc = "[c]ode [i]nspect tree-sitter" })
 
 -- Hardmode: Disable arrow keys in normal & visual mode
-map({ "v", "n" }, "<left>", '<cmd>echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<right>", '<cmd>echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<up>", '<cmd>echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
-map({ "v", "n" }, "<down>", '<cmd>echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<left>", ':echohl Error | echo "Youre in Hardmode.Use h to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<right>", ':echohl Error | echo "Youre in Hardmode.Use l to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<up>", ':echohl Error | echo "Youre in Hardmode.Use k to move!!" | echohl None<CR>')
+map({ "v", "n" }, "<down>", ':echohl Error | echo "Youre in Hardmode.Use j to move!!" | echohl None<CR>')
 
--- insert templates
--- Learnt from https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+-- insert templates: https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
 map({ "n", "x" }, "<leader>!", ":-1read $HOME/.config/nvim/base.html<CR>8jwf>a", { desc = "insert html boilerplate" })
+
+-- discovered evaluating expressions/code blocks from emacs, is also possible in nvim
+-- thanks TJ!
+map({ "n", "v" }, "<leader>ce", ":.lua<cr>", { desc = "[e]valuate [c]ode block" })
