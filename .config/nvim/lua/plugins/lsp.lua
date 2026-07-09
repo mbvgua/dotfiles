@@ -200,7 +200,7 @@ return {
 		--    :Mason
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-		    -- formatter for different langs
+			-- formatter for different langs
 			"black", -- python
 			"stylua", -- lua
 			"prettier", -- js/ts

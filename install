@@ -5,7 +5,7 @@ set -eou pipefail
 
 LANG_PACKAGES=(
     perl lua python LuaJIT make gcc clang nodejs git git-lfs stow keyd
-    clisp sbcl docker docker-buildx docker-compose base-devel libffi-devel
+    docker docker-buildx docker-compose base-devel libffi-devel
     bzip2-devel openssl openssl-devel readline
     python3-pipx python3-psutil python3-dbus-fast python3-xcffib
     # packages not in default void
@@ -19,7 +19,7 @@ USERLAND_PACKAGES=(
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
     polkit picom NetworkManager network-manager-applet rtkit blueman
     rofi dunst feh mpv brightnessctl redshift redshift-gtk btop ImageMagick
-    unzip autoconf automake xset xrandr ffmpeg udisks2 udiskie
+    unzip autoconf automake xset xrandr ffmpeg
 )
 TEMP_DIR=$(mktemp -d)
 
@@ -107,7 +107,7 @@ if [[ "$#" -eq 1 ]]; then
             sudo cp ./default.conf /etc/keyd/
 
             # install pnpm and its packages
-            sudo npm install -g typescript diff-so-fancy
+            sudo npm install -g typescript
 
             # install pipx and some packages
             pipx install git-filter-repo yt-dlp fastapi
@@ -117,10 +117,12 @@ if [[ "$#" -eq 1 ]]; then
 
             setup_dots() {
                 local DOTS_DIR="~/.dotfiles"
+                local DOTS_BACKUP="~/.dotfiles.backup"
                 local TARGET_BRANCH="xorg/void"
 
-                git clone ssh://git@codeberg.org/mbugua/dotfiles.git "$DOTS_DIR"
+                git clone ssh://git@github.com/mbvgua/dotfiles.git "$DOTS_DIR"
                 cd "$DOTS_DIR"
+
                 # pull all remote branches locally
                 git !git branch -r | \
                     grep -v "\->" | \
@@ -129,15 +131,19 @@ if [[ "$#" -eq 1 ]]; then
                     done && \
                     git fetch --all && \
                     git pull --all
+
                 git checkout "$TARGET_BRANCH"
                 stow .
             }
 
             if [[ ! -d "$DOTS_DIR" ]]; then
                 setup_dots
+                echo "successfully setup your dotfiles..."
             else
-                rm -rf "$DOTS_DIR"
+                echo "$DOTS_DIR directory found, safely moving it to $DOTS_BACKUP"
+                mv -r "$DOTS_DIR" "$DOTS_BACKUP"
                 setup_dots
+                echo "successfully setup your dotfiles..."
             fi
             ;;
         "--services" | "-s")
@@ -168,6 +174,7 @@ if [[ "$#" -eq 1 ]]; then
             ;;
         "--help" | "-h")
             usage
+            exit 1
             ;;
         *)
             echo "Unkown option $OPERATION"

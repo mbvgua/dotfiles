@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
--- builtin treesitter
+-- builtin treesitter:
 -- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
 -- possible to add extras with :TSInstall <lang> manually
 local parsers = {
@@ -95,7 +95,7 @@ autocmd("FileType", {
 	end,
 })
 
--- follow emacs ways, dont have errors shouting ate me
+-- follow emacs ways, dont have errors shouting at me
 -- create an autocommand to show diagnostics in a floating window on hover
 autocmd({ "CursorHold", "CursorHoldI" }, {
 	group = augroup("float_diagnostic", { clear = true }),
