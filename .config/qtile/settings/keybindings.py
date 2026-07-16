@@ -15,7 +15,7 @@ control: str = "control"
 terminal: str = "alacritty"
 # when I close the nvim instance, it goes back to the terminal
 editor: str = f"{terminal} -e sh -c 'nvim; exec $SHELL'"
-browser: str = "~/helium-0.10.7.1-x86_64.AppImage"
+browser: str = "~/helium-0.14.5.1-x86_64.AppImage"
 files: str = "thunar"
 
 # =====================

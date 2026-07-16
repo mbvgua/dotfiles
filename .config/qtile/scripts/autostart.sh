@@ -28,7 +28,7 @@ nm-applet --indicator &
 # blueman-applet &
 
 # restore brightness. runit doesnt recall previous session
-brightnessctl set 10% &
+brightnessctl set 15% &
 
 # blue light filter. my eyess!!
 redshift-gtk &

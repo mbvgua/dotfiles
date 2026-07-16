@@ -10,9 +10,13 @@
 	defaultBranch = main
 [commit]
 	template = ~/.config/git/message
-	gpgSign = true
+	gpgsign = true
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+[tag]
+	gpgsign = true
 [status]
 	submodulesummary = 1
 [pull]

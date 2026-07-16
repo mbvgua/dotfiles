@@ -20,6 +20,22 @@ end
 -- Run it immediately
 sync_git_colors()
 
+-- custom mappings
+local function my_on_attach(bufnr)
+	local api = require("nvim-tree.api")
+
+	local function opts(desc)
+		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+	end
+
+	-- default mappings
+	api.map.on_attach.default(bufnr)
+
+	-- custom mappings(:h nvim-tree-mappings-default)
+	vim.keymap.set("n", "[g", api.node.navigate.git.prev, opts("Prev Git"))
+	vim.keymap.set("n", "]g", api.node.navigate.git.next, opts("Next Git"))
+end
+
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "v1.17.0",
@@ -27,6 +43,7 @@ return {
 	lazy = false,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
+		on_attach = my_on_attach,
 		hijack_netrw = true,
 		disable_netrw = true,
 		view = {
@@ -50,7 +67,7 @@ return {
 						unstaged = "~", -- modified/edited
 						untracked = "+", -- added as new
 						renamed = "→", -- existed but now renamed
-						ignored = "◌", -- ignored by .gitignore
+						ignored = "◌", -- ignored by git
 						unmerged = "?", -- urgent merge conflict
 						staged = "✓", -- staged and ready
 						deleted = "✖", -- removed from git tracking

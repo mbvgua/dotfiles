@@ -2,6 +2,12 @@
 
 set -eou pipefail
 
+# FIXME:
+# cannot read external devices: hardisks, usbs, phones and such
+# bluetooth was impossible to setup correctly
+# screen sleeps even when watching things, on mpv or browser?!
+
+# --- VARIABLES --- #
 
 LANG_PACKAGES=(
     perl lua python LuaJIT make gcc clang nodejs git git-lfs stow keyd
@@ -23,6 +29,8 @@ USERLAND_PACKAGES=(
 )
 TEMP_DIR=$(mktemp -d)
 
+# --- FUNCTIONS --- #
+
 usage() {
     echo "
     Install system confiuration files and programs instantly.
@@ -43,6 +51,83 @@ cleanup() {
     rm -rf "$TEMP_DIR"
 }
 
+install_fonts() {
+    local fonts_dir="$HOME/.local/share/fonts"
+    if [[ ! -d "$fonts_dir" ]]; then 
+        mkdir -p "$fonts_dir"
+    fi
+
+    cd $TEMP_DIR
+    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+
+    unzip FiraMono.zip -d "$fonts_dir"
+    unzip JetBrainsMono.zip -d "$fonts_dir"
+    fc-cache -fv
+}
+
+setup_audio() {
+    sudo xbps-install pipewire alsa-pipewire wireplumber
+
+    ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+    ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
+    # enable pipewire and pipewire-pulse autostart
+    if [ -e "/usr/share/applications/pipewire.desktop" ] && [ -e "/etc/xdg/autostart/" ]; then
+        ln -s /usr/share/applications/pipewire.desktop /etc/xdg/autostart/pipewire.desktop
+        ln -s /usr/share/applications/pipewire-pulse.desktop /etc/xdg/autostart/pipewire-pulse.desktop
+    fi
+
+    # alsa configuration
+    ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+    ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+}
+
+setup_dots() {
+    local DOTS_DIR="~/.dotfiles"
+    local DOTS_BACKUP="~/.dotfiles.backup"
+    local TARGET_BRANCH="xorg/void"
+
+    git clone ssh://git@github.com/mbvgua/dotfiles.git "$DOTS_DIR"
+    cd "$DOTS_DIR"
+
+    # pull all remote branches locally
+    git !git branch -r | \
+        grep -v "\->" | \
+        while read remote; do \
+            git branch --track "${remote#origin/}" "$remote"; \
+        done && \
+        git fetch --all && \
+        git pull --all
+
+    git checkout "$TARGET_BRANCH"
+    stow .
+}
+
+startup_services() {
+    local services=(
+        # bluetoothd bluetooth
+        lightdm elogind NetworkManager containerd dbus docker mysqld keyd polkitd
+    )
+
+    for service in "${services[@]}"; do
+        if [[ ! -d "/etc/sv/$service" ]]; then
+            echo "$service not found in /etc/sv directory..."
+            echo "aborting operation"
+            echo "please install: $service"
+            exit 1
+        fi
+
+        # If present, symlink...
+        # FIX: it would be better to first recursively go through loop above
+        # then if all are present,now do this. if some are absent, add to a
+        # not_found array, then present list to user
+        sudo ln -s /etc/sv/"$service" /var/service
+    done
+}
+
+# --- IMPLEMENTATION --- #
+
 # when script exits, remove the temp dir created
 trap cleanup EXIT
 
@@ -52,124 +137,42 @@ if [[ "$#" -eq 1 ]]; then
 
     case $OPERATION in
         "--base" | "-b" )
-            echo "Installing needed packages..."
-            # TODO: conacatenate these two for loops
-            for package in "${LANG_PACKAGES[@]}"; do
-                sudo xbps-install -Syu "$package"
-            done
+            echo "1.) installing base packages..."
+            sudo xbps-install -Syu "${LANG_PACKAGES[@]}" "${USERLAND_PACKAGES[@]}"
 
-            for package in "${USERLAND_PACKAGES[@]}"; do
-                sudo xbps-install -Syu "$package"
-            done
-
-            echo "Installing system fonts..."
-            install_fonts() {
-                # currently using Firamono
-                local fonts_dir="$HOME/.local/share/fonts"
-                if [[ ! -d "$fonts_dir" ]]; then 
-                    mkdir "$fonts_dir"
-                fi
-
-                cd $TEMP_DIR
-                wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip
-                wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
-
-                unzip FiraMono.zip -d "$fonts_dir"
-                unzip JetBrainsMono.zip -d "$fonts_dir"
-                fc-cache -fv
-            }
+            echo "2.) installing system fonts..."
             install_fonts
 
-            setup_audio() {
-                sudo xbps-install pipewire alsa-pipewire wireplumber
-
-                ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
-                ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
-
-                # enable pipewire and pipewire-pulse autostart
-                if [ -e "/usr/share/applications/pipewire.desktop" ] && [ -e "/etc/xdg/autostart/" ]; then
-                    ln -s /usr/share/applications/pipewire.desktop /etc/xdg/autostart/pipewire.desktop
-                    ln -s /usr/share/applications/pipewire-pulse.desktop /etc/xdg/autostart/pipewire-pulse.desktop
-                fi
-
-                # alsa configuration
-                ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
-                ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
-            }
+            echo "3.) setting up audio..."
             setup_audio
 
             # touchpad click support
-            echo "Add touchpad click support..."
+            echo "4.) adding touchpad click support..."
             sudo cp ./40-libinput-touchpad.conf /etc/X11/xorg.conf.d/
 
             # remapping keyboard keys with keyd
-            echo "Remap keyboard layout with keyd..."
+            echo "5.) remapping keyboard layout..."
             sudo cp ./default.conf /etc/keyd/
 
-            # install pnpm and its packages
+            # install misc packages
+            echo "6.) Misc setup..."
             sudo npm install -g typescript
-
-            # install pipx and some packages
             pipx install git-filter-repo yt-dlp fastapi
             ;;
         "--dots" | "-d")
-            echo "Configure dotfiles..."
-
-            setup_dots() {
-                local DOTS_DIR="~/.dotfiles"
-                local DOTS_BACKUP="~/.dotfiles.backup"
-                local TARGET_BRANCH="xorg/void"
-
-                git clone ssh://git@github.com/mbvgua/dotfiles.git "$DOTS_DIR"
-                cd "$DOTS_DIR"
-
-                # pull all remote branches locally
-                git !git branch -r | \
-                    grep -v "\->" | \
-                    while read remote; do \
-                        git branch --track "${remote#origin/}" "$remote"; \
-                    done && \
-                    git fetch --all && \
-                    git pull --all
-
-                git checkout "$TARGET_BRANCH"
-                stow .
-            }
-
+            echo "Configuring dotfiles..."
             if [[ ! -d "$DOTS_DIR" ]]; then
+                echo "seting up your dotfiles..."
                 setup_dots
-                echo "successfully setup your dotfiles..."
             else
                 echo "$DOTS_DIR directory found, safely moving it to $DOTS_BACKUP"
                 mv -r "$DOTS_DIR" "$DOTS_BACKUP"
+                echo "seting up your dotfiles..."
                 setup_dots
-                echo "successfully setup your dotfiles..."
             fi
             ;;
         "--services" | "-s")
             echo "Configure system services to launch on startup..."
-
-            startup_services() {
-                local services=(
-                    lightdm elogind NetworkManager bluetooth bluetoothd
-                    containerd dbus docker mysqld keyd polkitd
-                )
-
-                for service in "${services[@]}"; do
-                    if [[ ! -d "/etc/sv/$service" ]]; then
-                        echo "$service not found in /etc/sv directory..."
-                        echo "aborting operation"
-                        echo "please install: $service"
-                        exit 1
-                    fi
-
-                    # If present, symlink...
-                    # FIX: it would be better to first recursively go through loop above
-                    # then if all are present,now do this. if some are absent, add to a
-                    # not_found array, then present list to user
-                    sudo ln -s /etc/sv/"$service" /var/service
-                done
-            }
             startup_services
             ;;
         "--help" | "-h")
@@ -182,11 +185,11 @@ if [[ "$#" -eq 1 ]]; then
             exit 1
     esac
 elif [[ "$#" -eq 0 ]]; then
-    echo "No arguments were passed"
+    echo "No arguments passed"
     usage
     exit 2
 else
-    echo "Too many argumants passed"
+    echo "Too many arguments passed"
     usage
     exit 2
 fi
