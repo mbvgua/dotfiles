@@ -4,7 +4,6 @@
 [color]
 	ui = true
 [alias]
-    ; lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
 	lol = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset - %C(bold blue)%d%Creset %s %Cgreen(%cr)%Cresetby %an' --all --abbrev-commit
     contributors = shortlog -nse
 	ao = remote add origin
