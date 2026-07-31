@@ -12,5 +12,5 @@
 .config/nvim/backupdir/
 
 # qtile
-.config/**/*/__pycache__
+*__pycache__
 *.pyc
