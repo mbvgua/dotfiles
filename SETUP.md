@@ -1,6 +1,6 @@
 ## What?
 
-- **OS**: GNU/Linux + Void
+- **OS**: GNU/Linux + Fedora
 - **Window manager**: [qtile](https://github.com/qtile/qtile) - An X11/Wayland tiling window manager.
 - **Compositor**: [picom](https://github.com/yshui/picom) - A lightweight compositor for X11.
 - **Shell**: [bash](https://cgit.git.savannah.gnu.org/cgit/bash.git) - Bash is an interactive command interpreter and programming language developed for Unix-like operating systems.
@@ -9,9 +9,9 @@
 - **Text editor**: [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
 - **Version controll**: 
     - [git](https://github.com/git/git) - A free and open source distributed version control system.
-    - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way.
+    <!-- - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way. -->
 - **Video/Music player**: [mpv](https://github.com/mpv-player/mpv) - command line media player.
-- **Audio player**: [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems.
+<!-- - **Audio player**: [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems. -->
 - **Web browser**: [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
 - **App launcher**: [rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
 - **Image viewer**: [feh](https://github.com/derf/feh) - a fast and light image viewer.
@@ -38,7 +38,7 @@ Navigate to your `$HOME` directory and:
 ```bash
     git clone https://github.com/mbvgua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
-    git checkout xorg/void
+    git checkout fedora
     ./install
 
     # create symlinks to necessary files

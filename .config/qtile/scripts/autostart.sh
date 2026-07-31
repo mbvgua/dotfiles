@@ -12,9 +12,6 @@ xfce4-screensaver &
 # ensure qtile inherits xfce settings!!
 xfsettingsd &
 
-# for audio
-pipewire &
-
 # compositor, prevents screen tearing
 picom --config ~/.config/picom/picom.conf &
 
@@ -25,7 +22,7 @@ dunst -config ~/.config/dunst/dunstrc &
 nm-applet --indicator &
 
 # bluetooth manager
-# blueman-applet &
+blueman-applet &
 
 # restore brightness. runit doesnt recall previous session
 brightnessctl set 15% &
