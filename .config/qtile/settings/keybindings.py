@@ -15,7 +15,7 @@ control: str = "control"
 terminal: str = "alacritty"
 # when I close the nvim instance, it goes back to the terminal
 editor: str = f"{terminal} -e sh -c 'nvim; exec $SHELL'"
-browser: str = "~/helium-0.14.5.1-x86_64.AppImage"
+browser: str = "firefox"
 files: str = "thunar"
 
 # =====================
@@ -131,11 +131,11 @@ keys: list[Key | KeyChord] = [
     # =================
     Key([mod], "Return", lazy.spawn(editor), desc="launch editor"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
+    Key([mod], "b", lazy.spawn(browser), desc="Open [b]rowser"),
     KeyChord(
         [mod],
         "o",
         [
-            Key([], "h", lazy.spawn(os.path.expanduser(browser)), desc="Open [h]elium"),
             Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
             Key(
                 [],

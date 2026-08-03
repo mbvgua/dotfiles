@@ -3,18 +3,19 @@
 set -eou pipefail
 
 # --- VARIABLES --- #
-LANG_PACKAGES=(
-    perl lua python luajit make gcc clang nodejs git git-lfs stow pipx
+PACKAGES=(
+    # lang packages
+    perl lua python go luajit nodejs
+    make gcc clang git git-lfs stow pip pipx hugo
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-)
-
-USERLAND_PACKAGES=(
+    # userland packages
     qtile xfce4 bash btop alacritty flameshot vim nvim tmux
-    qbittorrent gparted wget curl xclip mariadb ripgrep
+    qbittorrent gparted wget curl xclip mariadb ripgrep randr
     picom rofi dunst feh mpv brightnessctl redshift btop
     ImageMagick unzip autoconf automake xset xrandr ffmpeg-free
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
 )
+
 TEMP_DIR=$(mktemp -d)
 
 # --- FUNCTIONS --- #
@@ -83,9 +84,19 @@ install_from_source() {
     cd keyd
     make && sudo make install
     sudo systemctl enable --now keyd
+    cd ..
+
+    # kew
+    sudo dnf install -y pkg-config taglib-devel fftw-devel opus-devel opusfile-devel
+    libvorbis-devel libogg-devel git gcc make chafa-devel libatomic gcc-c++ glib2-devel
+    faad2-level faad2
+    git clone https://codeberg.org/ravachol/kew.git
+    cd kew
+    make -j
+    sudo make install
+    cd ..
 
     # sublime-merge
-    # cmus
 }
 
 # --- IMPLEMENTATION --- #
@@ -96,7 +107,7 @@ if [[ "$#" -eq 1 ]]; then
     case $OPERATION in
         "--setup" | "-s" )
             echo "1.) installing base packages..."
-            sudo dnf install "${LANG_PACKAGES[@]}" "${USERLAND_PACKAGES[@]}" --skip-unavailable
+            sudo dnf install "${PACKAGES[@]}" --skip-unavailable
 
             echo "2.) installing system fonts..."
             install_fonts
@@ -111,8 +122,10 @@ if [[ "$#" -eq 1 ]]; then
 
             # install misc packages
             echo "5.) Misc setup..."
-            sudo pnpm install -g typescript sass
+            sudo npm install -g typescript sass
             pipx install git-filter-repo yt-dlp fastapi
+            install_from_source
+
             ;;
         "--dots" | "-d")
             echo "Configuring dotfiles..."

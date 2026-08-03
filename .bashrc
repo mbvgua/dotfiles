@@ -27,10 +27,3 @@ shopt -s histappend                             # append to the history file, do
 
 # ignore differences in upper & lowercase for TAB completion
 bind "set completion-ignore-case on"
-
-# pnpm
-export PNPM_HOME="/home/mbugua/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac

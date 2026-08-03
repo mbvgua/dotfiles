@@ -41,7 +41,7 @@ groups.append(
     Group(
         name=group_names[1],
         matches=[
-            Match(wm_class="helium"),
+            Match(wm_class="org.mozilla.firefox"),
             Match(wm_class="org.pwmt.zathura"),
             Match(wm_class="qbittorrent"),
             Match(wm_class="teams-for-linux"),

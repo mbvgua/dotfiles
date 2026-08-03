@@ -72,7 +72,7 @@ run_cmd() {
 	    if [[ $1 == '--lock' ]]; then
             xfce4-screensaver-command -l
 		elif [[ $1 == '--suspend' ]]; then
-			loginctl suspend
+			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
 			if [[ "$DESKTOP_SESSION" == 'qtile' ]]; then
 				qtile cmd-obj -o cmd -f shutdown
@@ -80,9 +80,10 @@ run_cmd() {
 				i3-msg exit
 			fi
 		elif [[ $1 == '--reboot' ]]; then
-			loginctl reboot
+			# systemctl reboot      # hard reboot entire system
+			systemctl soft-reboot   # reboot only the userspace
 		elif [[ $1 == '--shutdown' ]]; then
-			loginctl poweroff
+			systemctl poweroff
 		fi
 	else
 	    usage

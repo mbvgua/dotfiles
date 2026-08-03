@@ -88,5 +88,7 @@ calc() {
 
 # clean unused packages. "OO" removes cached packages
 clean(){
-    sudo xbps-remove -oOOR
+    sudo dnf autoremove
+    sudo dnf clean packages
+    sudo dnf clean all
 }
