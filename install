@@ -7,10 +7,11 @@ PACKAGES=(
     # lang packages
     perl lua python go luajit nodejs
     make gcc clang git git-lfs stow pip pipx hugo
-    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    docker-cli containerd docker-compose docker-compose-switch
+    mariadb mariadb-server
     # userland packages
     qtile xfce4 bash btop alacritty flameshot vim nvim tmux
-    qbittorrent gparted wget curl xclip mariadb ripgrep randr
+    qbittorrent gparted wget curl xclip ripgrep randr
     picom rofi dunst feh mpv brightnessctl redshift btop
     ImageMagick unzip autoconf automake xset xrandr ffmpeg-free
     zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
@@ -108,6 +109,11 @@ if [[ "$#" -eq 1 ]]; then
         "--setup" | "-s" )
             echo "1.) installing base packages..."
             sudo dnf install "${PACKAGES[@]}" --skip-unavailable
+            sudo systemctl enable --now docker
+            sudo systemctl start docker
+
+            sudo systemctl enable --now mariadb
+            sudo mariadb-secure-installation
 
             echo "2.) installing system fonts..."
             install_fonts

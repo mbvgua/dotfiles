@@ -3,6 +3,7 @@
 set -eo pipefail
 
 output_dir="$HOME/Pictures/Screenshots/"
+timestamp=$(date +"%Y-%m-%d_%I-%M")
 choice="$1"
 
 
@@ -24,15 +25,18 @@ if [[ "$#" -ne 1 ]]; then
 else
     case "$choice" in
         selection)
-            flameshot gui --path "$output_dir"
+            # screenshot of only select region
+            flameshot gui --path "$output_dir" --clipboard
             ;;
         fullscreen)
             # takes full screenshot of where cursor is
-            flameshot screen --delay 500 --path "$output_dir"
+            # but required me to install xdg-portal-desktop, so nahhh
+            # flameshot screen --delay 500 --path "$output_dir" --clipboard
+            xfce4-screenshooter --fullscreen --save "$output_dir/$timestamp.png" --clipboard
             ;;
         all)
             # takes screenshot of all screens
-            flameshot full --delay 500 --path "$output_dir"
+            flameshot full --delay 500 --path "$output_dir" --clipboard
         ;;
         *)
             usage
