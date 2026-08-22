@@ -130,6 +130,7 @@ keys: list[Key | KeyChord] = [
     # Open My Tools
     # =================
     Key([mod], "Return", lazy.spawn(editor), desc="launch editor"),
+    Key([mod], "t", lazy.spawn(terminal), desc="Open [t]erminal"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="launch [r]ofi"),
     KeyChord(
         [mod],
@@ -137,10 +138,9 @@ keys: list[Key | KeyChord] = [
         [
             Key([], "b", lazy.spawn(browser), desc="Open [b]rowser"),
             Key([], "f", lazy.spawn(files), desc="Open [f]iles"),
-            Key([], "t", lazy.spawn(terminal), desc="Open [t]erminal"),
             Key(
                 [],
-                "l", # b & t were already taken
+                "t",
                 lazy.group["scratchpad"].dropdown_toggle("bt"),
                 desc="open [b]luetooth scratchpad",
             ),

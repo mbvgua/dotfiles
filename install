@@ -118,6 +118,9 @@ if [[ "$#" -eq 1 ]]; then
             echo "2.) installing system fonts..."
             install_fonts
 
+            echo "3.) installing nvim plugins..."
+            nvim --headless "+Lazy! sync" +qa
+
             # touchpad click support
             echo "3.) adding touchpad click support..."
             sudo cp ./40-libinput-touchpad.conf /etc/X11/xorg.conf.d/
@@ -164,3 +167,21 @@ else
     exit 2
 fi
 
+
+
+#
+# print_info() {
+#   echo -e "\033[33m$1\033[0m"
+# }
+#
+# print_noop() {
+#   echo -e "\033[35m$1\033[0m"
+# }
+#
+# print_success() {
+#   echo -e "\033[32m$1\033[0m"
+# }
+#
+# print_error() {
+#   echo -e "\033[31m$1\033[0m"
+# }

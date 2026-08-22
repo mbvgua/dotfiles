@@ -30,9 +30,8 @@ else
             ;;
         fullscreen)
             # takes full screenshot of where cursor is
-            # but required me to install xdg-portal-desktop, so nahhh
-            # flameshot screen --delay 500 --path "$output_dir" --clipboard
-            xfce4-screenshooter --fullscreen --save "$output_dir/$timestamp.png" --clipboard
+            # HACK: -n 0 is a hack
+            flameshot screen --number 0 --delay 500 --path "$output_dir" --clipboard
             ;;
         all)
             # takes screenshot of all screens
