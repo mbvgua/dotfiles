@@ -36,6 +36,75 @@ local function my_on_attach(bufnr)
 	vim.keymap.set("n", "]g", api.node.navigate.git.next, opts("Next Git"))
 end
 
+-- open non-text based files with external apps
+local function my_on_attach(bufnr)
+	local api = require("nvim-tree.api")
+
+	-- Load all default nvim-tree keybindings first
+	api.config.mappings.default_on_attach(bufnr)
+
+	-- Custom function to open file or run external application
+	local function open_file_or_external()
+		local node = api.tree.get_node_under_cursor()
+		if not node then
+			return
+		end
+
+		if node.type == "directory" then
+			api.node.open.edit() -- Expand / collapse directories as normal
+		elseif node.type == "file" then
+			local filepath = node.absolute_path
+			local ext = vim.fn.fnamemodify(filepath, ":e"):lower()
+
+			-- Map file extensions to your preferred apps
+			local external_apps = {
+				-- Documents
+				pdf = "zathura",
+				doc = "libreoffice",
+				docx = "libreoffice",
+				odt = "libreoffice",
+				xls = "libreoffice",
+				xlsx = "libreoffice",
+				ppt = "libreoffice",
+				pptx = "libreoffice",
+
+				-- Images
+				png = "feh",
+				jpg = "feh",
+				jpeg = "feh",
+				gif = "feh",
+				webp = "feh",
+
+				-- Audio & Video
+				mp4 = "mpv",
+				mkv = "mpv",
+				avi = "mpv",
+				webm = "mpv",
+				mp3 = "mpv",
+				flac = "mpv",
+				wav = "mpv",
+				ogg = "mpv",
+			}
+
+			local app = external_apps[ext]
+			if app then
+				-- Launch externally in a detached background job
+				vim.fn.jobstart({ app, filepath }, { detach = true })
+			else
+				-- Default behavior: open inside Neovim
+				api.node.open.edit()
+			end
+		end
+	end
+
+	-- Keymaps for nvim-tree buffer
+	local opts = { buffer = bufnr, noremap = true, silent = true, nowait = true }
+
+	vim.keymap.set("n", "<CR>", open_file_or_external, opts)
+	vim.keymap.set("n", "<2-LeftMouse>", open_file_or_external, opts)
+	vim.keymap.set("n", "o", open_file_or_external, opts)
+end
+
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "v1.17.0",

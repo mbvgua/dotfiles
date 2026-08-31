@@ -75,9 +75,21 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- bash, c, lua, markdown, markdown_inline, python, vim, vimdoc
 -- possible to add extras with :TSInstall <lang> manually
 local parsers = {
-	"cpp", "cmake", "make", "diff", "dockerfile",
-	"python", "sql", "luadoc", "nginx", "yaml",
-	"html", "css", "json", "javascript", "typescript",
+	"cpp",
+	"cmake",
+	"make",
+	"diff",
+	"dockerfile",
+	"python",
+	"sql",
+	"luadoc",
+	"nginx",
+	"yaml",
+	"html",
+	"css",
+	"json",
+	"javascript",
+	"typescript",
 }
 
 -- Install missing parsers on startup

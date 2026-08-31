@@ -1,7 +1,7 @@
 # downloads entire websites with wget
 alias wget-ds="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent "
-alias ytv="yt-dlp -f 'bestvideo+bestaudio/best'"                            # Best video + audio merged
-alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3"          # Best audio extracted as mp3
+alias ytv="yt-dlp -f 'bestvideo+bestaudio/best' --js-runtimes node"                            # Best video + audio merged
+alias yta="yt-dlp -f bestaudio --extract-audio --audio-format mp3 --js-runtimes node"          # Best audio extracted as mp3
 
 # substitutions
 alias vi='nvim'; alias vim='nvim'               # the future is now!

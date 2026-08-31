@@ -16,6 +16,12 @@ return {
 			cpp = { "clangd" },
 			markdown = { "prettier" },
 		},
+		-- yes I finally caved! format on save isnt thaaaat bad
+		format_on_save = {
+			-- These options will be passed to conform.format()
+			timeout_ms = 1000,
+			lsp_format = "fallback",
+		},
 	},
 	-- format using key bindings
 	vim.keymap.set("n", "<leader>cf", function()
