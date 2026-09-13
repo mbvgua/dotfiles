@@ -8,7 +8,7 @@ PACKAGES=(
     perl lua python go luajit nodejs
     make gcc clang git git-lfs stow pip pipx hugo
     docker-cli containerd docker-compose docker-compose-switch
-    mariadb mariadb-server
+    mariadb mariadb-server ShellCheck
     # userland packages
     qtile xfce4 bash btop alacritty flameshot vim nvim tmux
     qbittorrent gparted wget curl xclip ripgrep randr
@@ -111,6 +111,10 @@ if [[ "$#" -eq 1 ]]; then
             sudo dnf install "${PACKAGES[@]}" --skip-unavailable
             sudo systemctl enable --now docker
             sudo systemctl start docker
+            # fix docker to work without sudo
+            sudo groupadd docker
+            sudo usermod -aG docker $USER
+            newgrp docker
 
             sudo systemctl enable --now mariadb
             sudo mariadb-secure-installation

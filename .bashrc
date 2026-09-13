@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 
 # basic fedora-coloured+void-minimalist bash prompt
-export PS1='\[\e[01;32m\][\u@\h \W]\$\[\e[00m\] '
+export PS1='\[\e[01;32m\][\u@\h \W] \n$\[\e[00m\] '
 
 # User specific environment. also add path to *my* scripts
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
