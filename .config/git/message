@@ -1,5 +1,5 @@
 
-# type(optional scope): subject
+# type(optional scope): title
 #   |       |               |
 #   |       |               +-> short descriptive summary(e.g update README.md)
 #   |       |
@@ -9,10 +9,9 @@
 #------------------------------------------------> <BLANK LINE>
 # CHANGES:
 # - what has been changed in the codebase?
-#------------------------------------------------> <BLANK LINE>
-# CONTEXT:
 # - why was this change necessary?
-# - how does the change adress the problem?
+# - how does the change address the problem?
 #------------------------------------------------> <BLANK LINE>
-# CONSIDERATIONS:
+# FOOTER:
 # - are there any side effects/risks of merging the changes?
+# - Fixes #<issue number> e.t.c
