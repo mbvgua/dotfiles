@@ -13,8 +13,12 @@ control: str = "control"
 
 # my tools of choice
 terminal: str = "alacritty"
-# when I close the nvim instance, it goes back to the terminal
-editor: str = f"{terminal} -e sh -c 'nvim; exec $SHELL'"
+# NOTE: used this previously since when I close the nvim instance,
+# it went back to the terminal:
+#   editor: str = f"{terminal} -e sh -c 'nvim; exec $SHELL'"
+# but now with coding agents, this allows for multiple terminal agents
+# on the fly. and I can connect via SSH.
+editor: str = f"{terminal} -e tmux new-session -A -s editor"
 browser: str = "firefox"
 files: str = "thunar"
 

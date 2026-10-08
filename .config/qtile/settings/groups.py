@@ -3,7 +3,6 @@ from libqtile.lazy import lazy
 
 from .keybindings import keys, mod, terminal
 
-
 # =====================
 # Groups/workspaces
 # =====================
@@ -54,10 +53,10 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            # this opens a tmux session called 'scratch'
+            # this opens a plain terminal scratchpad
             DropDown(
                 "terminal",
-                f"{terminal} -e tmux new-session -s scratch",
+                terminal,
                 match=Match(wm_class="Alacritty"),
                 on_focus_lost_hide=False,
                 width=0.6,
