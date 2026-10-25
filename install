@@ -98,7 +98,20 @@ install_from_source() {
     sudo make install
     cd ..
 
-    # sublime-merge
+}
+
+misc_apps() {
+    # install opencode
+    curl -fsSL https://opencode.ai/v2/install | bash
+
+    # install pnpm
+    curl -fsSL https://get.pnpm.io | sh -
+
+    # install things from js/ts ecosystem
+    sudo pnpm install -g typescript sass
+
+    # essentials from python ecosystem
+    pipx install git-filter-repo yt-dlp fastapi uv
 }
 
 # --- IMPLEMENTATION --- #
@@ -114,7 +127,7 @@ if [[ "$#" -eq 1 ]]; then
             sudo systemctl start docker
             # fix docker to work without sudo
             sudo groupadd docker
-            sudo usermod -aG docker $USER
+            sudo usermod -aG docker "$USER"
             newgrp docker
 
             sudo systemctl enable --now mariadb
@@ -136,9 +149,8 @@ if [[ "$#" -eq 1 ]]; then
 
             # install misc packages
             echo "5.) Misc setup..."
-            sudo npm install -g typescript sass
-            pipx install git-filter-repo yt-dlp fastapi
             install_from_source
+            misc_apps
 
             ;;
         "--dots" | "-d")

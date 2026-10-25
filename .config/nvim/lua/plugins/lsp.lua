@@ -193,6 +193,8 @@ return {
 			jsonls = {}, -- json
 			yamlls = {}, -- yaml
 			taplo = {}, -- tomml
+			-- jdtls = {}, -- java
+			-- kotlin_language_server = {},
 		}
 
 		-- To check the current status of installed tools and/or manually install
@@ -205,6 +207,7 @@ return {
 			"stylua", -- lua
 			"prettier", -- js/ts
 			"prettierd", -- js/ts but on a dedicated daemon
+			-- "ktlint", -- kotlin
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

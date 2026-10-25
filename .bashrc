@@ -27,3 +27,18 @@ shopt -s histappend                             # append to the history file, do
 
 # ignore differences in upper & lowercase for TAB completion
 bind "set completion-ignore-case on"
+
+# pnpm
+export PNPM_HOME='/home/mbugua/.local/share/pnpm'
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH=$PATH:$HOME/go/bin
+
+# opencode
+export PATH=/home/mbugua/.opencode/bin:$PATH

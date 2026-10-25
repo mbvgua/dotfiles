@@ -90,6 +90,8 @@ local parsers = {
 	"json",
 	"javascript",
 	"typescript",
+	"java",
+	"kotlin",
 }
 
 -- Install missing parsers on startup
