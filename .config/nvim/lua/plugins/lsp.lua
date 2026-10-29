@@ -187,14 +187,13 @@ return {
 			ts_ls = {}, -- javascript, typescript
 			dockerls = {}, -- docker
 			docker_compose_language_service = {}, -- docker compose
+			terraformls = {}, -- terraform
 			sqlls = {}, -- sql
 			html = {}, -- html
 			cssls = {}, -- css
 			jsonls = {}, -- json
 			yamlls = {}, -- yaml
 			taplo = {}, -- tomml
-			-- jdtls = {}, -- java
-			-- kotlin_language_server = {},
 		}
 
 		-- To check the current status of installed tools and/or manually install
@@ -207,7 +206,7 @@ return {
 			"stylua", -- lua
 			"prettier", -- js/ts
 			"prettierd", -- js/ts but on a dedicated daemon
-			-- "ktlint", -- kotlin
+			"hclfmt",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -112,6 +112,14 @@ misc_apps() {
 
     # essentials from python ecosystem
     pipx install git-filter-repo yt-dlp fastapi uv
+
+    # terraform
+    sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    sudo dnf -y install terraform
+    terraform -install-autocomplete
+
+    # aws cli
+    curl -fsSL https://awscli.amazonaws.com/v2/install.sh | bash
 }
 
 # --- IMPLEMENTATION --- #

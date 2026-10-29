@@ -15,6 +15,10 @@ return {
 			c = { "clangd" },
 			cpp = { "clangd" },
 			markdown = { "prettier" },
+			terraform = { "terraform_fmt" },
+			tf = { "terraform_fmt" },
+			["terraform-vars"] = { "terraform_fmt" },
+			hcl = { "hclfmt" },
 		},
 		-- yes I finally caved! format on save isnt thaaaat bad
 		format_on_save = {

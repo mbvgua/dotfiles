@@ -42,3 +42,5 @@ export PATH=$PATH:$HOME/go/bin
 
 # opencode
 export PATH=/home/mbugua/.opencode/bin:$PATH
+
+complete -C /usr/bin/terraform terraform

@@ -5,7 +5,7 @@ These instructions apply to every project unless a project-level `AGENTS.md` giv
 ## Role and approach
 
 - Act as a senior software engineer pairing with me on tasks, mostly backend work.
-- My primary stack is Python/FastAPI/Flask and Node.js/TypeScript/Express.
+- My primary stack is modern Angular for the frontend, Python with FastAPI/Flask and Typescript with Node.js & Express for the backend.
 - Read the relevant code and project instructions before changing anything. Match the existing structure, naming, error handling, and formatting.
 - Make the smallest coherent change. Do not reorganize a project or refactor unrelated code unless I ask.
 - Prefer simple, explicit code over clever abstractions. Keep route handlers and controllers thin; put business logic where it can be tested directly.
@@ -22,12 +22,12 @@ These instructions apply to every project unless a project-level `AGENTS.md` giv
 
 ## Project layout
 
-Use the layout that already exists. When a project's structure is unclear, use the examples in `~/Desktop/clean` as a reference; do not copy them blindly or restructure an existing project to match.
+Use the layout that already exists. Prefer the project's `Makefile` or `package.json` scripts. Use these defaults only when the project has no equivalent.
 
 ### FastAPI projects
 
 - `app/main.py` creates the `FastAPI` app and lifespan; keep it thin.
-- `app/routers/api_v1/` contains versioned API routers.
+- `app/routers/api/` contains versioned API routers.
 - `app/schemas/` contains Pydantic request/response models.
 - `app/database/` contains the engine/session and SQLAlchemy models.
 - `app/utils/` contains reusable helpers (auth, passwords, tokens, email, images).
@@ -42,32 +42,6 @@ Use the layout that already exists. When a project's structure is unclear, use t
 - `src/config/` contains database, logging, and auth configuration.
 - `src/__tests__/` contains Jest tests and test data.
 - Keep controllers thin. Put business logic in services, models, or helpers. Use the existing Joi validators and Winston logger rather than adding new ones.
-
-## Commands
-
-Prefer the project's `Makefile` or `package.json` scripts. Use these defaults only when the project has no equivalent.
-
-### Python / FastAPI
-
-- Install dependencies: `python -m pip install -r requirements.txt`
-- Run development server: `fastapi dev` (or `uvicorn app.main:app --reload` if that is the project's convention)
-- Run all tests: `pytest`
-- Run one test while iterating: `pytest tests/path/test_file.py::test_name -q`
-- Apply migrations: `alembic upgrade head`
-
-### Node / Express
-
-- Install dependencies: `pnpm install`
-- Run development server: `pnpm dev`
-- Build/typecheck: use the project's script (`pnpm build`, `pnpm typecheck`)
-- Run all tests once: `pnpm exec jest --watchAll=false`
-- Run one test file or test while iterating: `pnpm exec jest path/to/file.test.ts -t "test name"`
-- Do not leave Jest in watch mode.
-
-### Type checking
-
-- Run `pnpm typecheck` from the package directory when the script exists. If it does not, run `pnpm exec tsc --noEmit`; never invoke a globally installed `tsc`.
-- In Python, keep type hints on public functions and Pydantic models. Run the project's formatter or type checker only if it is already configured.
 
 ## Testing
 
@@ -101,6 +75,7 @@ Prefer the project's `Makefile` or `package.json` scripts. Use these defaults on
 - Branch names: at most three words, separated by hyphens, with no slashes or type prefixes. Examples: `session-recovery`, `fix-scroll-state`, `regenerate-sdk`.
 - If you are unsure about a Git command, check `~/.config/git/config` for my aliases. Note that `git co` means **commit**, while `git ch` means **checkout**; `git unadd` unstages.
 - Never stage, commit, amend, or push unless I explicitly ask. Leave changes unstaged so I can review them with `git diff`.
+- Prefer atomic commits: each commit does one thing and one thing well. Split unrelated changes (e.g. a refactor/fix vs. a new feature) into separate commits.
 - Before editing, check `git status` and `git diff`. Never reset, checkout, or stash my existing changes.
 - Never create a pull request unless I ask.
 - Never force-push or rewrite shared history unless I explicitly ask.
@@ -139,6 +114,7 @@ Allowed types: `fix`, `feat`, `docs`, `style`, `refactor`, `perf`, `test`, `buil
 - After a change, run the focused test or check and show the command and result.
 - Summarize what changed, why, which files were touched, what you ran, and anything still uncertain.
 - Update the README, docs, or `.env.example` when behavior or setup changes.
+- I use Fedora Linux. Never suggest `apt`/`yay` commands; use `dnf`, e.g. dnf install fzf.
 - Keep responses concise and practical.
 
 ## Boundaries
@@ -146,3 +122,4 @@ Allowed types: `fix`, `feat`, `docs`, `style`, `refactor`, `perf`, `test`, `buil
 - **Always:** read before editing, follow existing patterns, add/update tests, run focused checks, keep diffs small.
 - **Ask first:** adding/removing dependencies, database schema or migration changes, deleting files, broad refactors, CI/CD or config changes, auth/security changes, anything destructive or irreversible.
 - **Never:** stage/commit/push/create a PR without being asked; push to `main`; force-push; commit secrets or `.env` files; edit `node_modules/`, `vendor/`, `.venv/`, `dist/`, or generated files; bypass commit signing; run destructive database commands without approval.
+- Never read secrets or credential files (e.g. _secrets_, .env*, ~/.ssh, ~/.gnupg, token/key files): their contents become tool output and get transmitted to the model gateway. Never use globs or recursive cat/grep over directories that may contain them; list filenames first and read only specific non-secret files. If a secrets file is the only way to answer, ask me. Filter or redact commands that can print secrets (env, printenv).

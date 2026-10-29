@@ -90,8 +90,8 @@ local parsers = {
 	"json",
 	"javascript",
 	"typescript",
-	"java",
-	"kotlin",
+	"terraform",
+	"hcl",
 }
 
 -- Install missing parsers on startup
