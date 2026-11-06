@@ -8,8 +8,9 @@ PACKAGES=(
     perl lua python go luajit nodejs
     make gcc clang git git-lfs stow pip pipx hugo
     docker-cli containerd docker-compose docker-compose-switch
-    mariadb mariadb-server ShellCheck
-    pandoc texlive-latex texlive-collection-latex texlive-booktabs texlive-mdwtools
+    mariadb mariadb-server ShellCheck pandoc
+    pdflatex texlive-latex texlive-collection-latex texlive-booktabs texlive-mdwtools
+    texlive-xcolor texlive-geometry texlive-amsmath texlive-collection-latexrecommended
     # userland packages
     qtile xfce4 bash btop alacritty flameshot vim nvim tmux
     qbittorrent gparted wget curl xclip ripgrep randr

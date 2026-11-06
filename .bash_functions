@@ -19,6 +19,24 @@ sauce() {
     fi
 }
 
+# converting .md files to .pdf
+md2pdf() {
+    if [[ $# -lt 1 || ! -f $1 ]]; then
+        echo "usage: md2pdf <input.md> [output.pdf]" >&2
+        return 1
+    fi
+
+    local input_file="$1"
+    local output_file="${2:-${1%.md}.pdf}"  # default output is <input>.pdf
+
+    pandoc "$input_file" -o "$output_file" \
+        --pdf-engine=pdflatex \
+        --toc --toc-depth=2 \
+        -V geometry:margin=1in \
+        -V fontsize=11pt \
+        -V colorlinks=true
+}
+
 # extract files cleanly
 # from DistroTube: https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc?ref_type=heads
 SAVEIFS=$IFS
