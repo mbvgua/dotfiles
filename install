@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-set -eou pipefail
+set -euo pipefail
 
 # --- VARIABLES --- #
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+DOTS_DIR="$HOME/.dotfiles"
+DOTS_BACKUP="$HOME/.dotfiles.backup"
+
 PACKAGES=(
     # lang packages
     perl lua python go luajit nodejs
@@ -13,201 +17,179 @@ PACKAGES=(
     texlive-xcolor texlive-geometry texlive-amsmath texlive-collection-latexrecommended
     # userland packages
     qtile xfce4 bash btop alacritty flameshot vim nvim tmux
-    qbittorrent gparted wget curl xclip ripgrep randr
-    picom rofi dunst feh mpv brightnessctl redshift btop
+    qbittorrent gparted wget curl xclip ripgrep
+    picom rofi dunst feh mpv brightnessctl redshift
     ImageMagick unzip autoconf automake xset xrandr ffmpeg-free
-    zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-ps zathura-cb zathura-djvu
+    zathura zathura-pdf-poppler zathura-pdf-mupdf zathura-ps zathura-cb zathura-djvu
 )
 
 TEMP_DIR=$(mktemp -d)
 
+# --- LOGGING FUNCTIONS --- #
+print_info()    { echo -e "\033[33m[INFO] $1\033[0m"; }
+print_success() { echo -e "\033[32m[SUCCESS] $1\033[0m"; }
+print_error()   { echo -e "\033[31m[ERROR] $1\033[0m"; }
+
 # --- FUNCTIONS --- #
 usage() {
-    echo "
-    Install system confiuration files and programs instantly.
+    cat <<EOF
+Install system configuration files and programs instantly.
 
-    Usage: $ $0 [OPTIONS]
+Usage: $0 [OPTIONS]
 
-    A list of options is listed below:
-
-    -s, --setup             install system packages and configurations
-    -d, --dots              clone dotfiles and set them up
-    -h, ---help             print this help segment and exit
-    "
+Options:
+    -s, --setup       Install system packages and configurations
+    -d, --dots        Clone dotfiles and set them up
+    -h, --help        Print this help message and exit
+EOF
 }
 
-# remove temp_dir created in a particular section
+# remove the temp dir created for a particular section
 cleanup() {
     rm -rf "$TEMP_DIR"
 }
-# when script exits, remove the temp dir created
 trap cleanup EXIT
 
 install_fonts() {
     local fonts_dir="$HOME/.local/share/fonts"
-    if [[ ! -d "$fonts_dir" ]]; then 
-        mkdir -p "$fonts_dir"
-    fi
+    mkdir -p "$fonts_dir"
 
-    cd $TEMP_DIR
-    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip
-    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+    cd "$TEMP_DIR"
+    print_info "Downloading Nerd Fonts..."
+    wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip
+    wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
 
-    unzip FiraMono.zip -d "$fonts_dir"
-    unzip JetBrainsMono.zip -d "$fonts_dir"
-    fc-cache -fv
+    unzip -qo FiraMono.zip -d "$fonts_dir"
+    unzip -qo JetBrainsMono.zip -d "$fonts_dir"
+    fc-cache -fv >/dev/null 2>&1
+    print_success "Fonts installed successfully."
 }
 
 setup_dots() {
-    local DOTS_DIR="~/.dotfiles"
-    local DOTS_BACKUP="~/.dotfiles.backup"
-    local TARGET_BRANCH="fedora"
+    local target_branch="fedora"
 
-    git clone ssh://git@github.com/mbvgua/dotfiles.git "$DOTS_DIR"
+    print_info "Cloning dotfiles repository..."
+    git clone -b "$target_branch" --single-branch ssh://git@github.com/mbvgua/dotfiles.git "$DOTS_DIR"
     cd "$DOTS_DIR"
-
-    # pull all remote branches locally
-    git !git branch -r | \
-        grep -v "\->" | \
-        while read remote; do \
-            git branch --track "${remote#origin/}" "$remote"; \
-        done && \
-        git fetch --all && \
-        git pull --all
-
-    git checkout "$TARGET_BRANCH"
     stow .
+    print_success "Dotfiles configured."
 }
 
 install_from_source() {
-    cd $TEMP_DIR
+    cd "$TEMP_DIR"
 
-    # keyd
+    print_info "Installing keyd from source..."
     git clone https://github.com/rvaiya/keyd
     cd keyd
     make && sudo make install
     sudo systemctl enable --now keyd
     cd ..
 
-    # kew
-    sudo dnf install -y pkg-config taglib-devel fftw-devel opus-devel opusfile-devel
-    libvorbis-devel libogg-devel git gcc make chafa-devel libatomic gcc-c++ glib2-devel
-    faad2-level faad2
+    print_info "Installing kew music player..."
+    sudo dnf install -y pkg-config taglib-devel fftw-devel opus-devel opusfile-devel \
+        libvorbis-devel libogg-devel git gcc make chafa-devel libatomic gcc-c++ glib2-devel \
+        faad2-devel faad2
     git clone https://codeberg.org/ravachol/kew.git
     cd kew
-    make -j
+    make -j"$(nproc)"
     sudo make install
     cd ..
-
 }
 
 misc_apps() {
-    # install opencode
+    print_info "Installing OpenCode..."
     curl -fsSL https://opencode.ai/v2/install | bash
 
-    # install pnpm
+    print_info "Installing pnpm..."
     curl -fsSL https://get.pnpm.io | sh -
 
-    # install things from js/ts ecosystem
+    print_info "Installing global Node tools..."
     sudo pnpm install -g typescript sass
 
-    # essentials from python ecosystem
+    print_info "Installing Python tools via pipx..."
     pipx install git-filter-repo yt-dlp fastapi uv
 
-    # terraform
+    print_info "Installing Terraform..."
     sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     sudo dnf -y install terraform
     terraform -install-autocomplete
 
-    # aws cli
+    print_info "Installing AWS CLI v2..."
     curl -fsSL https://awscli.amazonaws.com/v2/install.sh | bash
 }
 
 # --- IMPLEMENTATION --- #
-if [[ "$#" -eq 1 ]]; then 
-
+if [[ "$#" -eq 1 ]]; then
     OPERATION="$1"
 
     case $OPERATION in
-        "--setup" | "-s" )
-            echo "1.) installing base packages..."
-            sudo dnf install "${PACKAGES[@]}" --skip-unavailable
+        "--setup" | "-s")
+            print_info "1.) Installing base packages..."
+            sudo dnf install -y "${PACKAGES[@]}" --skip-unavailable
+
+            print_info "Enabling Docker..."
             sudo systemctl enable --now docker
-            sudo systemctl start docker
-            # fix docker to work without sudo
-            sudo groupadd docker
+            sudo groupadd -f docker
             sudo usermod -aG docker "$USER"
-            newgrp docker
+            print_info "Note: Log out and back in for Docker group permissions to take effect."
 
+            print_info "Enabling MariaDB..."
+            # sudo mariadb-secure-installation
             sudo systemctl enable --now mariadb
-            sudo mariadb-secure-installation
+            print_info "Skipping interactive mariadb-secure-installation. Run manually if needed."
 
-            echo "2.) installing system fonts..."
+            print_info "2.) Installing system fonts..."
             install_fonts
 
-            echo "3.) installing nvim plugins..."
-            nvim --headless "+Lazy! sync" +qa
+            print_info "3.) Installing nvim plugins..."
+            nvim --headless "+Lazy! sync" +qa || true
 
-            # touchpad click support
-            echo "3.) adding touchpad click support..."
-            sudo cp ./40-libinput-touchpad.conf /etc/X11/xorg.conf.d/
+            print_info "4.) Adding touchpad click support..."
+            if [[ -f "$SCRIPT_DIR/40-libinput-touchpad.conf" ]]; then
+                sudo cp "$SCRIPT_DIR/40-libinput-touchpad.conf" /etc/X11/xorg.conf.d/
+            else
+                print_error "40-libinput-touchpad.conf not found in $SCRIPT_DIR"
+            fi
 
-            # remapping keyboard keys with keyd
-            echo "4.) remapping keyboard layout..."
-            sudo cp ./default.conf /etc/keyd/
+            print_info "5.) Remapping keyboard layout..."
+            if [[ -f "$SCRIPT_DIR/default.conf" ]]; then
+                sudo cp "$SCRIPT_DIR/default.conf" /etc/keyd/
+            else
+                print_error "default.conf not found in $SCRIPT_DIR"
+            fi
 
-            # install misc packages
-            echo "5.) Misc setup..."
+            print_info "6.) Running source and misc application setups..."
             install_from_source
             misc_apps
-
+            print_success "Setup complete!"
             ;;
         "--dots" | "-d")
-            echo "Configuring dotfiles..."
+            print_info "Configuring dotfiles..."
             if [[ ! -d "$DOTS_DIR" ]]; then
-                echo "seting up your dotfiles..."
                 setup_dots
             else
-                echo "$DOTS_DIR directory found, safely moving it to $DOTS_BACKUP"
-                mv -r "$DOTS_DIR" "$DOTS_BACKUP"
-                echo "seting up your dotfiles..."
+                print_info "$DOTS_DIR directory found, safely moving it to $DOTS_BACKUP"
+                rm -rf "$DOTS_BACKUP"
+                mv "$DOTS_DIR" "$DOTS_BACKUP"
                 setup_dots
             fi
             ;;
         "--help" | "-h")
             usage
-            exit 1
+            exit 0
             ;;
         *)
-            echo "Unkown option $OPERATION"
+            print_error "Unknown option $OPERATION"
             echo "Use --help for usage information"
             exit 1
+            ;;
     esac
 elif [[ "$#" -eq 0 ]]; then
-    echo "No arguments passed"
+    print_error "No arguments passed"
     usage
     exit 2
 else
-    echo "Too many arguments passed"
+    print_error "Too many arguments passed"
     usage
     exit 2
 fi
-
-
-
-#
-# print_info() {
-#   echo -e "\033[33m$1\033[0m"
-# }
-#
-# print_noop() {
-#   echo -e "\033[35m$1\033[0m"
-# }
-#
-# print_success() {
-#   echo -e "\033[32m$1\033[0m"
-# }
-#
-# print_error() {
-#   echo -e "\033[31m$1\033[0m"
-# }

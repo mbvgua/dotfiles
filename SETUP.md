@@ -7,12 +7,10 @@
 - **Terminal emulator**: [alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator.
 - **Terminal multiplexer**: [tmux](https://github.com/tmux/tmux) - A terminal multiplexer.
 - **Text editor**: [neovim](https://github.com/neovim/neovim) - Hyperextensible Vim-based text editor.
-- **Version controll**: 
-    - [git](https://github.com/git/git) - A free and open source distributed version control system.
-    <!-- - [sublime merge](https://www.sublimemerge.com) - a cross-platform Git client, done the Sublime Text way. -->
+- **Version controll**: [git](https://github.com/git/git) - A free and open source distributed version control system.
 - **Video/Music player**: [mpv](https://github.com/mpv-player/mpv) - command line media player.
-<!-- - **Audio player**: [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems. -->
-- **Web browser**: [helium](https://github.com/imputnet/helium) - Private, fast, and honest web browser.
+- **Audio player**: [cmus](https://github.com/cmus/cmus) - Small, fast and powerful console music player for Unix-like operating systems.
+- **Web browser**: [firefox](helium)
 - **App launcher**: [rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
 - **Image viewer**: [feh](https://github.com/derf/feh) - a fast and light image viewer.
 - **File manager**: [thunar](https://gitlab.xfce.org/xfce/thunar) - Modern, fast and easy-to-use file manager for Xfce
@@ -35,6 +33,7 @@
 ## How?
 
 Navigate to your `$HOME` directory and:
+
 ```bash
     git clone https://github.com/mbvgua/dotfiles ~/.dotfiles
     cd ~/.dotfiles
@@ -44,4 +43,3 @@ Navigate to your `$HOME` directory and:
     # create symlinks to necessary files
     stow .
 ```
-

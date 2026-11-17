@@ -29,3 +29,5 @@ _darcs
 ^/40-libinput-touchpad.*
 ^/install
 ^/wallpapers
+^/Makefile
+^/desktop.png
